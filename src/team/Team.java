@@ -8,45 +8,86 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import player.Player;
 
 import java.io.IOException;
+
 /**
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
  * Turma: LEI1T1
- *
+ * <p>
  * Nome: <Nome completo do colega de grupo>
  * Número: <Número mecanográfico do colega de grupo>
  * Turma: <Turma do colega de grupo>
  */
 public class Team implements ITeam {
 
-    private Club club;
-    private IFormation formation;
-    private Player[] players;
+    private static final int MAX_PLAYERS = 11;
 
+    private IClub club;
+    private IFormation formation;
+    private Player[] squad;
+    private int playerCount;
+
+
+    public Team(IClub club) {
+        this.club = club;
+        this.squad = new Player[MAX_PLAYERS];
+        this.playerCount = 0;
+    }
 
     @Override
     public IClub getClub() {
-        return null;
+        return this.club;
     }
 
     @Override
     public IFormation getFormation() {
-        return null;
+        return this.formation;
     }
 
     @Override
     public IPlayer[] getPlayers() {
-        return new IPlayer[0];
+        IPlayer[] players = new IPlayer[this.playerCount];
+        for (int i = 0; i < this.playerCount; i++) {
+            players[i] = this.squad[i];
+        }
+        return players;
     }
 
     @Override
     public void addPlayer(IPlayer iPlayer) {
+        if (iPlayer == null) {
+            throw new IllegalArgumentException("player não pode ser nulo");
+        }
+        if (this.formation == null) {
+            throw new IllegalStateException("nenhuma formation definida");
+        }
 
+        if (this.playerCount == MAX_PLAYERS ) {
+            throw new IllegalStateException("A team esta cheia");
+        }
+
+        if (!club.isPlayer(iPlayer)) {
+            throw new IllegalStateException("Player nao pertence ao clube");
+        }
+        if (isInTeam(iPlayer)){
+            throw new IllegalStateException("Player ja esta na team");
+        }
+
+        if (!isValidPositionForFormation(iPlayer.getPosition())) {
+            throw new IllegalStateException("Posicao invalida para a formation");
+        }
+        this.squad[this.playerCount++] = (Player) iPlayer;
     }
 
     @Override
     public int getPositionCount(IPlayerPosition iPlayerPosition) {
-        return 0;
+        int count = 0;
+        for (IPlayer player : this.squad) {
+            if (player.getPosition().equals(iPlayerPosition)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override
@@ -61,11 +102,23 @@ public class Team implements ITeam {
 
     @Override
     public void setFormation(IFormation iFormation) {
-
+        this.formation = iFormation;
     }
 
     @Override
     public void exportToJson() throws IOException {
 
+    }
+
+    private boolean isInTeam(IPlayer iPlayer) {
+        if (iPlayer == null) {
+            throw new IllegalArgumentException("player não pode ser nulo");
+        }
+        for(IPlayer player: this.squad){
+            if(player.equals(iPlayer)){
+                return true;
+            }
+        }
+        return false;
     }
 }
