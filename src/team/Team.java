@@ -26,6 +26,10 @@ public class Team implements ITeam {
     private IFormation formation;
     private Player[] squad;
     private int playerCount;
+    private int defense;
+    private int midfield;
+    private int forward;
+    private boolean goalkeeper;
 
 
     public Team(IClub club) {
@@ -79,6 +83,7 @@ public class Team implements ITeam {
         this.squad[this.playerCount++] = (Player) iPlayer;
     }
 
+
     @Override
     public int getPositionCount(IPlayerPosition iPlayerPosition) {
         int count = 0;
@@ -121,4 +126,6 @@ public class Team implements ITeam {
         }
         return false;
     }
+
+
 }
