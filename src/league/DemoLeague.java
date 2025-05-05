@@ -1,21 +1,29 @@
 package league;
 
+import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+
 public class DemoLeague {
 
     public static void main(String[] args) {
 
-        League league = new League("Liga Portugal");
-        Season season = new Season(2022);
 
-        try {
-            league.createSeason(season);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+
+                League liga = new League("Liga Portugal");
+
+                // Adicionar várias épocas
+                liga.createSeason(new Season(2023));
+                liga.createSeason(new Season(2024));
+                liga.createSeason(new Season(2025));
+
+                // Percorrer todas as épocas
+                for (ISeason aq : liga.getSeasons()) {
+
+                System.out.println(aq);
+                }
+
+
+            }
         }
 
-        System.out.println(league.getName());
-
-    }
 
 
-}

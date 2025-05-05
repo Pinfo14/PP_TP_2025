@@ -37,8 +37,6 @@ public class Season implements ISeason {
      * CONSTRUTOR SEM ESTAR CONFIGURADO
      * @param year
      */
-
-
     public Season(int year) {
         this.year = year;
         this.clubs = new Club[20];
@@ -46,8 +44,6 @@ public class Season implements ISeason {
         this.pointsPerLoss = 0;
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
-
-
 
 
 
@@ -182,6 +178,10 @@ public class Season implements ISeason {
     @Override
     public void exportToJson() throws IOException {
 
+    }
+
+    public int oioi(){
+        return 2;
     }
 
     @Override
