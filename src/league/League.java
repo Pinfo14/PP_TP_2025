@@ -7,13 +7,23 @@ import java.io.IOException;
 
 public class League implements ILeague {
 
+    private static final int INITIAL_SEASONS = 2;
+    private static final int INCREMENT_FACTOR = 2;
     private String leagueName;
-    private String leagueDescription;
+    private Season[] seasons;
+    private int numberOfSeasons;
 
+
+    League(String leagueName){
+        this.leagueName = leagueName;
+        this.numberOfSeasons = 0;
+        this.seasons = new Season[INITIAL_SEASONS];
+
+    }
 
     @Override
     public String getName() {
-        return "";
+        return leagueName;
     }
 
     @Override
@@ -21,9 +31,29 @@ public class League implements ILeague {
         return new ISeason[0];
     }
 
+    private void incrementSeasons () {
+        Season[] seasonsTemp = new Season[seasons.length * INCREMENT_FACTOR];
+
+        System.arraycopy(seasons, 0, seasonsTemp, 0, seasons.length);
+
+        seasons = seasonsTemp;
+    }
+
     @Override
     public boolean createSeason(ISeason iSeason) {
-        return false;
+        if(iSeason == null) {
+            throw new IllegalArgumentException("Season cannot be null");
+        }
+
+        //verifica se existe alguma season igual - definir o equals para season
+
+        if (numberOfSeasons == seasons.length) {
+            incrementSeasons();
+        }
+
+        seasons[numberOfSeasons++] = (Season) iSeason;
+
+        return true;
     }
 
     @Override
