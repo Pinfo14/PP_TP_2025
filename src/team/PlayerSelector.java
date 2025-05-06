@@ -24,6 +24,6 @@ public class PlayerSelector implements IPlayerSelector {
                 return player;
             }
         }
-        throw new IllegalStateException("Nao foi encontrado um jogador para a posicao" );
+        throw new IllegalStateException("Nao foi encontrado um jogador para a posicao: "+iPlayerPosition.getDescription());
     }
 }

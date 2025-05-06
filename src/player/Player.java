@@ -23,7 +23,7 @@ public class Player implements IPlayer {
     private String name;
     private LocalDate birthDate;
     private String nationality;
-    private PlayerPosition position;
+    private IPlayerPosition position;
     private String photo;
     private int number;
 
@@ -39,7 +39,7 @@ public class Player implements IPlayer {
     /**
      * Construtor com dados base para criação de um jogador.
      */
-    public Player(String name,LocalDate birthDate, String nationality, PlayerPosition position, String photo, int number) {
+    public Player(String name,LocalDate birthDate, String nationality, IPlayerPosition position, String photo, int number) {
        this(name, birthDate, nationality, position, photo, number, 0, 0, 0, 0, 0, 0, null);
     }
 
@@ -47,7 +47,7 @@ public class Player implements IPlayer {
     /**
      * Construtor completo para criação de um jogador.
      */
-    public Player(String name, LocalDate birthDate, String nationality, PlayerPosition position, String photo, int number, int shooting, int passing, int stamina, int speed, float height, float weight, PreferredFoot preferredFoot) {
+    private Player(String name, LocalDate birthDate, String nationality, IPlayerPosition position, String photo, int number, int shooting, int passing, int stamina, int speed, float height, float weight, PreferredFoot preferredFoot) {
         this.name = name;
         this.birthDate = birthDate;
         this.nationality = nationality;
@@ -167,8 +167,12 @@ public class Player implements IPlayer {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Player)) return false;
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Player)){
+            return false;
+            }
         Player player = (Player) obj;
         return number == player.number && Objects.equals(name, player.name)
                 && Objects.equals(birthDate, player.birthDate)

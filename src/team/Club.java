@@ -20,7 +20,8 @@ import java.io.IOException;
 
 public class Club implements IClub {
 
-    private static final int MINIMUM_PLAYERS = 10;
+    private static final int MINIMUM_PLAYERS = 16;
+    private static final int INCREMENT_FACTOR = 2;
 
     private String name;
     private String code;
@@ -28,7 +29,7 @@ public class Club implements IClub {
     private int foundedYear;
     private String stadiumName;
     private String logo;
-    private Player[] players;
+    private IPlayer[] players;
     private int playerCount;
 
 
@@ -91,7 +92,7 @@ public class Club implements IClub {
         if (!isPlayer(iPlayer)) {
             throw new IllegalArgumentException("Player já está no clube");
         }
-        if (this.playerCount == MINIMUM_PLAYERS) {
+        if (this.playerCount == this.players.length) {
             throw new IllegalStateException("Clube está cheio");
         }
         this.players[this.playerCount++] = (Player) iPlayer;
@@ -136,12 +137,24 @@ public class Club implements IClub {
 
     @Override
     public IPlayer selectPlayer(IPlayerSelector iPlayerSelector, IPlayerPosition iPlayerPosition) {
-        return null;
+        if(iPlayerPosition == null){
+            throw new IllegalArgumentException("Position esta vazio");
+        }
+        return iPlayerSelector.selectPlayer(this, iPlayerPosition);
     }
 
     @Override
     public boolean isValid() {
-        return false;
+
+        if(this.playerCount ==0){
+            throw new IllegalStateException("Clube não tem jogadores");
+        }
+        if (this.playerCount < MINIMUM_PLAYERS) {
+            throw new IllegalStateException("Clube não tem pelo menos 16 jogadores");
+        }
+        if (!asGK()){
+            throw new IllegalStateException("Clube não tem pelo menos 1 guarda redes");
+        }
     }
 
     @Override
@@ -160,4 +173,14 @@ public class Club implements IClub {
         return -1;
     }
 
+    private boolean asGK(){
+        boolean gk = false;
+        for (IPlayer player : this.players) {
+            if (player.getPosition().getDescription().equals("Goalkeeper")){
+                gk = true;
+                break;
+            }
+        }
+        return gk;
+    }
 }
