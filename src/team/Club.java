@@ -155,6 +155,7 @@ public class Club implements IClub {
         if (!asGK()){
             throw new IllegalStateException("Clube não tem pelo menos 1 guarda redes");
         }
+        return true;
     }
 
     @Override
