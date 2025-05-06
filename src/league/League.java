@@ -13,13 +13,12 @@ import java.io.IOException;
  * Número: 8230067
  * Turma: LEI1T2
  */
-
 public class League implements ILeague {
 
     private static final int INITIAL_SEASONS = 2;
     private static final int INCREMENT_FACTOR = 2;
     private String leagueName;
-    private Season[] seasons;
+    private ISeason[] seasons;
     private int numberOfSeasons;
 
 
@@ -27,7 +26,6 @@ public class League implements ILeague {
         this.leagueName = leagueName;
         this.numberOfSeasons = 0;
         this.seasons = new Season[INITIAL_SEASONS];
-
     }
 
     @Override
@@ -45,11 +43,22 @@ public class League implements ILeague {
     }
 
     private void incrementSizeToSeasons() {
-        Season[] seasonsTemp = new Season[seasons.length * INCREMENT_FACTOR];
+        ISeason[] seasonsTemp = new Season[seasons.length * INCREMENT_FACTOR];
 
         System.arraycopy(seasons, 0, seasonsTemp, 0, seasons.length);
 
         seasons = seasonsTemp;
+    }
+
+    private boolean seasonsExist(ISeason iSeason) {
+
+        for(int i = 0; i < numberOfSeasons; i++) {
+            if(seasons[i].equals(iSeason)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
@@ -58,13 +67,15 @@ public class League implements ILeague {
             throw new IllegalArgumentException("Season cannot be null");
         }
 
-        //verifica se existe alguma season igual - definir o equals para season
+        if(seasonsExist(iSeason)) {
+            throw new IllegalArgumentException("Season already exists");
+        }
 
         if (numberOfSeasons == seasons.length) {
             incrementSizeToSeasons();
         }
 
-        seasons[numberOfSeasons++] = (Season) iSeason;
+        seasons[numberOfSeasons++] = iSeason;
 
         return true;
     }
@@ -73,7 +84,7 @@ public class League implements ILeague {
      * Find index
      *
      * @param year -
-     * @return index correspondent in seasons array
+     * @return index correspondent in seasons array or -1 if doesn't find
      */
     private int findSeassonIndex(int year) {
 
@@ -93,7 +104,7 @@ public class League implements ILeague {
         int seasonIndex = findSeassonIndex(i);
 
         if(seasonIndex == -1){
-            throw new IllegalArgumentException("Season does not found.");
+            throw new IllegalArgumentException("Season does not found");
         }
 
         ISeason season = seasons[seasonIndex];
@@ -105,7 +116,6 @@ public class League implements ILeague {
 
         return season;
 
-
     }
 
     @Override
@@ -114,7 +124,7 @@ public class League implements ILeague {
         int seasonIndex = findSeassonIndex(i);
 
         if(seasonIndex == -1){
-            throw new IllegalArgumentException("Season does not found.");
+            throw new IllegalArgumentException("Season does not found");
         }
 
         return seasons[seasonIndex];

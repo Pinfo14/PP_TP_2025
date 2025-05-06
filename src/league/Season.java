@@ -20,9 +20,11 @@ import java.io.IOException;
  */
 public class Season implements ISeason {
 
+    private static final int MAX_CLUBS = 18;
     private String name;
     private int year;
-    private Club[] clubs;
+    private IClub[] clubs;
+    private int numClubs;
     private Standing[] standings;
 
     private int pointsPerLoss;
@@ -33,13 +35,11 @@ public class Season implements ISeason {
     private int numberOfMatches;
 
 
-    /**
-     * CONSTRUTOR SEM ESTAR CONFIGURADO
-     * @param year
-     */
-    public Season(int year) {
+
+    public Season(String leagueName, int year) {
+        this.name = String.format("%s %d", leagueName, year);
         this.year = year;
-        this.clubs = new Club[20];
+        this.clubs = new Club[MAX_CLUBS];
 
         this.pointsPerLoss = 0;
         this.pointsPerWin = 3;
@@ -54,13 +54,42 @@ public class Season implements ISeason {
         return year;
     }
 
-    @Override
-    public boolean addClub(IClub iClub) {
+    private boolean clubExist(IClub iclub) {
+
+        for(int i = 0; i < numClubs; i++) {
+            if(clubs[i].equals(iclub)) {
+                return true;
+            }
+        }
+
         return false;
     }
 
     @Override
+    public boolean addClub(IClub iClub) {
+        if (iClub == null) {
+            throw new IllegalArgumentException("Club cannot be null.");
+        }
+
+        if(clubExist(iClub)) {
+            throw new IllegalArgumentException("Club already exists.");
+        }
+
+        if(numClubs == MAX_CLUBS) {
+            throw new IllegalStateException("League is full.");
+        }
+
+        clubs[numClubs] = iClub;
+        numClubs++;
+
+        generateSchedule();
+
+        return true;
+    }
+
+    @Override
     public boolean removeClub(IClub iClub) {
+
         return false;
     }
 
@@ -91,11 +120,15 @@ public class Season implements ISeason {
 
     @Override
     public int getCurrentRound() {
-        return 0;
+        return currentRound;
     }
 
     @Override
     public boolean isSeasonComplete() {
+
+        //verifica se os jogos estao todos realizados
+
+
         return false;
     }
 
@@ -180,18 +213,19 @@ public class Season implements ISeason {
 
     }
 
-    public int oioi(){
-        return 2;
-    }
+
 
     @Override
-    public boolean equals(Object object){
-        if(this == object){
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
+        if (obj == null || this.getClass() != obj.getClass()) {
+            return false;
+        }
 
+        Season other = (Season) obj;
 
-
-        return true;
+        return true // ou outra comparação relevante
     }
 }

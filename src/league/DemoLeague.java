@@ -11,15 +11,24 @@ public class DemoLeague {
                 League liga = new League("Liga Portugal");
 
                 // Adicionar várias épocas
-                liga.createSeason(new Season(2023));
-                liga.createSeason(new Season(2024));
-                liga.createSeason(new Season(2025));
+                liga.createSeason(new Season(liga.getName(), 2023));
+                liga.createSeason(new Season(liga.getName(), 2024));
+                liga.createSeason(new Season(liga.getName(), 2025));
 
-                // Percorrer todas as épocas
-                for (ISeason aq : liga.getSeasons()) {
 
-                System.out.println(aq);
+
+                try{
+                    liga.removeSeason(2021);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
+
+
+        // Percorrer todas as épocas
+            for (ISeason aq : liga.getSeasons()) {
+
+                System.out.println(aq.getName());
+            }
 
 
             }
