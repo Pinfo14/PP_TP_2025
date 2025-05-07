@@ -5,10 +5,10 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
  * Turma: LEI1T1
- *
- * Nome: <Nome completo do colega de grupo>
- * Número: <Número mecanográfico do colega de grupo>
- * Turma: <Turma do colega de grupo>
+ * <p>
+ * Nome: Roberto Cristiano Martins Faria
+ * Número: 8230067
+ * Turma: LEI1T2
  */
 public class PlayerPosition implements IPlayerPosition {
 
@@ -21,5 +21,11 @@ public class PlayerPosition implements IPlayerPosition {
     @Override
     public String getDescription() {
         return this.description;
+    }
+
+    @Override
+    public String toString() {
+        String s = this.description;
+        return s;
     }
 }

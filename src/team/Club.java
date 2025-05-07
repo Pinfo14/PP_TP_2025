@@ -7,15 +7,16 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 import player.Player;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
  * Turma: LEI1T1
  * <p>
- * Nome: <Nome completo do colega de grupo>
- * Número: <Número mecanográfico do colega de grupo>
- * Turma: <Turma do colega de grupo>
+ * Nome: Roberto Cristiano Martins Faria
+ * Número: 8230067
+ * Turma: LEI1T2
  */
 
 public class Club implements IClub {
@@ -89,7 +90,7 @@ public class Club implements IClub {
         if (iPlayer == null) {
             throw new IllegalArgumentException("Player nao pode ser nulo");
         }
-        if (!isPlayer(iPlayer)) {
+        if (isPlayer(iPlayer)) {
             throw new IllegalArgumentException("Player já está no clube");
         }
         if (this.playerCount == this.players.length) {
@@ -104,8 +105,8 @@ public class Club implements IClub {
         if (iPlayer == null) {
             throw new IllegalArgumentException("Player nao pode ser nulo");
         }
-        for (IPlayer player : this.players) {
-            if (player.equals(iPlayer)) {
+        for (int i = 0; i < this.playerCount; i++) {
+            if (this.players [i].equals(iPlayer)) {
                 return true;
             }
         }
@@ -162,7 +163,20 @@ public class Club implements IClub {
     public void exportToJson() throws IOException {
 
     }
-/**
+
+    @Override
+    public String toString() {
+        return "Club{" +
+                "name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", country='" + country + '\'' +
+                ", foundedYear=" + foundedYear +
+                ", players=" + Arrays.toString(players) +
+                ", stadiumName='" + stadiumName + '\'' +
+                '}';
+    }
+
+    /**
  * Metodo auxiliar para obter a posiçao do player no array
  * */
     private int getPlayerIndex(IPlayer iPlayer) {

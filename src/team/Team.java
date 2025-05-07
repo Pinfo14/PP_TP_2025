@@ -14,9 +14,9 @@ import java.io.IOException;
  * Número: 8230371
  * Turma: LEI1T1
  * <p>
- * Nome: <Nome completo do colega de grupo>
- * Número: <Número mecanográfico do colega de grupo>
- * Turma: <Turma do colega de grupo>
+ * Nome: Roberto Cristiano Martins Faria
+ * Número: 8230067
+ * Turma: LEI1T2
  */
 public class Team implements ITeam {
 
@@ -24,15 +24,16 @@ public class Team implements ITeam {
 
     private IClub club;
     private IFormation formation;
-    private Player[] squad;
+    private IPlayer[] squad;
     private int playerCount;
     private int defense;
     private int midfield;
     private int forward;
+    private int striker;
     private boolean goalkeeper;
 
 
-    public Team(IClub club) {
+    public Team (IClub club) {
         this.club = club;
         this.squad = new Player[MAX_PLAYERS];
         this.playerCount = 0;
@@ -66,21 +67,26 @@ public class Team implements ITeam {
             throw new IllegalStateException("nenhuma formation definida");
         }
 
-        if (this.playerCount == MAX_PLAYERS ) {
+        if (this.playerCount == MAX_PLAYERS) {
             throw new IllegalStateException("A team esta cheia");
         }
 
         if (!club.isPlayer(iPlayer)) {
             throw new IllegalStateException("Player nao pertence ao clube");
         }
-        if (isInTeam(iPlayer)){
+        if (isInTeam(iPlayer)) {
             throw new IllegalStateException("Player ja esta na team");
         }
 
         if (!isValidPositionForFormation(iPlayer.getPosition())) {
-            throw new IllegalStateException("Posicao invalida para a formation");
+            throw new IllegalStateException( "Player: "+ iPlayer.getName() +" Posicao " + iPlayer.getPosition().getDescription() +" invalida para a formation");
         }
-        this.squad[this.playerCount++] = (Player) iPlayer;
+
+        if (isValidPositionForFormation(iPlayer.getPosition())) {
+            incrementPosition(iPlayer);
+            this.squad[this.playerCount++] = iPlayer;
+        }
+
     }
 
 
@@ -97,7 +103,23 @@ public class Team implements ITeam {
 
     @Override
     public boolean isValidPositionForFormation(IPlayerPosition iPlayerPosition) {
-        return false;
+
+        if (iPlayerPosition.getDescription().equals("Goalkeeper") && this.goalkeeper) {
+            return false;
+        }
+        if (((Formation) this.formation).getNumAttackers() == this.forward && iPlayerPosition.getDescription().equals("Foward")) {
+            return false;
+        }
+        if (((Formation) this.formation).getNumDefenders() == this.defense && iPlayerPosition.getDescription().equals("Defender")) {
+            return false;
+        }
+        if (((Formation) this.formation).getNumMidfielders() == this.midfield && iPlayerPosition.getDescription().equals("Midfielder")) {
+            return false;
+        }
+        if (((Formation) this.formation).getNumStrikers() == this.striker && iPlayerPosition.getDescription().equals("Striker")) {
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -115,17 +137,55 @@ public class Team implements ITeam {
 
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (IPlayer player : this.squad) {
+            if (player != null) {
+                s += player.toString() + "\n";
+            }
+        }
+        return s;
+    }
+
     private boolean isInTeam(IPlayer iPlayer) {
         if (iPlayer == null) {
             throw new IllegalArgumentException("player não pode ser nulo");
         }
-        for(IPlayer player: this.squad){
-            if(player.equals(iPlayer)){
-                return true;
+        try {
+            for (int i = 0; i < this.playerCount; i++ ) {
+                if (this.squad[i].equals(iPlayer)) {
+                    return true;
+                }
             }
+        } catch (NullPointerException e) {
+            return false;
         }
         return false;
     }
 
 
+    private void incrementPosition(IPlayer iPlayer) {
+        String position = iPlayer.getPosition().getDescription();
+
+        switch (position) {
+            case "Goalkeeper":
+                this.goalkeeper = true;
+                break;
+            case "Defender":
+                this.defense++;
+                break;
+            case "Midfielder":
+                this.midfield++;
+                break;
+            case "Forward":
+                this.forward++;
+                break;
+            case "Striker":
+                this.striker++;
+                break;
+            default:
+                throw new IllegalStateException("Posicao invalida");
+        }
+    }
 }

@@ -13,11 +13,10 @@ import java.util.Objects;
  * Número: 8230371
  * Turma: LEI1T1
  * <p>
- * Nome: <Nome completo do colega de grupo>
- * Número: <Número mecanográfico do colega de grupo>
- * Turma: <Turma do colega de grupo>
+ * Nome: Roberto Cristiano Martins Faria
+ * Número: 8230067
+ * Turma: LEI1T2
  */
-
 public class Player implements IPlayer {
 
     private String name;
@@ -159,6 +158,16 @@ public class Player implements IPlayer {
 
     }
 
+
+    @Override
+    public String toString() {
+        return
+                "name='" + name + '\'' +
+                ", birthDate=" + birthDate +
+                ", nationality='" + nationality + '\'' +
+                ", position=" + position +
+                ", number=" + number;
+    }
 
     @Override
     protected Object clone() throws CloneNotSupportedException {
