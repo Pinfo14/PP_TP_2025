@@ -22,7 +22,7 @@ public class League implements ILeague {
     private int numberOfSeasons;
 
 
-    League(String leagueName){
+    public League(String leagueName){
         this.leagueName = leagueName;
         this.numberOfSeasons = 0;
         this.seasons = new Season[INITIAL_SEASONS];

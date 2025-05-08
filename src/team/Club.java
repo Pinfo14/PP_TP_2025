@@ -46,6 +46,12 @@ public class Club implements IClub {
         this.players = new Player[MAX_PLAYERS];
     }
 
+
+    /** For test only */
+    public Club(String name){
+        this.name = name;
+    }
+
     @Override
     public String getName() {
         return this.name;

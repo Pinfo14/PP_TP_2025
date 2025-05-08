@@ -25,14 +25,16 @@ public class Season implements ISeason {
     private int year;
     private IClub[] clubs;
     private int numClubs;
-    private Standing[] standings;
+    private IStanding[] standings; //mesmo index que os clubs
+    private ISchedule schedule;
+
+
 
     private int pointsPerLoss;
     private int pointsPerWin;
     private int pointsPerDraw;
 
     private int currentRound;
-    private int numberOfMatches;
 
 
 
@@ -40,10 +42,14 @@ public class Season implements ISeason {
         this.name = String.format("%s %d", leagueName, year);
         this.year = year;
         this.clubs = new Club[MAX_CLUBS];
+        this.numClubs = 0;
 
         this.pointsPerLoss = 0;
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
+        this.currentRound = 0;
+
+
 
 
 
@@ -54,16 +60,8 @@ public class Season implements ISeason {
         return year;
     }
 
-    private boolean clubExist(IClub iclub) {
 
-        for(int i = 0; i < numClubs; i++) {
-            if(clubs[i].equals(iclub)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
+    //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
 
     @Override
     public boolean addClub(IClub iClub) {
@@ -89,23 +87,68 @@ public class Season implements ISeason {
 
     @Override
     public boolean removeClub(IClub iClub) {
+        if (iClub == null) {
+            throw new IllegalArgumentException("Club cannot be null.");
+        }
 
-        return false;
+        int index = clubIndex(iClub);
+
+        if(index == -1) {
+            throw new IllegalStateException("Club does not exist in the league.");
+        }
+
+        for(int i = index; i < numClubs - 1; i++) {
+            clubs[i] = clubs[i + 1];
+        }
+
+        clubs[--numClubs] = null;
+        System.out.println("Schedule generated.");
+
+        generateSchedule();
+
+        return true;
     }
 
     @Override
     public void generateSchedule() {
 
+        schedule = new Schedule(clubs, numClubs);
+
+    }
+
+    private int calculateNumberOfMatches() {
+
+        return numClubs * (numClubs - 1);
+
     }
 
     @Override
     public IMatch[] getMatches() {
-        return new IMatch[0];
+        IMatch[] matches = new IMatch[calculateNumberOfMatches()];
+
+        IMatch[] scheduledMatches = null;
+        try {
+            scheduledMatches = schedule.getAllMatches();
+        } catch (IllegalStateException e) {
+            System.err.println("No matches found.");
+        }
+
+        System.arraycopy(scheduledMatches, 0, matches, 0, scheduledMatches.length);
+
+        return matches;
+
     }
 
     @Override
     public IMatch[] getMatches(int i) {
-        return new IMatch[0];
+        IMatch[] matches = new IMatch[calculateNumberOfMatches()];
+
+        IMatch[] scheduledMatches = schedule.getAllMatches();
+
+        System.arraycopy(scheduledMatches, 0, matches, 0, scheduledMatches.length);
+
+        return matches;
+
     }
 
     @Override
@@ -154,7 +197,8 @@ public class Season implements ISeason {
 
     @Override
     public ISchedule getSchedule() {
-        return null;
+        //System.out.println(schedule.toString());
+        return schedule;
     }
 
     @Override
@@ -194,24 +238,43 @@ public class Season implements ISeason {
 
     @Override
     public int getNumberOfCurrentTeams() {
-        int count = 0;
-        for (IClub club : this.clubs) {
-            if(club != null) {
-                count++;
-            }
-        }
-        return count;
+        return 0;
     }
 
     @Override
     public IClub[] getCurrentClubs() {
-        return new IClub[0];
+        IClub[] clubTemp = new IClub[numClubs];
+
+        System.arraycopy(clubs, 0, clubTemp, 0, numClubs);
+
+        return clubTemp;
     }
 
     @Override
     public void exportToJson() throws IOException {
 
     }
+
+    private boolean clubExist(IClub iclub) {
+        for(int i = 0; i < numClubs; i++) {
+            if(clubs[i].equals(iclub)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private int clubIndex(IClub iclub) {
+        for(int i = 0; i < numClubs; i++) {
+            if(clubs[i].equals(iclub)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
 
 
 
@@ -226,6 +289,12 @@ public class Season implements ISeason {
 
         Season other = (Season) obj;
 
-        return true; // ou outra comparação relevante
+        return true ;// ou outra comparação relevante
+    }
+
+    public String teste () {
+
+        return schedule.toString();
+
     }
 }
