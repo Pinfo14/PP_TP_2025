@@ -22,6 +22,7 @@ import java.util.Arrays;
 public class Club implements IClub {
 
     private static final int MINIMUM_PLAYERS = 16;
+    private static final int MAX_PLAYERS = 21;
     private static final int INCREMENT_FACTOR = 2;
 
     private String name;
@@ -42,7 +43,7 @@ public class Club implements IClub {
         this.stadiumName = stadiumName;
         this.logo = logo;
         this.playerCount = 0;
-        this.players = new Player[MINIMUM_PLAYERS];
+        this.players = new Player[MAX_PLAYERS];
     }
 
     @Override
@@ -96,7 +97,7 @@ public class Club implements IClub {
         if (this.playerCount == this.players.length) {
             throw new IllegalStateException("Clube está cheio");
         }
-        this.players[this.playerCount++] = (Player) iPlayer;
+        this.players[this.playerCount++] = iPlayer;
     }
 
 
@@ -106,7 +107,7 @@ public class Club implements IClub {
             throw new IllegalArgumentException("Player nao pode ser nulo");
         }
         for (int i = 0; i < this.playerCount; i++) {
-            if (this.players [i].equals(iPlayer)) {
+            if (this.players[i].equals(iPlayer)) {
                 return true;
             }
         }
@@ -120,7 +121,7 @@ public class Club implements IClub {
         }
 
         int index = getPlayerIndex(iPlayer);
-        if (index <0){
+        if (index < 0) {
             throw new IllegalArgumentException("Player não está no clube");
         }
         for (int i = index; i < this.playerCount - 1; i++) {
@@ -138,7 +139,7 @@ public class Club implements IClub {
 
     @Override
     public IPlayer selectPlayer(IPlayerSelector iPlayerSelector, IPlayerPosition iPlayerPosition) {
-        if(iPlayerPosition == null){
+        if (iPlayerPosition == null) {
             throw new IllegalArgumentException("Position esta vazio");
         }
         return iPlayerSelector.selectPlayer(this, iPlayerPosition);
@@ -147,13 +148,13 @@ public class Club implements IClub {
     @Override
     public boolean isValid() {
 
-        if(this.playerCount ==0){
+        if (this.playerCount == 0) {
             throw new IllegalStateException("Clube não tem jogadores");
         }
         if (this.playerCount < MINIMUM_PLAYERS) {
             throw new IllegalStateException("Clube não tem pelo menos 16 jogadores");
         }
-        if (!asGK()){
+        if (!asGK()) {
             throw new IllegalStateException("Clube não tem pelo menos 1 guarda redes");
         }
         return true;
@@ -177,8 +178,8 @@ public class Club implements IClub {
     }
 
     /**
- * Metodo auxiliar para obter a posiçao do player no array
- * */
+     * Metodo auxiliar para obter a posiçao do player no array
+     */
     private int getPlayerIndex(IPlayer iPlayer) {
         for (int i = 0; i < this.playerCount; i++) {
             if (this.players[i].equals(iPlayer)) {
@@ -188,14 +189,12 @@ public class Club implements IClub {
         return -1;
     }
 
-    private boolean asGK(){
-        boolean gk = false;
+    private boolean asGK() {
         for (IPlayer player : this.players) {
-            if (player.getPosition().getDescription().equals("Goalkeeper")){
-                gk = true;
-                break;
+            if (player.getPosition().getDescription().equals("Goalkeeper")) {
+                return true;
             }
         }
-        return gk;
+        return false;
     }
 }
