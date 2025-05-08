@@ -60,10 +60,6 @@ public class DemoLeague {
         }
 
 
-        for (IClub cb : season.getCurrentClubs()) {
-            System.out.println(cb.toString());
-        }
-
         System.out.println(season.getSchedule());
 
 

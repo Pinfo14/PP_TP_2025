@@ -103,6 +103,7 @@ public class Season implements ISeason {
 
         clubs[--numClubs] = null;
         System.out.println("Schedule generated.");
+
         generateSchedule();
 
         return true;
@@ -112,8 +113,6 @@ public class Season implements ISeason {
     public void generateSchedule() {
 
         schedule = new Schedule(clubs, numClubs);
-
-        System.out.println(schedule.toString());
 
     }
 
@@ -198,7 +197,7 @@ public class Season implements ISeason {
 
     @Override
     public ISchedule getSchedule() {
-        System.out.println(schedule.toString());
+        //System.out.println(schedule.toString());
         return schedule;
     }
 
