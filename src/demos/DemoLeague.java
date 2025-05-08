@@ -1,8 +1,7 @@
-package demos;
+package league;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
-import league.League;
-import league.Season;
+import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import team.Club;
 
 public class DemoLeague {
@@ -27,14 +26,34 @@ public class DemoLeague {
             System.out.println(e.getMessage());
         }
 
-        ISeason season =  liga.getSeason(2023);
+        ISeason season = (Season) liga.getSeason(2023);
 
         try {
             season.addClub(club1);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             season.addClub(club2);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             season.addClub(club3);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             season.addClub(club4);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             season.addClub(club5);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        try {
             season.addClub(club6);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -53,3 +72,5 @@ public class DemoLeague {
 
     }
 }
+
+

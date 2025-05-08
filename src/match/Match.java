@@ -14,11 +14,13 @@ public class Match implements IMatch {
     private ITeam homeTeam;
     private ITeam awayTeam;
     private boolean pleayed;
+    private int round;
 
-    public Match(IClub homeClub, IClub awayClub) {
+    public Match(IClub homeClub, IClub awayClub, int roud) {
         this.pleayed = false;
         this.homeClub = homeClub;
         this.awayClub = awayClub;
+        this.round = roud;
     }
 
     @Override
@@ -68,7 +70,7 @@ public class Match implements IMatch {
 
     @Override
     public int getRound() {
-        return 0;
+        return round;
     }
 
     @Override
@@ -94,5 +96,17 @@ public class Match implements IMatch {
     @Override
     public int getEventCount() {
         return 0;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(homeClub.getName());
+        sb.append(" vs ");
+        sb.append(awayClub.getName());
+
+        return sb.toString();
+
     }
 }

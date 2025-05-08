@@ -20,30 +20,26 @@ import java.io.IOException;
  */
 public class Season implements ISeason {
 
-    private static final int MAX_CLUBS = 18;
+    private int maxClubs;
     private String name;
     private int year;
     private IClub[] clubs;
     private int numClubs;
     private IStanding[] standings; //mesmo index que os clubs
     private ISchedule schedule;
-
-
-
     private int pointsPerLoss;
     private int pointsPerWin;
     private int pointsPerDraw;
-
     private int currentRound;
 
 
 
     public Season(String leagueName, int year) {
+        this.maxClubs = 18;
         this.name = String.format("%s %d", leagueName, year);
         this.year = year;
-        this.clubs = new Club[MAX_CLUBS];
+        this.clubs = new Club[maxClubs];
         this.numClubs = 0;
-
         this.pointsPerLoss = 0;
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
@@ -73,7 +69,7 @@ public class Season implements ISeason {
             throw new IllegalArgumentException("Club already exists.");
         }
 
-        if(numClubs == MAX_CLUBS) {
+        if(numClubs == maxClubs) {
             throw new IllegalStateException("League is full.");
         }
 
@@ -141,13 +137,18 @@ public class Season implements ISeason {
 
     @Override
     public IMatch[] getMatches(int i) {
-        IMatch[] matches = new IMatch[calculateNumberOfMatches()];
 
-        IMatch[] scheduledMatches = schedule.getAllMatches();
+/*
+        try {
+            scheduledMatches = schedule.getMatchesForRound(i);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Round is invalid.");
+        } catch (IllegalStateException e) {
+            System.err.println("No matches found - not initialised or not set.");
+        }
+*/
 
-        System.arraycopy(scheduledMatches, 0, matches, 0, scheduledMatches.length);
-
-        return matches;
+        return null;
 
     }
 
@@ -197,7 +198,6 @@ public class Season implements ISeason {
 
     @Override
     public ISchedule getSchedule() {
-        //System.out.println(schedule.toString());
         return schedule;
     }
 
@@ -223,12 +223,12 @@ public class Season implements ISeason {
 
     @Override
     public int getMaxTeams() {
-        return 0;
+        return maxClubs;
     }
 
     @Override
     public int getMaxRounds() {
-        return 0;
+        return 0 ;
     }
 
     @Override
@@ -290,11 +290,5 @@ public class Season implements ISeason {
         Season other = (Season) obj;
 
         return true ;// ou outra comparação relevante
-    }
-
-    public String teste () {
-
-        return schedule.toString();
-
     }
 }

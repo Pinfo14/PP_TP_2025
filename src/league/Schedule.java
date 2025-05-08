@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class Schedule  implements ISchedule {
 
-    private IMatch[][] games;
+    private IMatch[] games;
     private IClub[] clubs;
     private int numberOfClubs;
     private ITeam[] teams;
@@ -23,29 +23,107 @@ public class Schedule  implements ISchedule {
         this.clubs = copyClubs(clubs, numberOfClubs);
         this.numberOfClubs = numberOfClubs;
         this.numberOfRounds = calculateRounds();
+
         generateGames();
     }
 
+    private int calculateRounds() {
+        return (numberOfClubs - 1) * 2;
+    }
+
+    private int calculateMatchesPerRound() {
+        return numberOfClubs / 2;
+    }
+
+    private void generateGames() {
+
+        int totalClubs = numberOfClubs;
+        if (totalClubs % 2 != 0) {
+            clubs[totalClubs++] = new Club("FOLGA");
+        }
+
+        int n = totalClubs;
+        int halfRounds = n - 1;
+        this.numberOfRounds = halfRounds * 2;
+        int matchesPerRound = n / 2;
+        int totalMatches = numberOfRounds * matchesPerRound;
+
+        games = new IMatch[totalMatches];
+
+       // IClub[] rot = Arrays.copyOf(clubs, n); //verificar se se posso usar
+        IClub[] rot = copyClubs(this.clubs,n);
+
+        for (int r = 0; r < halfRounds; r++) {
+            for (int j = 0; j < matchesPerRound; j++) {
+                IClub home = rot[j];
+                IClub away = rot[n - 1 - j];
+                int idx    = r * matchesPerRound + j;
+                games[idx] = new Match(home, away, (r + 1));
+            }
+
+            IClub last = rot[n - 1];
+            System.arraycopy(rot, 1, rot, 2, n - 2);
+            rot[1] = last;
+        }
+
+        for (int r = 0; r < halfRounds; r++) {
+            for (int j = 0; j < matchesPerRound; j++) {
+
+                int firstIdx  = r * matchesPerRound + j;
+                IMatch m1      = games[firstIdx];
+
+                int secondIdx = (r + halfRounds) * matchesPerRound + j;
+
+                games[secondIdx] = new Match(m1.getAwayClub(), m1.getHomeClub(),halfRounds + r + 1);
+            }
+        }
+    }
 
 
     @Override
     public IMatch[] getMatchesForRound(int i) {
-        return new IMatch[0];
+
+        IMatch[] matches = new IMatch[calculateMatchesPerRound()];
+        int idx = 0;
+
+        for(IMatch match : games) {
+            if(match.getRound() == i){
+                matches[idx++] = match;
+            }
+        }
+
+        return matches;
     }
 
     @Override
     public IMatch[] getMatchesForTeam(ITeam iTeam) {
-        return new IMatch[0];
+
+
+        IMatch[] matches = new IMatch[calculateMatchesPerRound()];
+
+
+        int idx = 0;
+        for(IMatch match : games) {
+            if(match.getRound() == idx){
+                matches[idx++] = match;
+            }
+        }
+
+        return matches;
     }
 
     @Override
     public int getNumberOfRounds() {
-        return 0;
+        return this.numberOfRounds;
     }
 
     @Override
     public IMatch[] getAllMatches() {
-        return new IMatch[0];
+        IMatch[] matches = new IMatch[this.games.length];
+        for(int i = 0; i < this.games.length; i++) {
+            matches[i] = this.games[i];
+        }
+        return matches;
     }
 
     @Override
@@ -59,29 +137,6 @@ public class Schedule  implements ISchedule {
     public void exportToJson() throws IOException {
 
     }
-
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int round = 0; round < numberOfRounds; round++) {
-            sb.append("Jornada ").append(round + 1).append(":\n");
-            for (IMatch jogo : games[round]) {
-                String home = jogo.getHomeClub().getName();
-                String away = jogo.getAwayClub().getName();
-                // Opcional: se quiseres omitir a ronda de “Folga”:
-                if ("FOLGA".equals(home) || "FOLGA".equals(away)) {
-                    sb.append("  - ").append(
-                            "Folga para " + ("FOLGA".equals(home) ? away : home)
-                    ).append("\n");
-                } else {
-                    sb.append("  - ").append(home)
-                            .append(" vs ")
-                            .append(away)
-                            .append("\n");
-                }
-            }
-        }
-        return sb.toString();
-    }
     private IClub[] copyClubs(IClub[] clubs, int numberOfClubs) {
         IClub[] clubsTemp = new IClub[clubs.length];
         for(int i = 0; i < numberOfClubs; i++) {
@@ -90,50 +145,20 @@ public class Schedule  implements ISchedule {
         return clubsTemp;
     }
 
-    private int calculateRounds() {
-        return (numberOfClubs - 1) * 2;
-    }
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
 
-    private void generateGames() {
+        for (int round = 1; round <= numberOfRounds; round++) {
+            sb.append("Jornada ").append(round).append(":\n");
 
-        int totalClubs = numberOfClubs;
-
-        if (totalClubs % 2 != 0) {
-            clubs[totalClubs++] = new Club("FOLGA");
-        }
-
-        IClub clubsTemp[] = clubs;
-        int roundsPerHalf = totalClubs - 1;
-        this.numberOfRounds = roundsPerHalf * 2;  // ida + volta
-        int matchesPerRound = totalClubs / 2;
-
-        IMatch[][] fristTurn = new IMatch[roundsPerHalf][matchesPerRound];
-        for (int round = 0; round < roundsPerHalf; round++) {
-            for (int j = 0; j < matchesPerRound; j++) {
-                fristTurn[round][j] = new Match(clubsTemp[j], clubsTemp[totalClubs - 1 - j]);
-            }
-
-            IClub temp = clubsTemp[totalClubs - 1];
-            for (int k = totalClubs - 1; k > 1; k--) {
-                clubsTemp[k] = clubsTemp[k - 1];
-            }
-            clubsTemp[1] = temp;
-        }
-
-        IMatch[][] secondTurn = new Match[roundsPerHalf][matchesPerRound];
-        for (int round = 0; round < roundsPerHalf; round++) {
-            for (int j = 0; j < matchesPerRound; j++) {
-                IMatch game = fristTurn[round][j];
-                secondTurn[round][j] = new Match(game.getAwayClub(), game.getHomeClub());
+            for (IMatch jogo : games) {
+                if(jogo.getRound() == round) {
+                    sb.append(String.format("\t%s\n", jogo.toString()));
+                }
             }
         }
 
-        games = new IMatch[numberOfRounds][matchesPerRound];
-
-        for (int r = 0; r < roundsPerHalf; r++) {
-            System.arraycopy(fristTurn[r],  0, games[r],0, matchesPerRound);
-            System.arraycopy(secondTurn[r], 0, games[r + roundsPerHalf], 0, matchesPerRound);
-        }
+        return sb.toString();
     }
 
 

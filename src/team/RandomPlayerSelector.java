@@ -15,6 +15,7 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
  * Turma: LEI1T2
  */
 public class RandomPlayerSelector implements IPlayerSelector {
+
     @Override
     public IPlayer selectPlayer(IClub iClub, IPlayerPosition iPlayerPosition) {
         if (iClub == null) {

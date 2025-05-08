@@ -3,7 +3,6 @@ package event;
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 
 import java.io.IOException;
-import java.util.Objects;
 
 public class Event implements IEvent {
 
@@ -32,7 +31,7 @@ public class Event implements IEvent {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Event event)){
+        if (!(o instanceof Event)){
             return false;
         }
         Event ev = (Event) o;
