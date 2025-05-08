@@ -1,7 +1,9 @@
-package league;
+package demos;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import league.League;
+import league.Season;
 import team.Club;
 
 public class DemoLeague {
