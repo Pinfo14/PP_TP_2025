@@ -31,6 +31,9 @@ public class Club implements IClub {
     private Player[] players;
     private int playerCount;
 
+    public Club(String name) {
+        this.name = name;
+    }
 
     public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo) {
         this.name = name;
@@ -158,6 +161,13 @@ public class Club implements IClub {
             }
         }
         return -1;
+    }
+
+    @Override
+    public String toString() {
+
+        return this.name;
+
     }
 
 }
