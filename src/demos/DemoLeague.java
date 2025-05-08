@@ -28,47 +28,17 @@ public class DemoLeague {
 
         ISeason season = (Season) liga.getSeason(2023);
 
-        try {
-            season.addClub(club1);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            season.addClub(club2);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            season.addClub(club3);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            season.addClub(club4);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            season.addClub(club5);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            season.addClub(club6);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+        IClub[] clubs = {club1, club2, club3, club4, club5, club6};
 
+        for(IClub c : clubs) {
+            try {
+                season.addClub(c);
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         System.out.println(season.getSchedule());
-
-
-
-
-
-
-
-
 
     }
 }
