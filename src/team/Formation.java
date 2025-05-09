@@ -1,6 +1,9 @@
 package team;
 
 import com.ppstudios.footballmanager.api.contracts.team.IFormation;
+
+
+
 /**
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
@@ -38,6 +41,9 @@ public class Formation implements IFormation {
         if(this.numMidfielders < form.numMidfielders){
             return 1;
         }
+        if(this.numMidfielders > form.numMidfielders){
+            return -1;
+        }
         return 0;
     }
 
@@ -58,5 +64,20 @@ public class Formation implements IFormation {
     public int getNumStrikers() {
         return this.numStrikers;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Formation )){
+            return false;
+        }
+        Formation form = (Formation) o;
+
+        return this.numAttackers == form.numAttackers &&
+                this.numDefenders == form.numDefenders &&
+                this.numMidfielders == form.numMidfielders &&
+                this.numStrikers == form.numStrikers &&
+                this.name.equals(form.name);
+  }
+
 
 }

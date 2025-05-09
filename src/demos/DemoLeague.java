@@ -28,7 +28,7 @@ public class DemoLeague {
             System.out.println(e.getMessage());
         }
 
-        ISeason season = (Season) liga.getSeason(2023);
+        ISeason season = liga.getSeason(2023);
 
         IClub[] clubs = {club1, club2, club3, club4, club5, club6};
 

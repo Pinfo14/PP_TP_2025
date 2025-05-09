@@ -18,22 +18,17 @@ public class RandomPlayerSelector implements IPlayerSelector {
 
     @Override
     public IPlayer selectPlayer(IClub iClub, IPlayerPosition iPlayerPosition) {
-        if (iClub == null) {
-            throw new IllegalArgumentException("club não pode ser nulo");
-        }
-        if (iPlayerPosition == null) {
-            throw new IllegalArgumentException("position não pode ser nula");
-        }
-        // equipa vazia?
-        if (iClub.getPlayerCount() == 0) {
-            throw new IllegalStateException("clube vazio");
-        }
+        verifyClub(iClub);
+        verifyPosition(iPlayerPosition);
+        verifyClubPlayers(iClub);
 
-        IPlayer[] playersByPosition = getIPllayersByPosition(iClub.getPlayers(), iPlayerPosition);
+        IPlayer[] playersByPosition = getIPlayersByPosition(iClub.getPlayers(), iPlayerPosition);
         return playersByPosition[random(playersByPosition.length)];
     }
 
     private int countPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
+        verifyPosition(position);
+        verifyPlayers(players);
         int count = 0;
         for (IPlayer player : players) {
             if (player.getPosition().equals(position)) {
@@ -43,7 +38,8 @@ public class RandomPlayerSelector implements IPlayerSelector {
         return count;
     }
 
-    private IPlayer[] getIPllayersByPosition(IPlayer[] players, IPlayerPosition position) {
+
+    private IPlayer[] getIPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
 
         int numPlayers = countPlayersByPosition(players, position);
 
@@ -62,7 +58,33 @@ public class RandomPlayerSelector implements IPlayerSelector {
         return positionPLayers;
     }
 
-    private int random(int lenght) {
-        return (int) (Math.random() * lenght);
+    private int random(int length) {
+        return (int) (Math.random() * length);
     }
+
+    private void verifyClubPlayers(IClub club) {
+
+        if (club.getPlayerCount() == 0) {
+            throw new IllegalStateException("clube vazio");
+        }
+    }
+
+    private void verifyClub(IClub club) {
+        if (club == null) {
+            throw new IllegalArgumentException("club não pode ser nulo");
+        }
+    }
+
+    private void verifyPosition(IPlayerPosition position) {
+        if (position == null) {
+            throw new IllegalArgumentException("Position não pode ser null");
+        }
+    }
+
+    private void verifyPlayers(IPlayer[] players) {
+        if (players == null) {
+            throw new IllegalArgumentException("Array players não pode ser null");
+        }
+    }
+
 }

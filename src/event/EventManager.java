@@ -13,7 +13,7 @@ public class EventManager implements IEventManager {
     private int eventCount;
 
     public EventManager() {
-        this.events = new Event[INIT_CAP];
+        this.events = new IEvent[INIT_CAP];
         this.eventCount = 0;
     }
 
@@ -58,7 +58,9 @@ public class EventManager implements IEventManager {
     private String eventToString() {
      String s = "";
       for(int i = 0; i < this.eventCount; i++) {
-          s += this.events[i].toString() + "\n";
+          if(this.events[i] != null) {
+              s += this.events[i].toString() + "\n";
+          }
       }
       return s;
     }

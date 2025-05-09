@@ -7,7 +7,7 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 import player.Player;
 
 import java.io.IOException;
-import java.util.Arrays;
+
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -173,14 +173,7 @@ public class Club implements IClub {
 
     @Override
     public String toString() {
-        return "Club{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", country='" + country + '\'' +
-                ", foundedYear=" + foundedYear +
-                ", players=" + Arrays.toString(players) +
-                ", stadiumName='" + stadiumName + '\'' +
-                '}';
+        return this.name;
     }
 
     /**

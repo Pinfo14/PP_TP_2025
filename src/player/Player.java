@@ -63,15 +63,6 @@ public class Player implements IPlayer {
         this.weight = weight;
         this.preferredFoot = preferredFoot;
     }
-    /**
-     * Construtor para clone
-     */
-    private Player(Player outro) {
-        this(outro.name, outro.birthDate, outro.nationality, outro.position,
-                outro.photo, outro.number, outro.shooting, outro.passing,
-                outro.stamina, outro.speed, outro.height, outro.weight,
-                outro.preferredFoot);
-    }
 
 
     @Override
@@ -99,7 +90,7 @@ public class Player implements IPlayer {
         if (iPlayerPosition == null) {
             throw new IllegalArgumentException("Posição não pode ser nula");
         }
-        this.position = (PlayerPosition) iPlayerPosition;
+        this.position = iPlayerPosition;
     }
 
     @Override
@@ -162,17 +153,14 @@ public class Player implements IPlayer {
     @Override
     public String toString() {
         return
-                "name='" + name + '\'' +
-                ", birthDate=" + birthDate +
-                ", nationality='" + nationality + '\'' +
-                ", position=" + position +
-                ", number=" + number;
+                "name='" + name + "\n" +
+                "birthDate=" + birthDate +
+                "nationality='" + nationality + "\n" +
+                "position=" + position +
+                "number=" + number;
     }
 
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return new Player(this);
-    }
+
 
     @Override
     public boolean equals(Object obj) {

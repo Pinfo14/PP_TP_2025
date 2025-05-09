@@ -33,7 +33,7 @@ public class Team implements ITeam {
     private boolean goalkeeper;
 
 
-    public Team (IClub club) {
+    public Team(IClub club) {
         this.club = club;
         this.squad = new Player[MAX_PLAYERS];
         this.playerCount = 0;
@@ -60,34 +60,19 @@ public class Team implements ITeam {
 
     @Override
     public void addPlayer(IPlayer iPlayer) {
-        if (iPlayer == null) {
-            throw new IllegalArgumentException("player não pode ser nulo");
-        }
-        if (this.formation == null) {
-            throw new IllegalStateException("nenhuma formation definida");
-        }
 
-        if (this.playerCount == MAX_PLAYERS) {
-            throw new IllegalStateException("A team esta cheia");
-        }
+        validatePlayerNotNull(iPlayer);
+        validateFormationDefined();
+        validateTeamNotFull();
+        validatePlayerBelongsToClub(iPlayer);
+        validatePlayerNotInTeam(iPlayer);
+        validatePositionForFormation(iPlayer);
 
-        if (!club.isPlayer(iPlayer)) {
-            throw new IllegalStateException("Player nao pertence ao clube");
-        }
-        if (isInTeam(iPlayer)) {
-            throw new IllegalStateException("Player ja esta na team");
-        }
-
-        if (!isValidPositionForFormation(iPlayer.getPosition())) {
-            throw new IllegalStateException( "Player: "+ iPlayer.getName() +" Posicao " + iPlayer.getPosition().getDescription() +" invalida para a formation");
-        }
-
-        if (isValidPositionForFormation(iPlayer.getPosition())) {
-            incrementPosition(iPlayer);
-            this.squad[this.playerCount++] = iPlayer;
-        }
+        incrementPosition(iPlayer);
+        this.squad[this.playerCount++] = iPlayer;
 
     }
+
 
 
     @Override
@@ -142,18 +127,16 @@ public class Team implements ITeam {
         String s = "";
         for (IPlayer player : this.squad) {
             if (player != null) {
-                s += player.toString() + "\n";
+                s += player + "\n";
             }
         }
         return s;
     }
 
     private boolean isInTeam(IPlayer iPlayer) {
-        if (iPlayer == null) {
-            throw new IllegalArgumentException("player não pode ser nulo");
-        }
+        validatePlayerNotNull(iPlayer);
         try {
-            for (int i = 0; i < this.playerCount; i++ ) {
+            for (int i = 0; i < this.playerCount; i++) {
                 if (this.squad[i].equals(iPlayer)) {
                     return true;
                 }
@@ -186,6 +169,42 @@ public class Team implements ITeam {
                 break;
             default:
                 throw new IllegalStateException("Posicao invalida");
+        }
+    }
+
+    private void validatePositionForFormation(IPlayer iPlayer) {
+        if (!isValidPositionForFormation(iPlayer.getPosition())) {
+            throw new IllegalStateException("Player: " + iPlayer.getName() + " Posicao " + iPlayer.getPosition().getDescription() + " invalida para a formation");
+        }
+    }
+
+    private void validatePlayerNotNull(IPlayer p) {
+        if (p == null) {
+            throw new IllegalArgumentException("player não pode ser nulo");
+        }
+    }
+
+    private void validateFormationDefined() {
+        if (formation == null) {
+            throw new IllegalStateException("nenhuma formation definida");
+        }
+    }
+
+    private void validateTeamNotFull() {
+        if (playerCount == MAX_PLAYERS) {
+            throw new IllegalStateException("A team está cheia");
+        }
+    }
+
+    private void validatePlayerBelongsToClub(IPlayer p) {
+        if (!club.isPlayer(p)) {
+            throw new IllegalStateException("Player não pertence ao clube");
+        }
+    }
+
+    private void validatePlayerNotInTeam(IPlayer p) {
+        if (isInTeam(p)) {
+            throw new IllegalStateException("Player já está na team");
         }
     }
 }

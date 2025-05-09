@@ -31,12 +31,13 @@ public class TeamDemo {
         IPlayerPosition def = new PlayerPosition("Defender");
         IPlayerPosition striker = new PlayerPosition("Striker");
 
-        Player player = new Player("Emanuel",date,"Portugues", gk,"sdfg",1 );
-        Player player2 = new Player("Info",date,"Portugues", def,"sdfg",2 );
-        Player player3 = new Player("wfas",date,"Portugues", def,"sdfg",5 );
-        Player player4 = new Player("ffgmb",date,"Portugues", def,"sdfg",8 );
-        Player player5 = new Player("nthgfvb",date,"Portugues", def,"sdfg",85);
-        Player player6 = new Player("das",date,"Portugues", striker,"sdfg",86 );
+        IPlayer player = new Player("Emanuel",date,"Portugues", gk,"sdfg",1 );
+        IPlayer NotInteam = new Player("Alfredo",date,"Portugues", gk,"sdfg",10 );
+        IPlayer player2 = new Player("Info",date,"Portugues", def,"sdfg",2 );
+        IPlayer player3 = new Player("wfas",date,"Portugues", def,"sdfg",5 );
+        IPlayer player4 = new Player("ffgmb",date,"Portugues", def,"sdfg",8 );
+        IPlayer player5 = new Player("nthgfvb",date,"Portugues", def,"sdfg",85);
+        IPlayer player6 = new Player("das",date,"Portugues", striker,"sdfg",86 );
 
         club[0].addPlayer(player2);
         club[0].addPlayer(player);
@@ -44,10 +45,9 @@ public class TeamDemo {
         club[0].addPlayer(player4);
         club[0].addPlayer(player5);
         club[0].addPlayer(player6);
-        System.out.println(club[0].toString());
 
-        //club[0].removePlayer(player2);
-      //  System.out.println(club[0]);
+        IPlayer[] players ={NotInteam,player,player2,player3,player4,player5,player6};
+
 
 
         IPlayerSelector selector = new RandomPlayerSelector();
@@ -55,29 +55,29 @@ public class TeamDemo {
 
         try{
            IPlayer play = club[0].selectPlayer(selector, def);
-           System.out.println(play.toString());
+           System.out.println("Random defesa: \n"+play.toString());
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
 
-        IFormation formation = new Formation("4-3-2-1", 4, 3, 2,1);
+        IFormation formation4321 = new Formation("4-3-2-1", 4, 3, 2,1);
 
         System.out.println("\n\n TEAM \n\n");
-
+        System.out.println(formation4321.getDisplayName());
         ITeam team = new Team(club[0]);
-        team.setFormation(formation);
+        team.setFormation(formation4321);
 
-        try{
-            team.addPlayer(player);
-            team.addPlayer(player2);
-            team.addPlayer(player3);
-            team.addPlayer(player4);
-            team.addPlayer(player5);
-            team.addPlayer(player6);
-        }catch (Exception e){
-            System.out.println(e.getMessage());
+
+        for(IPlayer p : players){
+            try{
+                team.addPlayer(p);
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
 
-        System.out.println(team.toString());
+
+
+        System.out.println(team);
     }
 }
