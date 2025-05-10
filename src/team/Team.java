@@ -92,7 +92,7 @@ public class Team implements ITeam {
         if (iPlayerPosition.getDescription().equals("Goalkeeper") && this.goalkeeper) {
             return false;
         }
-        if (((Formation) this.formation).getNumAttackers() == this.forward && iPlayerPosition.getDescription().equals("Foward")) {
+        if (((Formation) this.formation).getNumAttackers() == this.forward && iPlayerPosition.getDescription().equals("Forward")) {
             return false;
         }
         if (((Formation) this.formation).getNumDefenders() == this.defense && iPlayerPosition.getDescription().equals("Defender")) {

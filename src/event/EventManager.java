@@ -6,7 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.event.IEventManager;
 
 public class EventManager implements IEventManager {
 
-    private static final int INIT_CAP=20;
+    private static final int INIT_CAP=90;
     private static final int INCREMENT=2;
 
     private IEvent[] events;

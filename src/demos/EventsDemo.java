@@ -3,11 +3,11 @@ package demos;
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
-import event.Event;
-import event.EventManager;
-import event.GoalEvent;
+import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import event.*;
 import player.Player;
 import player.PlayerPosition;
+import team.Club;
 
 import java.time.LocalDate;
 
@@ -17,12 +17,20 @@ public class EventsDemo {
         LocalDate date = LocalDate.of(2003, 1, 1);
         IPlayerPosition st = new PlayerPosition("Striker");
         IPlayer player = new Player("Emanuel",date,"Portugues", st,"sdfg",1 );
-        IEvent ev = new Event("Falta",25);
-        IEvent ev2 = new Event("Passe",25);
+        IClub club = new Club("Porto");
+
+        IEvent Foul = new FoulEvent(player,25);
+        IEvent shot = new ShotEvent("Remate de ",player,26);
+        IEvent goal = new GoalEvent(player,26,"Goloooo");
+        IEvent pass = new PassEvent("Passe",player,28);
+        IEvent missShot = new ShotEvent("Remate falhado de ",player,29);
+        IEvent goalKick = new GoalKickEvent(club,29);
+
+
         IEvent ev3 = null;
-        IEvent ev4 = new GoalEvent(player,26,"Goloooo");
+
         EventManager manager = new EventManager();
-         IEvent[] events = {ev, ev2, ev3,ev4};
+         IEvent[] events = {Foul,shot,goal,pass,missShot,goalKick};
          for(IEvent event : events) {
              try {
                  manager.addEvent(event);

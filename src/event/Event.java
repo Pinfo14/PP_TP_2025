@@ -4,7 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 
 import java.io.IOException;
 
-public class Event implements IEvent {
+public abstract class Event implements IEvent {
 
     private String description;
     private int minute;
@@ -26,21 +26,20 @@ public class Event implements IEvent {
 
     @Override
     public void exportToJson() throws IOException {
-
+        // Implementação futura
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Event)){
+        if (!(o instanceof Event)) {
             return false;
         }
         Event ev = (Event) o;
-        return this.minute==ev.getMinute() && this.description.equals(ev.getDescription());
+        return this.minute == ev.getMinute() && this.description.equals(ev.getDescription());
     }
 
     @Override
     public String toString() {
-     String s = "Event: " + this.description + " Minuto: " + this.minute + "\n";
-     return s;
+        return  this.description + " ao minuto " + this.minute;
     }
 }

@@ -1,14 +1,19 @@
 package imports;
 
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import player.Player;
+import player.PlayerPosition;
 import team.Club;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -75,31 +80,53 @@ public class Imports {
         }
     }
 
-    /**
-     * Gera o nome do arquivo para um determinado clube. O nome do arquivo é criado usando
-     * a última palavra do nome do clube seguida da extensão ".json".
-     *
-     * @param club O objeto clube cujo nome será usado para gerar o nome do arquivo.
-     * @return Uma string representando o nome do arquivo para o clube fornecido.
-     */
-    private String[] fileName(Club club) {
-        String[] partes = club.getName().split("\\s+");//divide a string do nome em partes usando espaços em branco como separador
-// \\s+ é uma expressão regex que significa "um ou mais espaços em branco"
-        //comparar o array com o nome do ficheiro para comparar uso o contains da class String
-        return partes;
-    }
+    public IPlayer[] importPlayers( String fileName) {
+        JSONParser parser = new JSONParser();
+        File file = new File("src/Files/players/" + fileName);
 
-    private String getActualFileName(String[] partes,File file){
-        if(partes.length == 1){
-            return partes[0] + ".json";
+        try (FileReader reader = new FileReader(file)) {
+            JSONObject root = (JSONObject) parser.parse(reader);
+
+            JSONArray playerArray = null;
+            if (root.containsKey("plantel")) {
+                playerArray = (JSONArray) root.get("plantel");
+            } else if (root.containsKey("squad")) {
+                playerArray = (JSONArray) root.get("squad");
+            } else {
+                System.err.println("Erro: o ficheiro não contém 'plantel' nem 'squad'.");
+                return new Player[0];
+            }
+
+            IPlayer[] player = new Player[playerArray.size()];
+
+            int i = 0;
+            for (Object obj : playerArray) {
+                JSONObject playerJson = (JSONObject) obj;
+
+                String name = (String) playerJson.get("name");
+                LocalDate birthDate = LocalDate.parse((String) playerJson.get("birthDate"));
+                String nationality = (String) playerJson.get("nationality");
+                String photo = (String) playerJson.get("photo");
+                int number = ((Long) playerJson.get("number")).intValue();
+                IPlayerPosition position = new PlayerPosition((String) playerJson.get("basePosition"));
+
+                Player playerObj = new Player(
+                        name,
+                        birthDate,
+                        nationality,
+                        position,
+                        photo,
+                        number
+                );
+
+                player[i++] = playerObj;
+            }
+            return player;
+
+        } catch (IOException | ParseException e) {
+            e.printStackTrace();
+            return new Player[0];
         }
-        file.getName();
-
-        return  file.getName();
     }
-
-    //posso fazer agora um import player que recebe o path
-    //e com base no nome do club e do ficheiro importa os players e instancia Player returnando um array de players
-    //esse array e dps usado no import clubs que adiciona os players ao club.
 
 }

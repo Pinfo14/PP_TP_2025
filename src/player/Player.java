@@ -154,10 +154,10 @@ public class Player implements IPlayer {
     public String toString() {
         return
                 "name='" + name + "\n" +
-                "birthDate=" + birthDate +
+                "birthDate=" + birthDate +"\n"+
                 "nationality='" + nationality + "\n" +
-                "position=" + position +
-                "number=" + number;
+                "position=" + position+"\n" +
+                "number=" + number+"\n";
     }
 
 
@@ -171,11 +171,11 @@ public class Player implements IPlayer {
             return false;
             }
         Player player = (Player) obj;
-        return number == player.number && Objects.equals(name, player.name)
-                && Objects.equals(birthDate, player.birthDate)
-                && Objects.equals(nationality, player.nationality)
-                && Objects.equals(position, player.position)
-                && Objects.equals(photo, player.photo);
+        return this.number == player.getNumber() && this.name.equals(player.getName())
+                && this.birthDate.equals(player.birthDate)
+                && this.nationality.equals(player.nationality)
+                && this.position.equals(player.position)
+                && this.photo.equals(player.photo);
     }
 
 }

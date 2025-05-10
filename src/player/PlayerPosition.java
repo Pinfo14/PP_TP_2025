@@ -1,6 +1,9 @@
 package player;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
+
+import java.util.Objects;
+
 /**
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
@@ -28,4 +31,16 @@ public class PlayerPosition implements IPlayerPosition {
         String s = this.description;
         return s;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof PlayerPosition)) {
+            return false;
+        }
+        PlayerPosition that = (PlayerPosition) o;
+        return this.description.equals(that.getDescription());
+    }
+
 }
+
+
