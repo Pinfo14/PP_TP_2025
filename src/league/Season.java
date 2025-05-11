@@ -39,25 +39,18 @@ public class Season implements ISeason {
         this.name = String.format("%s %d", leagueName, year);
         this.year = year;
         this.clubs = new Club[maxClubs];
+        this.standings = new IStanding[maxClubs];
         this.numClubs = 0;
         this.pointsPerLoss = 0;
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
         this.currentRound = 0;
-
-
-
-
-
     }
 
     @Override
     public int getYear() {
         return year;
     }
-
-
-
 
     @Override
     public boolean addClub(IClub iClub) {
@@ -74,7 +67,7 @@ public class Season implements ISeason {
             throw new IllegalStateException("League is full.");
         }
 
-        standings[numClubs] = new Standing();
+        standings[numClubs] = new Standing(iClub);
         clubs[numClubs] = iClub;
         numClubs++;
 
@@ -141,17 +134,18 @@ public class Season implements ISeason {
     @Override
     public IMatch[] getMatches(int i) {
 
-/*
+        IMatch[] scheduledMatches = new IMatch[calculateNumberOfMatches()];
+
         try {
             scheduledMatches = schedule.getMatchesForRound(i);
         } catch (IllegalArgumentException e) {
             System.err.println("Round is invalid.");
+            throw e;
         } catch (IllegalStateException e) {
             System.err.println("No matches found - not initialised or not set.");
+            throw e;
         }
-*/
-
-        return null;
+        return scheduledMatches;
 
     }
 
@@ -201,6 +195,7 @@ public class Season implements ISeason {
 
     @Override
     public ISchedule getSchedule() {
+        System.out.println(schedule);
         return schedule;
     }
 

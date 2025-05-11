@@ -1,6 +1,7 @@
 package demos;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import league.League;
 import league.Season;
@@ -40,7 +41,18 @@ public class DemoLeague {
             }
         }
 
-        System.out.println(season.getSchedule());
+
+        IMatch[] matches = season.getMatches(12);
+        for (IMatch match : matches) {
+            try {
+              System.out.println(match.toString());
+            } catch (IllegalArgumentException e) {
+                System.err.println("Round is invalid.");
+            } catch (IllegalStateException e) {
+                System.err.println("No matches found - not initialised or not set.");
+
+            }
+        }
 
     }
 }

@@ -36,7 +36,6 @@ public class Schedule  implements ISchedule {
     }
 
     private void generateGames() {
-
         int totalClubs = numberOfClubs;
         if (totalClubs % 2 != 0) {
             clubs[totalClubs++] = new Club("FOLGA");
@@ -49,7 +48,6 @@ public class Schedule  implements ISchedule {
         int totalMatches = numberOfRounds * matchesPerRound;
 
         games = new IMatch[totalMatches];
-
        // IClub[] rot = Arrays.copyOf(clubs, n); //verificar se se posso usar
         IClub[] rot = copyClubs(this.clubs,n);
 
@@ -79,15 +77,23 @@ public class Schedule  implements ISchedule {
         }
     }
 
-
     @Override
     public IMatch[] getMatchesForRound(int i) {
+        if(i < 0 || i >= numberOfRounds) {
+            throw new IllegalArgumentException("Null round");
+        }
+
+
+
+
+
 
         IMatch[] matches = new IMatch[calculateMatchesPerRound()];
         int idx = 0;
 
+
         for(IMatch match : games) {
-            if(match.getRound() == i){
+            if (match.getRound() == i) {
                 matches[idx++] = match;
             }
         }
