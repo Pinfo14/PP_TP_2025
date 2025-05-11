@@ -57,10 +57,11 @@ public class Season implements ISeason {
     }
 
 
-    //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
+
 
     @Override
     public boolean addClub(IClub iClub) {
+        //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
@@ -73,6 +74,7 @@ public class Season implements ISeason {
             throw new IllegalStateException("League is full.");
         }
 
+        standings[numClubs] = new Standing();
         clubs[numClubs] = iClub;
         numClubs++;
 
@@ -83,6 +85,7 @@ public class Season implements ISeason {
 
     @Override
     public boolean removeClub(IClub iClub) {
+        //todo verifica se algum jogo ja foi jogado
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
