@@ -31,9 +31,12 @@ public class Club implements IClub {
     private Player[] players;
     private int playerCount;
 
+<<<<<<< HEAD
     public Club(String name) {
         this.name = name;
     }
+=======
+>>>>>>> origin/Emanuel
 
     public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo) {
         this.name = name;
@@ -163,6 +166,7 @@ public class Club implements IClub {
         return -1;
     }
 
+<<<<<<< HEAD
     @Override
     public String toString() {
 
@@ -170,4 +174,6 @@ public class Club implements IClub {
 
     }
 
+=======
+>>>>>>> origin/Emanuel
 }
