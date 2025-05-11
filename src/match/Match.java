@@ -31,11 +31,11 @@ public class Match implements IMatch {
         this.eventCount = 0;
     }
 
-    public void setHomeTeam(ITeam homeTeam) {
+    private void setHomeTeam(ITeam homeTeam) {
         this.homeTeam = homeTeam;
     }
 
-    public void setAwayTeam(ITeam awayTeam) {
+    private void setAwayTeam(ITeam awayTeam) {
         this.awayTeam = awayTeam;
     }
 
@@ -89,9 +89,31 @@ public class Match implements IMatch {
         return round;
     }
 
+    private boolean checkIfTeamsAreTheSame(ITeam team1, ITeam team2) {
+        return team1.equals(team2);
+    }
+
     @Override
     public void setTeam(ITeam iTeam) {
 
+        //tirar duvidas e dps terminar
+        if(iTeam == null) {
+
+        }
+        if(checkIfTeamsAreTheSame(iTeam, this.homeTeam)) {
+
+        }
+        if(iTeam.getClub().equals(this.homeClub)) {
+
+        }
+
+        //verificar se club da match e o msm da team
+
+        if(this.homeTeam == null) {
+            setHomeTeam(iTeam);
+        }else if(this.awayTeam == null) {
+            setAwayTeam(iTeam);
+        }
     }
 
     @Override
