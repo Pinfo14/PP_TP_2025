@@ -89,30 +89,22 @@ public class Match implements IMatch {
         return round;
     }
 
-    private boolean checkIfTeamsAreTheSame(ITeam team1, ITeam team2) {
-        return team1.equals(team2);
-    }
-
     @Override
     public void setTeam(ITeam iTeam) {
-
-        //tirar duvidas e dps terminar
         if(iTeam == null) {
-
-        }
-        if(checkIfTeamsAreTheSame(iTeam, this.homeTeam)) {
-
-        }
-        if(iTeam.getClub().equals(this.homeClub)) {
-
+            throw new NullPointerException("Team cannot be null.");
         }
 
-        //verificar se club da match e o msm da team
+        if(isPlayed()) {
+            throw new IllegalStateException("Match is already played.");
+        }
 
-        if(this.homeTeam == null) {
+        if(iTeam.getClub().equals(homeClub)) {
             setHomeTeam(iTeam);
-        }else if(this.awayTeam == null) {
+        } else if(iTeam.getClub().equals(awayClub)) {
             setAwayTeam(iTeam);
+        } else {
+            throw new IllegalStateException("Team does not belong to the club.");
         }
     }
 
