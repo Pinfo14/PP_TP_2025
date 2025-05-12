@@ -123,7 +123,7 @@ public class PlayerAttributes {
         s+="\nSpeed:"+this.speed;
         s+="\nHeight:"+this.height;
         s+="\nWeight:"+this.weight;
-        s+="\nPrefered Foot: "+this.preferredFoot.getPreferredFoot();
+        s+="\nPrefered Foot: "+this.preferredFoot;
         return s;
     }
 }

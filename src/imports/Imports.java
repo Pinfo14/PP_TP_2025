@@ -29,6 +29,12 @@ import java.time.LocalDate;
 
 public class Imports {
 
+    private PlayerAttributes attributes ;
+
+
+    public Imports() {
+        this.attributes = new PlayerAttributes();
+    }
     /**
      * Lê informações dos clubes de um arquivo JSON e constrói um array de objetos Club.
      * O método analisa a estrutura JSON para extrair detalhes incluindo nome do clube, código, país,
@@ -110,10 +116,12 @@ public class Imports {
                 String photo = (String) playerJson.get("photo");
                 int number = ((Long) playerJson.get("number")).intValue();
                 String playerPos =(String) playerJson.get("basePosition");
+
                 IPlayerPosition position = new PlayerPosition(playerPos);
 
-                PlayerAttributes attributes = new PlayerAttributes();
-                attributes.generateAttributes(playerPos);
+
+                  PlayerAttributes playerAttributes= attributes.generateAttributes(playerPos);
+
 
                 Player playerObj = new Player(
                         name,
@@ -122,7 +130,7 @@ public class Imports {
                         position,
                         photo,
                         number,
-                        attributes
+                        playerAttributes
                 );
 
                 player[i++] = playerObj;
