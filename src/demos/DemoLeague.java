@@ -1,6 +1,7 @@
 package demos;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import league.League;
@@ -42,17 +43,48 @@ public class DemoLeague {
         }
 
 
-        IMatch[] matches = season.getMatches(12);
-        for (IMatch match : matches) {
-            try {
-              System.out.println(match.toString());
-            } catch (IllegalArgumentException e) {
-                System.err.println("Round is invalid.");
-            } catch (IllegalStateException e) {
-                System.err.println("No matches found - not initialised or not set.");
+        try {
+            IStanding[] standing = season.getLeagueStandings();
 
+            if (standing == null || standing.length == 0) {
+                System.out.println("Nenhuma classficacao encontrada.");
+            } else {
+                for (IStanding  classificacao : standing) {
+                    if(classificacao != null) {
+                        System.out.println(classificacao.toString());
+                    }
+                    // aqui dificilmente throwará IllegalArgumentException / IllegalStateException,
+                    // então não precisa de try por partida, a menos que match.toString()
+                    // também possa lançar algo.
+
+                }
             }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Round é inválido: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.out.println("Não há partidas: season não inicializada ou rodada não foi definida.");
         }
+
+        //;
+        try {
+            IMatch[] matches = season.getMatches();
+
+            if (matches == null || matches.length == 0) {
+                System.out.println("Nenhuma partida encontrada para essa rodada.");
+            } else {
+                for (IMatch match : matches) {
+                    // aqui dificilmente throwará IllegalArgumentException / IllegalStateException,
+                    // então não precisa de try por partida, a menos que match.toString()
+                    // também possa lançar algo.
+                    System.out.println(match);
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("Round é inválido: " + e.getMessage());
+        } catch (IllegalStateException e) {
+            System.out.println("Não há partidas: season não inicializada ou rodada não foi definida.");
+        }
+
 
     }
 }

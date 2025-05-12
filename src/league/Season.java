@@ -93,8 +93,11 @@ public class Season implements ISeason {
             clubs[i] = clubs[i + 1];
         }
 
+        for(int i = index; i < numClubs - 1; i++) {
+            standings[i] = standings[i + 1];
+        }
+
         clubs[--numClubs] = null;
-        System.out.println("Schedule generated.");
 
         generateSchedule();
 
@@ -190,7 +193,13 @@ public class Season implements ISeason {
 
     @Override
     public IStanding[] getLeagueStandings() {
-        return new IStanding[0];
+        IStanding[] standingsTemp = new Standing[standings.length];
+
+        for(int i = 0; i < standingsTemp.length; i++) {
+            standingsTemp[i] = standings[i];
+        }
+
+        return standingsTemp;
     }
 
     @Override

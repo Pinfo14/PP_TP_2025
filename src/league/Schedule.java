@@ -83,11 +83,6 @@ public class Schedule  implements ISchedule {
             throw new IllegalArgumentException("Null round");
         }
 
-
-
-
-
-
         IMatch[] matches = new IMatch[calculateMatchesPerRound()];
         int idx = 0;
 

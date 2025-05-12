@@ -76,6 +76,15 @@ public class Match implements IMatch {
 
     @Override
     public boolean isValid() {
+        if (homeClub == null || awayClub == null || homeTeam == null || awayTeam == null) {
+            return false;
+        }
+        if ("FOLGA".equals(homeClub.getName()) || "FOLGA".equals(awayClub.getName())) {
+            return false;
+        }
+        if (homeClub.equals(awayClub) || homeTeam.equals(awayTeam)) {
+            return false;
+        }
         return true;
     }
 
@@ -168,6 +177,7 @@ public class Match implements IMatch {
         sb.append(homeClub.getName());
         sb.append(" vs ");
         sb.append(awayClub.getName());
+        sb.append(" valida? :").append(isValid());
 
         return sb.toString();
 

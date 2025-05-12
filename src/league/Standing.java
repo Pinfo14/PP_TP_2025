@@ -19,7 +19,7 @@ public class Standing implements IStanding {
 
     public Standing(IClub club) {
         this.club = club;
-
+        //this.team = null;
         this.numberDraws = 0;
         this.numberWins = 0;
         this.numberLosses = 0;
@@ -34,7 +34,7 @@ public class Standing implements IStanding {
 
     @Override
     public ITeam getTeam() {
-        return null;
+        return team;
     }
 
     @Override
@@ -105,6 +105,22 @@ public class Standing implements IStanding {
     @Override
     public int getGoalDifference() {
         return (numberGoalsScored+numberGoalsConceded);
+    }
+
+
+
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Club: ").append(club).append(" ");
+        sb.append("| Pts: ").append(points).append(" J: ").append(getTotalMatches());
+        sb.append("").append(" GM:").append(numberGoalsScored).append(" GS:").append(numberGoalsConceded);
+        sb.append(" E:").append(numberDraws).append(" D:").append(numberLosses).append(" V:").append(numberWins);
+
+        return sb.toString();
+
     }
 
 }
