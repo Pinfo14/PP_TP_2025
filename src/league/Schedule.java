@@ -36,6 +36,7 @@ public class Schedule  implements ISchedule {
     }
 
     private void generateGames() {
+
         int totalClubs = numberOfClubs;
         if (totalClubs % 2 != 0) {
             clubs[totalClubs++] = new Club("FOLGA");
@@ -48,7 +49,7 @@ public class Schedule  implements ISchedule {
         int totalMatches = numberOfRounds * matchesPerRound;
 
         games = new IMatch[totalMatches];
-       // IClub[] rot = Arrays.copyOf(clubs, n); //verificar se se posso usar
+
         IClub[] rot = copyClubs(this.clubs,n);
 
         for (int r = 0; r < halfRounds; r++) {
@@ -60,7 +61,7 @@ public class Schedule  implements ISchedule {
             }
 
             IClub last = rot[n - 1];
-            System.arraycopy(rot, 1, rot, 2, n - 2);
+            shiftRightFromIndex(rot, 1, n - 2);
             rot[1] = last;
         }
 
@@ -77,18 +78,15 @@ public class Schedule  implements ISchedule {
         }
     }
 
+
     @Override
     public IMatch[] getMatchesForRound(int i) {
-        if(i < 0 || i >= numberOfRounds) {
-            throw new IllegalArgumentException("Null round");
-        }
 
         IMatch[] matches = new IMatch[calculateMatchesPerRound()];
         int idx = 0;
 
-
         for(IMatch match : games) {
-            if (match.getRound() == i) {
+            if(match.getRound() == i){
                 matches[idx++] = match;
             }
         }
@@ -146,6 +144,13 @@ public class Schedule  implements ISchedule {
         return clubsTemp;
     }
 
+    private void shiftRightFromIndex(IClub[] array, int start, int count) {
+        for (int i = start + count - 1; i >= start; i--) {
+            array[i + 1] = array[i];
+        }
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
