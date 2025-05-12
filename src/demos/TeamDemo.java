@@ -54,8 +54,8 @@ public class TeamDemo {
 
 
         try{
-           IPlayer play = club[0].selectPlayer(selector, def);
-           System.out.println("Random defesa: \n"+play.toString());
+            IPlayer play = club[0].selectPlayer(selector, def);
+            System.out.println("Random defesa: \n"+play.toString());
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

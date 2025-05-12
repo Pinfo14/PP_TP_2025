@@ -127,15 +127,15 @@ public class Match implements IMatch {
         if (iEvent == null) {
             throw new IllegalArgumentException("Evento não pode ser nulo.");
         }
-       if (isInEvent(iEvent)){
-           throw new IllegalStateException("Evento já existe no jogo.");
-       }
-
-        if (this.eventCount == this.events.length) {
-           expandCapacity();
+        if (isInEvent(iEvent)){
+            throw new IllegalStateException("Evento já existe no jogo.");
         }
 
-       this.events[this.eventCount++] = iEvent;
+        if (this.eventCount == this.events.length) {
+            expandCapacity();
+        }
+
+        this.events[this.eventCount++] = iEvent;
     }
 
     private void expandCapacity() {
@@ -143,7 +143,7 @@ public class Match implements IMatch {
         for (int i = 0; i < this.eventCount; i++) {
             temp[i] = this.events[i];
         }
-       this.events = temp;
+        this.events = temp;
     }
 
 
