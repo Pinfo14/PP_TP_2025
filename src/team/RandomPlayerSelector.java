@@ -15,6 +15,10 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
  * Turma: LEI1T2
  */
 public class RandomPlayerSelector implements IPlayerSelector {
+    private boolean[] alreadySelected;
+    private IPlayer[] lastPool;
+
+
 
     @Override
     public IPlayer selectPlayer(IClub iClub, IPlayerPosition iPlayerPosition) {
@@ -23,7 +27,32 @@ public class RandomPlayerSelector implements IPlayerSelector {
         verifyClubPlayers(iClub);
 
         IPlayer[] playersByPosition = getIPlayersByPosition(iClub.getPlayers(), iPlayerPosition);
-        return playersByPosition[random(playersByPosition.length)];
+
+        if (this.lastPool != playersByPosition) {
+            this.lastPool = playersByPosition;
+            this.alreadySelected = new boolean[playersByPosition.length];
+        }
+
+        int available = 0;
+        for (int i = 0; i < this.alreadySelected.length; i++) {
+            if (!this.alreadySelected[i]) available++;
+        }
+
+        if (available == 0) {
+            throw new IllegalStateException("Todos os jogadores da posição " + iPlayerPosition.getDescription() + " já foram selecionados.");
+        }
+
+        int selectedIndex = getUniqueRandomIndex(this.alreadySelected);
+        this.alreadySelected[selectedIndex] = true;
+        return playersByPosition[selectedIndex];
+    }
+
+    private int getUniqueRandomIndex(boolean[] used) {
+        int index;
+        do {
+            index = (int) (Math.random() * used.length);
+        } while (used[index]);
+        return index;
     }
 
     private int countPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
@@ -38,32 +67,22 @@ public class RandomPlayerSelector implements IPlayerSelector {
         return count;
     }
 
-
     private IPlayer[] getIPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
-
         int numPlayers = countPlayersByPosition(players, position);
-
         if (numPlayers == 0) {
             throw new IllegalStateException("Nao foi encontrado um jogador para a posicao: " + position.getDescription());
         }
-
-        IPlayer[] positionPLayers = new IPlayer[numPlayers];
+        IPlayer[] positionPlayers = new IPlayer[numPlayers];
         int count = 0;
-
         for (IPlayer player : players) {
             if (player.getPosition().equals(position)) {
-                positionPLayers[count++] = player;
+                positionPlayers[count++] = player;
             }
         }
-        return positionPLayers;
-    }
-
-    private int random(int length) {
-        return (int) (Math.random() * length);
+        return positionPlayers;
     }
 
     private void verifyClubPlayers(IClub club) {
-
         if (club.getPlayerCount() == 0) {
             throw new IllegalStateException("clube vazio");
         }

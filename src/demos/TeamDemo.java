@@ -33,7 +33,7 @@ public class TeamDemo {
 
         IPlayer player = new Player("Emanuel",date,"Portugues", gk,"sdfg",1 );
         IPlayer NotInteam = new Player("Alfredo",date,"Portugues", gk,"sdfg",10 );
-        IPlayer player2 = new Player("Info",date,"Portugues", def,"sdfg",2 );
+        IPlayer player2 = new Player("Roberto",date,"Portugues", def,"sdfg",2 );
         IPlayer player3 = new Player("wfas",date,"Portugues", def,"sdfg",5 );
         IPlayer player4 = new Player("ffgmb",date,"Portugues", def,"sdfg",8 );
         IPlayer player5 = new Player("nthgfvb",date,"Portugues", def,"sdfg",85);
@@ -54,8 +54,8 @@ public class TeamDemo {
 
 
         try{
-           IPlayer play = club[0].selectPlayer(selector, def);
-           System.out.println("Random defesa: \n"+play.toString());
+            IPlayer play = club[0].selectPlayer(selector, def);
+            System.out.println("Random defesa: \n"+play.toString());
         }catch (Exception e){
             System.out.println(e.getMessage());
         }

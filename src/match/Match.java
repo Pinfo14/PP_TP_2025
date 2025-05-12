@@ -76,6 +76,15 @@ public class Match implements IMatch {
 
     @Override
     public boolean isValid() {
+        if (homeClub == null || awayClub == null || homeTeam == null || awayTeam == null) {
+            return false;
+        }
+        if ("FOLGA".equals(homeClub.getName()) || "FOLGA".equals(awayClub.getName())) {
+            return false;
+        }
+        if (homeClub.equals(awayClub) || homeTeam.equals(awayTeam)) {
+            return false;
+        }
         return true;
     }
 
@@ -89,30 +98,22 @@ public class Match implements IMatch {
         return round;
     }
 
-    private boolean checkIfTeamsAreTheSame(ITeam team1, ITeam team2) {
-        return team1.equals(team2);
-    }
-
     @Override
     public void setTeam(ITeam iTeam) {
-
-        //tirar duvidas e dps terminar
         if(iTeam == null) {
-
-        }
-        if(checkIfTeamsAreTheSame(iTeam, this.homeTeam)) {
-
-        }
-        if(iTeam.getClub().equals(this.homeClub)) {
-
+            throw new NullPointerException("Team cannot be null.");
         }
 
-        //verificar se club da match e o msm da team
+        if(isPlayed()) {
+            throw new IllegalStateException("Match is already played.");
+        }
 
-        if(this.homeTeam == null) {
+        if(iTeam.getClub().equals(homeClub)) {
             setHomeTeam(iTeam);
-        }else if(this.awayTeam == null) {
+        } else if(iTeam.getClub().equals(awayClub)) {
             setAwayTeam(iTeam);
+        } else {
+            throw new IllegalStateException("Team does not belong to the club.");
         }
     }
 
@@ -126,15 +127,15 @@ public class Match implements IMatch {
         if (iEvent == null) {
             throw new IllegalArgumentException("Evento não pode ser nulo.");
         }
-       if (isInEvent(iEvent)){
-           throw new IllegalStateException("Evento já existe no jogo.");
-       }
-
-        if (this.eventCount == this.events.length) {
-           expandCapacity();
+        if (isInEvent(iEvent)){
+            throw new IllegalStateException("Evento já existe no jogo.");
         }
 
-       this.events[this.eventCount++] = iEvent;
+        if (this.eventCount == this.events.length) {
+            expandCapacity();
+        }
+
+        this.events[this.eventCount++] = iEvent;
     }
 
     private void expandCapacity() {
@@ -142,7 +143,7 @@ public class Match implements IMatch {
         for (int i = 0; i < this.eventCount; i++) {
             temp[i] = this.events[i];
         }
-       this.events = temp;
+        this.events = temp;
     }
 
 
@@ -176,6 +177,7 @@ public class Match implements IMatch {
         sb.append(homeClub.getName());
         sb.append(" vs ");
         sb.append(awayClub.getName());
+        sb.append(" valida? :").append(isValid());
 
         return sb.toString();
 

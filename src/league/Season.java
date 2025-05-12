@@ -39,16 +39,12 @@ public class Season implements ISeason {
         this.name = String.format("%s %d", leagueName, year);
         this.year = year;
         this.clubs = new Club[maxClubs];
+        this.standings = new IStanding[maxClubs];
         this.numClubs = 0;
         this.pointsPerLoss = 0;
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
         this.currentRound = 0;
-
-
-
-
-
     }
 
     @Override
@@ -56,11 +52,9 @@ public class Season implements ISeason {
         return year;
     }
 
-
-    //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
-
     @Override
     public boolean addClub(IClub iClub) {
+        //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
@@ -73,6 +67,7 @@ public class Season implements ISeason {
             throw new IllegalStateException("League is full.");
         }
 
+        standings[numClubs] = new Standing(iClub);
         clubs[numClubs] = iClub;
         numClubs++;
 
@@ -83,6 +78,7 @@ public class Season implements ISeason {
 
     @Override
     public boolean removeClub(IClub iClub) {
+        //todo verifica se algum jogo ja foi jogado
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
@@ -97,8 +93,11 @@ public class Season implements ISeason {
             clubs[i] = clubs[i + 1];
         }
 
+        for(int i = index; i < numClubs - 1; i++) {
+            standings[i] = standings[i + 1];
+        }
+
         clubs[--numClubs] = null;
-        System.out.println("Schedule generated.");
 
         generateSchedule();
 
@@ -138,17 +137,18 @@ public class Season implements ISeason {
     @Override
     public IMatch[] getMatches(int i) {
 
-/*
+        IMatch[] scheduledMatches = new IMatch[calculateNumberOfMatches()];
+
         try {
             scheduledMatches = schedule.getMatchesForRound(i);
         } catch (IllegalArgumentException e) {
             System.err.println("Round is invalid.");
+            throw e;
         } catch (IllegalStateException e) {
             System.err.println("No matches found - not initialised or not set.");
+            throw e;
         }
-*/
-
-        return null;
+        return scheduledMatches;
 
     }
 
@@ -193,11 +193,18 @@ public class Season implements ISeason {
 
     @Override
     public IStanding[] getLeagueStandings() {
-        return new IStanding[0];
+        IStanding[] standingsTemp = new Standing[standings.length];
+
+        for(int i = 0; i < standingsTemp.length; i++) {
+            standingsTemp[i] = standings[i];
+        }
+
+        return standingsTemp;
     }
 
     @Override
     public ISchedule getSchedule() {
+        System.out.println(schedule);
         return schedule;
     }
 
