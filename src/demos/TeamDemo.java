@@ -7,6 +7,7 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import imports.Imports;
 import player.Player;
+import player.PlayerAttributes;
 import player.PlayerPosition;
 import team.Club;
 import team.Formation;
@@ -31,13 +32,21 @@ public class TeamDemo {
         IPlayerPosition def = new PlayerPosition("Defender");
         IPlayerPosition striker = new PlayerPosition("Striker");
 
-        IPlayer player = new Player("Emanuel",date,"Portugues", gk,"sdfg",1 );
-        IPlayer NotInteam = new Player("Alfredo",date,"Portugues", gk,"sdfg",10 );
-        IPlayer player2 = new Player("Roberto",date,"Portugues", def,"sdfg",2 );
-        IPlayer player3 = new Player("wfas",date,"Portugues", def,"sdfg",5 );
-        IPlayer player4 = new Player("ffgmb",date,"Portugues", def,"sdfg",8 );
-        IPlayer player5 = new Player("nthgfvb",date,"Portugues", def,"sdfg",85);
-        IPlayer player6 = new Player("das",date,"Portugues", striker,"sdfg",86 );
+        PlayerAttributes attributes = new PlayerAttributes();
+
+        PlayerAttributes defAttributes =   attributes.generateAttributes(def.getDescription());
+        PlayerAttributes strikerAttributes =   attributes.generateAttributes(striker.getDescription());
+        PlayerAttributes gkAttributes =   attributes.generateAttributes(gk.getDescription());
+
+
+
+        IPlayer player = new Player("Emanuel",date,"Portugues", gk,"sdfg",1 ,gkAttributes);
+        IPlayer NotInteam = new Player("Alfredo",date,"Portugues", gk,"sdfg",10 ,gkAttributes);
+        IPlayer player2 = new Player("Roberto",date,"Portugues", def,"sdfg",2 ,defAttributes);
+        IPlayer player3 = new Player("wfas",date,"Portugues", def,"sdfg",5 ,defAttributes);
+        IPlayer player4 = new Player("ffgmb",date,"Portugues", def,"sdfg",8 ,defAttributes);
+        IPlayer player5 = new Player("nthgfvb",date,"Portugues", def,"sdfg",85,defAttributes);
+        IPlayer player6 = new Player("das",date,"Portugues", striker,"sdfg",86 ,strikerAttributes);
 
         club[0].addPlayer(player2);
         club[0].addPlayer(player);

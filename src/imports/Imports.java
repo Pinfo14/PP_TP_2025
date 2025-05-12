@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import player.Player;
+import player.PlayerAttributes;
 import player.PlayerPosition;
 import team.Club;
 
@@ -108,7 +109,11 @@ public class Imports {
                 String nationality = (String) playerJson.get("nationality");
                 String photo = (String) playerJson.get("photo");
                 int number = ((Long) playerJson.get("number")).intValue();
-                IPlayerPosition position = new PlayerPosition((String) playerJson.get("basePosition"));
+                String playerPos =(String) playerJson.get("basePosition");
+                IPlayerPosition position = new PlayerPosition(playerPos);
+
+                PlayerAttributes attributes = new PlayerAttributes();
+                attributes.generateAttributes(playerPos);
 
                 Player playerObj = new Player(
                         name,
@@ -116,7 +121,8 @@ public class Imports {
                         nationality,
                         position,
                         photo,
-                        number
+                        number,
+                        attributes
                 );
 
                 player[i++] = playerObj;

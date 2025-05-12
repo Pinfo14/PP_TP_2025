@@ -25,43 +25,20 @@ public class Player implements IPlayer {
     private IPlayerPosition position;
     private String photo;
     private int number;
-
-    private int shooting;
-    private int passing;
-    private int stamina;
-    private int speed;
-
-    private float height;
-    private float weight;
-    private PreferredFoot preferredFoot;
-
-    /**
-     * Construtor com dados base para criação de um jogador.
-     */
-    public Player(String name,LocalDate birthDate, String nationality, IPlayerPosition position, String photo, int number) {
-       this(name, birthDate, nationality, position, photo, number, 0, 0, 0, 0, 0, 0, null);
-    }
+    private PlayerAttributes attributes;
 
 
     /**
      * Construtor completo para criação de um jogador.
      */
-    private Player(String name, LocalDate birthDate, String nationality, IPlayerPosition position, String photo, int number, int shooting, int passing, int stamina, int speed, float height, float weight, PreferredFoot preferredFoot) {
+    public Player(String name, LocalDate birthDate, String nationality, IPlayerPosition position, String photo, int number, PlayerAttributes attributes) {
         this.name = name;
         this.birthDate = birthDate;
         this.nationality = nationality;
         this.position = position;
         this.photo = photo;
         this.number = number;
-
-        this.shooting = shooting;
-        this.passing = passing;
-        this.stamina = stamina;
-        this.speed = speed;
-
-        this.height = height;
-        this.weight = weight;
-        this.preferredFoot = preferredFoot;
+        this.attributes = attributes;
     }
 
 
@@ -106,22 +83,22 @@ public class Player implements IPlayer {
 
     @Override
     public int getShooting() {
-        return this.shooting;
+        return this.attributes.getShooting();
     }
 
     @Override
     public int getPassing() {
-        return this.passing;
+        return this.attributes.getPassing();
     }
 
     @Override
     public int getStamina() {
-        return this.stamina;
+        return this.attributes.getStamina();
     }
 
     @Override
     public int getSpeed() {
-        return this.speed;
+        return this.attributes.getSpeed();
     }
 
     @Override
@@ -131,17 +108,17 @@ public class Player implements IPlayer {
 
     @Override
     public float getHeight() {
-        return this.height;
+        return this.attributes.height;
     }
 
     @Override
     public float getWeight() {
-        return this.weight;
+        return this.attributes.weight;
     }
 
     @Override
     public PreferredFoot getPreferredFoot() {
-        return this.preferredFoot;
+        return this.attributes.getPreferredFoot();
     }
 
     @Override
@@ -153,23 +130,25 @@ public class Player implements IPlayer {
     @Override
     public String toString() {
         return
+                "\n--------------\n"+
                 "name='" + name + "\n" +
-                "birthDate=" + birthDate +"\n"+
-                "nationality='" + nationality + "\n" +
-                "position=" + position+"\n" +
-                "number=" + number+"\n";
-    }
+                        "birthDate=" + birthDate + "\n" +
+                        "nationality='" + nationality + "\n" +
+                        "position=" + position + "\n" +
+                        "number=" + number + "\n" +
+                        "\n\n" + attributes.toString();
 
+    }
 
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj){
+        if (this == obj) {
             return true;
         }
-        if (!(obj instanceof Player)){
+        if (!(obj instanceof Player)) {
             return false;
-            }
+        }
         Player player = (Player) obj;
         return this.number == player.getNumber() && this.name.equals(player.getName())
                 && this.birthDate.equals(player.birthDate)

@@ -6,6 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import event.*;
 import player.Player;
+import player.PlayerAttributes;
 import player.PlayerPosition;
 import team.Club;
 
@@ -16,7 +17,12 @@ public class EventsDemo {
 
         LocalDate date = LocalDate.of(2003, 1, 1);
         IPlayerPosition st = new PlayerPosition("Striker");
-        IPlayer player = new Player("Emanuel",date,"Portugues", st,"sdfg",1 );
+
+        PlayerAttributes attributes = new PlayerAttributes();
+
+        PlayerAttributes strikerAttributes =   attributes.generateAttributes(st.getDescription());
+
+        IPlayer player = new Player("Emanuel",date,"Portugues", st,"sdfg",1 ,strikerAttributes);
         IClub club = new Club("Porto");
 
         IEvent Foul = new FoulEvent(player,25);
