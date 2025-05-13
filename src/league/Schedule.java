@@ -78,9 +78,12 @@ public class Schedule  implements ISchedule {
         }
     }
 
-
     @Override
     public IMatch[] getMatchesForRound(int i) {
+
+        if(i < 1 || i > numberOfRounds) {
+            throw new IllegalArgumentException("Round not valid");
+        }
 
         IMatch[] matches = new IMatch[calculateMatchesPerRound()];
         int idx = 0;
@@ -96,10 +99,11 @@ public class Schedule  implements ISchedule {
 
     @Override
     public IMatch[] getMatchesForTeam(ITeam iTeam) {
-
+        if(iTeam == null) {
+            throw new IllegalArgumentException("Team not valid");
+        }
 
         IMatch[] matches = new IMatch[calculateMatchesPerRound()];
-
 
         int idx = 0;
         for(IMatch match : games) {
@@ -127,8 +131,20 @@ public class Schedule  implements ISchedule {
 
     @Override
     public void setTeam(ITeam iTeam, int i) {
+        if(iTeam == null) {
+            throw new IllegalArgumentException("Team not valid");
+        }
+        if(i < 1 || i > numberOfRounds) {
+            throw new IllegalArgumentException("Round not valid");
+        }
+        if(!isInLeague(iTeam)) {
+            throw new IllegalStateException("Team is not in the league");
+        }
 
-        //aqui percorre a jornada e guarda a equipa que vai jogar.
+        IMatch[] matches = getMatchesForRound(i);
+        for(IMatch match: matches) {
+            match.setTeam(iTeam);
+        }
 
     }
 
@@ -148,6 +164,16 @@ public class Schedule  implements ISchedule {
         for (int i = start + count - 1; i >= start; i--) {
             array[i + 1] = array[i];
         }
+    }
+
+    private boolean isInLeague(ITeam team) {
+
+        for(IClub clubTemp : clubs) {
+            if(clubTemp.equals(team.getClub())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

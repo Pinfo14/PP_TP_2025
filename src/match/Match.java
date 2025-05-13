@@ -21,14 +21,18 @@ public class Match implements IMatch {
     private int round;
     private IEvent[] events;
     private int eventCount;
+    private int homeGoals;
+    private int awayGoals;
 
-    public Match(IClub homeClub, IClub awayClub, int roud) {
+    public Match(IClub homeClub, IClub awayClub, int round) {
         this.pleayed = false;
         this.homeClub = homeClub;
         this.awayClub = awayClub;
-        this.round = roud;
+        this.round = round;
         this.events = new IEvent[INIT_CAP];
         this.eventCount = 0;
+        this.homeGoals = 0;
+        this.awayGoals = 0;
     }
 
     private void setHomeTeam(ITeam homeTeam) {
@@ -74,6 +78,12 @@ public class Match implements IMatch {
         return 0;
     }
 
+    /**
+     * Verifica se as equipas e as teams são nulas e se existe uma equipa com o nome FOLGA
+     * Verifica se a cada equipa corresponde a cada club.
+     * Caso se verifique alguma destas situações retorna false, caso contrario retorna true
+     * @return true se a partida for valida e false caso não seja.
+     */
     @Override
     public boolean isValid() {
         if (homeClub == null || awayClub == null || homeTeam == null || awayTeam == null) {
@@ -88,9 +98,19 @@ public class Match implements IMatch {
         return true;
     }
 
+    /**
+     * Devolve a equipa Team vencedora do jogo.
+     * @return a equipa vencedora ou null em caso de empate
+     */
     @Override
     public ITeam getWinner() {
-        return null;
+        if(homeGoals > awayGoals) {
+            return homeTeam;
+        } else if (awayGoals > homeGoals) {
+            return awayTeam;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -146,7 +166,6 @@ public class Match implements IMatch {
         this.events = temp;
     }
 
-
     private boolean isInEvent(IEvent event) {
         for(int i = 0; i < this.eventCount; i++) {
             if(this.events[i].equals(event)) {
@@ -182,4 +201,6 @@ public class Match implements IMatch {
         return sb.toString();
 
     }
+
+    //TODO FAZER O EQUALS
 }

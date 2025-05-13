@@ -76,13 +76,20 @@ public class DemoLeague {
                     // aqui dificilmente throwará IllegalArgumentException / IllegalStateException,
                     // então não precisa de try por partida, a menos que match.toString()
                     // também possa lançar algo.
-                    System.out.println(match);
+                    System.out.println(match.getWinner());
                 }
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("Round é inválido: " + e.getMessage());
+            System.out.println(e.getMessage());
         } catch (IllegalStateException e) {
             System.out.println("Não há partidas: season não inicializada ou rodada não foi definida.");
+        }
+
+
+        IClub[] club = season.getCurrentClubs();
+
+        for (IClub clubMatch : club) {
+            System.out.println(clubMatch);
         }
 
 
