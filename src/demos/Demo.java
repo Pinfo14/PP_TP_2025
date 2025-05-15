@@ -33,6 +33,8 @@ public class Demo {
             }
         }
 
+
+
         System.out.println("---------------------------------------");
         for(IPlayer p : club[0].getPlayers()){
             System.out.println(p.getName());
@@ -42,6 +44,8 @@ public class Demo {
         for(IPlayer p : club[1].getPlayers()){
             System.out.println(p.getName());
         }
+
+
 
     }
 }

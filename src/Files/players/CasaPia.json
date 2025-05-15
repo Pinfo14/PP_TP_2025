@@ -1,0 +1,244 @@
+{
+  "squad": [
+    {
+      "name": "Patrick Sequeira",
+      "birthDate": "1999-03-01",
+      "nationality": "Costa Rican",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Daniel Azevedo",
+      "birthDate": "1998-02-12",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Ricardo Batista",
+      "birthDate": "1986-11-19",
+      "nationality": "Angolan",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 33
+    },
+    {
+      "name": "Duplexe Tchamba",
+      "birthDate": "1998-07-10",
+      "nationality": "Cameroonian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Ruben Kluivert",
+      "birthDate": "2001-05-21",
+      "nationality": "Dutch",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "João Goulart",
+      "birthDate": "2000-01-27",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "Leonardo Lelo",
+      "birthDate": "2000-03-30",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "José Fonte",
+      "birthDate": "1983-12-22",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Fahem Benaïssa-Yahia",
+      "birthDate": "2000-04-29",
+      "nationality": "French",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 12
+    },
+    {
+      "name": "André Geraldes",
+      "birthDate": "1991-05-02",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 18
+    },
+    {
+      "name": "Nermin Zolotić",
+      "birthDate": "1993-07-07",
+      "nationality": "Bosnian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Isaac Monteiro",
+      "birthDate": "2004-03-04",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 44
+    },
+    {
+      "name": "Gaizka Larrazabal",
+      "birthDate": "1997-12-17",
+      "nationality": "Spanish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 72
+    },
+    {
+      "name": "Tiago Dias",
+      "birthDate": "1998-05-04",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Miguel Sousa",
+      "birthDate": "1998-09-19",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "Beni Mukendi",
+      "birthDate": "2002-05-21",
+      "nationality": "Angolan",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 16
+    },
+    {
+      "name": "Rafael Brito",
+      "birthDate": "2002-01-19",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Telasco Segovia",
+      "birthDate": "2003-04-02",
+      "nationality": "Venezuelan",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Pablo Roberto",
+      "birthDate": "1999-11-14",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 80
+    },
+    {
+      "name": "Andrian Kraev",
+      "birthDate": "1999-02-14",
+      "nationality": "Bulgarian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 89
+    },
+    {
+      "name": "Nuno Moreira",
+      "birthDate": "1999-06-16",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Max Svensson",
+      "birthDate": "2001-11-08",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Raúl Blanco",
+      "birthDate": "2001-07-31",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Kiki Silva",
+      "birthDate": "1998-02-14",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Jérémy Livolant",
+      "birthDate": "1998-01-09",
+      "nationality": "French",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 29
+    },
+    {
+      "name": "Samu",
+      "birthDate": "2006-09-15",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 37
+    },
+    {
+      "name": "Henrique Pereira",
+      "birthDate": "2002-02-15",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 52
+    },
+    {
+      "name": "Samuel Obeng",
+      "birthDate": "1997-05-15",
+      "nationality": "Ghanaian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Cassiano",
+      "birthDate": "1989-06-16",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 90
+    },
+    {
+      "name": "Clau Mendes",
+      "birthDate": "2000-12-08",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 99
+    }
+  ]
+}

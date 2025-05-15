@@ -1,0 +1,196 @@
+{
+  "squad": [
+    {
+      "name": "Guillermo Ochoa",
+      "birthDate": "1985-07-13",
+      "nationality": "Mexican",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 13
+    },
+    {
+      "name": "Pedro Trigueira",
+      "birthDate": "1988-01-04",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 88
+    },
+    {
+      "name": "Simão Bertelli",
+      "birthDate": "1993-07-02",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 93
+    },
+    {
+      "name": "Baptiste Roux",
+      "birthDate": "1999-07-25",
+      "nationality": "French",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Cristian Devenish",
+      "birthDate": "2001-01-10",
+      "nationality": "Colombian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Kiki Afonso",
+      "birthDate": "1994-12-10",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Tomás Tavares",
+      "birthDate": "2001-03-07",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Fernando Fonseca",
+      "birthDate": "1997-03-14",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Eric Veiga",
+      "birthDate": "1997-02-16",
+      "nationality": "Luxembourgish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 27
+    },
+    {
+      "name": "Lucas Fernandes",
+      "birthDate": "1997-04-20",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Lucas Piazón",
+      "birthDate": "1994-01-20",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Gustavo Assunção",
+      "birthDate": "2000-03-30",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 12
+    },
+    {
+      "name": "Jaume Grau",
+      "birthDate": "1997-05-05",
+      "nationality": "Spanish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "Tiago Galletto",
+      "birthDate": "1998-09-15",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Giorgi Aburjania",
+      "birthDate": "1995-01-02",
+      "nationality": "Georgian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 16
+    },
+    {
+      "name": "John Mercado",
+      "birthDate": "2002-06-22",
+      "nationality": "Ecuadorian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Zé Luís",
+      "birthDate": "1991-01-24",
+      "nationality": "Cape Verdean",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Nenê",
+      "birthDate": "1983-07-19",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 18
+    },
+    {
+      "name": "Gerson Rodrigues",
+      "birthDate": "1995-06-20",
+      "nationality": "Luxembourgish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Vasco Lopes",
+      "birthDate": "1999-09-15",
+      "nationality": "Cape Verdean",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 26
+    },
+    {
+      "name": "Babatunde Akinsola",
+      "birthDate": "2001-08-10",
+      "nationality": "Nigerian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Yair Mena",
+      "birthDate": "1996-11-12",
+      "nationality": "Colombian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Lucas Rodrigues",
+      "birthDate": "1997-02-28",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Samuel",
+      "birthDate": "2000-05-05",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 20
+    }
+  ]
+}

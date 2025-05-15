@@ -1,0 +1,196 @@
+{
+  "squad": [
+    {
+      "name": "Bruno Varela",
+      "birthDate": "1994-11-04",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "Charles",
+      "birthDate": "1994-02-04",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 27
+    },
+    {
+      "name": "João Oliveira",
+      "birthDate": "2002-09-18",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 47
+    },
+    {
+      "name": "José Ribeiro",
+      "birthDate": "2006-05-13",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 91
+    },
+    {
+      "name": "Toni Borevković",
+      "birthDate": "1997-06-18",
+      "nationality": "Croatian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 24
+    },
+    {
+      "name": "Bruno Gaspar",
+      "birthDate": "1993-04-21",
+      "nationality": "Angolan",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 76
+    },
+    {
+      "name": "Diogo Lobão",
+      "birthDate": "2006-01-20",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 92
+    },
+    {
+      "name": "Filipe Relvas",
+      "birthDate": "1999-09-20",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "Hevertton Santos",
+      "birthDate": "2001-02-01",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "João Mendes",
+      "birthDate": "2000-04-13",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 13
+    },
+    {
+      "name": "Maga",
+      "birthDate": "2002-11-16",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Óscar Rivas",
+      "birthDate": "2000-03-27",
+      "nationality": "Spanish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 15
+    },
+    {
+      "name": "Ricardo Ribeiro",
+      "birthDate": "2006-04-26",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 93
+    },
+    {
+      "name": "Rodrigo Silva",
+      "birthDate": "2007-03-14",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": null
+    },
+    {
+      "name": "Mikel Villanueva",
+      "birthDate": "1993-04-14",
+      "nationality": "Venezuelan",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Beni",
+      "birthDate": "2002-05-21",
+      "nationality": "Angolan",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": null
+    },
+    {
+      "name": "João Mendes",
+      "birthDate": "1994-10-21",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Nuno Santos",
+      "birthDate": "1999-03-02",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Diogo Sousa",
+      "birthDate": "2005-01-01",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 92
+    },
+    {
+      "name": "Rodrigo Duarte",
+      "birthDate": "2005-01-01",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 98
+    },
+    {
+      "name": "Nelson Oliveira",
+      "birthDate": "1991-08-08",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Chuchu Ramírez",
+      "birthDate": "1997-01-01",
+      "nationality": "Venezuelan",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Úmaro Embaló",
+      "birthDate": "2001-05-01",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Vando Félix",
+      "birthDate": "2002-01-01",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 21
+    }
+  ]
+}

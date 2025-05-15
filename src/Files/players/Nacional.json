@@ -1,0 +1,252 @@
+{
+  "squad": [
+    {
+      "name": "Rui Encarnação",
+      "birthDate": "1998-04-05",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "César Augusto",
+      "birthDate": "2003-08-23",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 12
+    },
+    {
+      "name": "Lucas França",
+      "birthDate": "1996-01-19",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 37
+    },
+    {
+      "name": "João Aurélio",
+      "birthDate": "1988-08-17",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Ulisses",
+      "birthDate": "1999-09-28",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "José Gomes",
+      "birthDate": "1996-07-20",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Lucas Oliveira",
+      "birthDate": "2004-02-05",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "Garcia",
+      "birthDate": "2002-01-04",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Afonso Freitas",
+      "birthDate": "2000-04-07",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Chico Gonçalves",
+      "birthDate": "2004-03-05",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 33
+    },
+    {
+      "name": "Léo Santos",
+      "birthDate": "1998-12-09",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 34
+    },
+    {
+      "name": "Zé Vítor",
+      "birthDate": "2001-02-09",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 38
+    },
+    {
+      "name": "Douglas Sequeira",
+      "birthDate": "2003-09-16",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 43
+    },
+    {
+      "name": "Bruno Costa",
+      "birthDate": "1997-04-19",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Luís Esteves",
+      "birthDate": "1998-04-09",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Chiheb Labidi",
+      "birthDate": "2001-06-01",
+      "nationality": "Tunisian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 15
+    },
+    {
+      "name": "Daniel Penha",
+      "birthDate": "1998-10-17",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "André Sousa",
+      "birthDate": "1990-07-09",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 18
+    },
+    {
+      "name": "Miguel Baeza",
+      "birthDate": "2000-03-27",
+      "nationality": "Spanish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Jota",
+      "birthDate": "1993-03-07",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Djibril Soumaré",
+      "birthDate": "2003-01-07",
+      "nationality": "French",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 27
+    },
+    {
+      "name": "Matheus Dias",
+      "birthDate": "2002-05-09",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 88
+    },
+    {
+      "name": "Rúben Macedo",
+      "birthDate": "1996-03-09",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Adrián Butzke",
+      "birthDate": "1999-03-30",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Isaac",
+      "birthDate": "2004-03-26",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 23
+    },
+    {
+      "name": "Arvin Appiah",
+      "birthDate": "2001-01-05",
+      "nationality": "English",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 70
+    },
+    {
+      "name": "Tiago Reis",
+      "birthDate": "1999-08-14",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 72
+    },
+    {
+      "name": "Gabriel Santos",
+      "birthDate": "1999-03-16",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Dyego Sousa",
+      "birthDate": "1989-09-14",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 81
+    },
+    {
+      "name": "Dudu Teodora",
+      "birthDate": "1999-08-10",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 99
+    },
+    {
+      "name": "Joel Tagueu",
+      "birthDate": "1993-12-06",
+      "nationality": "Cameroonian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": null
+    }
+  ]
+}
