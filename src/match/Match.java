@@ -1,17 +1,15 @@
 package match;
 
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
+import com.ppstudios.footballmanager.api.contracts.event.IEventManager;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import event.EventManager;
 
 import java.io.IOException;
 
 public class Match implements IMatch {
-
-    private static final int INIT_CAP = 10;
-    private static final int INCREMENT = 2;
-
 
     private IClub homeClub;
     private IClub awayClub;
@@ -19,7 +17,7 @@ public class Match implements IMatch {
     private ITeam awayTeam;
     private boolean pleayed;
     private int round;
-    private IEvent[] events;
+    private IEventManager eventManager;
     private int eventCount;
 
     public Match(IClub homeClub, IClub awayClub, int roud) {
@@ -27,7 +25,7 @@ public class Match implements IMatch {
         this.homeClub = homeClub;
         this.awayClub = awayClub;
         this.round = roud;
-        this.events = new IEvent[INIT_CAP];
+        this.eventManager = new EventManager();
         this.eventCount = 0;
     }
 
@@ -131,25 +129,15 @@ public class Match implements IMatch {
             throw new IllegalStateException("Evento já existe no jogo.");
         }
 
-        if (this.eventCount == this.events.length) {
-            expandCapacity();
-        }
-
-        this.events[this.eventCount++] = iEvent;
+        this.eventManager.addEvent(iEvent);
+        this.eventCount++;
     }
 
-    private void expandCapacity() {
-        IEvent[] temp = new IEvent[this.events.length * INCREMENT];
-        for (int i = 0; i < this.eventCount; i++) {
-            temp[i] = this.events[i];
-        }
-        this.events = temp;
-    }
 
 
     private boolean isInEvent(IEvent event) {
         for(int i = 0; i < this.eventCount; i++) {
-            if(this.events[i].equals(event)) {
+            if(this.eventManager.getEvents()[i].equals(event)){
                 return true;
             }
         }
@@ -160,7 +148,7 @@ public class Match implements IMatch {
     public IEvent[] getEvents() {
         IEvent[] copia = new IEvent[this.eventCount];
         for (int i = 0; i < this.eventCount; i++) {
-            copia[i] = this.events[i];
+            copia[i] = this.eventManager.getEvents()[i];
         }
         return copia;
     }

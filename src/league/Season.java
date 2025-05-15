@@ -137,17 +137,17 @@ public class Season implements ISeason {
     @Override
     public IMatch[] getMatches(int i) {
 
+
+
         IMatch[] scheduledMatches = new IMatch[calculateNumberOfMatches()];
+
 
         try {
             scheduledMatches = schedule.getMatchesForRound(i);
-        } catch (IllegalArgumentException e) {
-            System.err.println("Round is invalid.");
-            throw e;
-        } catch (IllegalStateException e) {
-            System.err.println("No matches found - not initialised or not set.");
+        } catch (IllegalArgumentException | IllegalStateException e) {
             throw e;
         }
+
         return scheduledMatches;
 
     }
@@ -204,7 +204,6 @@ public class Season implements ISeason {
 
     @Override
     public ISchedule getSchedule() {
-        System.out.println(schedule);
         return schedule;
     }
 
