@@ -8,7 +8,7 @@ public class SeasonManagement {
     public void run(ISeason season) {
 
         SeasonMenu seasonMenu = new SeasonMenu();
-        seasonMenu.menu();
+        seasonMenu.menu(season.getYear(),"FC Porto", season.getName());
 
     }
 

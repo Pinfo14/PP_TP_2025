@@ -36,7 +36,7 @@ public class Season implements ISeason {
 
     public Season(String leagueName, int year) {
         this.maxClubs = 18;
-        this.name = String.format("%s %d", leagueName, year);
+        this.name = leagueName;
         this.year = year;
         this.clubs = new Club[maxClubs];
         this.standings = new IStanding[maxClubs];

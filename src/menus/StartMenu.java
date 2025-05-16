@@ -29,11 +29,11 @@ public class StartMenu {
 
         StringBuilder menu = new StringBuilder();
 
-        menu.append("╔════════════════════════════════════════════════════════════════════════════════════════╗\n");
-        menu.append("║                                                                                        ║\n");
-        menu.append("║                          PP - SOCCER PARADIGMAS SIMULATOR                              ║\n");
-        menu.append("║                                                                                        ║\n");
-        menu.append("╠════════════════════════════════════════════════════════════════════════════════════════╣\n");
+        menu.append("╔═════════════════════════════════════════════════════════════════════════════════════════\n");
+        menu.append("║\n");
+        menu.append("║  PP - SOCCER PARADIGMAS SIMULATOR\n");
+        menu.append("║\n");
+        menu.append("╠════════════════════════════════════════════════════════════════════════════════════════╗\n");
         menu.append("║                                                                                        ║\n");
         menu.append("║   1 - NOVO JOGO                                                                        ║\n");
         menu.append("║   2 - CARREGAR JOGO ANTERIOR                                                           ║\n");
