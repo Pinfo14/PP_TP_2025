@@ -23,9 +23,11 @@ public class Match implements IMatch {
     private int eventCount;
     private int homeGoals;
     private int awayGoals;
+    private boolean coaching;
 
     public Match(IClub homeClub, IClub awayClub, int round) {
         this.pleayed = false;
+        this.coaching = false;
         this.homeClub = homeClub;
         this.awayClub = awayClub;
         this.round = round;
@@ -41,6 +43,14 @@ public class Match implements IMatch {
 
     private void setAwayTeam(ITeam awayTeam) {
         this.awayTeam = awayTeam;
+    }
+
+    public void setCoaching() {
+        this.coaching = true;
+    }
+
+    public boolean isCoaching() {
+        return this.coaching;
     }
 
     @Override

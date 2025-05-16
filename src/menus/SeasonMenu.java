@@ -56,7 +56,8 @@ public class SeasonMenu {
         menu.append("║   2 - Selecionar equipa para treinar                                                   ║\n");
         menu.append("║----------------------------------------------------------------------------------------║\n");
         menu.append("║   3 - Proxima Jornada                                                                  ║\n");
-        menu.append("║   4 - Jogos e Rsultados                                                                ║\n");
+        menu.append("║   4 - Listar Jogos                                                                     ║\n");
+        menu.append("║   4 - Listar Rsultados                                                                 ║\n");
         menu.append("║   5 - Classificacao                                                                    ║\n");
         menu.append("║   6 - Simular o restante epoca                                                         ║\n");
         menu.append("║                                                                                        ║\n");
