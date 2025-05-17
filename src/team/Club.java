@@ -173,7 +173,15 @@ public class Club implements IClub {
 
     @Override
     public String toString() {
-        return this.name;
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(name);
+        sb.append(" (");
+        sb.append(code);
+        sb.append(") - ");
+        sb.append(country);
+
+        return sb.toString();
     }
 
     /**

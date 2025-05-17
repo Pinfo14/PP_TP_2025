@@ -6,6 +6,8 @@ import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class Match implements IMatch {
 
@@ -213,4 +215,11 @@ public class Match implements IMatch {
     }
 
     //TODO FAZER O EQUALS
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Match match)) return false;
+        return pleayed == match.pleayed && round == match.round && eventCount == match.eventCount && homeGoals == match.homeGoals && awayGoals == match.awayGoals && coaching == match.coaching && Objects.equals(homeClub, match.homeClub) && Objects.equals(awayClub, match.awayClub) && Objects.equals(homeTeam, match.homeTeam) && Objects.equals(awayTeam, match.awayTeam) && Objects.deepEquals(events, match.events);
+    }
+
 }

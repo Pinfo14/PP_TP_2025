@@ -4,33 +4,14 @@ import reader.Reader;
 
 public class SeasonMenu {
 
-    public void menu(int year, String club, String name) {
-        int opcao = 0;
-        Reader reader = new Reader();
+    public static void mainSeasonMenu(int year, String club, String name) {
 
         displayMenu(year, club, name);
-
-        do {
-            opcao = reader.readInt(0,2,"Selecione uma opcao: ");
-            switch (opcao) {
-                case 1:
-                    int opcaoTemp = 0;
-                    managementTeamsMenu(year,club, name);
-                    do{
-                        opcao = reader.readInt(0,6,"Selecione uma opcao: ");
-                    } while (opcaoTemp != 0);
-                case 2:
-                    //selecct equipa para treinar
-                default:
-                    //import os dados guardados.
-            }
-
-        } while (opcao != 0);
 
     }
 
 
-    public void displayMenu(int year, String club, String name) {
+    private static void displayMenu(int year, String club, String name) {
 
         StringBuilder menu = new StringBuilder();
 
@@ -68,7 +49,7 @@ public class SeasonMenu {
 
     }
 
-    public void managementTeamsMenu(int year, String club, String name) {
+    public static void managementTeamsMenu(int year, String club, String name) {
 
         StringBuilder menu = new StringBuilder();
 
@@ -90,10 +71,9 @@ public class SeasonMenu {
         menu.append("║\n");
         menu.append("╠════════════════════════════════════════════════════════════════════════════════════════╗\n");
         menu.append("║                                                                                        ║\n");
-        menu.append("║   1 - Carregar Equipa - JSON FILE                                                      ║\n");
-        menu.append("║   2 - Criar Equipa                                                                     ║\n");
-        menu.append("║   3 - Apagar Equipa                                                                    ║\n");
-        menu.append("║   4 - Listar Equipas na Liga                                                           ║\n");
+        menu.append("║   1 - Adicionar Equipas à Liga                                                         ║\n");
+        menu.append("║   2 - Apagar Equipa da Liga                                                            ║\n");
+        menu.append("║   3 - Listar Equipas na Liga                                                           ║\n");
         menu.append("║----------------------------------------------------------------------------------------║\n");
         menu.append("║   5 - Carregar Jogadores - JSON FILE                                                   ║\n");
         menu.append("║   6 - Criar Jogador                                                                    ║\n");
