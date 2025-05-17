@@ -4,7 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.event.IGoalEvent;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 
 import java.io.IOException;
-import java.util.Objects;
+
 
 public class GoalEvent implements IGoalEvent {
 
@@ -40,16 +40,18 @@ public class GoalEvent implements IGoalEvent {
 
     @Override
     public String toString() {
-        return this.getPlayer().getName()+" " + this.getDescription() +" "+ this.getMinute() + "\n";
+        return  " " + this.getDescription() + " " + this.getMinute() +" "+this.player.getName() +"\n";
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof GoalEvent goalEvent)){
+        if (!(o instanceof GoalEvent goalEvent)) {
             return false;
         }
-       GoalEvent goalEv = (GoalEvent) o;
-        return this.minute==goalEv.getMinute() && this.description.equals(goalEv.getDescription()) && this.player.equals(goalEv.getPlayer());
+        GoalEvent goalEv = (GoalEvent) o;
+        return this.minute == goalEv.getMinute()
+                && this.description.equals(goalEv.getDescription())
+                && this.player.equals(goalEv.getPlayer());
     }
 
 }

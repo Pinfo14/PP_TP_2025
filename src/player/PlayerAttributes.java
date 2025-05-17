@@ -10,12 +10,13 @@ public class PlayerAttributes {
     public int speed;
     public float height;
     public float weight;
+    public int defence;
     public PreferredFoot preferredFoot;
 
 
     public PlayerAttributes() {}
 
-    private PlayerAttributes(int shooting, int passing, int stamina, int speed, float height, float weight, PreferredFoot preferredFoot) {
+    private PlayerAttributes(int shooting, int passing, int stamina, int speed, float height, float weight, int defence,PreferredFoot preferredFoot) {
         this.shooting = shooting;
         this.passing = passing;
         this.stamina = stamina;
@@ -23,6 +24,7 @@ public class PlayerAttributes {
         this.height = height;
         this.weight = weight;
         this.preferredFoot = preferredFoot;
+        this.defence = defence;
     }
 
     public  PlayerAttributes generateAttributes(String basePosition) {
@@ -30,25 +32,30 @@ public class PlayerAttributes {
         int passing = 50;
         int stamina = 50;
         int speed = 50;
+        int defence = 50;
 
         String pos = basePosition.toLowerCase();
 
         if (pos.equals("goalkeeper")) {
+            defence = randomBetween(60, 100);
             shooting = randomBetween(0, 20);
             passing = randomBetween(10, 30);
             stamina = randomBetween(50, 80);
             speed = randomBetween(40, 70);
         } else if (pos.equals("defender")) {
+            defence = randomBetween(30, 90);
             shooting = randomBetween(20, 50);
             passing = randomBetween(30, 60);
             stamina = randomBetween(60, 90);
             speed = randomBetween(50, 80);
         } else if (pos.equals("midfielder")) {
+            defence = randomBetween(20, 60);
             shooting = randomBetween(40, 70);
             passing = randomBetween(50, 90);
             stamina = randomBetween(60, 90);
             speed = randomBetween(60, 90);
         } else if (pos.equals("forward") || pos.equals("striker")) {
+            defence = randomBetween(10, 30);
             shooting = randomBetween(70, 100);
             passing = randomBetween(40, 70);
             stamina = randomBetween(40, 70);
@@ -60,7 +67,7 @@ public class PlayerAttributes {
 
         PreferredFoot foot = generatePreferredFoot();
 
-        return new PlayerAttributes(shooting, passing, stamina, speed, height, weight, foot);
+        return new PlayerAttributes(shooting, passing, stamina, speed, height, weight, defence,foot);
     }
 
 
@@ -107,6 +114,10 @@ public class PlayerAttributes {
 
     public int getStamina() {
         return stamina;
+    }
+
+    public int getDefence() {
+        return defence;
     }
 
     public PreferredFoot getPreferredFoot() {

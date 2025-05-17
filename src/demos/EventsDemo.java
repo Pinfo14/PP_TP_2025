@@ -25,12 +25,12 @@ public class EventsDemo {
         IPlayer player = new Player("Emanuel",date,"Portugues", st,"sdfg",1 ,strikerAttributes);
         IClub club = new Club("Porto");
 
-        IEvent Foul = new FoulEvent(player,25);
+        IEvent Foul = new FoulEvent("player",25);
         IEvent shot = new ShotEvent("Remate de ",player,26);
         IEvent goal = new GoalEvent(player,26,"Goloooo");
         IEvent pass = new PassEvent("Passe",player,28);
         IEvent missShot = new ShotEvent("Remate falhado de ",player,29);
-        IEvent goalKick = new GoalKickEvent(club,29);
+        IEvent goalKick = new GoalKickEvent(29,"pontape de baliza");
 
 
         IEvent ev3 = null;

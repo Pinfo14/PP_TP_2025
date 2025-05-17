@@ -4,9 +4,38 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    //private static final Scanner scanner = new Scanner(System.in);
 
-    public void menu () {
+    public void menu() {
+        boolean sair = false;
+        while (!sair) {
+            System.out.println("\n=== MENU ===");
+            System.out.println("1. Novo jogo");
+            System.out.println("2. Carregar jogo");
+
+            int opcao = lerInteiro();
+
+            switch (opcao) {
+                case 1:
+                    System.out.println("Novo jogo");
+                    //Carrega os json base
+                    mainMenu();
+                    break;
+                case 2:
+                    System.out.println("Carregar jogo");
+                    //Carrega os json do jogos salvos
+                    mainMenu();
+                    break;
+                case 0:
+                    sair = true;
+                    break;
+                default:
+                    System.out.println("Opção inválida!");
+            }
+        }
+    }
+
+    private void mainMenu() {
         boolean sair = false;
 
         while (!sair) {
@@ -49,39 +78,41 @@ public class MainMenu {
         }
     }
 
-    private  int lerInteiro() {
-        try {
+    private int lerInteiro() {
+       /* try {
             return Integer.parseInt(scanner.nextLine());
         } catch (Exception e) {
             return -1;
-        }
-    }
-    private  void salvarSair() {
-        System.out.println("A salvar..");
-      //ExportJsons
+        }*/
+        return 0;
     }
 
-    private  void mostrarPlantel() {
+    private void salvarSair() {
+        System.out.println("A salvar...");
+        //ExportJsons
+    }
+
+    private void mostrarPlantel() {
         System.out.println("\n--- Plantel da Equipa ---");
         // aqui chamo o método  para obter os jogadores e mostrar
     }
 
-    private  void mostrarCalendario() {
+    private void mostrarCalendario() {
         System.out.println("\n--- Calendário do Campeonato ---");
         // aqui chamo o método pra obter o Schedule
     }
 
-    private  void mostrarEstatisticas() {
+    private void mostrarEstatisticas() {
         System.out.println("\n--- Estatísticas ---");
         // aqui mostra estatísticas
     }
 
-    private  void simularJornada() {
+    private void simularJornada() {
         System.out.println("\n--- Simular Próxima Jornada ---");
         // aqui chama simulateRound() do ISeason
     }
 
-    private  void PrepararProxJogo() {
+    private void PrepararProxJogo() {
         System.out.println("\n--- Preparar  Jogo ---");
         // aqui usas o método displayMatchResult(match) e percorres os eventos
     }

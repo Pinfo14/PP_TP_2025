@@ -6,7 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Objects;
+
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -29,7 +29,7 @@ public class Player implements IPlayer {
 
 
     /**
-     * Construtor completo para criação de um jogador.
+     * Construtor completo para criar um jogador.
      */
     public Player(String name, LocalDate birthDate, String nationality, IPlayerPosition position, String photo, int number, PlayerAttributes attributes) {
         this.name = name;
@@ -119,6 +119,10 @@ public class Player implements IPlayer {
     @Override
     public PreferredFoot getPreferredFoot() {
         return this.attributes.getPreferredFoot();
+    }
+
+    public int getDefence(){
+        return this.attributes.getDefence();
     }
 
     @Override

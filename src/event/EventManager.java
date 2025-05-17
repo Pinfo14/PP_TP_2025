@@ -6,7 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.event.IEventManager;
 
 public class EventManager implements IEventManager {
 
-    private static final int INIT_CAP=90;
+    private static final int INIT_CAP=10;
     private static final int INCREMENT=2;
 
     private IEvent[] events;
@@ -34,7 +34,7 @@ public class EventManager implements IEventManager {
 
     @Override
     public IEvent[] getEvents() {
-        IEvent[] eventsTemp = new Event[this.eventCount];
+        IEvent[] eventsTemp = new IEvent[this.eventCount];
         for(int i = 0; i < this.eventCount; i++) {
             eventsTemp[i] = this.events[i];
         }
@@ -48,7 +48,7 @@ public class EventManager implements IEventManager {
 
     @Override
     public String toString() {
-        String s = "|||||||||| Eventos ||||||||||||\n";
+        String s = "\n";
         s += "Numero de eventos: " + this.eventCount + "\n";
         s += eventToString();
         return s;
@@ -75,7 +75,7 @@ public class EventManager implements IEventManager {
     }
 
     private void increaseCapacity() {
-        IEvent[] temp = new Event[this.events.length * INCREMENT];
+        IEvent[] temp = new IEvent[this.events.length * INCREMENT];
         for(int i = 0; i < this.eventCount; i++) {
             temp[i] = this.events[i];
         }

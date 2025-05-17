@@ -8,8 +8,13 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import event.EventManager;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class Match implements IMatch {
+
+    private static final int INIT_CAP = 10;
+    private static final int INCREMENT = 2;
+
 
     private IClub homeClub;
     private IClub awayClub;
@@ -17,16 +22,18 @@ public class Match implements IMatch {
     private ITeam awayTeam;
     private boolean pleayed;
     private int round;
-    private IEventManager eventManager;
-    private int eventCount;
+    private IEventManager events;
+    private int homeGoals;
+    private int awayGoals;
 
-    public Match(IClub homeClub, IClub awayClub, int roud) {
+    public Match(IClub homeClub, IClub awayClub, int round) {
         this.pleayed = false;
         this.homeClub = homeClub;
         this.awayClub = awayClub;
-        this.round = roud;
-        this.eventManager = new EventManager();
-        this.eventCount = 0;
+        this.round = round;
+        this.events = new EventManager();
+        this.homeGoals = 0;
+        this.awayGoals = 0;
     }
 
     private void setHomeTeam(ITeam homeTeam) {
@@ -72,6 +79,13 @@ public class Match implements IMatch {
         return 0;
     }
 
+    /**
+     * Verifica se as equipas e as teams são nulas e se existe uma equipa com o nome FOLGA
+     * Verifica se a cada equipa corresponde a cada club.
+     * Caso se verifique alguma destas situações retorna false, caso contrario retorna true
+     *
+     * @return true se a partida for valida e false caso não seja.
+     */
     @Override
     public boolean isValid() {
         if (homeClub == null || awayClub == null || homeTeam == null || awayTeam == null) {
@@ -86,9 +100,20 @@ public class Match implements IMatch {
         return true;
     }
 
+    /**
+     * Devolve a equipa Team vencedora do jogo.
+     *
+     * @return a equipa vencedora ou null em caso de empate
+     */
     @Override
     public ITeam getWinner() {
-        return null;
+        if (homeGoals > awayGoals) {
+            return homeTeam;
+        } else if (awayGoals > homeGoals) {
+            return awayTeam;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -98,17 +123,17 @@ public class Match implements IMatch {
 
     @Override
     public void setTeam(ITeam iTeam) {
-        if(iTeam == null) {
+        if (iTeam == null) {
             throw new NullPointerException("Team cannot be null.");
         }
 
-        if(isPlayed()) {
+        if (isPlayed()) {
             throw new IllegalStateException("Match is already played.");
         }
 
-        if(iTeam.getClub().equals(homeClub)) {
+        if (iTeam.getClub().equals(homeClub)) {
             setHomeTeam(iTeam);
-        } else if(iTeam.getClub().equals(awayClub)) {
+        } else if (iTeam.getClub().equals(awayClub)) {
             setAwayTeam(iTeam);
         } else {
             throw new IllegalStateException("Team does not belong to the club.");
@@ -125,19 +150,17 @@ public class Match implements IMatch {
         if (iEvent == null) {
             throw new IllegalArgumentException("Evento não pode ser nulo.");
         }
-        if (isInEvent(iEvent)){
+        if (isInEvent(iEvent)) {
             throw new IllegalStateException("Evento já existe no jogo.");
         }
+        this.events.addEvent(iEvent);
 
-        this.eventManager.addEvent(iEvent);
-        this.eventCount++;
     }
 
 
-
     private boolean isInEvent(IEvent event) {
-        for(int i = 0; i < this.eventCount; i++) {
-            if(this.eventManager.getEvents()[i].equals(event)){
+        for (IEvent iEvent : this.events.getEvents()) {
+            if (iEvent.equals(event)) {
                 return true;
             }
         }
@@ -146,16 +169,16 @@ public class Match implements IMatch {
 
     @Override
     public IEvent[] getEvents() {
-        IEvent[] copia = new IEvent[this.eventCount];
-        for (int i = 0; i < this.eventCount; i++) {
-            copia[i] = this.eventManager.getEvents()[i];
+        IEvent[] copia = new IEvent[this.events.getEventCount()];
+        for (int i = 0; i < this.events.getEventCount(); i++) {
+            copia[i] = this.events.getEvents()[i];
         }
         return copia;
     }
 
     @Override
     public int getEventCount() {
-        return this.eventCount;
+        return this.events.getEventCount();
     }
 
     @Override
@@ -170,4 +193,25 @@ public class Match implements IMatch {
         return sb.toString();
 
     }
+
+    //TODO FAZER O EQUALS
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Match)) {
+            return false;
+        }
+        Match match = (Match) o;
+        return this.pleayed == match.pleayed &&
+                this.round == match.round &&
+                this.homeGoals == match.homeGoals &&
+                this.awayGoals == match.awayGoals &&
+                this.homeClub.equals(match.getHomeClub()) &&
+                this.awayClub.equals(match.getAwayClub()) &&
+                this.homeTeam.equals(match.homeTeam) &&
+                this.awayTeam.equals(match.awayTeam) &&
+                this.events.equals(match.events);
+    }
+
 }
