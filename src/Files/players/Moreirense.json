@@ -1,0 +1,196 @@
+{
+  "squad": [
+    {
+      "name": "Kewin",
+      "birthDate": "1995-01-25",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 40
+    },
+    {
+      "name": "Caio Secco",
+      "birthDate": "1990-12-22",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Mika",
+      "birthDate": "1991-03-08",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 16
+    },
+    {
+      "name": "Michel",
+      "birthDate": "2003-05-20",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Maracás",
+      "birthDate": "1994-04-27",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 26
+    },
+    {
+      "name": "Gilberto Batista",
+      "birthDate": "2003-12-29",
+      "nationality": "Guinea-Bissauan",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 66
+    },
+    {
+      "name": "Marcelo",
+      "birthDate": "1989-07-27",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 44
+    },
+    {
+      "name": "Leonardo Buta",
+      "birthDate": "2002-06-05",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 15
+    },
+    {
+      "name": "Godfried Frimpong",
+      "birthDate": "1999-04-21",
+      "nationality": "Dutch",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 23
+    },
+    {
+      "name": "Dinis Pinto",
+      "birthDate": "2000-08-24",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 76
+    },
+    {
+      "name": "Dani Morer",
+      "birthDate": "1998-02-05",
+      "nationality": "Spanish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Ismael",
+      "birthDate": "1999-03-25",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Guilherme Liberato",
+      "birthDate": "2001-06-16",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 28
+    },
+    {
+      "name": "Afonso Assis",
+      "birthDate": "2006-07-15",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Lawrence Ofori",
+      "birthDate": "1998-06-28",
+      "nationality": "Ghanaian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 80
+    },
+    {
+      "name": "Sidnei Tavares",
+      "birthDate": "2001-09-29",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Alan",
+      "birthDate": "2000-03-08",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Ivo Rodrigues",
+      "birthDate": "1995-03-30",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Jeremy Antonisse",
+      "birthDate": "2002-03-29",
+      "nationality": "Dutch",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Benny",
+      "birthDate": "1997-12-04",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Cedric Teguia",
+      "birthDate": "2001-09-01",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Joel Jorquera",
+      "birthDate": "2000-01-01",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Pedro Santos",
+      "birthDate": "2002-01-01",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Hernâni",
+      "birthDate": "1991-08-20",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    }
+  ]
+}

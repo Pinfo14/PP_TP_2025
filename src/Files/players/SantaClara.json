@@ -1,0 +1,204 @@
+{
+  "squad": [
+    {
+      "name": "Gabriel Batista",
+      "birthDate": "1998-06-03",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Neneca",
+      "birthDate": "2003-08-27",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 12
+    },
+    {
+      "name": "João Afonso",
+      "birthDate": "2007-04-30",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 50
+    },
+    {
+      "name": "Diogo Calila",
+      "birthDate": "1998-10-10",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Matheus Pereira",
+      "birthDate": "2000-12-21",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Pedro Pacheco",
+      "birthDate": "1997-01-27",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "Luís Rocha",
+      "birthDate": "1986-08-13",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 13
+    },
+    {
+      "name": "Frederico Venâncio",
+      "birthDate": "1993-02-04",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Sidney Lima",
+      "birthDate": "1997-01-17",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 23
+    },
+    {
+      "name": "Guilherme Ramos",
+      "birthDate": "1997-08-11",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 27
+    },
+    {
+      "name": "Lucas Soares",
+      "birthDate": "1998-05-04",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 42
+    },
+    {
+      "name": "Adriano Firmino",
+      "birthDate": "1999-11-04",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Pedro Ferreira",
+      "birthDate": "1998-01-05",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Bruno Almeida",
+      "birthDate": "1996-09-09",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Serginho",
+      "birthDate": "1999-12-01",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 35
+    },
+    {
+      "name": "Daniel Borges",
+      "birthDate": "2003-04-06",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 41
+    },
+    {
+      "name": "Klismahn",
+      "birthDate": "1999-11-23",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Bobsin",
+      "birthDate": "2000-01-12",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": null
+    },
+    {
+      "name": "Ricardinho",
+      "birthDate": "1998-08-06",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Gabriel Silva",
+      "birthDate": "2002-03-22",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "João Costa",
+      "birthDate": "2000-03-07",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Vinícius Lopes",
+      "birthDate": "1999-05-07",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 70
+    },
+    {
+      "name": "Jader Gentil",
+      "birthDate": "2003-07-24",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": null
+    },
+    {
+      "name": "Rildo",
+      "birthDate": "2000-01-21",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": null
+    },
+    {
+      "name": "Reinaldo",
+      "birthDate": "2001-06-06",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": null
+    }
+  ]
+}

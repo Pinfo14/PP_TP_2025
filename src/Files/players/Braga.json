@@ -1,0 +1,253 @@
+{
+  "squad": [
+    {
+        "name": "Lukáš Horníček",
+        "birthDate": "2002-07-13",
+        "nationality": "Czech",
+        "basePosition": "Goalkeeper",
+        "photo": null,
+        "number": 91
+    },
+    {
+        "name": "Tiago Sá",
+        "birthDate": "1995-01-11",
+        "nationality": "Portuguese",
+        "basePosition": "Goalkeeper",
+        "photo": null,
+        "number": 12
+    },
+    {
+        "name": "João Carvalho",
+        "birthDate": "2004-04-09",
+        "nationality": "Portuguese",
+        "basePosition": "Goalkeeper",
+        "photo": null,
+        "number": 78
+    },
+    {
+        "name": "Adrián Marín",
+        "birthDate": "1997-01-09",
+        "nationality": "Spanish",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 19
+    },
+    {
+        "name": "Bright Arrey-Mbi",
+        "birthDate": "2003-03-26",
+        "nationality": "German",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 26
+    },
+    {
+        "name": "Chissumba",
+        "birthDate": "2005-05-29",
+        "nationality": "Portuguese",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 55
+    },
+    {
+        "name": "João Ferreira",
+        "birthDate": "2001-03-22",
+        "nationality": "Portuguese",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 13
+    },
+    {
+        "name": "Jónatas Noro",
+        "birthDate": "2005-07-09",
+        "nationality": "Portuguese",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 53
+    },
+    {
+        "name": "Sikou Niakaté",
+        "birthDate": "1999-07-10",
+        "nationality": "Malian",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 4
+    },
+    {
+        "name": "Paulo Oliveira",
+        "birthDate": "1992-01-08",
+        "nationality": "Portuguese",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 15
+    },
+    {
+        "name": "Robson Bambu",
+        "birthDate": "1997-11-12",
+        "nationality": "Brazilian",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 3
+    },
+    {
+        "name": "Victor Gómez",
+        "birthDate": "2000-04-01",
+        "nationality": "Spanish",
+        "basePosition": "Defender",
+        "photo": null,
+        "number": 2
+    },
+    {
+        "name": "Diego Rodrigues",
+        "birthDate": "2005-05-24",
+        "nationality": "Portuguese",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 50
+    },
+    {
+        "name": "Jean-Baptiste Gorby",
+        "birthDate": "2002-07-25",
+        "nationality": "French",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 29
+    },
+    {
+        "name": "Guilherme Barbosa",
+        "birthDate": "2005-08-08",
+        "nationality": "Portuguese",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 54
+    },
+    {
+        "name": "Thiago Helguera",
+        "birthDate": "2006-03-26",
+        "nationality": "Uruguayan",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 22
+    },
+    {
+        "name": "João Moutinho",
+        "birthDate": "1986-09-08",
+        "nationality": "Portuguese",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 8
+    },
+    {
+        "name": "Uroš Račić",
+        "birthDate": "1998-03-17",
+        "nationality": "Serbian",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 10
+    },
+    {
+        "name": "Rúben Furtado",
+        "birthDate": "2005-12-01",
+        "nationality": "Portuguese",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 79
+    },
+    {
+        "name": "Vasconcelos",
+        "birthDate": "2005-02-26",
+        "nationality": "Portuguese",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 80
+    },
+    {
+        "name": "Vitor Carvalho",
+        "birthDate": "1997-05-27",
+        "nationality": "Brazilian",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 6
+    },
+    {
+        "name": "Rodrigo Zalazar",
+        "birthDate": "1999-08-12",
+        "nationality": "Uruguayan",
+        "basePosition": "Midfielder",
+        "photo": null,
+        "number": 16
+    },
+    {
+        "name": "Afonso Patrão",
+        "birthDate": "2007-02-03",
+        "nationality": "Portuguese",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 67
+    },
+    {
+        "name": "Amine El Ouazzani",
+        "birthDate": "2001-07-15",
+        "nationality": "Moroccan",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 9
+    },
+    {
+        "name": "Fran Navarro",
+        "birthDate": "1998-02-03",
+        "nationality": "Spanish",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 39
+    },
+    {
+        "name": "Gabriel Martínez",
+        "birthDate": "2003-01-22",
+        "nationality": "Spanish",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 77
+    },
+    {
+        "name": "Ismaël Gharbi",
+        "birthDate": "2004-04-10",
+        "nationality": "Spanish",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 20
+    },
+    {
+        "name": "Ricardo Horta",
+        "birthDate": "1994-09-15",
+        "nationality": "Portuguese",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 21
+    },
+    {
+        "name": "Rodrigo Macedo",
+        "birthDate": "2003-07-09",
+        "nationality": "Portuguese",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 92
+    },
+    {
+        "name": "Roger",
+        "birthDate": "2005-11-21",
+        "nationality": "Portuguese",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 11
+    },
+    {
+        "name": "Sandro Vidigal",
+        "birthDate": "2007-07-28",
+        "nationality": "Portuguese",
+        "basePosition": "Forward",
+        "photo": null,
+        "number": 95
+    }
+    }
+]
+}

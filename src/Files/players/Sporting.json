@@ -1,0 +1,220 @@
+{
+  "squad": [
+    {
+      "name": "Franco Israel",
+      "birthDate": "2000-04-22",
+      "nationality": "Uruguayan",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Rui Silva",
+      "birthDate": "1994-02-07",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 24
+    },
+    {
+      "name": "Diego Callai",
+      "birthDate": "2004-07-18",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 41
+    },
+    {
+      "name": "Diogo Pinto",
+      "birthDate": "2004-06-18",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 51
+    },
+    {
+      "name": "Matheus Reis",
+      "birthDate": "1995-02-18",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Jeremiah St. Juste",
+      "birthDate": "1996-10-19",
+      "nationality": "Dutch",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Zeno Debast",
+      "birthDate": "2003-10-24",
+      "nationality": "Belgian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Iván Fresneda",
+      "birthDate": "2004-09-28",
+      "nationality": "Spanish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Gonçalo Inácio",
+      "birthDate": "2001-08-25",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Ousmane Diomandé",
+      "birthDate": "2003-12-04",
+      "nationality": "Ivorian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 26
+    },
+    {
+      "name": "Ricardo Esgaio",
+      "birthDate": "1993-05-16",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 47
+    },
+    {
+      "name": "Eduardo Quaresma",
+      "birthDate": "2002-02-02",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 72
+    },
+    {
+      "name": "Hidemasa Morita",
+      "birthDate": "1995-05-10",
+      "nationality": "Japanese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Pedro Gonçalves",
+      "birthDate": "1998-06-28",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Daniel Bragança",
+      "birthDate": "1999-05-27",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 23
+    },
+    {
+      "name": "Morten Hjulmand",
+      "birthDate": "1999-06-25",
+      "nationality": "Danish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 42
+    },
+    {
+      "name": "João Simões",
+      "birthDate": "2007-01-06",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 52
+    },
+    {
+      "name": "Viktor Gyökeres",
+      "birthDate": "1998-06-04",
+      "nationality": "Swedish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Marcus Edwards",
+      "birthDate": "1998-12-03",
+      "nationality": "English",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Nuno Santos",
+      "birthDate": "1995-02-13",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Francisco Trincão",
+      "birthDate": "1999-12-29",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Conrad Harder",
+      "birthDate": "2005-04-07",
+      "nationality": "Danish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Maxi Araújo",
+      "birthDate": "2000-02-15",
+      "nationality": "Uruguayan",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Geny Catamo",
+      "birthDate": "1992-11-09",
+      "nationality": "Mozambican",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Geovany Quenda",
+      "birthDate": "2007-04-30",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 57
+    },
+    {
+      "name": "Rafael Nel",
+      "birthDate": "2005-04-03",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 86
+    },
+    {
+      "name": "Afonso Moreira",
+      "birthDate": "2005-03-19",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 90
+    }
+  ]
+}

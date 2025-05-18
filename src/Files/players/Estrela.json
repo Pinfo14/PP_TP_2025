@@ -1,0 +1,260 @@
+{
+  "squad": [
+    {
+      "name": "Francisco Meixedo",
+      "birthDate": "2001-05-19",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Bruno Brígido",
+      "birthDate": "1991-03-09",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 30
+    },
+    {
+      "name": "Marko Gudžulić",
+      "birthDate": "2002-07-05",
+      "nationality": "Serbian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 93
+    },
+    {
+      "name": "Diogo Travassos",
+      "birthDate": "2004-03-31",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Till Cissokho",
+      "birthDate": "2000-02-08",
+      "nationality": "French",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Ferro",
+      "birthDate": "1997-03-26",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "Issiar Dramé",
+      "birthDate": "1999-02-16",
+      "nationality": "Malian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Miguel Lopes",
+      "birthDate": "1986-12-19",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 13
+    },
+    {
+      "name": "Juan Mina",
+      "birthDate": "2004-07-27",
+      "nationality": "Colombian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Guilherme Montóia",
+      "birthDate": "2003-09-14",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Nilton",
+      "birthDate": "2001-05-25",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Rúben Lima",
+      "birthDate": "1989-10-03",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 28
+    },
+    {
+      "name": "Euri Carvalho",
+      "birthDate": "2004-02-17",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 31
+    },
+    {
+      "name": "Tiago Gabriel",
+      "birthDate": "2004-12-26",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 44
+    },
+    {
+      "name": "Danilo Veiga",
+      "birthDate": "2002-09-25",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Daniel Cabral",
+      "birthDate": "2002-05-14",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Alan Ruiz",
+      "birthDate": "1993-08-19",
+      "nationality": "Argentinian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Paulo Moreira",
+      "birthDate": "2000-02-17",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Léo Cordeiro",
+      "birthDate": "1995-09-27",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Leonel Bucca",
+      "birthDate": "1999-03-20",
+      "nationality": "Argentinian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 26
+    },
+    {
+      "name": "Manuel Keliano",
+      "birthDate": "2003-01-16",
+      "nationality": "Angolan",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 42
+    },
+    {
+      "name": "Nur Asis",
+      "birthDate": "2004-03-04",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 89
+    },
+    {
+      "name": "André Luiz",
+      "birthDate": "2002-02-23",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Rodrigo Pinho",
+      "birthDate": "1991-05-30",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Petterson",
+      "birthDate": "2004-01-04",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 37
+    },
+    {
+      "name": "Caio Santana",
+      "birthDate": "2004-03-22",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 38
+    },
+    {
+      "name": "Mamede",
+      "birthDate": "2002-03-18",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 88
+    },
+    {
+      "name": "Jovane Cabral",
+      "birthDate": "1998-06-14",
+      "nationality": "Cape Verdean",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 97
+    },
+    {
+      "name": "Kikas",
+      "birthDate": "1998-09-17",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 98
+    },
+    {
+      "name": "Bilal Mazhar",
+      "birthDate": "2003-11-21",
+      "nationality": "Egyptian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 99
+    },
+    {
+      "name": "Ronaldo Tavares",
+      "birthDate": "1997-07-22",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": null
+    },
+    {
+      "name": "Alioune Ndour",
+      "birthDate": "2001-03-03",
+      "nationality": "Senegalese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": null
+    }
+  ]
+}
