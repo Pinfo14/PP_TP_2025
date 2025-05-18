@@ -14,7 +14,7 @@ import player.PlayerPositionManage;
 
 public class MatchSimulator implements MatchSimulatorStrategy {
 
-    private static final double EVENT_PROB = 0.1;
+    private static final double EVENT_PROB = 0.2;
     private static final double HOME_OR_AWAY_PROB = 0.5;
     private static final double PASS_EVENT_PROB = 0.5;
     private static final double SHOT_EVENT_PROB = 0.8;
@@ -57,6 +57,9 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                     ev = factory.generatePassEvent(autor, alvo, minuto, isHome);
                 } else if (tipo > PASS_EVENT_PROB && tipo < SHOT_EVENT_PROB) {
                     ev = factory.generateShotEvent(autor, gk, minuto, isHome);
+                    if (ev instanceof GoalEvent) {
+                        // adicionar golo a equipa
+                    }
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);
                 }

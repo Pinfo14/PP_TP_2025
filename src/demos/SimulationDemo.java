@@ -12,7 +12,6 @@ import league.League;
 import league.Season;
 import player.PlayerPositionManage;
 import simulation.MatchSimulator;
-import team.Club;
 import team.Formation;
 import team.RandomPlayerSelector;
 import team.Team;
@@ -21,7 +20,7 @@ public class SimulationDemo {
 
     public static void main(String[] args) {
         // 1) Importa clubes e jogadores
-        Imports importClubs = new Imports();
+     /*   Imports importClubs = new Imports();
         Club[] clubes = importClubs.importClubs();  // ex.: [Benfica, Porto, …]
 
         IPlayer[] benficaPlayers = importClubs.importPlayers("Benfica.json");
@@ -43,6 +42,10 @@ public class SimulationDemo {
                 System.out.println("Porto: " + e.getMessage());
             }
         }
+*/      Imports importClubs = new Imports();
+        IClub[] clubes = importClubs.importPlayersToClub();
+
+// criar uma classe para gerar aleatoriamente todas as equipas passando a formacao como argomento talvez
 
 
         IPlayer[] porto11 = new IPlayer[11];

@@ -2,6 +2,7 @@ package imports;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
+import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -141,6 +142,105 @@ public class Imports {
             e.printStackTrace();
             return new Player[0];
         }
+    }
+
+
+
+    public IClub[] importPlayersToClub(){
+
+        IClub[] club = this.importClubs();
+
+        String directoryPath = "src/Files/players";
+
+        // Using File class create an object for specific directory
+        File directory = new File(directoryPath);
+
+        // Using listFiles method we get all the files of a directory
+        // return type of listFiles is array
+        File[] files = directory.listFiles();
+
+
+        for (IClub c : club) {
+            try {
+                IPlayer[] players = this.importPlayers(checkNameFileClub(files, c.getName()));
+                try {
+                    for (IPlayer p : players) {
+                        c.addPlayer(p);
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage() + c.getName()+"FAILED");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage() );
+            }
+
+        }
+
+        return club;
+    }
+
+
+
+    private  String checkNameFileClub(File[] files, String clubName) {
+        // Divide o nome do clube em tokens (tudo maiúsculo) [SPORT,LISBOA,E,BENFICA]
+        String[] tokens = removerAcentos(clubName).toUpperCase().split("\\s+");
+        String lastToken = tokens[tokens.length-1];
+        String firstMatch = null;
+
+        for (File f : files) {
+            String fname = f.getName();
+            int dot = fname.lastIndexOf('.');//index do . exemplo sporting.json
+            String base = dot > 0
+                    ? fname.substring(0, dot).toUpperCase()//sporting.json -> SPORTING
+                    : fname.toUpperCase();
+
+            // Para cada token, verifica se o nome-base do ficheiro contém o token
+            for (String token : tokens) {
+                if (base.contains(token)) {
+                    // Se o token for o último, prioridade máxima
+                    if (token.equals(lastToken)) {
+                        return fname;
+                    }
+                    // Guarda o primeiro match caso ainda não exista
+                    if (firstMatch == null) {
+                        firstMatch = fname;
+                    }
+                }
+            }
+        }
+
+        // Se não encontrou match no último token, retorna o primeiro match (ou null)
+        return firstMatch;
+    }
+
+
+    /**
+     * Remove acentos de uma string substituindo cada caractere acentuado
+     * pelo correspondente sem acento.
+     */
+    public String removerAcentos(String texto) {
+        // String com todos os caracteres acentuados possíveis
+        String comAcento = "ÁÀÂÃÄáàâãäÉÈÊËéèêëÍÌÎÏíìîïÓÒÔÕÖóòôõöÚÙÛÜúùûüÇç";
+        // String com caracteres não acentuados correspondentes
+        String semAcento = "AAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUUuuuuCc";
+        // Cria um StringBuilder com tamanho inicial igual ao texto para melhor performance
+        StringBuilder sb = new StringBuilder(texto.length());
+
+        // Percorre cada caractere do texto de entrada
+        for (char c : texto.toCharArray()) {
+            // Procura o índice do caractere atual na string de caracteres acentuados
+            int idx = comAcento.indexOf(c);
+            // Se encontrou o caractere acentuado (idx diferente de -1)
+            if (idx != -1) {
+                // Adiciona o caractere não acentuado correspondente
+                sb.append(semAcento.charAt(idx));
+            } else {
+                // Se não encontrou, mantém o caractere original
+                sb.append(c);
+            }
+        }
+        //  retorna o StringBuilder como String
+        return sb.toString();
     }
 
 }
