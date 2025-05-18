@@ -22,7 +22,7 @@ import java.io.IOException;
 public class Club implements IClub {
 
     private static final int MINIMUM_PLAYERS = 16;
-    private static final int MAX_PLAYERS = 30;
+    private static final int MAX_PLAYERS = 40;
     private static final int INCREMENT_FACTOR = 2;
 
     private String name;

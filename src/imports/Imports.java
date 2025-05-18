@@ -108,7 +108,11 @@ public class Imports {
                 LocalDate birthDate = LocalDate.parse((String) playerJson.get("birthDate"));
                 String nationality = (String) playerJson.get("nationality");
                 String photo = (String) playerJson.get("photo");
-                int number = ((Long) playerJson.get("number")).intValue();
+                int number=0;
+                Object numberObj = playerJson.get("number");
+                if (numberObj != null) {
+                    number = ((Long) numberObj).intValue();
+                }
                 IPlayerPosition position = new PlayerPosition((String) playerJson.get("basePosition"));
 
                 Player playerObj = new Player(
@@ -169,16 +173,16 @@ public class Imports {
 
 
     private  String checkNameFileClub(File[] files, String clubName) {
-        // Divide o nome do clube em tokens (tudo maiúsculo)
+        // Divide o nome do clube em tokens (tudo maiúsculo) [SPORT,LISBOA,E,BENFICA]
         String[] tokens = removerAcentos(clubName).toUpperCase().split("\\s+");
-        String lastToken = tokens[tokens.length - 1];
+        String lastToken = tokens[tokens.length-1];
         String firstMatch = null;
 
         for (File f : files) {
             String fname = f.getName();
-            int dot = fname.lastIndexOf('.');
+            int dot = fname.lastIndexOf('.');//index do . exemplo sporting.json
             String base = dot > 0
-                    ? fname.substring(0, dot).toUpperCase()
+                    ? fname.substring(0, dot).toUpperCase()//sporting.json -> SPORTING
                     : fname.toUpperCase();
 
             // Para cada token, verifica se o nome-base do ficheiro contém o token
@@ -192,8 +196,6 @@ public class Imports {
                     if (firstMatch == null) {
                         firstMatch = fname;
                     }
-                    // não procures mais tokens neste ficheiro
-                    break;
                 }
             }
         }
@@ -207,19 +209,28 @@ public class Imports {
      * Remove acentos de uma string substituindo cada caractere acentuado
      * pelo correspondente sem acento.
      */
-    public  String removerAcentos(String texto) {
-        String comAcento    = "ÁÀÂÃÄáàâãäÉÈÊËéèêëÍÌÎÏíìîïÓÒÔÕÖóòôõöÚÙÛÜúùûüÇç";
-        String semAcento    = "AAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUUuuuuCc";
+    public String removerAcentos(String texto) {
+        // String com todos os caracteres acentuados possíveis
+        String comAcento = "ÁÀÂÃÄáàâãäÉÈÊËéèêëÍÌÎÏíìîïÓÒÔÕÖóòôõöÚÙÛÜúùûüÇç";
+        // String com caracteres não acentuados correspondentes
+        String semAcento = "AAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUUuuuuCc";
+        // Cria um StringBuilder com tamanho inicial igual ao texto para melhor performance
         StringBuilder sb = new StringBuilder(texto.length());
 
+        // Percorre cada caractere do texto de entrada
         for (char c : texto.toCharArray()) {
+            // Procura o índice do caractere atual na string de caracteres acentuados
             int idx = comAcento.indexOf(c);
+            // Se encontrou o caractere acentuado (idx diferente de -1)
             if (idx != -1) {
+                // Adiciona o caractere não acentuado correspondente
                 sb.append(semAcento.charAt(idx));
             } else {
+                // Se não encontrou, mantém o caractere original
                 sb.append(c);
             }
         }
+        //  retorna o StringBuilder como String
         return sb.toString();
     }
 
