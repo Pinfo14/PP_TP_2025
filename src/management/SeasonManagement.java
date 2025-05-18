@@ -39,8 +39,9 @@ public class SeasonManagement {
             switch (option) {
                 case 1:
                     int optionTemp, readerTemp;
-                    SeasonMenu.managementTeamsMenu(season.getYear(), "GGGGG", season.getName());
+
                     do {
+                        SeasonMenu.managementSeasonMenu(season.getYear(), "GGGGG", season.getName());
                         optionTemp = reader.readInt(0, 6, "Selecione uma opção: ");
                         switch (optionTemp) {
 
@@ -85,5 +86,15 @@ public class SeasonManagement {
                     break;
             }
         } while (option != 0);
+    }
+
+    public static void limparConsole() {
+        try {
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+        } catch (Exception e) {
+            // Se não funcionar, imprime várias linhas
+            for (int i = 0; i < 50; ++i) System.out.println();
+        }
     }
 }

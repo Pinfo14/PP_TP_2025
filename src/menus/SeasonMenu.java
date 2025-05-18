@@ -6,82 +6,36 @@ public class SeasonMenu {
 
     public static void mainSeasonMenu(int year, String club, String name) {
 
-        displayMenu(year, club, name);
+        HeaderMenu.print(year, 1, club, name);
 
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                                                                         ║");
+        System.out.println("║   1 - Gerir equipas                                                     ║");
+        System.out.println("║   2 - Selecionar equipa para treinar                                    ║");
+        System.out.println("║-------------------------------------------------------------------------║");
+        System.out.println("║   3 - Proxima Jornada                                                   ║");
+        System.out.println("║   4 - Listar Jogos                                                      ║");
+        System.out.println("║   4 - Listar Resultados                                                 ║");
+        System.out.println("║   5 - Classificacao                                                     ║");
+        System.out.println("║   6 - Simular o restante epoca                                          ║");
+        System.out.println("║                                                                         ║");
+        System.out.println("║   0 - Sair                                                              ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════╝");
     }
 
 
-    private static void displayMenu(int year, String club, String name) {
+    public static void managementSeasonMenu(int year, String club, String name) {
 
-        StringBuilder menu = new StringBuilder();
+        HeaderMenu.print(year, 1, club, name); // Mostra o cabeçalho no formato caixa
 
-        menu.append("╔═════════════════════════════════════════════════════════════════════════════════════════\n");
-        menu.append("║\n");
-        menu.append("║  PP - SOCCER PARADIGMAS SIMULATOR\n");
-        menu.append("║  ");
-        menu.append(year);
-        menu.append("-");
-        menu.append(year + 1);
-        menu.append(" - ");
-        menu.append(name);
-        menu.append("\n");
-        //aqui colocar a identificacao do clube a treinar
-        menu.append("║  Esta a treinar o ");
-        menu.append(club);
-        menu.append("\n");
-        //clube a treinar.
-        menu.append("║\n");
-        menu.append("╠════════════════════════════════════════════════════════════════════════════════════════╗\n");
-        menu.append("║                                                                                        ║\n");
-        menu.append("║   1 - Gerir equipas                                                                    ║\n");
-        menu.append("║   2 - Selecionar equipa para treinar                                                   ║\n");
-        menu.append("║----------------------------------------------------------------------------------------║\n");
-        menu.append("║   3 - Proxima Jornada                                                                  ║\n");
-        menu.append("║   4 - Listar Jogos                                                                     ║\n");
-        menu.append("║   4 - Listar Rsultados                                                                 ║\n");
-        menu.append("║   5 - Classificacao                                                                    ║\n");
-        menu.append("║   6 - Simular o restante epoca                                                         ║\n");
-        menu.append("║                                                                                        ║\n");
-        menu.append("║   0 - Sair                                                                             ║\n");
-        menu.append("╚════════════════════════════════════════════════════════════════════════════════════════╝\n");
-
-        System.out.print(menu.toString());
-
-    }
-
-    public static void managementTeamsMenu(int year, String club, String name) {
-
-        StringBuilder menu = new StringBuilder();
-
-        menu.append("╔═════════════════════════════════════════════════════════════════════════════════════════\n");
-        menu.append("║\n");
-        menu.append("║  PP - SOCCER PARADIGMAS SIMULATOR\n");
-        menu.append("║  ");
-        menu.append(year);
-        menu.append("-");
-        menu.append(year + 1);
-        menu.append(" - ");
-        menu.append(name);
-        menu.append("\n");
-        //aqui colocar a identificacao do clube a treinar
-        menu.append("║  Esta a treinar o ");
-        menu.append(club);
-        menu.append("\n");
-        //clube a treinar.
-        menu.append("║\n");
-        menu.append("╠════════════════════════════════════════════════════════════════════════════════════════╗\n");
-        menu.append("║                                                                                        ║\n");
-        menu.append("║   1 - Adicionar Equipas à Liga                                                         ║\n");
-        menu.append("║   2 - Apagar Equipa da Liga                                                            ║\n");
-        menu.append("║   3 - Listar Equipas na Liga                                                           ║\n");
-        menu.append("║----------------------------------------------------------------------------------------║\n");
-        menu.append("║   5 - Carregar Jogadores - JSON FILE                                                   ║\n");
-        menu.append("║   6 - Criar Jogador                                                                    ║\n");
-        menu.append("║                                                                                        ║\n");
-        menu.append("║   0 - Voltar                                                                           ║\n");
-        menu.append("╚════════════════════════════════════════════════════════════════════════════════════════╝\n");
-
-        System.out.print(menu.toString());
+        System.out.println("╔═════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                                                                         ║");
+        System.out.println("║   1 - Adicionar Equipas à Liga                                          ║");
+        System.out.println("║   2 - Apagar Equipa da Liga                                             ║");
+        System.out.println("║   3 - Listar Equipas na Liga                                            ║");
+        System.out.println("║                                                                         ║");
+        System.out.println("║   0 - Voltar                                                            ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════════════╝");
 
     }
 
