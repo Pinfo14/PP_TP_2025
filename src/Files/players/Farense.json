@@ -1,0 +1,228 @@
+{
+  "squad": [
+    {
+      "name": "Ricardo Velho",
+      "birthDate": "1998-08-20",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 33
+    },
+    {
+      "name": "Kaique Pereira",
+      "birthDate": "2003-04-16",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Miguel Carvalho",
+      "birthDate": "1996-06-20",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Tomás Ribeiro",
+      "birthDate": "1999-04-30",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Marco Moreno",
+      "birthDate": "2001-02-20",
+      "nationality": "Spanish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Lucas Áfrico",
+      "birthDate": "1995-02-05",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 44
+    },
+    {
+      "name": "Artur Jorge",
+      "birthDate": "1994-08-14",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "Raúl Silva",
+      "birthDate": "1989-11-04",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 34
+    },
+    {
+      "name": "Paulo Victor",
+      "birthDate": "2001-04-13",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Derick Poloni",
+      "birthDate": "1993-09-01",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 31
+    },
+    {
+      "name": "Pastor",
+      "birthDate": "2000-02-20",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 28
+    },
+    {
+      "name": "Rivaldo Correia",
+      "birthDate": "1999-05-15",
+      "nationality": "Cape Verdean",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 70
+    },
+    {
+      "name": "Cláudio Falcão",
+      "birthDate": "1994-07-10",
+      "nationality": "Brazilian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 29
+    },
+    {
+      "name": "Zé Carlos",
+      "birthDate": "1999-07-31",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Miguel Menino",
+      "birthDate": "2002-03-15",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 93
+    },
+    {
+      "name": "Samuel Justo",
+      "birthDate": "2003-06-25",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 80
+    },
+    {
+      "name": "Neto",
+      "birthDate": "1990-05-12",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Rony Lopes",
+      "birthDate": "1995-12-28",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Yusupha Njie",
+      "birthDate": "1994-03-01",
+      "nationality": "Gambian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Rui Costa",
+      "birthDate": "1996-02-20",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "André Candeias",
+      "birthDate": "2001-11-15",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 41
+    },
+    {
+      "name": "Jaime Pinto",
+      "birthDate": "2002-07-10",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 71
+    },
+    {
+      "name": "Elves Baldé",
+      "birthDate": "1999-10-02",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Marco Matias",
+      "birthDate": "1989-05-10",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Álex Bermejo",
+      "birthDate": "1998-12-11",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Bruno Santos",
+      "birthDate": "1997-04-05",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Darío Poveda",
+      "birthDate": "1997-03-03",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "António Tomane",
+      "birthDate": "1992-10-23",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    }
+  ]
+}

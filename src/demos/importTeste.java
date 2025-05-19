@@ -11,7 +11,6 @@ public class importTeste {
         for (IClub c : club) {
             System.out.println(c.getName());
             System.out.println(c.getPlayerCount());
-            System.out.println(c.getPlayers()[1]);
         }
     }
 }

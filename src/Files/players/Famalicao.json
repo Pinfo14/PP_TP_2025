@@ -1,0 +1,236 @@
+{
+  "squad": [
+    {
+      "name": "Ivan Zlobin",
+      "birthDate": "1997-03-07",
+      "nationality": "Russian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Gabriel Cabral",
+      "birthDate": "2003-04-19",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Lazar Carević",
+      "birthDate": "1999-03-16",
+      "nationality": "Montenegrin",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Hugo Cunha",
+      "birthDate": "2001-09-06",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 90
+    },
+    {
+      "name": "Lucas Calegari",
+      "birthDate": "2002-02-27",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Léo Realpe",
+      "birthDate": "2001-02-26",
+      "nationality": "Ecuadorian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Enea Mihaj",
+      "birthDate": "1998-07-05",
+      "nationality": "Albanian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "Rafa Soares",
+      "birthDate": "1995-05-09",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Riccieli",
+      "birthDate": "1998-09-17",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 15
+    },
+    {
+      "name": "Justin de Haas",
+      "birthDate": "2000-02-01",
+      "nationality": "Dutch",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 16
+    },
+    {
+      "name": "Rodrigo Pinheiro",
+      "birthDate": "2002-08-28",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 17
+    },
+    {
+      "name": "Ian Custódio",
+      "birthDate": "2003-04-16",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 36
+    },
+    {
+      "name": "Ibrahima Ba",
+      "birthDate": "2005-05-26",
+      "nationality": "Senegalese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 55
+    },
+    {
+      "name": "Diogo Costa",
+      "birthDate": "2003-07-27",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 75
+    },
+    {
+      "name": "Tom van de Looi",
+      "birthDate": "1999-07-02",
+      "nationality": "Dutch",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Mirko Topić",
+      "birthDate": "2001-02-05",
+      "nationality": "Serbian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Mathias de Amorim",
+      "birthDate": "2004-12-10",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "Otso Liimatta",
+      "birthDate": "2004-07-10",
+      "nationality": "Finnish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 18
+    },
+    {
+      "name": "Gustavo Sá",
+      "birthDate": "2004-11-11",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Zaydou Youssouf",
+      "birthDate": "1999-07-11",
+      "nationality": "French",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 28
+    },
+    {
+      "name": "Martim Almeida",
+      "birthDate": "2005-03-19",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 70
+    },
+    {
+      "name": "Samuel Lobato",
+      "birthDate": "2001-10-19",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 88
+    },
+    {
+      "name": "Sorriso",
+      "birthDate": "2001-02-23",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    },
+    {
+      "name": "Mario González",
+      "birthDate": "1996-02-25",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Rochinha",
+      "birthDate": "1995-05-03",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Óscar Aranda",
+      "birthDate": "2002-04-29",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Afonso Rodrigues",
+      "birthDate": "2002-08-19",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Yassir Zabiri",
+      "birthDate": "2005-02-23",
+      "nationality": "Moroccan",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Gil Dias",
+      "birthDate": "1996-09-28",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 23
+    }
+  ]
+}

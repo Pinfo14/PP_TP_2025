@@ -2,6 +2,7 @@ package demos;
 
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
@@ -117,6 +118,9 @@ public class SimulationDemo {
             System.out.println("-----------------------------------");
         }
 
+      for (IStanding standing: season.getLeagueStandings() ) {
+          System.out.println(standing.toString());
+      }
 
     }
 }

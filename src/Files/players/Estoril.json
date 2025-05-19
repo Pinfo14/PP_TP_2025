@@ -1,0 +1,188 @@
+{
+  "squad": [
+    {
+      "name": "Kevin Chamorro",
+      "birthDate": "1997-04-08",
+      "nationality": "Costa Rican",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Joel Robles",
+      "birthDate": "1990-06-17",
+      "nationality": "Spanish",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 27
+    },
+    {
+      "name": "Diogo Dias",
+      "birthDate": "2003-03-15",
+      "nationality": "Portuguese",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 31
+    },
+    {
+      "name": "Pedro Amaral",
+      "birthDate": "1997-08-25",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 24
+    },
+    {
+      "name": "Gonçalo Costa",
+      "birthDate": "2000-02-18",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 18
+    },
+    {
+      "name": "Pedro Álvaro",
+      "birthDate": "2000-03-02",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 23
+    },
+    {
+      "name": "Eliaquim Mangala",
+      "birthDate": "1991-02-13",
+      "nationality": "French",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 5
+    },
+    {
+      "name": "Kévin Boma",
+      "birthDate": "2001-07-31",
+      "nationality": "French",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 44
+    },
+    {
+      "name": "Felix Bacher",
+      "birthDate": "1999-11-17",
+      "nationality": "Austrian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 25
+    },
+    {
+      "name": "Pedro Carvalho",
+      "birthDate": "2002-05-10",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Wagner Pina",
+      "birthDate": "2001-09-12",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "Volnei",
+      "birthDate": "2000-05-18",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 71
+    },
+    {
+      "name": "Ismael Sierra",
+      "birthDate": "2003-02-14",
+      "nationality": "Spanish",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 13
+    },
+    {
+      "name": "Jandro Orellana",
+      "birthDate": "2000-08-07",
+      "nationality": "Spanish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Xeka",
+      "birthDate": "1994-03-10",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 88
+    },
+    {
+      "name": "Jordan Holsgrove",
+      "birthDate": "1999-09-10",
+      "nationality": "Scottish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Foe Ondoa",
+      "birthDate": "2005-04-22",
+      "nationality": "Cameroonian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 26
+    },
+    {
+      "name": "João Carvalho",
+      "birthDate": "1997-03-09",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 12
+    },
+    {
+      "name": "André Lacximicant",
+      "birthDate": "2001-05-19",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Rafik Guitane",
+      "birthDate": "1999-05-26",
+      "nationality": "French",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 99
+    },
+    {
+      "name": "Israel Salazar",
+      "birthDate": "2003-05-10",
+      "nationality": "Spanish",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 92
+    },
+    {
+      "name": "Alejandro Marqués",
+      "birthDate": "2000-08-04",
+      "nationality": "Venezuelan",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Hélder Costa",
+      "birthDate": "1994-01-12",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 7
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "squad": [
+    {
+      "name": "Cezary Miszta",
+      "birthDate": "2001-10-30",
+      "nationality": "Polish",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 1
+    },
+    {
+      "name": "Matheus Teixeira",
+      "birthDate": "1999-03-08",
+      "nationality": "Brazilian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 95
+    },
+    {
+      "name": "Antzelo Sina",
+      "birthDate": "2004-01-07",
+      "nationality": "Albanian",
+      "basePosition": "Goalkeeper",
+      "photo": null,
+      "number": 99
+    },
+    {
+      "name": "Andreas Ntoi",
+      "birthDate": "2002-02-02",
+      "nationality": "Greek",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 3
+    },
+    {
+      "name": "Francisco Petrasso",
+      "birthDate": "2002-02-28",
+      "nationality": "Argentine",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 23
+    },
+    {
+      "name": "Jonathan Panzo",
+      "birthDate": "2000-10-25",
+      "nationality": "English",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 2
+    },
+    {
+      "name": "Nelson Abbey",
+      "birthDate": "2003-03-01",
+      "nationality": "English",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 4
+    },
+    {
+      "name": "João Pedro",
+      "birthDate": "2002-06-10",
+      "nationality": "Brazilian",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Konstantinos Kostoulas",
+      "birthDate": "2005-02-08",
+      "nationality": "Greek",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 82
+    },
+    {
+      "name": "Omar Richards",
+      "birthDate": "1998-02-15",
+      "nationality": "English",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 98
+    },
+    {
+      "name": "João Tomé",
+      "birthDate": "2003-02-12",
+      "nationality": "Portuguese",
+      "basePosition": "Defender",
+      "photo": null,
+      "number": 20
+    },
+    {
+      "name": "João Novais",
+      "birthDate": "1993-07-10",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 6
+    },
+    {
+      "name": "Vítor Gomes",
+      "birthDate": "1987-12-25",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 8
+    },
+    {
+      "name": "Amine",
+      "birthDate": "1992-11-04",
+      "nationality": "Moroccan",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 10
+    },
+    {
+      "name": "Brandon Aguilera",
+      "birthDate": "2003-06-28",
+      "nationality": "Costa Rican",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 16
+    },
+    {
+      "name": "João Graça",
+      "birthDate": "1995-06-18",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 21
+    },
+    {
+      "name": "Demir Ege Tıknaz",
+      "birthDate": "2004-08-17",
+      "nationality": "Turkish",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 34
+    },
+    {
+      "name": "Martim Neto",
+      "birthDate": "2003-01-14",
+      "nationality": "Portuguese",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 76
+    },
+    {
+      "name": "Ole Pohlmann",
+      "birthDate": "2001-04-05",
+      "nationality": "German",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 80
+    },
+    {
+      "name": "Dijar Ferati",
+      "birthDate": "2008-09-24",
+      "nationality": "Albanian",
+      "basePosition": "Midfielder",
+      "photo": null,
+      "number": 75
+    },
+    {
+      "name": "Clayton",
+      "birthDate": "1999-01-11",
+      "nationality": "Brazilian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 9
+    },
+    {
+      "name": "Tiago Morais",
+      "birthDate": "2003-09-03",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 11
+    },
+    {
+      "name": "Karem Zoabi",
+      "birthDate": "2006-05-03",
+      "nationality": "Israeli",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 14
+    },
+    {
+      "name": "Chukwudi Igbokwe",
+      "birthDate": "2002-06-20",
+      "nationality": "Nigerian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 15
+    },
+    {
+      "name": "Kiko Bondoso",
+      "birthDate": "1995-11-17",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 19
+    },
+    {
+      "name": "Ahmed Hassan",
+      "birthDate": "1993-03-05",
+      "nationality": "Egyptian",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 22
+    },
+    {
+      "name": "Tobías Medina",
+      "birthDate": "2004-03-03",
+      "nationality": "Argentine",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 27
+    },
+    {
+      "name": "Fábio Ronaldo",
+      "birthDate": "2001-04-28",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 77
+    },
+    {
+      "name": "Tim Sousa",
+      "birthDate": "2002-02-14",
+      "nationality": "Portuguese",
+      "basePosition": "Forward",
+      "photo": null,
+      "number": 94
+    }
+  ]
+}
