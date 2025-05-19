@@ -10,12 +10,9 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import imports.Imports;
 import league.League;
 import league.Season;
-import player.PlayerPositionManage;
 import simulation.GenerateTeams;
 import simulation.MatchSimulator;
-import team.Formation;
-import team.RandomPlayerSelector;
-import team.Team;
+
 
 public class SimulationDemo {
 
@@ -43,47 +40,63 @@ public class SimulationDemo {
                 System.out.println("Porto: " + e.getMessage());
             }
         }
-*/      Imports importClubs = new Imports();
+*/
+        Imports importClubs = new Imports();
         IClub[] clubes = importClubs.importPlayersToClub();
 
 // criar uma classe para gerar aleatoriamente todas as equipas passando a formacao como argomento talve
 // apenas cria team aleatoria pra todos os clubes menos para aquele que o user decidiu dar coach no caso dele ele decide gerar aleatoriamente uma team(11 inicial) ou criala ele msm
 
 
-        ITeam teamPorto;
-        ITeam teamBenfica;
-
-
-        GenerateTeams generateTeams=new GenerateTeams();
-        teamPorto=generateTeams.randomTeam(clubes[1]);
-        teamBenfica=generateTeams.randomTeam(clubes[0]);
-
         // 3) Cria liga e temporada e adiciona clubes à temporada
         League liga = new League("Liga Portugal");
         Season temporada2023 = new Season("Liga Portugal", 2023);
-        try { liga.createSeason(temporada2023); }
-        catch (Exception e) { System.out.println("Erro ao criar temporada: " + e.getMessage()); return; }
+        try {
+            liga.createSeason(temporada2023);
+        } catch (Exception e) {
+            System.out.println("Erro ao criar temporada: " + e.getMessage());
+            return;
+        }
 
         ISeason season = liga.getSeason(2023);
         for (IClub c : clubes) {
-            try { season.addClub(c); }
-            catch (Exception e) { System.out.println("Erro ao adicionar " + c.getName() + ": " + e.getMessage()); }
+            try {
+                season.addClub(c);
+            } catch (Exception e) {
+                System.out.println("Erro ao adicionar " + c.getName() + ": " + e.getMessage());
+            }
         }
 
         // 4) Gera calendário (round-robin)
-        try { season.generateSchedule(); }
-        catch (Exception e) { System.out.println("Não foi possível gerar fixtures: " + e.getMessage()); return; }
+        try {
+            season.generateSchedule();
+        } catch (Exception e) {
+            System.out.println("Não foi possível gerar fixtures: " + e.getMessage());
+            return;
+        }
 
         // 5) Simula cada partida e imprime eventos
         MatchSimulator simulador = new MatchSimulator();
         IMatch[] partidas = season.getMatches();
 
 
+        GenerateTeams generateTeams = new GenerateTeams();
+
         for (IMatch partida : partidas) {
-            partida.setTeam(teamPorto);
-            partida.setTeam(teamBenfica);
+            // Obtém os clubes donos da casa e visitantes
+            IClub casaClub = partida.getHomeClub();
+            IClub foraClub = partida.getAwayClub();
+
+            // Gera 11 iniciais aleatórios para cada lado
+            ITeam casaLineup = generateTeams.randomTeam(casaClub);
+            ITeam foraLineup = generateTeams.randomTeam(foraClub);
+
+            // Atribui as equipas ao próprio objeto de partida
+            partida.setTeam(casaLineup);
+            partida.setTeam(foraLineup);
         }
 
+// Agora simula e imprime eventos
         System.out.println("=== Eventos dos Jogos Simulados ===");
         for (IMatch partida : partidas) {
             System.out.printf("Jogo: %s x %s%n",
@@ -93,22 +106,17 @@ public class SimulationDemo {
 
             simulador.simulate(partida);
 
-
             if (partida.getEvents().length == 0) {
                 System.out.println("  (sem eventos)");
             } else {
                 for (IEvent ev : partida.getEvents()) {
-                    System.out.println("Evento: "+
-                            ev.toString()
-                    );
+                    System.out.println("Evento: " + ev);
                 }
             }
-            System.out.println(partida.getWinner());
-
+            System.out.println("Vencedor: " + partida.getWinner());
             System.out.println("-----------------------------------");
         }
+
+
     }
-
-
-
 }
