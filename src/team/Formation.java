@@ -39,10 +39,10 @@ public class Formation implements IFormation {
         Formation form = (Formation) iFormation;
 
         if(this.numMidfielders < form.numMidfielders){
-            return 1;
+            return 5;//percentagem
         }
         if(this.numMidfielders > form.numMidfielders){
-            return -1;
+            return -5;
         }
         return 0;
     }

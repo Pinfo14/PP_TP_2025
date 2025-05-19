@@ -33,6 +33,7 @@ public class Club implements IClub {
     private String logo;
     private IPlayer[] players;
     private int playerCount;
+    private boolean isCoach;
 
 
     public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo) {
@@ -44,6 +45,7 @@ public class Club implements IClub {
         this.logo = logo;
         this.playerCount = 0;
         this.players = new Player[MAX_PLAYERS];
+        this.isCoach = false;
     }
 
 

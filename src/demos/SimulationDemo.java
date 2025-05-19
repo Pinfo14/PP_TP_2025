@@ -11,6 +11,7 @@ import imports.Imports;
 import league.League;
 import league.Season;
 import player.PlayerPositionManage;
+import simulation.GenerateTeams;
 import simulation.MatchSimulator;
 import team.Formation;
 import team.RandomPlayerSelector;
@@ -45,90 +46,17 @@ public class SimulationDemo {
 */      Imports importClubs = new Imports();
         IClub[] clubes = importClubs.importPlayersToClub();
 
-// criar uma classe para gerar aleatoriamente todas as equipas passando a formacao como argomento talvez
+// criar uma classe para gerar aleatoriamente todas as equipas passando a formacao como argomento talve
+// apenas cria team aleatoria pra todos os clubes menos para aquele que o user decidiu dar coach no caso dele ele decide gerar aleatoriamente uma team(11 inicial) ou criala ele msm
 
 
-        IPlayer[] porto11 = new IPlayer[11];
-        int portoIdx = 0;
         ITeam teamPorto;
         ITeam teamBenfica;
-        int benficaIdx = 0;
-        IPlayer[] benfica11 = new IPlayer[11];
-
-        PlayerPositionManage positionManager = new PlayerPositionManage();
-        IPlayerSelector playerSelector = new RandomPlayerSelector();
-
-        Formation formation433 = new Formation("4-3-3", 4, 3, 3, 0);
-        Formation formation442 = new Formation("4-4-2", 4, 4, 2, 0);
-        while ( portoIdx < 11) {
-            for (int def = 0; def < formation433.getNumDefenders(); def++) {
-                IPlayer  player = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Defender"));
-                while (veryfiPlayerInTeam(porto11, player)){
-                    player = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Defender"));
-                }
-                porto11[portoIdx++] = player;
-            }
-
-        for (int mid = 0; mid < formation433.getNumMidfielders(); mid++) {
-            IPlayer player = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Midfielder"));;
-             while (veryfiPlayerInTeam(porto11, player)){
-                 player = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Midfielder"));
-             }
-            porto11[portoIdx++] = player;
-        }
-        for (int att = 0; att < formation433.getNumAttackers(); att++) {
-            IPlayer player = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Forward"));
-            while (veryfiPlayerInTeam(porto11, player)){
-                player = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Forward"));
-            }
-            porto11[portoIdx++] = player;
-        }
-        porto11[portoIdx++] = playerSelector.selectPlayer(clubes[1], positionManager.getPositionByDescription("Goalkeeper"));
-    }
-
-            teamPorto = new Team(clubes[1]);
-            teamPorto.setFormation(formation433);
-            for (IPlayer p : porto11) {
-                teamPorto.addPlayer(p);
-            }
 
 
-
-        while (benficaIdx < 11){
-            for (int def = 0; def < formation442.getNumDefenders(); def++) {
-                IPlayer  player = playerSelector.selectPlayer(clubes[0], positionManager.getPositionByDescription("Defender"));
-                while (veryfiPlayerInTeam(benfica11, player)){
-                    player =   playerSelector.selectPlayer(clubes[0], positionManager.getPositionByDescription("Defender"));
-                }
-                benfica11[benficaIdx++] = player;
-            }
-            for (int mid = 0; mid < formation442.getNumMidfielders(); mid++) {
-
-                IPlayer  player = playerSelector.selectPlayer(clubes[0], positionManager.getPositionByDescription("Midfielder"));
-                while (veryfiPlayerInTeam(benfica11, player)){
-                    player =  playerSelector.selectPlayer(clubes[0], positionManager.getPositionByDescription("Midfielder"));
-                }
-                benfica11[benficaIdx++] = player;
-
-            }
-            for (int att = 0; att < formation442.getNumAttackers(); att++) {
-                IPlayer  player = playerSelector.selectPlayer(clubes[0], positionManager.getPositionByDescription("Forward"));
-                while (veryfiPlayerInTeam(benfica11, player)){
-                    player =  playerSelector.selectPlayer(clubes[0], positionManager.getPositionByDescription("Forward"));
-                }
-                benfica11[benficaIdx++] = player;
-
-            }
-            benfica11[benficaIdx++] = playerSelector.selectPlayer(clubes[0],positionManager.getPositionByDescription("Goalkeeper"));
-        }
-
-
-            teamBenfica = new Team(clubes[0]);
-            teamBenfica.setFormation(formation442);
-            for (IPlayer p : benfica11) {
-                teamBenfica.addPlayer(p);
-            }
-
+        GenerateTeams generateTeams=new GenerateTeams();
+        teamPorto=generateTeams.randomTeam(clubes[1]);
+        teamBenfica=generateTeams.randomTeam(clubes[0]);
 
         // 3) Cria liga e temporada e adiciona clubes à temporada
         League liga = new League("Liga Portugal");
@@ -149,6 +77,8 @@ public class SimulationDemo {
         // 5) Simula cada partida e imprime eventos
         MatchSimulator simulador = new MatchSimulator();
         IMatch[] partidas = season.getMatches();
+
+
         for (IMatch partida : partidas) {
             partida.setTeam(teamPorto);
             partida.setTeam(teamBenfica);
@@ -179,16 +109,6 @@ public class SimulationDemo {
         }
     }
 
-    /**
-     * Verifica se o jogador já está no array do 11.
-     */
-    private static boolean veryfiPlayerInTeam(IPlayer[] team, IPlayer player) {
-        for (int i = 0; i < team.length; i++) {
-            if (team[i] != null && team[i].equals(player)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 }

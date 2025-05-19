@@ -128,6 +128,7 @@ public class PlayerAttributes {
     @Override
     public String toString() {
         String s ="Atributos do jogador: \n";
+        s+="Defence:"+this.defence+"\n";
         s+="Shooting:"+this.shooting;
         s+="\nPassing:"+this.passing;
         s+="\nStamina:"+this.stamina;

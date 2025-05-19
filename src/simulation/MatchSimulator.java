@@ -10,6 +10,7 @@ import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStra
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import event.*;
 import player.PlayerPositionManage;
+import team.Team;
 
 
 public class MatchSimulator implements MatchSimulatorStrategy {
@@ -23,10 +24,13 @@ public class MatchSimulator implements MatchSimulatorStrategy {
 
     private EventFactory factory;
     private PlayerPositionManage positionManager;
+    private int probFormationHomeTeam;
+
 
     public MatchSimulator() {
         this.factory = new EventFactory();
         this.positionManager = new PlayerPositionManage();
+        this.probFormationHomeTeam=0;
     }
 
     @Override
@@ -44,8 +48,20 @@ public class MatchSimulator implements MatchSimulatorStrategy {
 
             if (Math.random() < EVENT_PROB) {
                 boolean isHome = Math.random() < HOME_OR_AWAY_PROB;
-                ITeam atacantes = isHome ? homeTeam : awayTeam;
-                ITeam defensores = isHome ? awayTeam : homeTeam;
+
+                ITeam atacantes ;
+                ITeam defensores ;
+
+                if(isHome){
+                    atacantes = homeTeam;
+                     defensores =  awayTeam;
+                    this.probFormationHomeTeam = atacantes.getFormation().getTacticalAdvantage(defensores.getFormation())/10;
+                }else {
+                     atacantes =awayTeam;
+                     defensores =homeTeam;
+                    this.probFormationHomeTeam = defensores.getFormation().getTacticalAdvantage(atacantes.getFormation())/10;
+                }
+
 
                 IPlayer autor = getPlayer(atacantes);
                 IPlayer alvo  = getPlayer(defensores);
@@ -53,9 +69,9 @@ public class MatchSimulator implements MatchSimulatorStrategy {
 
                 double tipo = Math.random();
 
-                if (tipo < PASS_EVENT_PROB) {
+                if (tipo < PASS_EVENT_PROB ) {
                     ev = factory.generatePassEvent(autor, alvo, minuto, isHome);
-                } else if (tipo > PASS_EVENT_PROB && tipo < SHOT_EVENT_PROB) {
+                } else if (tipo > PASS_EVENT_PROB + this.probFormationHomeTeam && tipo < SHOT_EVENT_PROB +this.probFormationHomeTeam) {
                     ev = factory.generateShotEvent(autor, gk, minuto, isHome);
                     if (ev instanceof GoalEvent) {
                         // adicionar golo a equipa

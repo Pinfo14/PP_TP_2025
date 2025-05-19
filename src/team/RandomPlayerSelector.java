@@ -4,6 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
+import player.PlayerPositionManage;
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -17,7 +18,11 @@ import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 public class RandomPlayerSelector implements IPlayerSelector {
     private boolean[] alreadySelected;
     private IPlayer[] lastPool;
+    private PlayerPositionManage positionManage;
 
+    public RandomPlayerSelector(){
+        this.positionManage = new PlayerPositionManage();
+    }
 
 
     @Override
@@ -67,11 +72,22 @@ public class RandomPlayerSelector implements IPlayerSelector {
         return count;
     }
 
+    /**
+     * Retrieves all players from the given array that match the specified position.
+     *
+     * @param players An array of IPlayer instances to filter.
+     * @param position The IPlayerPosition to filter players by.
+     * @return An array of IPlayer instances that match the specified position.
+     * @throws IllegalStateException If no players match the specified position.
+     */
     private IPlayer[] getIPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
         int numPlayers = countPlayersByPosition(players, position);
-        if (numPlayers == 0) {
-            throw new IllegalStateException("Nao foi encontrado um jogador para a posicao: " + position.getDescription());
+
+        if (numPlayers == 0 && position.equals(this.positionManage.getPositionByDescription("Striker")) ) {
+            position= this.positionManage.getPositionByDescription("Forward");
+            numPlayers = countPlayersByPosition(players, position);
         }
+
         IPlayer[] positionPlayers = new IPlayer[numPlayers];
         int count = 0;
         for (IPlayer player : players) {
@@ -81,6 +97,7 @@ public class RandomPlayerSelector implements IPlayerSelector {
         }
         return positionPlayers;
     }
+
 
     private void verifyClubPlayers(IClub club) {
         if (club.getPlayerCount() == 0) {
