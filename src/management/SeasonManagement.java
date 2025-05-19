@@ -5,6 +5,7 @@ import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import imports.Imports;
 import league.Season;
 import menus.ListClub;
+import menus.ListMatches;
 import menus.SeasonMenu;
 import reader.Reader;
 import util.Utils;
@@ -12,7 +13,6 @@ import util.Utils;
 public class SeasonManagement {
 
     private IClub[] clubesLoaded ;
-    private ISeason season;
 
     public SeasonManagement() {
         Imports imports = new Imports();
@@ -30,48 +30,54 @@ public class SeasonManagement {
     }
 
 
-    public void run(ISeason season) {
+    public void run(ISeason iSeason) {
         int option, optionTemp, readerTemp;
         Reader reader = new Reader();
 
+        Season season = null;
+        if(iSeason instanceof Season) {
+            season = (Season) iSeason;
+        }
+
         do {
-            // ATENÇÃO: Troque "GGGGG" pelo nome correto da competição ou deixe um TODO
-            SeasonMenu.mainSeasonMenu(season.getYear(), "GGGGG", season.getName());
-            option = reader.readInt(0, 2, "Selecione uma opção: ");
+            SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName());
+            option = reader.readInt(0, 7, "Selecione uma opção: ");
             switch (option) {
 
                 case 1:
                     do {
-                        SeasonMenu.managementSeasonMenu(season.getYear(), "GGGGG", season.getName());
-                        optionTemp = reader.readInt(0, 6, "Selecione uma opção: ");
+                        SeasonMenu.managementSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName());
+                        optionTemp = reader.readInt(0, 3, "Selecione uma opção: ");
                         switch (optionTemp) {
 
                             case 1:
                                 ListClub.listClubLoaded(clubesLoaded );
                                 readerTemp = reader.readInt(1, countClubsLoded(), "Insira o ID do Clube: ");
                                 try {
+                                    //clonar o objecto quando passamos para aqui ?
                                     season.addClub(clubesLoaded [readerTemp - 1]);
+                                    System.out.println("Clube adicionado com sucesso.");
                                 } catch (IllegalArgumentException | IllegalStateException e) {
                                     System.out.println(e.getMessage());
                                 }
                                 break;
                             case 2:
                                 try {
-                                    season.getCurrentClubs();
-
-                                    ListClub.listClubLoaded(season.getCurrentClubs());
-                                    readerTemp = reader.readInt(1, season.getNumberOfCurrentTeams(), "Insira o ID do Clube: ");
-                                    try {
-                                        season.removeClub(season.getCurrentClubs()[readerTemp - 1]);
-                                    } catch (IllegalArgumentException | IllegalStateException e) {
-                                        System.out.println(e.getMessage());
+                                    IClub[] clubes = season.getCurrentClubs();
+                                    if (clubes == null || clubes.length == 0) {
+                                        System.out.println("Nenhum clube disponível para remover.");
+                                        break;
                                     }
-                                }catch (IllegalArgumentException | IllegalStateException e) {
+                                    ListClub.listClubLoaded(clubes);
+
+                                    readerTemp = reader.readInt(1, clubes.length, "Insira o ID do Clube: ");
+                                    season.removeClub(clubes[readerTemp - 1]);
+                                    System.out.println("Clube removido com sucesso.");
+                                } catch (IllegalArgumentException | IllegalStateException | NullPointerException e) {
                                     System.out.println(e.getMessage());
                                 }
-
                                 break;
-                            default:
+                            case 3:
                                 ListClub.listClubLoaded(season.getCurrentClubs());
                                 Utils.waitEnter();
                                 break;
@@ -83,15 +89,20 @@ public class SeasonManagement {
                     System.out.println("Selecione um clube para treinar.");
                     ListClub.listClubLoaded(season.getCurrentClubs());
                     optionTemp = reader.readInt(1,season.getNumberOfCurrentTeams(), "Insira o ID do Clube para treinar: ");
-
                     season.setCoachingClubIndex(optionTemp-1);
-                    //Criar metodo na seson para escolher o
-
-
                     break;
 
+                case 3:
+                    break;
+                case 4:
+                    ListMatches.listMatches(season.getMatches());
+                    Utils.waitEnter();
+                    break;
+
+
+
                 default:
-                    // TODO: Implementar lógica para importar dados salvos, se necessário
+                    // TODO: Implementar lógica para salvar dados, se necessário
                     break;
             }
         } while (option != 0);

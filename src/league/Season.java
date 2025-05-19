@@ -46,6 +46,7 @@ public class Season implements ISeason {
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
         this.currentRound = 0;
+        this.coachingClubIndex = -1;
     }
 
     @Override
@@ -62,6 +63,9 @@ public class Season implements ISeason {
     }
 
     public String getNameCoachingClub() {
+        if (coachingClubIndex == -1) {
+            return "";
+        }
         return clubs[coachingClubIndex].getName();
     }
 
@@ -111,7 +115,7 @@ public class Season implements ISeason {
         }
 
         clubs[--numClubs] = null;
-
+        coachingClubIndex = -1;
         generateSchedule();
 
         return true;
@@ -125,23 +129,35 @@ public class Season implements ISeason {
     }
 
     private int calculateNumberOfMatches() {
-
-        return numClubs * (numClubs - 1);
-
+        int totalClubs = numClubs;
+        if (totalClubs % 2 != 0) {
+            totalClubs++;        }
+        return totalClubs * (totalClubs - 1);
     }
 
     @Override
     public IMatch[] getMatches() {
-        IMatch[] matches = new IMatch[calculateNumberOfMatches()];
+        int numMatches = calculateNumberOfMatches();
+        IMatch[] matches = new IMatch[numMatches];
+
+        System.out.println("Matches: " + numMatches);
 
         IMatch[] scheduledMatches = null;
+
         try {
             scheduledMatches = schedule.getAllMatches();
         } catch (IllegalStateException e) {
-            System.err.println("No matches found.");
+            System.out.println("No matches found.");
+            return matches;
         }
 
-        System.arraycopy(scheduledMatches, 0, matches, 0, scheduledMatches.length);
+        int newLength;
+        if (scheduledMatches.length < matches.length) {
+            newLength = scheduledMatches.length;
+        } else {
+            newLength = matches.length;
+        }
+        System.arraycopy(scheduledMatches, 0, matches, 0, newLength);
 
         return matches;
 
@@ -150,10 +166,7 @@ public class Season implements ISeason {
     @Override
     public IMatch[] getMatches(int i) {
 
-
-
         IMatch[] scheduledMatches = new IMatch[calculateNumberOfMatches()];
-
 
         try {
             scheduledMatches = schedule.getMatchesForRound(i);

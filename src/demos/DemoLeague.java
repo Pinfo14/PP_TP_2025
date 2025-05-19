@@ -6,6 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import league.League;
 import league.Season;
+import menus.ListMatches;
 import team.Club;
 
 public class DemoLeague {
@@ -42,42 +43,13 @@ public class DemoLeague {
             }
         }
 
-
-        try {
-            IStanding[] standing = season.getLeagueStandings();
-
-            if (standing == null || standing.length == 0) {
-                System.out.println("Nenhuma classficacao encontrada.");
-            } else {
-                for (IStanding  classificacao : standing) {
-                    if(classificacao != null) {
-                        System.out.println(classificacao.toString());
-                    }
-                    // aqui dificilmente throwará IllegalArgumentException / IllegalStateException,
-                    // então não precisa de try por partida, a menos que match.toString()
-                    // também possa lançar algo.
-
-                }
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Round é inválido: " + e.getMessage());
-        } catch (IllegalStateException e) {
-            System.out.println("Não há partidas: season não inicializada ou rodada não foi definida.");
-        }
-
-        //;
         try {
             IMatch[] matches = season.getMatches();
 
             if (matches == null || matches.length == 0) {
                 System.out.println("Nenhuma partida encontrada para essa rodada.");
             } else {
-                for (IMatch match : matches) {
-                    // aqui dificilmente throwará IllegalArgumentException / IllegalStateException,
-                    // então não precisa de try por partida, a menos que match.toString()
-                    // também possa lançar algo.
-                    System.out.println(match.getWinner());
-                }
+                ListMatches.listMatches(matches);
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -85,11 +57,20 @@ public class DemoLeague {
             System.out.println("Não há partidas: season não inicializada ou rodada não foi definida.");
         }
 
+        season.removeClub(club2);
 
-        IClub[] club = season.getCurrentClubs();
+        try {
+            IMatch[] matches = season.getMatches();
 
-        for (IClub clubMatch : club) {
-            System.out.println(clubMatch);
+            if (matches == null || matches.length == 0) {
+                System.out.println("Nenhuma partida encontrada para essa rodada.");
+            } else {
+                ListMatches.listMatches(matches);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        } catch (IllegalStateException e) {
+            System.out.println("Não há partidas: season não inicializada ou rodada não foi definida.");
         }
 
 

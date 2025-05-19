@@ -15,9 +15,9 @@ public class SeasonMenu {
         System.out.println("║-------------------------------------------------------------------------║");
         System.out.println("║   3 - Proxima Jornada                                                   ║");
         System.out.println("║   4 - Listar Jogos                                                      ║");
-        System.out.println("║   4 - Listar Resultados                                                 ║");
-        System.out.println("║   5 - Classificacao                                                     ║");
-        System.out.println("║   6 - Simular o restante epoca                                          ║");
+        System.out.println("║   5 - Listar Resultados                                                 ║");
+        System.out.println("║   6 - Classificacao                                                     ║");
+        System.out.println("║   7 - Simular o restante epoca                                          ║");
         System.out.println("║                                                                         ║");
         System.out.println("║   0 - Sair                                                              ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════════════╝");
