@@ -44,6 +44,7 @@ public class LeagueManagement {
     private void initialMessage() {
         StringBuilder sb = new StringBuilder();
 
+        sb.append("\n");
         sb.append("Bem-vindo ao PP Soccer Manager. Para iniciar um novo jogo tem de indicar o ano em que\n");
         sb.append("pretende começar. Também tem de colocar o nome da sua Liga.\n");
         sb.append("Após indicar o nome e o ano, será redirecionado para a página de gestão da sua liga.\n");

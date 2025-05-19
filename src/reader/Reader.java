@@ -12,11 +12,15 @@ public class Reader
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(System.in)
             );
-            int numero;
+            int numero = -1;
             do{
                 System.out.print(message);
                 String linha = reader.readLine();
-                numero = Integer.parseInt(linha);
+                try{
+                    numero = Integer.parseInt(linha);
+                }catch (NumberFormatException e){
+                    System.out.println("Por vafor introduza um numero");
+                }
                 if(numero < minOption || numero > maxOption){
                     System.out.println("Por favor digite um numero valido.");
                 }

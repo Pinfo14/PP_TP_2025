@@ -3,9 +3,11 @@ package management;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import imports.Imports;
+import league.Season;
 import menus.ListClub;
 import menus.SeasonMenu;
 import reader.Reader;
+import util.Utils;
 
 public class SeasonManagement {
 
@@ -29,7 +31,7 @@ public class SeasonManagement {
 
 
     public void run(ISeason season) {
-        int option;
+        int option, optionTemp, readerTemp;
         Reader reader = new Reader();
 
         do {
@@ -37,9 +39,8 @@ public class SeasonManagement {
             SeasonMenu.mainSeasonMenu(season.getYear(), "GGGGG", season.getName());
             option = reader.readInt(0, 2, "Selecione uma opção: ");
             switch (option) {
-                case 1:
-                    int optionTemp, readerTemp;
 
+                case 1:
                     do {
                         SeasonMenu.managementSeasonMenu(season.getYear(), "GGGGG", season.getName());
                         optionTemp = reader.readInt(0, 6, "Selecione uma opção: ");
@@ -47,7 +48,7 @@ public class SeasonManagement {
 
                             case 1:
                                 ListClub.listClubLoaded(clubesLoaded );
-                                readerTemp = reader.readInt(1, countClubsLoded(), "\nInsira o ID do Clube: ");
+                                readerTemp = reader.readInt(1, countClubsLoded(), "Insira o ID do Clube: ");
                                 try {
                                     season.addClub(clubesLoaded [readerTemp - 1]);
                                 } catch (IllegalArgumentException | IllegalStateException e) {
@@ -59,7 +60,7 @@ public class SeasonManagement {
                                     season.getCurrentClubs();
 
                                     ListClub.listClubLoaded(season.getCurrentClubs());
-                                    readerTemp = reader.readInt(1, season.getNumberOfCurrentTeams(), "\nInsira o ID do Clube: ");
+                                    readerTemp = reader.readInt(1, season.getNumberOfCurrentTeams(), "Insira o ID do Clube: ");
                                     try {
                                         season.removeClub(season.getCurrentClubs()[readerTemp - 1]);
                                     } catch (IllegalArgumentException | IllegalStateException e) {
@@ -72,13 +73,21 @@ public class SeasonManagement {
                                 break;
                             default:
                                 ListClub.listClubLoaded(season.getCurrentClubs());
+                                Utils.waitEnter();
                                 break;
                         }
                     } while (optionTemp != 0);
                     break;
 
                 case 2:
-                    // TODO: Implementar lógica para selecionar o clube para treinar
+                    System.out.println("Selecione um clube para treinar.");
+                    ListClub.listClubLoaded(season.getCurrentClubs());
+                    optionTemp = reader.readInt(1,season.getNumberOfCurrentTeams(), "Insira o ID do Clube para treinar: ");
+
+                    season.setCoachingClubIndex(optionTemp-1);
+                    //Criar metodo na seson para escolher o
+
+
                     break;
 
                 default:

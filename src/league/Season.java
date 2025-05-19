@@ -25,6 +25,7 @@ public class Season implements ISeason {
     private int year;
     private IClub[] clubs;
     private int numClubs;
+    private int coachingClubIndex;
     private IStanding[] standings; //mesmo index que os clubs
     private ISchedule schedule;
     private int pointsPerLoss;
@@ -50,6 +51,18 @@ public class Season implements ISeason {
     @Override
     public int getYear() {
         return year;
+    }
+
+    public void setCoachingClubIndex(int coachingClubIndex) {
+        this.coachingClubIndex = coachingClubIndex;
+    }
+
+    public int getCoachingClubIndex() {
+        return coachingClubIndex;
+    }
+
+    public String getNameCoachingClub() {
+        return clubs[coachingClubIndex].getName();
     }
 
     @Override
@@ -244,7 +257,7 @@ public class Season implements ISeason {
 
     @Override
     public int getNumberOfCurrentTeams() {
-        return 0;
+        return numClubs;
     }
 
     @Override
