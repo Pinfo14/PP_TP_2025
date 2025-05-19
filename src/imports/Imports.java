@@ -144,6 +144,36 @@ public class Imports {
         }
     }
 
+    private File[] sortFiles(File[] files) {
+
+        if (files == null || files.length == 0) {
+            throw new IllegalArgumentException("Files esta vazio");
+        }
+
+        //  Copia para não alterar o array original
+        File[] sorted = new File[files.length];
+        for (int i = 0; i < files.length; i++) {
+            sorted[i] = files[i];
+        }
+
+        //  Selection sort por nome
+        for (int i = 0; i < sorted.length - 1; i++) {
+            int minIndex = i;
+            // procura o menor nome entre os restos
+            for (int j = i + 1; j < sorted.length; j++) {
+                if (sorted[j].getName().compareTo(sorted[minIndex].getName()) < 0) {
+                    minIndex = j;
+                }
+            }
+            // troca posição i pelo menor encontrado
+            File temp = sorted[i];
+            sorted[i] = sorted[minIndex];
+            sorted[minIndex] = temp;
+        }
+
+        return sorted;
+    }
+
 
 
     public IClub[] importPlayersToClub(){
@@ -157,7 +187,9 @@ public class Imports {
 
         // Using listFiles method we get all the files of a directory
         // return type of listFiles is array
-        File[] files = directory.listFiles();
+        File[] unsortedFiles = directory.listFiles();
+
+        File[] files = sortFiles(unsortedFiles);
 
 
         for (IClub c : club) {
