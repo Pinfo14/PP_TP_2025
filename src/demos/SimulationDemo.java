@@ -4,9 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
-import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import imports.Imports;
 import league.League;
@@ -18,30 +16,7 @@ import simulation.MatchSimulator;
 public class SimulationDemo {
 
     public static void main(String[] args) {
-        // 1) Importa clubes e jogadores
-     /*   Imports importClubs = new Imports();
-        Club[] clubes = importClubs.importClubs();  // ex.: [Benfica, Porto, …]
 
-        IPlayer[] benficaPlayers = importClubs.importPlayers("Benfica.json");
-        IPlayer[] portoPlayers = importClubs.importPlayers("Porto.json");
-
-        // 2) Adiciona jogadores aos clubes correspondentes
-        //    assumindo que clube[0] é Benfica e clube[1] é Porto
-        for (IPlayer p : benficaPlayers) {
-            try {
-                clubes[0].addPlayer(p);
-            } catch (Exception e) {
-                System.out.println("Benfica: " + e.getMessage());
-            }
-        }
-        for (IPlayer p : portoPlayers) {
-            try {
-                clubes[1].addPlayer(p);
-            } catch (Exception e) {
-                System.out.println("Porto: " + e.getMessage());
-            }
-        }
-*/
         Imports importClubs = new Imports();
         IClub[] clubes = importClubs.importPlayersToClub();
 
@@ -68,7 +43,7 @@ public class SimulationDemo {
             }
         }
 
-        // 4) Gera calendário (round-robin)
+        // 4) Gera calendário
         try {
             season.generateSchedule();
         } catch (Exception e) {
@@ -100,9 +75,7 @@ public class SimulationDemo {
 // Agora simula e imprime eventos
         System.out.println("=== Eventos dos Jogos Simulados ===");
         for (IMatch partida : partidas) {
-            System.out.printf("Jogo: %s x %s%n",
-                    partida.getHomeTeam().getClub().getName(),
-                    partida.getAwayTeam().getClub().getName()
+            System.out.print("Jogo: " + partida.getHomeTeam().getClub().getName()+"vs"+ partida.getAwayTeam().getClub().getName()
             );
 
             simulador.simulate(partida);

@@ -13,13 +13,13 @@ import team.RandomPlayerSelector;
 import team.Team;
 
 public class GenerateTeams {
-    private Imports imports;
+
     private IPlayerSelector playerSelector;
     private PlayerPositionManage positionManage;
     private DefaultFormations formations;
 
     public GenerateTeams() {
-        this.imports = new Imports();
+
         this.playerSelector = new RandomPlayerSelector();
         this.positionManage = new PlayerPositionManage();
         this.formations = new DefaultFormations();

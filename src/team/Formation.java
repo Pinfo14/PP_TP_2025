@@ -22,11 +22,21 @@ public class Formation implements IFormation {
     private int numStrikers;
 
     public Formation(String name, int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
+        if (!isValidFormation(numDefenders, numMidfielders, numAttackers, numStrikers)) {
+            throw new IllegalArgumentException("Invalid formation");
+        }
         this.name = name;
         this.numDefenders = numDefenders;
         this.numMidfielders = numMidfielders;
         this.numAttackers = numAttackers;
         this.numStrikers = numStrikers;
+    }
+
+    private boolean isValidFormation(int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
+        if(numAttackers+numDefenders+numMidfielders+numStrikers !=10 ){
+            return false;
+        }
+        return true;
     }
 
     @Override

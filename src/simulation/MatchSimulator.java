@@ -20,6 +20,8 @@ public class MatchSimulator implements MatchSimulatorStrategy {
     private static final double PASS_EVENT_PROB = 0.5;
     private static final double SHOT_EVENT_PROB = 0.8;
 
+    private int homeGoals;
+    private int awayGoals;
 
 
     private EventFactory factory;
@@ -31,6 +33,8 @@ public class MatchSimulator implements MatchSimulatorStrategy {
         this.factory = new EventFactory();
         this.positionManager = new PlayerPositionManage();
         this.probFormationHomeTeam=0;
+        this.homeGoals=0;
+        this.awayGoals=0;
     }
 
     @Override
@@ -74,6 +78,12 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                 } else if (tipo > PASS_EVENT_PROB + this.probFormationHomeTeam && tipo < SHOT_EVENT_PROB +this.probFormationHomeTeam) {
                     ev = factory.generateShotEvent(autor, gk, minuto, isHome);
                     if (ev instanceof GoalEvent) {
+                        if (isHome) {
+                            this.homeGoals++;
+                        }
+                        else {
+                            this.awayGoals++;
+                        }
                         // adicionar golo a equipa
                     }
                 } else {
@@ -88,7 +98,14 @@ public class MatchSimulator implements MatchSimulatorStrategy {
         }
     }
 
+    
 
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+    public int getAwayGoals() {
+        return awayGoals;
+    }
     /**
      * Escolhe um jogador aleatoriamente do array devolvido por getPlayers() de uma posicao especifica.
      */

@@ -101,10 +101,24 @@ public class Team implements ITeam {
         if (((Formation) this.formation).getNumMidfielders() == this.midfield && iPlayerPosition.getDescription().equals("Midfielder")) {
             return false;
         }
+
         if (((Formation) this.formation).getNumStrikers() == this.striker && iPlayerPosition.getDescription().equals("Striker")) {
             return false;
         }
+
         return true;
+    }
+
+    private int checkStriker(){
+
+        int count =0;
+
+        for(IPlayer player : this.club.getPlayers()){
+            if(player.getPosition().getDescription().equals("Striker")){
+               count ++;
+            }
+        }
+        return count;
     }
 
     @Override
@@ -150,6 +164,7 @@ public class Team implements ITeam {
 
     private void incrementPosition(IPlayer iPlayer) {
         String position = iPlayer.getPosition().getDescription();
+
 
         switch (position) {
             case "Goalkeeper":
