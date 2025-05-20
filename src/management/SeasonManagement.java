@@ -6,6 +6,7 @@ import imports.Imports;
 import league.Season;
 import menus.ListClub;
 import menus.ListMatches;
+import menus.ListStanding;
 import menus.SeasonMenu;
 import reader.Reader;
 import util.Utils;
@@ -97,7 +98,12 @@ public class SeasonManagement {
                 case 4:
                     ListMatches.listMatches(season.getMatches());
                     Utils.waitEnter();
+                case 5:
                     break;
+                case 6:
+                    ListStanding.list(season.getLeagueStandings());
+                    Utils.waitEnter();
+
 
 
 
@@ -108,13 +114,4 @@ public class SeasonManagement {
         } while (option != 0);
     }
 
-    public static void limparConsole() {
-        try {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-        } catch (Exception e) {
-            // Se não funcionar, imprime várias linhas
-            for (int i = 0; i < 50; ++i) System.out.println();
-        }
-    }
 }

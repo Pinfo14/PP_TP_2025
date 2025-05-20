@@ -221,11 +221,10 @@ public class Season implements ISeason {
     public IStanding[] getLeagueStandings() {
         IStanding[] standingsTemp = new Standing[standings.length];
 
-        for(int i = 0; i < standingsTemp.length; i++) {
-            standingsTemp[i] = standings[i];
-        }
+        System.arraycopy(standings, 0, standingsTemp, 0, standings.length);
 
         return standingsTemp;
+
     }
 
     @Override
