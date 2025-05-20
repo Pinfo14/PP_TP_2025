@@ -25,6 +25,7 @@ public class Season implements ISeason {
     private int year;
     private IClub[] clubs;
     private int numClubs;
+    private int coachingClubIndex;
     private IStanding[] standings; //mesmo index que os clubs
     private ISchedule schedule;
     private int pointsPerLoss;
@@ -36,7 +37,7 @@ public class Season implements ISeason {
 
     public Season(String leagueName, int year) {
         this.maxClubs = 18;
-        this.name = String.format("%s %d", leagueName, year);
+        this.name = leagueName;
         this.year = year;
         this.clubs = new Club[maxClubs];
         this.standings = new IStanding[maxClubs];
@@ -45,11 +46,27 @@ public class Season implements ISeason {
         this.pointsPerWin = 3;
         this.pointsPerDraw = 1;
         this.currentRound = 0;
+        this.coachingClubIndex = -1;
     }
 
     @Override
     public int getYear() {
         return year;
+    }
+
+    public void setCoachingClubIndex(int coachingClubIndex) {
+        this.coachingClubIndex = coachingClubIndex;
+    }
+
+    public int getCoachingClubIndex() {
+        return coachingClubIndex;
+    }
+
+    public String getNameCoachingClub() {
+        if (coachingClubIndex == -1) {
+            return "";
+        }
+        return clubs[coachingClubIndex].getName();
     }
 
     @Override
@@ -98,7 +115,7 @@ public class Season implements ISeason {
         }
 
         clubs[--numClubs] = null;
-
+        coachingClubIndex = -1;
         generateSchedule();
 
         return true;
@@ -112,23 +129,35 @@ public class Season implements ISeason {
     }
 
     private int calculateNumberOfMatches() {
-
-        return numClubs * (numClubs - 1);
-
+        int totalClubs = numClubs;
+        if (totalClubs % 2 != 0) {
+            totalClubs++;        }
+        return totalClubs * (totalClubs - 1);
     }
 
     @Override
     public IMatch[] getMatches() {
-        IMatch[] matches = new IMatch[calculateNumberOfMatches()];
+        int numMatches = calculateNumberOfMatches();
+        IMatch[] matches = new IMatch[numMatches];
+
+        System.out.println("Matches: " + numMatches);
 
         IMatch[] scheduledMatches = null;
+
         try {
             scheduledMatches = schedule.getAllMatches();
         } catch (IllegalStateException e) {
-            System.err.println("No matches found.");
+            System.out.println("No matches found.");
+            return matches;
         }
 
-        System.arraycopy(scheduledMatches, 0, matches, 0, scheduledMatches.length);
+        int newLength;
+        if (scheduledMatches.length < matches.length) {
+            newLength = scheduledMatches.length;
+        } else {
+            newLength = matches.length;
+        }
+        System.arraycopy(scheduledMatches, 0, matches, 0, newLength);
 
         return matches;
 
@@ -137,10 +166,7 @@ public class Season implements ISeason {
     @Override
     public IMatch[] getMatches(int i) {
 
-
-
         IMatch[] scheduledMatches = new IMatch[calculateNumberOfMatches()];
-
 
         try {
             scheduledMatches = schedule.getMatchesForRound(i);
@@ -244,7 +270,7 @@ public class Season implements ISeason {
 
     @Override
     public int getNumberOfCurrentTeams() {
-        return 0;
+        return numClubs;
     }
 
     @Override

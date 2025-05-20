@@ -87,6 +87,9 @@ public class SimulationDemo {
                     System.out.println("Evento: " + ev);
                 }
             }
+
+            partida.isPlayed();
+
             System.out.println("Vencedor: " + partida.getWinner());
             System.out.println("-----------------------------------");
         }

@@ -1,8 +1,9 @@
-import menus.MainMenu;
+import menus.StartMenu;
 
 public class Main {
     public static void main(String[] args) {
-        MainMenu mainMenu = new MainMenu();
-        mainMenu.menu();
+
+        StartMenu startMenu = new StartMenu();
+        startMenu.menu();
     }
 }
