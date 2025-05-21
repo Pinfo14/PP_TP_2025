@@ -14,8 +14,6 @@ public class ListMatches {
             return;
         }
 
-
-
         System.out.println("\n--------+--------------------------------+--------------------------------");
         System.out.println(String.format("%-7s | %-30s | %-30s","JORNADA", "VISITADO", "VISITANTE"));
         System.out.println("--------+--------------------------------+--------------------------------");
@@ -42,7 +40,6 @@ public class ListMatches {
             lastRound = round;
 
             System.out.println(String.format("%-7s | %-30s | %-30s", mt.getRound(), home, away));
-
         }
     }
 }

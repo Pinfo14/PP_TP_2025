@@ -21,11 +21,11 @@ public class Formation implements IFormation {
     private int numAttackers;
     private int numStrikers;
 
-    public Formation(String name, int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
+    public Formation(int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
         if (!isValidFormation(numDefenders, numMidfielders, numAttackers, numStrikers)) {
             throw new IllegalArgumentException("Invalid formation");
         }
-        this.name = name;
+        this.name = numDefenders + "-" + numMidfielders + "-" + numAttackers + "-" + numStrikers;
         this.numDefenders = numDefenders;
         this.numMidfielders = numMidfielders;
         this.numAttackers = numAttackers;
@@ -87,7 +87,21 @@ public class Formation implements IFormation {
                 this.numMidfielders == form.numMidfielders &&
                 this.numStrikers == form.numStrikers &&
                 this.name.equals(form.name);
-  }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder str = new StringBuilder();
+        str.append(this.numDefenders);
+        str.append("-");
+        str.append(this.numMidfielders);
+        str.append("-");
+        str.append(this.numAttackers);
+        str.append("-");
+        str.append(this.numStrikers);
+
+        return str.toString();
+    }
 
 
 }

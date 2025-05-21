@@ -188,7 +188,6 @@ public class Match implements IMatch {
         sb.append(homeClub.getName());
         sb.append(" vs ");
         sb.append(awayClub.getName());
-        sb.append(" valida? :").append(isValid());
 
         return sb.toString();
 

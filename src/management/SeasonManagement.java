@@ -41,13 +41,13 @@ public class SeasonManagement {
         }
 
         do {
-            SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName());
+            SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName(), season.getCurrentRound());
             option = reader.readInt(0, 7, "Selecione uma opção: ");
             switch (option) {
 
                 case 1:
                     do {
-                        SeasonMenu.managementSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName());
+                        SeasonMenu.managementSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName(), season.getCurrentRound());
                         optionTemp = reader.readInt(0, 3, "Selecione uma opção: ");
                         switch (optionTemp) {
 
@@ -87,13 +87,26 @@ public class SeasonManagement {
                     break;
 
                 case 2:
-                    System.out.println("Selecione um clube para treinar.");
+                    IClub[] clube = season.getCurrentClubs();
+                    if (clube == null || clube.length == 0) {
+                        System.out.println("Não existem clubes para treinar.");
+                        break;
+                    }
                     ListClub.listClubLoaded(season.getCurrentClubs());
+                    System.out.println("Selecione um clube para treinar.");
                     optionTemp = reader.readInt(1,season.getNumberOfCurrentTeams(), "Insira o ID do Clube para treinar: ");
                     season.setCoachingClubIndex(optionTemp-1);
                     break;
 
                 case 3:
+                    if(season.getCoachingClubIndex() != -1 && season.getNumberOfCurrentTeams() > 0) {
+                        RoundManagement roundManagement = new RoundManagement();
+                        System.out.println(season.getCurrentRound());
+                        roundManagement.run(season);
+
+                    }else{
+                        System.out.println("Selecione um clube para treinar.");
+                    }
                     break;
                 case 4:
                     ListMatches.listMatches(season.getMatches());

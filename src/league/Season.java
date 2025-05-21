@@ -87,7 +87,7 @@ public class Season implements ISeason {
         standings[numClubs] = new Standing(iClub);
         clubs[numClubs] = iClub;
         numClubs++;
-
+        currentRound = 1;
         generateSchedule();
 
         return true;
@@ -106,6 +106,10 @@ public class Season implements ISeason {
             throw new IllegalStateException("Club does not exist in the league.");
         }
 
+        if(index == coachingClubIndex) {
+            coachingClubIndex = -1;
+        }
+
         for(int i = index; i < numClubs - 1; i++) {
             clubs[i] = clubs[i + 1];
         }
@@ -115,7 +119,7 @@ public class Season implements ISeason {
         }
 
         clubs[--numClubs] = null;
-        coachingClubIndex = -1;
+        currentRound = 1;
         generateSchedule();
 
         return true;
@@ -165,6 +169,10 @@ public class Season implements ISeason {
 
     @Override
     public IMatch[] getMatches(int i) {
+
+        if(i < 0 || i > schedule.getNumberOfRounds()) {
+            throw new IllegalArgumentException("Jornada Inexistente");
+        }
 
         IMatch[] scheduledMatches = new IMatch[calculateNumberOfMatches()];
 

@@ -2,9 +2,9 @@ package menus;
 
 public class SeasonMenu {
 
-    public static void mainSeasonMenu(int year, String club, String name) {
+    public static void mainSeasonMenu(int year, String club, String name, int round) {
 
-        HeaderMenu.print(year, 1, club, name);
+        HeaderMenu.print(year,round, club, name);
 
         System.out.println("╔═════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                                                         ║");
@@ -22,9 +22,9 @@ public class SeasonMenu {
     }
 
 
-    public static void managementSeasonMenu(int year, String club, String name) {
+    public static void managementSeasonMenu(int year, String club, String name, int round) {
 
-        HeaderMenu.print(year, 1, club, name); // Mostra o cabeçalho no formato caixa
+        HeaderMenu.print(year, round, club, name); // Mostra o cabeçalho no formato caixa
 
         System.out.println("╔═════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                                                         ║");

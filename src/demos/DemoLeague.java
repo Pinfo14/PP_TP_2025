@@ -43,6 +43,11 @@ public class DemoLeague {
             }
         }
 
+        IMatch[] ma = season.getMatches(5);
+    for(IMatch m : ma) {
+        System.out.println(m.toString());
+    }
+
 
         ListStanding.list(season.getLeagueStandings());
 
