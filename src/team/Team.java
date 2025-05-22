@@ -33,8 +33,9 @@ public class Team implements ITeam {
     private boolean goalkeeper;
 
 
-    public Team(IClub club) {
+    public Team(IClub club, IFormation formation) {
         this.club = club;
+        this.formation = formation;
         this.squad = new Player[MAX_PLAYERS];
         this.playerCount = 0;
     }
@@ -73,8 +74,6 @@ public class Team implements ITeam {
 
     }
 
-
-
     @Override
     public int getPositionCount(IPlayerPosition iPlayerPosition) {
         int count = 0;
@@ -102,11 +101,7 @@ public class Team implements ITeam {
             return false;
         }
 
-        if (((Formation) this.formation).getNumStrikers() == this.striker && iPlayerPosition.getDescription().equals("Striker")) {
-            return false;
-        }
-
-        return true;
+       return true;
     }
 
     private int checkStriker(){

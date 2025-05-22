@@ -24,9 +24,9 @@ public class DefaultFormations {
     }
 
     private void setDefaults() {
-        this.formations[0] = new Formation(4, 3, 2,1);
-        this.formations[1] = new Formation(4, 3, 3,0);
-        this.formations[2] = new Formation( 4, 4, 2,0);
+        this.formations[0] = new Formation(4, 3, 2);
+        this.formations[1] = new Formation(4, 3, 3);
+        this.formations[2] = new Formation( 4, 4, 2);
         this.formationCount=3;
     }
 

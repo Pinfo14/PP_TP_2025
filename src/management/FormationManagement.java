@@ -13,10 +13,14 @@ public class FormationManagement {
 
     public FormationManagement() {
         formations = new Formation[INITIAL_FORMATIONS];
-        this.formations[0] = new Formation( 4, 3, 2,1);
-        this.formations[1] = new Formation(4, 3, 3,0);
-        this.formations[2] = new Formation(4, 4, 2,0);
+        this.formations[0] = new Formation( 4, 3, 2);
+        this.formations[1] = new Formation(4, 3, 3);
+        this.formations[2] = new Formation(4, 4, 2);
         this.countFormations=3;
+    }
+
+    public IFormation getFormation(int index) {
+        return formations[index];
     }
 
     private void increaseFormationArray() {
@@ -26,8 +30,8 @@ public class FormationManagement {
         formations = formartionsTemp;
     }
 
-    public void addFormation(int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
-        formations[countFormations] = new Formation(numDefenders, numMidfielders, numAttackers, numStrikers);
+    public void addFormation(int numDefenders, int numMidfielders, int numAttackers) {
+        formations[countFormations] = new Formation(numDefenders, numMidfielders, numAttackers);
         countFormations++;
     }
 

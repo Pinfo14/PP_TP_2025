@@ -69,11 +69,11 @@ public class TeamDemo {
             System.out.println(e.getMessage());
         }
 
-        IFormation formation4321 = new Formation(4, 3, 2,1);
+        IFormation formation4321 = new Formation(4, 3, 2);
 
         System.out.println("\n\n TEAM \n\n");
         System.out.println(formation4321.getDisplayName());
-        ITeam team = new Team(club[0]);
+        ITeam team = new Team(club[0], formation4321);
         team.setFormation(formation4321);
 
 

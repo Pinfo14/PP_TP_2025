@@ -26,9 +26,8 @@ public class GenerateTeams {
     }
 
     public ITeam randomTeam(IClub club) {
-        ITeam team = new Team(club);
         Formation form = selectRandomForm();
-        team.setFormation(form);
+        ITeam team = new Team(club,form);
 
         IPlayer[] players= this.fullTeam(form,club);
 
@@ -83,6 +82,7 @@ public class GenerateTeams {
         IPlayer[] defenders = generatePlayersByPos(formation.getNumDefenders(), this.positionManage.getPositionByDescription("Defender"),club);
         IPlayer[] midfielders = generatePlayersByPos(formation.getNumMidfielders(), this.positionManage.getPositionByDescription("Midfielder"),club);
         IPlayer[] attackers = generatePlayersByPos(formation.getNumAttackers(), this.positionManage.getPositionByDescription("Forward"),club);
+        /*
         if (formation.getNumStrikers()>0){
             IPlayer[] strikers = generatePlayersByPos(formation.getNumStrikers(), this.positionManage.getPositionByDescription("Striker"),club);
 
@@ -90,7 +90,7 @@ public class GenerateTeams {
                 players[idx++] = p;
             }
         }
-
+        */
         for (IPlayer p : defenders) {
             players[idx++] = p;
         }

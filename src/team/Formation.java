@@ -19,21 +19,19 @@ public class Formation implements IFormation {
     private int numDefenders;
     private int numMidfielders;
     private int numAttackers;
-    private int numStrikers;
 
-    public Formation(int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
-        if (!isValidFormation(numDefenders, numMidfielders, numAttackers, numStrikers)) {
+    public Formation(int numDefenders, int numMidfielders, int numAttackers) {
+        if (!isValidFormation(numDefenders, numMidfielders, numAttackers)) {
             throw new IllegalArgumentException("Invalid formation");
         }
-        this.name = numDefenders + "-" + numMidfielders + "-" + numAttackers + "-" + numStrikers;
+        this.name = numDefenders + "-" + numMidfielders + "-" + numAttackers;
         this.numDefenders = numDefenders;
         this.numMidfielders = numMidfielders;
         this.numAttackers = numAttackers;
-        this.numStrikers = numStrikers;
     }
 
-    private boolean isValidFormation(int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
-        if(numAttackers+numDefenders+numMidfielders+numStrikers !=10 ){
+    private boolean isValidFormation(int numDefenders, int numMidfielders, int numAttackers) {
+        if(numAttackers+numDefenders+numMidfielders !=10 ){
             return false;
         }
         return true;
@@ -71,9 +69,6 @@ public class Formation implements IFormation {
     public int getNumMidfielders() {
         return this.numMidfielders;
     }
-    public int getNumStrikers() {
-        return this.numStrikers;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -85,7 +80,6 @@ public class Formation implements IFormation {
         return this.numAttackers == form.numAttackers &&
                 this.numDefenders == form.numDefenders &&
                 this.numMidfielders == form.numMidfielders &&
-                this.numStrikers == form.numStrikers &&
                 this.name.equals(form.name);
     }
 
@@ -98,7 +92,6 @@ public class Formation implements IFormation {
         str.append("-");
         str.append(this.numAttackers);
         str.append("-");
-        str.append(this.numStrikers);
 
         return str.toString();
     }
