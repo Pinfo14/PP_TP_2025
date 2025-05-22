@@ -44,11 +44,11 @@ public class RoundManagement {
 
         for(IMatch match : matches) {
             if(match.getAwayClub().equals(coachingClub)) {
-                match.setTeam();
+             //   match.setTeam();
             }
         }
 
-
+return null;
 
     }
 

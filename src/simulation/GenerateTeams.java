@@ -44,19 +44,19 @@ public class GenerateTeams {
 
     private Formation selectRandomForm() {
         Formation[] formations = this.formations.getFormations();
-        return formations[(int) (Math.random() * formations.length)];
+        return formations[(int) (Math.random() * formations.length)];//talvez mandar uma copia;
     }
 
     private IPlayer generateGK(IClub club) {
         return this.playerSelector.selectPlayer(club, this.positionManage.getPositionByDescription("Goalkeeper"));
     }
-
+// talvez alterar para adicionar direto a team
     private IPlayer[] generatePlayersByPos(int num, IPlayerPosition position, IClub club) {
 
         IPlayer[] players = new IPlayer[num];
         int idx = 0;
 
-        for (int def = 0; def < num; def++) {
+        for (int pos = 0; pos < num; pos++) {
             IPlayer player = playerSelector.selectPlayer(club, position);
             while (veryfiPlayerInTeam(players, player)) {
                 player = playerSelector.selectPlayer(club, position);
@@ -85,7 +85,9 @@ public class GenerateTeams {
         IPlayer[] attackers = generatePlayersByPos(formation.getNumAttackers(), this.positionManage.getPositionByDescription("Forward"),club);
         if (formation.getNumStrikers()>0){
             IPlayer[] strikers = generatePlayersByPos(formation.getNumStrikers(), this.positionManage.getPositionByDescription("Striker"),club);
-
+                if (strikers.length == 0){
+                    strikers = generatePlayersByPos(formation.getNumStrikers(), this.positionManage.getPositionByDescription("Forward"),club);
+                }
             for (IPlayer p : strikers) {
                 players[idx++] = p;
             }
