@@ -89,6 +89,9 @@ public class Formation implements IFormation {
                 this.name.equals(form.name);
     }
 
+
+
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();

@@ -17,7 +17,7 @@ import java.time.LocalDate;
  * Número: 8230067
  * Turma: LEI1T2
  */
-public class Player implements IPlayer {
+public class Player implements IPlayer, Cloneable {
 
     private String name;
     private LocalDate birthDate;
@@ -125,10 +125,6 @@ public class Player implements IPlayer {
         return this.attributes.getDefence();
     }
 
-    @Override
-    public void exportToJson() throws IOException {
-
-    }
 
 
     @Override
@@ -157,8 +153,31 @@ public class Player implements IPlayer {
         return this.number == player.getNumber() && this.name.equals(player.getName())
                 && this.birthDate.equals(player.birthDate)
                 && this.nationality.equals(player.nationality)
-                && this.position.equals(player.position)
-                && this.photo.equals(player.photo);
+                && this.position.equals(player.position);
     }
 
+
+
+
+    @Override
+    public void exportToJson() throws IOException {
+
+    }
+
+    public Player copy() throws CloneNotSupportedException{
+        return (Player) this.clone();
+    }
+
+    @Override
+    public Player clone() throws CloneNotSupportedException {
+
+        try{
+            PlayerAttributes attribute = this.attributes.clone();
+            return new Player(this.name, this.birthDate, this.nationality, this.position, this.photo, this.number,attribute);
+
+        } catch (CloneNotSupportedException e){
+            throw new CloneNotSupportedException("Erro ao clonar o atributo do player: " + this.name);
+        }
+
+    }
 }

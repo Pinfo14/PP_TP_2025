@@ -34,6 +34,7 @@ public class Club implements IClub {
     private IPlayer[] players;
     private int playerCount;
     private boolean isCoach;
+    private int maxPlayers;
 
 
     public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo) {
@@ -44,13 +45,26 @@ public class Club implements IClub {
         this.stadiumName = stadiumName;
         this.logo = logo;
         this.playerCount = 0;
-        this.players = new Player[MAX_PLAYERS];
+        this.players = new Player[MINIMUM_PLAYERS];
         this.isCoach = false;
+        this.maxPlayers = MAX_PLAYERS;
+    }
+
+    public Club(String name, String code, String country, int foundedYear, String stadiumName, String logo, int maxPlayers) {
+        this.name = name;
+        this.code = code;
+        this.country = country;
+        this.foundedYear = foundedYear;
+        this.stadiumName = stadiumName;
+        this.logo = logo;
+        this.playerCount = 0;
+        this.players = new Player[MINIMUM_PLAYERS];
+        this.isCoach = false;
+        this.maxPlayers = maxPlayers;
     }
 
 
-
-    public Club(String name){
+    public Club(String name) {
         this.name = name;
     }
 
@@ -61,9 +75,13 @@ public class Club implements IClub {
 
     @Override
     public IPlayer[] getPlayers() {
-        IPlayer[] players = new IPlayer[this.playerCount];
+        IPlayer[] players = new Player[this.playerCount];
         for (int i = 0; i < this.playerCount; i++) {
-            players[i] = this.players[i];
+            try {
+                players[i] = ((Player) this.players[i]).clone();
+            } catch (CloneNotSupportedException e) {
+                System.out.println("Erro ao clonar o player: " + this.players[i].getName());
+            }
         }
         return players;
     }
@@ -102,12 +120,24 @@ public class Club implements IClub {
         if (isPlayer(iPlayer)) {
             throw new IllegalArgumentException("Player já está no clube");
         }
-        if (this.playerCount == this.players.length) {
+        if (this.playerCount == this.maxPlayers) {
             throw new IllegalStateException("Clube está cheio");
+        }
+
+        if (this.playerCount == this.players.length) {
+            expandArray();
         }
         this.players[this.playerCount++] = iPlayer;
     }
 
+
+    private void expandArray() {
+        IPlayer[] newPlayers = new Player[this.players.length + INCREMENT_FACTOR];
+        for (int i = 0; i < this.players.length; i++) {
+            newPlayers[i] = this.players[i];
+        }
+        this.players = newPlayers;
+    }
 
     @Override
     public boolean isPlayer(IPlayer iPlayer) {
@@ -178,6 +208,24 @@ public class Club implements IClub {
         return this.name;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Club)) {
+            return false;
+        }
+        Club club = (Club) o;
+        return this.name.equals(club.name)
+                && this.code.equals(club.code)
+                && this.country.equals(club.country)
+                && this.foundedYear == club.foundedYear
+                && this.stadiumName.equals(club.stadiumName);
+    }
+
+
     /**
      * Metodo auxiliar para obter a posiçao do player no array
      */
@@ -198,4 +246,6 @@ public class Club implements IClub {
         }
         return false;
     }
+
+
 }

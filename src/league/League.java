@@ -2,7 +2,10 @@ package league;
 
 import com.ppstudios.footballmanager.api.contracts.league.ILeague;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+import netscape.javascript.JSObject;
+import org.json.simple.JSONObject;
 
+import java.io.FileWriter;
 import java.io.IOException;
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -132,6 +135,19 @@ public class League implements ILeague {
 
     @Override
     public void exportToJson() throws IOException {
+        //cria o save file e dps chama o export do season e sempre assim em cascada fazendo append
+        JSONObject leagueJson = new JSONObject();
+
+        leagueJson.put("name",this.leagueName);
+        leagueJson.put("numberOfSeasons",this.numberOfSeasons);
+
+        for (int i = 0; i < this.numberOfSeasons; i++) {
+            //seasons
+              //
+        }
 
     }
+
+
+
 }

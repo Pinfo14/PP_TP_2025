@@ -2,7 +2,6 @@ package demos;
 
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.league.ILeague;
-import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
@@ -19,7 +18,7 @@ public class OneMatchDemo {
 
         ILeague league = new League("Liga Portugal");
 
-        Season season = new Season("Liga Portugal", 2023);
+        Season season = new Season(league.getName(), 2023);
         for (IClub c : clubs) {
             try {
                 season.addClub(c);

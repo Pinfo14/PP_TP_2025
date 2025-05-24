@@ -1,8 +1,11 @@
 package player;
 
+import com.ppstudios.footballmanager.api.contracts.data.IExporter;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 
-public class PlayerAttributes {
+import java.io.IOException;
+
+public class PlayerAttributes implements Cloneable {
 
     public int shooting;
     public int passing;
@@ -138,4 +141,10 @@ public class PlayerAttributes {
         s+="\nPrefered Foot: "+this.preferredFoot;
         return s;
     }
+
+    @Override
+    protected PlayerAttributes clone() throws CloneNotSupportedException {
+        return new PlayerAttributes(this.shooting, this.passing, this.stamina, this.speed, this.height, this.weight, this.defence,this.preferredFoot);
+    }
+
 }

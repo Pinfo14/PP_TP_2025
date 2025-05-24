@@ -8,7 +8,7 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import event.EventManager;
 
 import java.io.IOException;
-import java.util.Objects;
+
 
 public class Match implements IMatch {
 
@@ -193,7 +193,7 @@ public class Match implements IMatch {
 
     }
 
-    //TODO FAZER O EQUALS
+    //TO DO FAZER O EQUALS
 
 
     @Override

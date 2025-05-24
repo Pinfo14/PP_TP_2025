@@ -2,7 +2,6 @@ package player;
 
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 
-import java.util.Objects;
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -14,6 +13,8 @@ import java.util.Objects;
  * Turma: LEI1T2
  */
 public class PlayerPosition implements IPlayerPosition {
+
+    //fazer enum
 
     private final String description;
 

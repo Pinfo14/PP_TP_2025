@@ -4,6 +4,8 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
+import player.Player;
+import util.Utils;
 import player.PlayerPositionManage;
 
 /**
@@ -17,8 +19,9 @@ import player.PlayerPositionManage;
  */
 public class RandomPlayerSelector implements IPlayerSelector {
     private boolean[] alreadySelected;
-    private IPlayer[] lastPool;
+    private Player[] lastPool;
     private PlayerPositionManage positionManage;
+
 
     public RandomPlayerSelector(){
         this.positionManage = new PlayerPositionManage();
@@ -31,12 +34,15 @@ public class RandomPlayerSelector implements IPlayerSelector {
         verifyPosition(iPlayerPosition);
         verifyClubPlayers(iClub);
 
-        IPlayer[] playersByPosition = getIPlayersByPosition(iClub.getPlayers(), iPlayerPosition);
+        Player[] playersByPosition = getIPlayersByPosition(iClub.getPlayers(), iPlayerPosition);
 
-        if (this.lastPool != playersByPosition) {
+
+
+        if(!Utils.arrayEquals(this.lastPool,playersByPosition)) {
             this.lastPool = playersByPosition;
             this.alreadySelected = new boolean[playersByPosition.length];
         }
+
 
         int available = 0;
         for (int i = 0; i < this.alreadySelected.length; i++) {
@@ -49,7 +55,9 @@ public class RandomPlayerSelector implements IPlayerSelector {
 
         int selectedIndex = getUniqueRandomIndex(this.alreadySelected);
         this.alreadySelected[selectedIndex] = true;
-        return playersByPosition[selectedIndex];
+
+            return playersByPosition[selectedIndex];
+
     }
 
     private int getUniqueRandomIndex(boolean[] used) {
@@ -80,7 +88,7 @@ public class RandomPlayerSelector implements IPlayerSelector {
      * @return An array of IPlayer instances that match the specified position.
      * @throws IllegalStateException If no players match the specified position.
      */
-    private IPlayer[] getIPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
+    private Player[] getIPlayersByPosition(IPlayer[] players, IPlayerPosition position) {
         int numPlayers = countPlayersByPosition(players, position);
 
         if (numPlayers == 0 && position.equals(this.positionManage.getPositionByDescription("Striker")) ) {
@@ -88,11 +96,11 @@ public class RandomPlayerSelector implements IPlayerSelector {
             numPlayers = countPlayersByPosition(players, position);
         }
 
-        IPlayer[] positionPlayers = new IPlayer[numPlayers];
+        Player[] positionPlayers = new Player[numPlayers];
         int count = 0;
         for (IPlayer player : players) {
             if (player.getPosition().equals(position)) {
-                positionPlayers[count++] = player;
+                positionPlayers[count++] =(Player) player;
             }
         }
         return positionPlayers;

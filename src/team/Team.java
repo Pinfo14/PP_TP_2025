@@ -51,9 +51,13 @@ public class Team implements ITeam {
 
     @Override
     public IPlayer[] getPlayers() {
-        IPlayer[] players = new IPlayer[this.playerCount];
+        Player[] players = new Player[this.playerCount];
         for (int i = 0; i < this.playerCount; i++) {
-            players[i] = this.squad[i];
+            try {
+                players[i] =((Player) this.squad[i]).clone();
+            } catch (CloneNotSupportedException e) {
+                System.out.println("Clone failed");
+            }
         }
         return players;
     }
@@ -68,7 +72,6 @@ public class Team implements ITeam {
         validatePlayerNotInTeam(iPlayer);
         validatePositionForFormation(iPlayer);
 
-        incrementPosition(iPlayer);
         this.squad[this.playerCount++] = iPlayer;
 
     }
@@ -86,12 +89,34 @@ public class Team implements ITeam {
         return count;
     }
 
+
+    private boolean asStriker(){
+        if(this.striker == ((Formation) this.formation).getNumStrikers()) {
+            return true;
+        }
+            for (IPlayer player : this.club.getPlayers()) {
+                if (player.getPosition().getDescription().equals("Striker")) {
+                    return true;
+                }
+            }
+
+        return false;
+
+    }
+
+
     @Override
     public boolean isValidPositionForFormation(IPlayerPosition iPlayerPosition) {
 
         if (iPlayerPosition.getDescription().equals("Goalkeeper") && this.goalkeeper) {
             return false;
         }
+
+        if(!asStriker() && iPlayerPosition.getDescription().equals("Forward")){// se nao tiver nenhum striker pode adicionar um forward pra respeitar a formacao
+            this.striker++;
+            return true;
+        }
+
         if (((Formation) this.formation).getNumAttackers() == this.forward && iPlayerPosition.getDescription().equals("Forward")) {
             return false;
         }
@@ -106,20 +131,11 @@ public class Team implements ITeam {
             return false;
         }
 
+        incrementPosition(iPlayerPosition);
+
         return true;
     }
 
-    private int checkStriker(){
-
-        int count =0;
-
-        for(IPlayer player : this.club.getPlayers()){
-            if(player.getPosition().getDescription().equals("Striker")){
-               count ++;
-            }
-        }
-        return count;
-    }
 
     @Override
     public int getTeamStrength() {
@@ -162,8 +178,8 @@ public class Team implements ITeam {
     }
 
 
-    private void incrementPosition(IPlayer iPlayer) {
-        String position = iPlayer.getPosition().getDescription();
+    private void incrementPosition(IPlayerPosition iPlayerPosition) {
+        String position = iPlayerPosition.getDescription();
 
 
         switch (position) {

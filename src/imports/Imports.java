@@ -21,10 +21,10 @@ import java.time.LocalDate;
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
  * Turma: LEI1T1
- * <p>
- * Nome: <Nome completo do colega de grupo>
- * Número: <Número mecanográfico do colega de grupo>
- * Turma: <Turma do colega de grupo>
+ *
+ * Nome: Roberto Cristiano Martins Faria
+ * Número: 8230067
+ * Turma: LEI1T2
  */
 
 
@@ -47,7 +47,8 @@ public class Imports {
         JSONParser parser = new JSONParser();
         File file = new File("src/Files/clubs.json");
 
-        try (FileReader reader = new FileReader(file)) {
+        try  {
+            FileReader reader = new FileReader(file);
             JSONArray clubsArray = (JSONArray) parser.parse(reader);
             // Cria o array de Club com o tamanho do jsonarray
             Club[] clubs = new Club[clubsArray.size()];
@@ -88,7 +89,8 @@ public class Imports {
         JSONParser parser = new JSONParser();
         File file = new File("src/Files/players/" + fileName);
 
-        try (FileReader reader = new FileReader(file)) {
+        try  {
+            FileReader reader = new FileReader(file);
             JSONObject root = (JSONObject) parser.parse(reader);
 
             JSONArray playerArray = null;
@@ -153,13 +155,11 @@ public class Imports {
 
         String directoryPath = "src/Files/players";
 
-        // Using File class create an object for specific directory
         File directory = new File(directoryPath);
 
-        // Using listFiles method we get all the files of a directory
-        // return type of listFiles is array
         File[] files = directory.listFiles();
 
+        //Alterar digo para abrir o ficheiro x se lançar exeção se a lançar ele tenta abrir outro.
 
         for (IClub c : club) {
             try {
@@ -182,6 +182,7 @@ public class Imports {
 
 
     private String checkNameFileClub(File[] files, String clubName) {
+
         // Divide o nome do clube em tokens (tudo maiúsculo) [SPORT,LISBOA,E,BENFICA]
         String[] tokens = removerAcentos(clubName).toUpperCase().split("\\s+");
         String lastToken = tokens[tokens.length - 1];
