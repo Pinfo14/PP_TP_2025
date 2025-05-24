@@ -4,6 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
+import org.json.simple.JSONObject;
 import player.Player;
 
 import java.io.IOException;
@@ -202,6 +203,24 @@ public class Club implements IClub {
     public void exportToJson() throws IOException {
 
     }
+
+    public JSONObject getJson() {
+        JSONObject obj = new JSONObject();
+        obj.put("name", this.name);
+        obj.put("code", this.code);
+        obj.put("country", this.country);
+        obj.put("foundedYear", this.foundedYear);
+        obj.put("stadiumName", this.stadiumName);
+        obj.put("logo", this.logo);
+        obj.put("players", this.players);
+
+
+        obj.put("playerCount", this.playerCount);
+        return obj;
+    }
+
+
+
 
     @Override
     public String toString() {

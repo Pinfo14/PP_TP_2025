@@ -2,12 +2,15 @@ package management;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import com.ppstudios.footballmanager.api.contracts.team.IFormation;
+import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import league.Season;
 import match.Match;
 import menus.RoundMenu;
 import menus.SeasonMenu;
 import reader.Reader;
 import team.Formation;
+import team.Team;
 
 public class RoundManagement {
 
@@ -17,11 +20,25 @@ public class RoundManagement {
         Reader reader = new Reader();
 
         SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName(), season.getCurrentRound());
-        RoundMenu.topMenu(season.getCurrentRound(),getOpponentName(season), getGamesString(season));
-        formationManagement.listFormations();
-        reader.readInt(1, formationManagement.getNumFormations(), "Seleicone a tatica que pretende: ");
-        //descobrir a posicçao do jogo
+        RoundMenu.topMenu(season.getCurrentRound(), getOpponentName(season), getGamesString(season));
 
+        //Selects the tactic formation
+        int indexFormation;
+        do {
+            formationManagement.listFormations();
+            indexFormation = reader.readInt(1, formationManagement.getNumFormations(), "Seleicone a tatica que pretende (0 - para criar nova tatica): ");
+            switch (indexFormation) {
+                case 0:
+                    int defense = reader.readInt(1,10, "Numero de defesas: ");
+                    int middle = reader.readInt(1,10, "Numero de medios: ");
+                    int attackers = reader.readInt(1,10, "Numero de avançados: ");
+                    formationManagement.addFormation(defense, middle, attackers);
+            }
+        } while (indexFormation==0);
+        Formation formation = (Formation) formationManagement.getFormation(indexFormation);
+        setCoachFormation(season, formation);
+
+        //Seleciona jogadores
 
 
     }
@@ -37,21 +54,23 @@ public class RoundManagement {
         return clubs[coachingClubIndex];
     }
 
-    private IMatch setCoachFormation(Season season, Formation formation) {
-
+    private void setCoachFormation(Season season, IFormation formation) {
         IMatch[] matches = season.getMatches(season.getCurrentRound());
         IClub coachingClub = findCoachingClub(season);
 
-        for(IMatch match : matches) {
-            if(match.getAwayClub().equals(coachingClub)) {
-             //   match.setTeam();
+        for (IMatch match : matches) {
+            try {
+                if (coachingClub.equals(match.getHomeClub())) {
+                    match.setTeam(new Team(coachingClub, formation));
+                }
+                if (coachingClub.equals(match.getAwayClub())) {
+                    match.setTeam(new Team(coachingClub, formation));
+                }
+            }catch (NullPointerException | IllegalStateException e) {
+                System.out.println(e.getMessage());
             }
         }
-
-return null;
-
     }
-
 
     private String getGamesString(Season season) {
         IMatch[] matches = season.getMatches(season.getCurrentRound());
@@ -88,6 +107,8 @@ return null;
 
         return "desconhecido";
     }
+
+
 
 
 }

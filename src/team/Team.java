@@ -33,8 +33,9 @@ public class Team implements ITeam {
     private boolean goalkeeper;
 
 
-    public Team(IClub club) {
+    public Team(IClub club, IFormation formation) {
         this.club = club;
+        this.formation = formation;
         this.squad = new Player[MAX_PLAYERS];
         this.playerCount = 0;
     }
@@ -51,13 +52,9 @@ public class Team implements ITeam {
 
     @Override
     public IPlayer[] getPlayers() {
-        Player[] players = new Player[this.playerCount];
+        IPlayer[] players = new IPlayer[this.playerCount];
         for (int i = 0; i < this.playerCount; i++) {
-            try {
-                players[i] =((Player) this.squad[i]).clone();
-            } catch (CloneNotSupportedException e) {
-                System.out.println("Clone failed");
-            }
+            players[i] = this.squad[i];
         }
         return players;
     }
@@ -72,11 +69,10 @@ public class Team implements ITeam {
         validatePlayerNotInTeam(iPlayer);
         validatePositionForFormation(iPlayer);
 
+        incrementPosition(iPlayer);
         this.squad[this.playerCount++] = iPlayer;
 
     }
-
-
 
     @Override
     public int getPositionCount(IPlayerPosition iPlayerPosition) {
@@ -89,34 +85,12 @@ public class Team implements ITeam {
         return count;
     }
 
-
-    private boolean asStriker(){
-        if(this.striker == ((Formation) this.formation).getNumStrikers()) {
-            return true;
-        }
-            for (IPlayer player : this.club.getPlayers()) {
-                if (player.getPosition().getDescription().equals("Striker")) {
-                    return true;
-                }
-            }
-
-        return false;
-
-    }
-
-
     @Override
     public boolean isValidPositionForFormation(IPlayerPosition iPlayerPosition) {
 
         if (iPlayerPosition.getDescription().equals("Goalkeeper") && this.goalkeeper) {
             return false;
         }
-
-        if(!asStriker() && iPlayerPosition.getDescription().equals("Forward")){// se nao tiver nenhum striker pode adicionar um forward pra respeitar a formacao
-            this.striker++;
-            return true;
-        }
-
         if (((Formation) this.formation).getNumAttackers() == this.forward && iPlayerPosition.getDescription().equals("Forward")) {
             return false;
         }
@@ -126,12 +100,6 @@ public class Team implements ITeam {
         if (((Formation) this.formation).getNumMidfielders() == this.midfield && iPlayerPosition.getDescription().equals("Midfielder")) {
             return false;
         }
-
-        if (((Formation) this.formation).getNumStrikers() == this.striker && iPlayerPosition.getDescription().equals("Striker")) {
-            return false;
-        }
-
-        incrementPosition(iPlayerPosition);
 
         return true;
     }
@@ -178,8 +146,8 @@ public class Team implements ITeam {
     }
 
 
-    private void incrementPosition(IPlayerPosition iPlayerPosition) {
-        String position = iPlayerPosition.getDescription();
+    private void incrementPosition(IPlayer iPlayer) {
+        String position = iPlayer.getPosition().getDescription();
 
 
         switch (position) {

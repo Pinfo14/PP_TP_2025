@@ -2,8 +2,8 @@ package player;
 
 import com.ppstudios.footballmanager.api.contracts.data.IExporter;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
+import org.json.simple.JSONObject;
 
-import java.io.IOException;
 
 public class PlayerAttributes implements Cloneable {
 
@@ -140,6 +140,21 @@ public class PlayerAttributes implements Cloneable {
         s+="\nWeight:"+this.weight;
         s+="\nPrefered Foot: "+this.preferredFoot;
         return s;
+    }
+
+    public JSONObject getJsonObject() {
+        JSONObject attributes = new JSONObject();
+        attributes.put("shooting", this.getShooting());
+        attributes.put("passing", this.getPassing());
+        attributes.put("stamina", this.getStamina());
+        attributes.put("speed", this.getSpeed());
+        attributes.put("defence", this.getDefence());
+        attributes.put("height", this.getHeight());
+        attributes.put("weight", this.getWeight());
+        attributes.put("preferredFoot", this.getPreferredFoot().toString());
+
+        return attributes;
+
     }
 
     @Override

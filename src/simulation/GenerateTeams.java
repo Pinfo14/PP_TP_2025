@@ -1,35 +1,43 @@
 package simulation;
+
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import management.FormationManagement;
 import player.PlayerPositionManage;
-import team.DefaultFormations;
 import team.Formation;
 import team.RandomPlayerSelector;
 import team.Team;
-
 
 public class GenerateTeams {
 
     private IPlayerSelector playerSelector;
     private PlayerPositionManage positionManage;
-    private DefaultFormations formations;
+    private FormationManagement formations;
 
     public GenerateTeams() {
 
         this.playerSelector = new RandomPlayerSelector();
         this.positionManage = new PlayerPositionManage();
-        this.formations = new DefaultFormations();
+        this.formations = new FormationManagement();
     }
 
     public ITeam randomTeam(IClub club) {
-        ITeam team = new Team(club);
-        Formation form = selectRandomForm();
-        team.setFormation(form);
 
-        //verificar se o clube tem o numero necessario para a formação!!
+
+        Formation form = null;
+
+        for (Formation formation : this.formations.getFormations()) { // Usar getFormations()
+            if (hasMinimumPlayersForFormation(club, formation)) {
+                form = formation;
+                break;
+            }
+        }
+
+        ITeam team = new Team(club, form);
+
 
         generatePlayersByPos(form.getNumAttackers(), this.positionManage.getPositionByDescription("Forward"), team);
 
@@ -37,50 +45,58 @@ public class GenerateTeams {
 
         generatePlayersByPos(form.getNumDefenders(), this.positionManage.getPositionByDescription("Defender"), team);
 
-        if (asSriker(club)) {
-            generatePlayersByPos(form.getNumStrikers(), this.positionManage.getPositionByDescription("Striker"), team);
-        } else {
-            generatePlayersByPos(form.getNumStrikers(), this.positionManage.getPositionByDescription("Forward"), team);
-        }
 
         generatePlayersByPos(1, this.positionManage.getPositionByDescription("Goalkeeper"), team);
-
 
 
         return team;
     }
 
+    private boolean hasMinimumPlayersForFormation(IClub club, Formation formation) {
+        int numDefenders = formation.getNumDefenders();
+        int numMidfielders = formation.getNumMidfielders();
+        int numAttackers = formation.getNumAttackers();
 
+        // Contar players disponíveis por posição
+        int availableDefenders = numPlayerByPos(club.getPlayers(), this.positionManage.getPositionByDescription("Defender"));
+        int availableMidfielders = numPlayerByPos(club.getPlayers(), this.positionManage.getPositionByDescription("Midfielder"));
+        int availableForwards = numPlayerByPos(club.getPlayers(), this.positionManage.getPositionByDescription("Forward"));
+        int availableGoalkeepers = numPlayerByPos(club.getPlayers(), this.positionManage.getPositionByDescription("Goalkeeper"));
 
-    private boolean asSriker(IClub club) {
-        for (IPlayer p : club.getPlayers()) {
-            if (p.getPosition().equals(this.positionManage.getPositionByDescription("Striker"))) {
-                return true;
+        // TODOS os requisitos devem ser satisfeitos (AND, não OR)
+        return availableDefenders >= numDefenders &&
+                availableMidfielders >= numMidfielders &&
+                availableForwards >= numAttackers &&
+                availableGoalkeepers >= 1; // Sempre precisa de pelo menos 1 GK
+    }
+
+    private int numPlayerByPos(IPlayer[] players, IPlayerPosition position) {
+        int count = 0;
+        for (IPlayer player : players) {
+            if (player.getPosition().equals(position)) {
+                count++;
             }
         }
-        return false;
+        return count;
     }
 
-
-
-    private Formation selectRandomForm() {
-        Formation[] formations = this.formations.getFormations();
-        return formations[(int) (Math.random() * formations.length)];
-    }
 
 
     private void generatePlayersByPos(int num, IPlayerPosition position, ITeam team) {
-
-        for (int pos = 0; pos < num; pos++) {
-            IPlayer player = playerSelector.selectPlayer(team.getClub(), position);
-            while (veryfiPlayerInTeam(team.getPlayers(), player)) {
-                player = playerSelector.selectPlayer(team.getClub(), position);
+        try {
+            for (int pos = 0; pos < num; pos++) {
+                IPlayer player = playerSelector.selectPlayer(team.getClub(), position);
+                while (veryfiPlayerInTeam(team.getPlayers(), player)) {
+                    player = playerSelector.selectPlayer(team.getClub(), position);
+                }
+                try {
+                    team.addPlayer(player);
+                } catch (Exception e) {
+                    System.out.println("Erro ao adicionar jogador: " + e.getMessage());
+                }
             }
-            try {
-                team.addPlayer(player);
-            } catch (Exception e) {
-                System.out.println("Erro ao adicionar jogador: " + e.getMessage());
-            }
+        } catch (Exception e) {
+            System.out.println("Erro ao gerar equipe: " + e.getMessage());
         }
     }
 
@@ -95,5 +111,4 @@ public class GenerateTeams {
     }
 
 
-     //export pra json usar JSONObject e JSONArrays
- }
+}

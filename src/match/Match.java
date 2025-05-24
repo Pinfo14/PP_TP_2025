@@ -136,7 +136,7 @@ public class Match implements IMatch {
         } else if (iTeam.getClub().equals(awayClub)) {
             setAwayTeam(iTeam);
         } else {
-            throw new IllegalStateException("Team does not belong to the club.");
+            throw new IllegalStateException("Erro. Esta equipa está no jogo errado.");
         }
     }
 

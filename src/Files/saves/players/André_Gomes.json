@@ -1,0 +1,17 @@
+{
+  "number": 75,
+  "nationality": "Portuguese",
+  "name": "André Gomes",
+  "attributes": {
+    "defence": 77,
+    "stamina": 79,
+    "shooting": 2,
+    "weight": 73.28,
+    "passing": 24,
+    "preferredFoot": "Right",
+    "speed": 49,
+    "height": 1.72
+  },
+  "position": "Goalkeeper",
+  "birthDate": "2004-10-20"
+}

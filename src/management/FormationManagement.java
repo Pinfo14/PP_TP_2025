@@ -13,12 +13,23 @@ public class FormationManagement {
 
     public FormationManagement() {
         formations = new Formation[INITIAL_FORMATIONS];
-        this.formations[0] = new Formation( 4, 3, 2,1);
-        this.formations[1] = new Formation(4, 3, 3,0);
-        this.formations[2] = new Formation(4, 4, 2,0);
+        this.formations[0] = new Formation( 4, 2, 4);
+        this.formations[1] = new Formation(4, 3, 3);
+        this.formations[2] = new Formation(4, 4, 2);
         this.countFormations=3;
     }
 
+    public IFormation getFormation(int index) {
+        return formations[index];
+    }
+
+    public Formation[] getFormations() {
+        Formation[] formation = new Formation[this.countFormations];
+        for(int i = 0; i < this.countFormations; i++){
+            formation[i] =(Formation)this.formations[i];
+        }
+        return formation;
+    }
     private void increaseFormationArray() {
         IFormation[] formartionsTemp = new IFormation[formations.length + INCREMENT_FACTOR];
 
@@ -26,9 +37,14 @@ public class FormationManagement {
         formations = formartionsTemp;
     }
 
-    public void addFormation(int numDefenders, int numMidfielders, int numAttackers, int numStrikers) {
-        formations[countFormations] = new Formation(numDefenders, numMidfielders, numAttackers, numStrikers);
-        countFormations++;
+    public void addFormation(int numDefenders, int numMidfielders, int numAttackers) {
+        try {
+            formations[countFormations] = new Formation(numDefenders, numMidfielders, numAttackers);
+            countFormations++;
+        }catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     public void listFormations() {

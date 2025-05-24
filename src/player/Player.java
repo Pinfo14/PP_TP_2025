@@ -3,7 +3,10 @@ package player;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
+import org.json.simple.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 
@@ -121,17 +124,16 @@ public class Player implements IPlayer, Cloneable {
         return this.attributes.getPreferredFoot();
     }
 
-    public int getDefence(){
+    public int getDefence() {
         return this.attributes.getDefence();
     }
-
 
 
     @Override
     public String toString() {
         return
-                "\n--------------\n"+
-                "name='" + name + "\n" +
+                "\n--------------\n" +
+                        "name='" + name + "\n" +
                         "birthDate=" + birthDate + "\n" +
                         "nationality='" + nationality + "\n" +
                         "position=" + position + "\n" +
@@ -157,25 +159,59 @@ public class Player implements IPlayer, Cloneable {
     }
 
 
-
-
     @Override
     public void exportToJson() throws IOException {
 
+        String filename = this.name.replaceAll(" ", "_") + ".json";
+        String path = "src/Files/saves/players/" + filename;
+
+        File playerFile = new File(path);
+
+        if(!playerFile.exists()){
+            playerFile.createNewFile();
+        }
+
+        JSONObject playerJson = this.getJsonObject();
+
+        // Escrever o JSON no arquivo
+        FileWriter writer = new FileWriter(playerFile);
+        try {
+            writer.write(playerJson.toJSONString());
+            System.out.println("Jogador exportado com sucesso para: " + path);
+
+        }catch (IOException e){
+            System.out.println("Erro ao exportar o jogador para o arquivo: " + path);
+        }
+        finally {
+            writer.close();
+        }
+
     }
 
-    public Player copy() throws CloneNotSupportedException{
-        return (Player) this.clone();
+
+
+
+    public JSONObject getJsonObject() {
+        //cria um json object
+        JSONObject player = new JSONObject();
+        player.put("name", this.name);
+        player.put("birthDate", this.birthDate.toString());
+        player.put("nationality", this.nationality);
+        player.put("position", this.position.getDescription());
+        player.put("number", this.number);
+        player.put("attributes", this.attributes.getJsonObject());
+        return player;
     }
+
 
     @Override
     public Player clone() throws CloneNotSupportedException {
 
-        try{
+        try {
             PlayerAttributes attribute = this.attributes.clone();
-            return new Player(this.name, this.birthDate, this.nationality, this.position, this.photo, this.number,attribute);
+            return new Player(this.name, this.birthDate, this.nationality, this.position, this.photo, this.number, attribute);
 
-        } catch (CloneNotSupportedException e){
+        } catch (CloneNotSupportedException e) {
             throw new CloneNotSupportedException("Erro ao clonar o atributo do player: " + this.name);
         }
 
