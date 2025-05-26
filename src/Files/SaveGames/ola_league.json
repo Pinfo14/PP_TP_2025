@@ -1,0 +1,72 @@
+{
+  "numberOfSeasons": 1,
+  "seasons": [
+    {
+      "coachingClubIndex": 0,
+      "currentRound": 1,
+      "schedule": {
+        "numberOfClubs": 2,
+        "clubs": [
+          "FCP",
+          "VSC"
+        ],
+        "matches": [
+          {
+            "awayClub": "VSC",
+            "homeClub": "FCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": "VSC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          }
+        ],
+        "numberOfRounds": 2
+      },
+      "pointsPerWin": 3,
+      "year": 2021,
+      "name": "ola",
+      "pointsPerLoss": 0,
+      "numberOfTeams": 2,
+      "pointsPerDraw": 1,
+      "standings": [
+        {
+          "TotalMatches": 0,
+          "Points": 0,
+          "Losses": 0,
+          "GoalDifference": 0,
+          "Club": "FCP",
+          "GoalsConceded": 0,
+          "GoalsScored": 0,
+          "Draws": 0,
+          "Wins": 0
+        },
+        {
+          "TotalMatches": 0,
+          "Points": 0,
+          "Losses": 0,
+          "GoalDifference": 0,
+          "Club": "VSC",
+          "GoalsConceded": 0,
+          "GoalsScored": 0,
+          "Draws": 0,
+          "Wins": 0
+        }
+      ]
+    }
+  ],
+  "name": "ola"
+}

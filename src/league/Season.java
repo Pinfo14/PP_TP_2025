@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 import simulation.MatchSimulator;
 import team.Club;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -311,6 +313,19 @@ public class Season implements ISeason {
     @Override
     public void exportToJson() throws IOException {
 
+        String fileName = "src/Files/Season.json";
+        File file = new File(fileName);
+        file.createNewFile();
+
+        FileWriter fileWriter = new FileWriter(file);
+        try {
+            fileWriter.write(getSeasonJson().toJSONString());
+            System.out.println("Season exportado com sucesso para: " + fileName);
+        }catch (IOException e){
+            System.out.println("Erro ao exportar o season para o arquivo: " + fileName);
+        }finally {
+            fileWriter.close();
+        }
     }
 
     private JSONArray getStandingsJson(){

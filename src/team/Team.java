@@ -36,7 +36,7 @@ public class Team implements ITeam {
     private boolean goalkeeper;
 
 
-    public Team(IClub club, IFormation formation, IPlayer[] squad, int defense, int midfield, int forward); {
+    public Team(IClub club, IFormation formation, IPlayer[] squad, int defense, int midfield, int forward){
         this.club = club;
         this.formation = formation;
         this.squad = squad;
@@ -45,6 +45,14 @@ public class Team implements ITeam {
         this.forward = forward;
         this.playerCount = 11;
     }
+
+    public Team(IClub club, IFormation formation){
+        this.club = club;
+        this.formation = formation;
+        this.squad = new Player[MAX_PLAYERS];
+        this.playerCount=0;
+    }
+
 
     @Override
     public IClub getClub() {

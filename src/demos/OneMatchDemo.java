@@ -8,16 +8,13 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import imports.Imports;
 import league.League;
 import league.Season;
-import management.SaveGame;
 import simulation.GenerateTeams;
 import simulation.MatchSimulator;
-
-import java.io.IOException;
 
 public class OneMatchDemo {
     public static void main(String[] args) {
         Imports importClubs = new Imports();
-        IClub[] clubs = importClubs.importPlayersToClub();
+        IClub[] clubs = importClubs.importPlayersAndClub();
 
         ILeague league = new League("Liga Portugal");
 

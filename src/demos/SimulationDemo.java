@@ -21,7 +21,7 @@ public class SimulationDemo {
     public static void main(String[] args) {
 
         Imports importClubs = new Imports();
-        IClub[] clubes = importClubs.importPlayersToClub();
+        IClub[] clubes = importClubs.importPlayersAndClub();
 
         System.out.println(clubes[0].getPlayers()[0]);
 

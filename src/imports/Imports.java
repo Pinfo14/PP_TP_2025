@@ -151,7 +151,7 @@ public class Imports {
 
 
 
-    public IClub[] importPlayersToClub() {
+    public IClub[] importPlayersAndClub() {
 
         IClub[] club = this.importClubs();
 

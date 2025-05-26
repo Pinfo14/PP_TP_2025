@@ -4,7 +4,17 @@ import management.LeagueManagement;
 import management.SaveGame;
 import reader.Reader;
 
+import java.io.IOException;
+
 public class StartMenu {
+
+    private SaveGame saveGame;
+    private  LeagueManagement leagueManagement;
+
+    public StartMenu() {
+        this.saveGame = new SaveGame();
+        this.leagueManagement = new LeagueManagement();
+    }
 
     public void menu() {
         int opcao = 0;
@@ -14,15 +24,22 @@ public class StartMenu {
         do {
             displayMenu();
             opcao = reader.readInt(0, 2, "Opçao: ");
+
              switch (opcao) {
                  case 1:
-                     LeagueManagement leagueManagement = new LeagueManagement();
                      leagueManagement.startNewGame(true);
                      break;
                  default:
                      //import os dados guardados.
              }
 
+             if (opcao == 0){
+                 try {
+                     this.saveGame.saveGame(leagueManagement.getLeague());
+                 } catch (IOException e) {
+                    System.out.println("Erro ao salvar o jogo: " + e.getMessage());
+                 }
+             }
 
         } while (opcao != 0);
 

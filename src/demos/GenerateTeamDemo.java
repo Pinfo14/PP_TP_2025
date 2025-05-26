@@ -9,7 +9,7 @@ public class GenerateTeamDemo {
     public static void main(String[] args) {
 
         Imports imports = new Imports();
-        IClub[] clubs = imports.importPlayersToClub();
+        IClub[] clubs = imports.importPlayersAndClub();
 
         GenerateTeams generateTeams = new GenerateTeams();
 
