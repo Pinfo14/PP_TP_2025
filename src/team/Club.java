@@ -4,9 +4,11 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IPlayerSelector;
-import org.json.simple.JSONObject;
+import org.json.simple.*;
 import player.Player;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -201,7 +203,27 @@ public class Club implements IClub {
 
     @Override
     public void exportToJson() throws IOException {
+        String filename = this.code + ".json";
+        String path = "src/Files/saves/clubs/" + filename;
 
+        File clubFile = new File(path);
+
+
+        if (!clubFile.exists()) {
+            clubFile.createNewFile();
+        }
+
+        // Obter JSON do clube
+        JSONObject clubJson = this.getJson();
+
+        // Escrever no arquivo
+        FileWriter writer = new FileWriter(clubFile);
+        try {
+            writer.write(clubJson.toJSONString());
+            System.out.println("Clube exportado com sucesso para: " + path);
+        } finally {
+            writer.close();
+        }
     }
 
     public JSONObject getJson() {
@@ -212,15 +234,27 @@ public class Club implements IClub {
         obj.put("foundedYear", this.foundedYear);
         obj.put("stadiumName", this.stadiumName);
         obj.put("logo", this.logo);
-        obj.put("players", this.players);
-
-
+        obj.put("players", getPlayersJson());
+        obj.put("maxPlayers", this.maxPlayers);
         obj.put("playerCount", this.playerCount);
         return obj;
     }
 
 
 
+
+    private JSONArray getPlayersJson() {
+        JSONArray playersArray = new JSONArray();
+
+        for (int i = 0; i < this.playerCount; i++) {
+            if (this.players[i] instanceof Player) {
+                Player player = (Player) this.players[i];
+                playersArray.add(player.getJsonObject());
+            }
+        }
+
+        return playersArray;
+    }
 
     @Override
     public String toString() {

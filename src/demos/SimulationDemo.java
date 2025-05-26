@@ -9,8 +9,11 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import imports.Imports;
 import league.League;
 import league.Season;
+import management.SaveGame;
 import simulation.GenerateTeams;
 import simulation.MatchSimulator;
+
+import java.io.IOException;
 
 
 public class SimulationDemo {
@@ -20,13 +23,15 @@ public class SimulationDemo {
         Imports importClubs = new Imports();
         IClub[] clubes = importClubs.importPlayersToClub();
 
+        System.out.println(clubes[0].getPlayers()[0]);
+
 // criar uma classe para gerar aleatoriamente todas as equipas passando a formacao como argomento talve
 // apenas cria team aleatoria pra todos os clubes menos para aquele que o user decidiu dar coach no caso dele ele decide gerar aleatoriamente uma team(11 inicial) ou criala ele msm
 
 
         // 3) Cria liga e temporada e adiciona clubes à temporada
-        League liga = new League("Liga Portugal");
-        Season temporada2023 = new Season("Liga Portugal", 2023);
+        League liga = new League("Liga bleh");
+        Season temporada2023 = new Season("Liga bleh", 2023);
         try {
             liga.createSeason(temporada2023);
         } catch (Exception e) {
@@ -98,5 +103,17 @@ public class SimulationDemo {
           System.out.println(standing.toString());
       }
 
+       /* try {
+            liga.exportToJson();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }*/
+
+        SaveGame saveGame=new SaveGame();
+        try {
+            saveGame.saveGame(liga);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

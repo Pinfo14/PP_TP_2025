@@ -5,8 +5,12 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import match.Match;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import team.Club;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -151,7 +155,52 @@ public class Schedule  implements ISchedule {
     @Override
     public void exportToJson() throws IOException {
 
+        String fileName = "src/Files/schedule.json";
+        File file = new File(fileName);
+        file.createNewFile();
+
+        FileWriter fileWriter = new FileWriter(file);
+        try {
+            fileWriter.write(getJsonSchedule().toJSONString());
+            System.out.println("Schedule exportado com sucesso para: " + fileName);
+        }catch (IOException e){
+            System.out.println("Erro ao exportar o schedule para o arquivo: " + fileName);
+        }finally {
+            fileWriter.close();
+        }
     }
+
+    public JSONObject getJsonSchedule() {
+        JSONObject scheduleJson = new JSONObject();
+        scheduleJson.put("numberOfRounds", this.numberOfRounds);
+        scheduleJson.put("numberOfClubs", this.numberOfClubs);
+        scheduleJson.put("clubs", this.getClubsCodes());
+        scheduleJson.put("matches", this.getJsonMatchs());
+        return scheduleJson;
+    }
+
+    private JSONArray getJsonMatchs() {
+        JSONArray jsonArray = new JSONArray();
+        for (int i = 0; i < this.games.length; i++) {
+            if(this.games[i] != null) {
+                jsonArray.add(((Match)this.games[i]).getMatchJson());
+            }
+        }
+        return jsonArray;
+    }
+
+
+    private JSONArray getClubsCodes(){
+        JSONArray jsonArray = new JSONArray();
+        for(int i = 0; i < this.clubs.length; i++) {
+            if(this.clubs[i] != null) {
+                jsonArray.add(this.clubs[i].getCode());
+            }
+
+        }
+        return jsonArray;
+    }
+
     private IClub[] copyClubs(IClub[] clubs, int numberOfClubs) {
         IClub[] clubsTemp = new IClub[clubs.length];
         for(int i = 0; i < numberOfClubs; i++) {

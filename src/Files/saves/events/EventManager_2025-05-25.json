@@ -1,0 +1,24 @@
+{
+  "eventCount": 4,
+  "events": [
+    {
+      "description": "player",
+      "victim": "quim",
+      "type": "Foul",
+      "autor": "Emanuel",
+      "minute": 25
+    },
+    {
+      "description": "Passe",
+      "type": "PassEvent",
+      "autor": "quim",
+      "minute": 28
+    },
+    {
+      "description": "pontape de baliza",
+      "type": "GoalKick",
+      "autor": "Emanuel",
+      "minute": 29
+    }
+  ]
+}

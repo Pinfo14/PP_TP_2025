@@ -2,7 +2,10 @@ package event;
 
 import com.ppstudios.footballmanager.api.contracts.event.IGoalEvent;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
+import org.json.simple.JSONObject;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -36,11 +39,40 @@ public class GoalEvent implements IGoalEvent {
     @Override
     public void exportToJson() throws IOException {
 
+        String fileName = "src/Files/saves/events/GoalEvent_"+this.player.getName()+".json";
+        File file = new File(fileName);
+file.createNewFile();
+        JSONObject object =  getEventJson();
+
+        FileWriter fileWriter = new FileWriter(file);
+        try {
+            fileWriter.write(object.toJSONString());
+            System.out.println("Goal Event exportado com sucesso para: " + fileName);
+        }catch (IOException e){
+            System.out.println("Erro ao exportar o goal event para o arquivo: " + fileName);
+        }finally {
+            fileWriter.close();
+        }
+
     }
+
+    public JSONObject getEventJson(){
+        JSONObject object = new JSONObject();
+        object.put("type",getEventName() );
+        object.put("autor", this.player.getName());
+        object.put("minute", this.minute);
+        object.put("description", this.description);
+        return object;
+    }
+
 
     @Override
     public String toString() {
         return  " " + this.getDescription() + " " + this.getMinute() +" "+this.player.getName() +"\n";
+    }
+
+    public String getEventName() {
+        return "Goal";
     }
 
     @Override

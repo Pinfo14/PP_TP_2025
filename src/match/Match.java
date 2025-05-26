@@ -3,10 +3,15 @@ package match;
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.event.IEventManager;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
-import event.EventManager;
+import event.*;
+import org.json.simple.JSONObject;
+import team.Team;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 
@@ -56,7 +61,7 @@ public class Match implements IMatch {
 
     @Override
     public boolean isPlayed() {
-        return false;
+        return this.pleayed;
     }
 
     @Override
@@ -71,14 +76,76 @@ public class Match implements IMatch {
 
     @Override
     public void setPlayed() {
-        pleayed = true;
+        if (this.pleayed){
+           this.pleayed = false;
+        }else {
+            pleayed = true;
+        }
+    }
+
+    public void calculateGoalsFromEvents() {
+
+        IEvent[] allEvents = this.events.getEvents();
+
+        for (IEvent event : allEvents) {
+            if (event instanceof GoalEvent) {
+                GoalEvent goalEvent = (GoalEvent) event;
+
+                // Verifica se o jogador que marcou pertence à equipa da casa ou visitante
+                if (isPlayerFromTeam(goalEvent.getPlayer(), homeTeam)) {
+                    this.homeGoals++;
+                } else if (isPlayerFromTeam(goalEvent.getPlayer(), awayTeam)) {
+                    this.awayGoals++;
+                }
+            }
+        }
+    }
+
+    /**
+     * Verifica se um jogador pertence a uma equipa
+     */
+    private boolean isPlayerFromTeam(com.ppstudios.footballmanager.api.contracts.player.IPlayer player, ITeam team) {
+        if (team == null || player == null) {
+            return false;
+        }
+        IPlayer[] teamPlayers = team.getPlayers();
+        for (IPlayer teamPlayer : teamPlayers) {
+            if (teamPlayer != null && teamPlayer.equals(player)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public int getTotalByEvent(Class aClass, IClub iClub) {
-        return 0;
-    }
+        int count = 0;
+        IEvent[] allEvents = this.events.getEvents();
 
+        for (IEvent event : allEvents) {
+            if (aClass.isInstance(event)) {
+                // Para eventos de golo, verifica se o jogador pertence ao clube
+                if (event instanceof GoalEvent) {
+                    GoalEvent goalEvent = (GoalEvent) event;
+                    if (isPlayerFromClub(goalEvent.getPlayer(), iClub)) {
+                        count++;
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
+    /**
+     * Verifica se um jogador pertence a um clube
+     */
+    private boolean isPlayerFromClub(com.ppstudios.footballmanager.api.contracts.player.IPlayer player, IClub club) {
+        if (club == null || player == null) {
+            return false;
+        }
+
+        return club.isPlayer(player);
+    }
     /**
      * Verifica se as equipas e as teams são nulas e se existe uma equipa com o nome FOLGA
      * Verifica se a cada equipa corresponde a cada club.
@@ -140,10 +207,7 @@ public class Match implements IMatch {
         }
     }
 
-    @Override
-    public void exportToJson() throws IOException {
 
-    }
 
     @Override
     public void addEvent(IEvent iEvent) {
@@ -193,7 +257,46 @@ public class Match implements IMatch {
 
     }
 
-    //TO DO FAZER O EQUALS
+    @Override
+    public void exportToJson() throws IOException {
+
+        String fileName = "src/Files/saves/matches/Match_"+this.homeClub.getCode()+"VS"+this.awayClub.getCode()+".json";
+        File file = new File(fileName);
+        file.createNewFile();
+
+        JSONObject object =  getMatchJson();
+        FileWriter fileWriter = new FileWriter(file);
+        try {
+            fileWriter.write(object.toJSONString());
+            System.out.println("Match exportado com sucesso para: " + fileName);
+        }catch (IOException e){
+            System.out.println("Erro ao exportar o Match para o arquivo: " + fileName);
+        }finally {
+            fileWriter.close();
+        }
+    }
+    public JSONObject getMatchJson() {
+        JSONObject object = new JSONObject();
+        object.put("homeClub", this.homeClub.getCode());
+        object.put("awayClub",this.awayClub.getCode());
+        object.put("homeGoals", this.homeGoals);
+        object.put("awayGoals", this.awayGoals);
+        object.put("played", this.pleayed);
+        // Teams (se existirem)
+        if(this.homeTeam != null) {
+            object.put("homeTeam", ((Team)this.homeTeam).getJsonObj());
+        }
+        if(this.awayTeam != null) {
+            object.put("awayTeam", ((Team)this.awayTeam).getJsonObj());
+        }
+
+        // Events
+        if(this.events != null) {
+            object.put("events", ((EventManager)this.events).getEventJson() );
+        }
+
+        return object;
+    }
 
 
     @Override

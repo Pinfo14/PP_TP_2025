@@ -5,14 +5,22 @@ import league.League;
 import league.Season;
 import reader.Reader;
 
+import java.io.IOException;
+
 public class LeagueManagement {
 
     private static final int INITIAL_LEAGUE = 1;
     private static final int INCREMENT_FACTOR = 2;
     private League[] league = new League[INITIAL_LEAGUE];  // Inicializado
     private int countLeague;
+    private SaveGame saveGame ;
 
-    public void startNewGame() {
+
+    public LeagueManagement() {
+        this.saveGame = new SaveGame();
+    }
+
+    public void startNewGame( boolean useDefaultData) {
 
         Reader reader = new Reader();
         int year;
@@ -34,7 +42,7 @@ public class LeagueManagement {
         season = new Season(leagueName, year);
         league[countLeague].createSeason(season);
 
-        SeasonManagement seasonManagement = new SeasonManagement();
+        SeasonManagement seasonManagement = new SeasonManagement(useDefaultData);
         seasonManagement.run(league[countLeague].getSeason(year));
 
         countLeague++;
@@ -57,5 +65,15 @@ public class LeagueManagement {
 
         System.arraycopy(league, 0, newArray, 0, league.length);
         league = newArray;
+    }
+
+    public void saveGame() {
+        try {
+            this.saveGame.saveGame(league[countLeague]);
+            System.out.println("Jogo guardado com sucesso.");
+        } catch (IOException e) {
+           System.out.println(e.getMessage());
+        }
+
     }
 }

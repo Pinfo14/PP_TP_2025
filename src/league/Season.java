@@ -6,6 +6,9 @@ import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import simulation.MatchSimulator;
 import team.Club;
 
 import java.io.IOException;
@@ -33,6 +36,22 @@ public class Season implements ISeason {
     private int pointsPerDraw;
     private int currentRound;
 
+
+
+    public Season(String leagueName, int year, int coachingClubIndex, int currentRound,
+                  int pointsPerWin, int pointsPerDraw, int pointsPerLoss) {
+        this.maxClubs = 18;
+        this.name = leagueName;
+        this.year = year;
+        this.clubs = new Club[maxClubs];
+        this.standings = new IStanding[maxClubs];
+        this.numClubs = 0;
+        this.pointsPerLoss = pointsPerLoss;
+        this.pointsPerWin = pointsPerWin;
+        this.pointsPerDraw = pointsPerDraw;
+        this.currentRound = currentRound;
+        this.coachingClubIndex = coachingClubIndex;
+    }
 
 
     public Season(String leagueName, int year) {
@@ -292,6 +311,32 @@ public class Season implements ISeason {
     @Override
     public void exportToJson() throws IOException {
 
+    }
+
+    private JSONArray getStandingsJson(){
+        JSONArray jsonArray = new JSONArray();
+
+        for(int i = 0; i < this.standings.length; i++) {
+            if(this.standings[i] != null) {
+                jsonArray.add(((Standing)this.standings[i]).getJsonObj());
+            }
+        }
+        return jsonArray;
+    }
+
+    public JSONObject getSeasonJson() {
+        JSONObject seasonJson = new JSONObject();
+        seasonJson.put("name", this.name);
+        seasonJson.put("year", this.year);
+        seasonJson.put("numberOfTeams", this.numClubs);
+        seasonJson.put("coachingClubIndex", this.coachingClubIndex);
+        seasonJson.put("pointsPerWin", this.pointsPerWin);
+        seasonJson.put("pointsPerDraw", this.pointsPerDraw);
+        seasonJson.put("pointsPerLoss", this.pointsPerLoss);
+        seasonJson.put("currentRound", this.currentRound);
+        seasonJson.put("standings", this.getStandingsJson());
+        seasonJson.put("schedule",( (Schedule) this.schedule).getJsonSchedule());
+        return seasonJson;
     }
 
     private boolean clubExist(IClub iclub) {

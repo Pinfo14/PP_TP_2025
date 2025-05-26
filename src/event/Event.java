@@ -1,6 +1,7 @@
 package event;
 
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
+import org.json.simple.JSONObject;
 
 import java.io.IOException;
 
@@ -24,10 +25,10 @@ public abstract class Event implements IEvent {
         return this.minute;
     }
 
-    @Override
-    public void exportToJson() throws IOException {
-        // Implementação futura
-    }
+
+
+   public abstract JSONObject getEventJson();
+    public abstract String getEventName();
 
     @Override
     public boolean equals(Object o) {

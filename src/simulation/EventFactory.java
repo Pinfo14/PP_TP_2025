@@ -2,6 +2,7 @@ package simulation;
 
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
+import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import player.Player;
 import event.*;
 
@@ -22,7 +23,7 @@ public class EventFactory {
         desc = (isHome ? "[Casa] " : "[Fora] ")
                 + "Passe bem-sucedido de " + autor.getName()
                 + " para " + receptor.getName();
-        return new PassEvent(desc, minuto);
+        return new PassEvent(desc, minuto,autor);
     }
 
 
@@ -38,7 +39,7 @@ public class EventFactory {
         if (!sucesso) {
             desc = (isHome ? "[Casa] " : "[Fora] ")
                     + "Remate defendido por " + goolKepeer.getName();
-            return new GoalKickEvent(minute, desc);
+            return new GoalKickEvent(minute, desc,gk);
         }
 
         desc = "GOLOOO para equipa da " + (isHome ? "casa" : "fora");
@@ -73,7 +74,7 @@ public class EventFactory {
                 + "Falta de " + maker.getName()
                 + " sobre " + victim.getName()
                 + " (assinalada)";
-        return new FoulEvent(desc, min);
+        return new FoulEvent(desc, min, maker, victim);
     }
 
 

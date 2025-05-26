@@ -1,0 +1,402 @@
+{
+  "country": "Portugal",
+  "code": "SLB",
+  "players": [
+    {
+      "number": 75,
+      "nationality": "Portuguese",
+      "name": "André Gomes",
+      "attributes": {
+        "defence": 86,
+        "stamina": 61,
+        "shooting": 7,
+        "weight": 91.84,
+        "passing": 18,
+        "preferredFoot": "Left",
+        "speed": 54,
+        "height": 1.82
+      },
+      "position": "Goalkeeper",
+      "birthDate": "2004-10-20"
+    },
+    {
+      "number": 24,
+      "nationality": "Portuguese",
+      "name": "Samuel Soares",
+      "attributes": {
+        "defence": 88,
+        "stamina": 60,
+        "shooting": 18,
+        "weight": 65.44,
+        "passing": 10,
+        "preferredFoot": "Right",
+        "speed": 49,
+        "height": 1.65
+      },
+      "position": "Goalkeeper",
+      "birthDate": "2002-06-15"
+    },
+    {
+      "number": 1,
+      "nationality": "Ukrainian",
+      "name": "Anatoliy Trubin",
+      "attributes": {
+        "defence": 98,
+        "stamina": 57,
+        "shooting": 9,
+        "weight": 65.62,
+        "passing": 13,
+        "preferredFoot": "Left",
+        "speed": 49,
+        "height": 1.91
+      },
+      "position": "Goalkeeper",
+      "birthDate": "2001-08-01"
+    },
+    {
+      "number": 3,
+      "nationality": "Spanish",
+      "name": "Álvaro Carreras",
+      "attributes": {
+        "defence": 56,
+        "stamina": 62,
+        "shooting": 37,
+        "weight": 77.3,
+        "passing": 34,
+        "preferredFoot": "Both",
+        "speed": 75,
+        "height": 1.77
+      },
+      "position": "Defender",
+      "birthDate": "2003-03-23"
+    },
+    {
+      "number": 4,
+      "nationality": "Portuguese",
+      "name": "António Silva",
+      "attributes": {
+        "defence": 37,
+        "stamina": 75,
+        "shooting": 27,
+        "weight": 63.2,
+        "passing": 39,
+        "preferredFoot": "Right",
+        "speed": 55,
+        "height": 1.67
+      },
+      "position": "Defender",
+      "birthDate": "2003-10-30"
+    },
+    {
+      "number": 30,
+      "nationality": "Argentine",
+      "name": "Nicolás Otamendi",
+      "attributes": {
+        "defence": 65,
+        "stamina": 77,
+        "shooting": 46,
+        "weight": 65.74,
+        "passing": 56,
+        "preferredFoot": "Right",
+        "speed": 76,
+        "height": 1.86
+      },
+      "position": "Defender",
+      "birthDate": "1988-02-12"
+    },
+    {
+      "number": 6,
+      "nationality": "Danish",
+      "name": "Alexander Bah",
+      "attributes": {
+        "defence": 90,
+        "stamina": 62,
+        "shooting": 43,
+        "weight": 62.75,
+        "passing": 39,
+        "preferredFoot": "Left",
+        "speed": 74,
+        "height": 1.95
+      },
+      "position": "Defender",
+      "birthDate": "1997-12-09"
+    },
+    {
+      "number": 81,
+      "nationality": "Albanian",
+      "name": "Adrian Bajrami",
+      "attributes": {
+        "defence": 65,
+        "stamina": 65,
+        "shooting": 33,
+        "weight": 89.0,
+        "passing": 52,
+        "preferredFoot": "Right",
+        "speed": 54,
+        "height": 1.83
+      },
+      "position": "Defender",
+      "birthDate": "2002-04-05"
+    },
+    {
+      "number": 37,
+      "nationality": "German",
+      "name": "Jan-Niklas Beste",
+      "attributes": {
+        "defence": 50,
+        "stamina": 77,
+        "shooting": 38,
+        "weight": 94.35,
+        "passing": 53,
+        "preferredFoot": "Left",
+        "speed": 71,
+        "height": 1.96
+      },
+      "position": "Defender",
+      "birthDate": "1999-01-04"
+    },
+    {
+      "number": 28,
+      "nationality": "Burkinabe",
+      "name": "Issa Kaboré",
+      "attributes": {
+        "defence": 82,
+        "stamina": 78,
+        "shooting": 20,
+        "weight": 67.98,
+        "passing": 48,
+        "preferredFoot": "Right",
+        "speed": 64,
+        "height": 1.67
+      },
+      "position": "Defender",
+      "birthDate": "2001-05-12"
+    },
+    {
+      "number": 71,
+      "nationality": "Portuguese",
+      "name": "Leandro Santos",
+      "attributes": {
+        "defence": 67,
+        "stamina": 64,
+        "shooting": 34,
+        "weight": 92.02,
+        "passing": 54,
+        "preferredFoot": "Right",
+        "speed": 61,
+        "height": 1.89
+      },
+      "position": "Defender",
+      "birthDate": "2005-09-28"
+    },
+    {
+      "number": 61,
+      "nationality": "Portuguese",
+      "name": "Florentino Luís",
+      "attributes": {
+        "defence": 57,
+        "stamina": 73,
+        "shooting": 55,
+        "weight": 66.56,
+        "passing": 73,
+        "preferredFoot": "Right",
+        "speed": 64,
+        "height": 1.87
+      },
+      "position": "Midfielder",
+      "birthDate": "1998-05-19"
+    },
+    {
+      "number": 8,
+      "nationality": "Norwegian",
+      "name": "Fredrik Aursnes",
+      "attributes": {
+        "defence": 40,
+        "stamina": 71,
+        "shooting": 57,
+        "weight": 81.76,
+        "passing": 70,
+        "preferredFoot": "Left",
+        "speed": 70,
+        "height": 1.86
+      },
+      "position": "Midfielder",
+      "birthDate": "1994-03-13"
+    },
+    {
+      "number": 10,
+      "nationality": "Turkish",
+      "name": "Orkun Kökçü",
+      "attributes": {
+        "defence": 37,
+        "stamina": 61,
+        "shooting": 53,
+        "weight": 76.64,
+        "passing": 67,
+        "preferredFoot": "Left",
+        "speed": 85,
+        "height": 1.71
+      },
+      "position": "Midfielder",
+      "birthDate": "2002-12-29"
+    },
+    {
+      "number": 11,
+      "nationality": "Argentine",
+      "name": "Ángel Di María",
+      "attributes": {
+        "defence": 25,
+        "stamina": 65,
+        "shooting": 94,
+        "weight": 92.85,
+        "passing": 68,
+        "preferredFoot": "Right",
+        "speed": 90,
+        "height": 1.69
+      },
+      "position": "Forward",
+      "birthDate": "1988-02-14"
+    },
+    {
+      "number": 85,
+      "nationality": "Portuguese",
+      "name": "Renato Sanches",
+      "attributes": {
+        "defence": 24,
+        "stamina": 67,
+        "shooting": 50,
+        "weight": 60.24,
+        "passing": 76,
+        "preferredFoot": "Left",
+        "speed": 62,
+        "height": 1.93
+      },
+      "position": "Midfielder",
+      "birthDate": "1997-08-18"
+    },
+    {
+      "number": 16,
+      "nationality": "Portuguese",
+      "name": "Manu Silva",
+      "attributes": {
+        "defence": 26,
+        "stamina": 75,
+        "shooting": 58,
+        "weight": 90.23,
+        "passing": 80,
+        "preferredFoot": "Left",
+        "speed": 80,
+        "height": 1.96
+      },
+      "position": "Midfielder",
+      "birthDate": "2000-06-23"
+    },
+    {
+      "number": 79,
+      "nationality": "Portuguese",
+      "name": "Hugo Sequeira",
+      "attributes": {
+        "defence": 24,
+        "stamina": 57,
+        "shooting": 78,
+        "weight": 91.35,
+        "passing": 64,
+        "preferredFoot": "Right",
+        "speed": 75,
+        "height": 1.71
+      },
+      "position": "Forward",
+      "birthDate": "2002-04-01"
+    },
+    {
+      "number": 84,
+      "nationality": "Portuguese",
+      "name": "João Rêgo",
+      "attributes": {
+        "defence": 23,
+        "stamina": 55,
+        "shooting": 72,
+        "weight": 85.21,
+        "passing": 67,
+        "preferredFoot": "Left",
+        "speed": 73,
+        "height": 1.9
+      },
+      "position": "Forward",
+      "birthDate": "2004-03-25"
+    },
+    {
+      "number": 21,
+      "nationality": "Portuguese",
+      "name": "Gonçalo Ramos",
+      "attributes": {
+        "defence": 21,
+        "stamina": 46,
+        "shooting": 75,
+        "weight": 89.97,
+        "passing": 49,
+        "preferredFoot": "Left",
+        "speed": 95,
+        "height": 1.87
+      },
+      "position": "Forward",
+      "birthDate": "2001-06-20"
+    },
+    {
+      "number": 77,
+      "nationality": "Serbian",
+      "name": "Luka Jovic",
+      "attributes": {
+        "defence": 23,
+        "stamina": 66,
+        "shooting": 81,
+        "weight": 92.07,
+        "passing": 55,
+        "preferredFoot": "Left",
+        "speed": 86,
+        "height": 1.86
+      },
+      "position": "Forward",
+      "birthDate": "1997-01-23"
+    },
+    {
+      "number": 50,
+      "nationality": "Brazilian",
+      "name": "David Neres",
+      "attributes": {
+        "defence": 21,
+        "stamina": 56,
+        "shooting": 94,
+        "weight": 75.69,
+        "passing": 43,
+        "preferredFoot": "Left",
+        "speed": 71,
+        "height": 1.95
+      },
+      "position": "Forward",
+      "birthDate": "1997-03-03"
+    },
+    {
+      "number": 27,
+      "nationality": "Portuguese",
+      "name": "Rafa Silva",
+      "attributes": {
+        "defence": 19,
+        "stamina": 43,
+        "shooting": 77,
+        "weight": 88.19,
+        "passing": 42,
+        "preferredFoot": "Right",
+        "speed": 92,
+        "height": 1.91
+      },
+      "position": "Forward",
+      "birthDate": "1993-05-17"
+    }
+  ],
+  "playerCount": 23,
+  "name": "Sport Lisboa e Benfica",
+  "stadiumName": "Estádio da Luz",
+  "logo": "https:\/\/media.api-sports.io\/football\/teams\/211.png",
+  "foundedYear": 1904
+}

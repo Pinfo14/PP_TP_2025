@@ -5,8 +5,11 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IFormation;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import player.Player;
 
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -54,7 +57,11 @@ public class Team implements ITeam {
     public IPlayer[] getPlayers() {
         IPlayer[] players = new IPlayer[this.playerCount];
         for (int i = 0; i < this.playerCount; i++) {
-            players[i] = this.squad[i];
+            try {
+                players[i] = ((Player)this.squad[i]).clone();
+            } catch (CloneNotSupportedException e) {
+                System.out.println("Erro ao clonar o player");
+            }
         }
         return players;
     }
@@ -110,14 +117,51 @@ public class Team implements ITeam {
         return 0;
     }
 
+
     @Override
     public void setFormation(IFormation iFormation) {
         this.formation = iFormation;
     }
 
+
+
+    public JSONObject getJsonObj() {
+        JSONObject team = new JSONObject();
+        team.put("Club",this.club.getCode());
+        team.put("Formation",this.formation.getDisplayName());
+        team.put("Squad",getPlayerNamesJson());
+        team.put("PlayerCount",this.playerCount);
+        team.put("Defense",this.defense);
+        team.put("Midfield",this.midfield);
+        team.put("Forward",this.forward);
+        team.put("Striker",this.striker);
+        team.put("Goalkeeper",this.goalkeeper);
+        return team;
+    }
+
+    public JSONArray getPlayerNamesJson() {
+        JSONArray playerNames = new JSONArray();
+        for (int i = 0; i < this.playerCount; i++) {
+            if (this.squad[i] != null) {
+                playerNames.add(this.squad[i].getName());
+            }
+        }
+        return playerNames;
+    }
+
     @Override
     public void exportToJson() throws IOException {
 
+        String filename = this.club.getName().replaceAll(" ", "_") + "_team.json";
+        String path = "src/Files/saves/teams/" + filename;
+
+        FileWriter writer = new FileWriter(path);
+        try {
+            writer.write(getJsonObj().toJSONString());
+            System.out.println("Equipe exportada com sucesso para: " + path);
+        } finally {
+            writer.close();
+        }
     }
 
     @Override

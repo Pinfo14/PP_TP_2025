@@ -19,7 +19,7 @@ public class PlayerAttributes implements Cloneable {
 
     public PlayerAttributes() {}
 
-    private PlayerAttributes(int shooting, int passing, int stamina, int speed, float height, float weight, int defence,PreferredFoot preferredFoot) {
+    public PlayerAttributes(int shooting, int passing, int stamina, int speed, float height, float weight, int defence,PreferredFoot preferredFoot) {
         this.shooting = shooting;
         this.passing = passing;
         this.stamina = stamina;

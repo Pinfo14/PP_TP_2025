@@ -15,10 +15,37 @@ public class SeasonManagement {
 
     private IClub[] clubesLoaded ;
 
+    private boolean defaultData;
+
+
     public SeasonManagement() {
-        Imports imports = new Imports();
-        clubesLoaded  = imports.importClubs();
+        this.defaultData = false;
+        loadDefaultClubs();
     }
+    public SeasonManagement(boolean useDefaultData) {
+       if(useDefaultData){
+          loadDefaultClubs();
+       }else {
+           loadSavedClubs();
+       }
+    }
+
+
+    private void loadDefaultClubs() {
+        System.out.println("A carregar dados default...");
+        Imports imports = new Imports();
+       this.clubesLoaded = imports.importPlayersToClub();
+
+    }
+
+    private void loadSavedClubs() {
+        System.out.println("A carregar jogo guardado...");
+        // Aqui implementarias o loading dos saves
+
+        // TODO: Implementar loading real dos saves
+
+    }
+
 
     private int countClubsLoded() {
         int count = 0;
@@ -124,6 +151,8 @@ public class SeasonManagement {
                     // TODO: Implementar lógica para salvar dados, se necessário
                     break;
             }
+            SaveGame saveGame = new SaveGame();
+
         } while (option != 0);
     }
 

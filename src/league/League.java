@@ -3,6 +3,7 @@ package league;
 import com.ppstudios.footballmanager.api.contracts.league.ILeague;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import netscape.javascript.JSObject;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
@@ -133,17 +134,43 @@ public class League implements ILeague {
         return seasons[seasonIndex];
     }
 
+
+    private JSONArray getSeasonJson() {
+        JSONArray seasonJson = new JSONArray();
+
+        for (int i = 0; i < this.numberOfSeasons; i++) {
+            if(seasons[i] != null) {
+                seasonJson.add(((Season)this.seasons[i]).getSeasonJson());
+            }
+        }
+        return seasonJson;
+    }
+
+    public JSONObject getLeagueJson() {
+        JSONObject leagueJson = new JSONObject();
+        leagueJson.put("name",this.leagueName);
+        leagueJson.put("numberOfSeasons",this.numberOfSeasons);
+        leagueJson.put("seasons",this.getSeasonJson());
+        return leagueJson;
+    }
+
+
     @Override
     public void exportToJson() throws IOException {
         //cria o save file e dps chama o export do season e sempre assim em cascada fazendo append
-        JSONObject leagueJson = new JSONObject();
+        JSONObject leagueJson = getLeagueJson();
 
-        leagueJson.put("name",this.leagueName);
-        leagueJson.put("numberOfSeasons",this.numberOfSeasons);
+        String fileName ="src/Files/saves/league/"+this.leagueName + ".json";
+        FileWriter fileWriter = new FileWriter(fileName);
 
-        for (int i = 0; i < this.numberOfSeasons; i++) {
-            //seasons
-              //
+        try {
+            fileWriter.write(leagueJson.toJSONString());
+            System.out.println("League exportado com sucesso para: " + fileName);
+        }catch (IOException e) {
+            System.out.println("Erro ao exportar a league para o arquivo: " + fileName);
+        }finally {
+
+            fileWriter.close();
         }
 
     }

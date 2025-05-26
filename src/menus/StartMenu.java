@@ -1,6 +1,7 @@
 package menus;
 
 import management.LeagueManagement;
+import management.SaveGame;
 import reader.Reader;
 
 public class StartMenu {
@@ -16,10 +17,12 @@ public class StartMenu {
              switch (opcao) {
                  case 1:
                      LeagueManagement leagueManagement = new LeagueManagement();
-                     leagueManagement.startNewGame();
+                     leagueManagement.startNewGame(true);
+                     break;
                  default:
                      //import os dados guardados.
              }
+
 
         } while (opcao != 0);
 
