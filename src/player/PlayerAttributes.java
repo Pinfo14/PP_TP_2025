@@ -127,15 +127,17 @@ public class PlayerAttributes {
 
     @Override
     public String toString() {
-        String s ="Atributos do jogador: \n";
-        s+="Defence:"+this.defence+"\n";
-        s+="Shooting:"+this.shooting;
-        s+="\nPassing:"+this.passing;
-        s+="\nStamina:"+this.stamina;
-        s+="\nSpeed:"+this.speed;
-        s+="\nHeight:"+this.height;
-        s+="\nWeight:"+this.weight;
-        s+="\nPrefered Foot: "+this.preferredFoot;
-        return s;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Atributos do jogador: ");
+        sb.append("Defence:").append(this.defence).append(", ");
+        sb.append("Shooting:").append(this.shooting).append(", ");
+        sb.append("Passing:").append(this.passing).append(", ");
+        sb.append("Stamina:").append(this.stamina).append(", ");
+        sb.append("Speed:").append(this.speed).append(", ");
+        sb.append("Height:").append(this.height).append(", ");
+        sb.append("Weight:").append(this.weight).append(", ");
+        sb.append("Preferred Foot:").append(this.preferredFoot);
+        return sb.toString();
     }
+
 }

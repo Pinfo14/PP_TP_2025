@@ -1,5 +1,5 @@
 package demos;
-
+/*
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.team.IFormation;
@@ -57,7 +57,8 @@ public class TeamDemo {
 
         IPlayer[] players ={NotInteam,player,player2,player3,player4,player5,player6};
 
-
+        System.out.println(player.toString());
+        System.out.println(player2.toString());
 
         IPlayerSelector selector = new RandomPlayerSelector();
 
@@ -73,7 +74,7 @@ public class TeamDemo {
 
         System.out.println("\n\n TEAM \n\n");
         System.out.println(formation4321.getDisplayName());
-        ITeam team = new Team(club[0], formation4321);
+        /**ITeam team = new Team(club[0], formation4321);
         team.setFormation(formation4321);
 
 
@@ -88,5 +89,8 @@ public class TeamDemo {
 
 
         System.out.println(team);
+
+
     }
 }
+*/

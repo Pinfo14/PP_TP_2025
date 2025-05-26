@@ -85,7 +85,7 @@ public class Schedule  implements ISchedule {
             throw new IllegalArgumentException("Round not valid");
         }
 
-        IMatch[] matches = new IMatch[calculateMatchesPerRound()];
+        IMatch[] matches = new IMatch[calculateMatchesPerRound()+1];
         int idx = 0;
 
         for(IMatch match : games) {

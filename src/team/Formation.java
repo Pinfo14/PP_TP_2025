@@ -91,7 +91,6 @@ public class Formation implements IFormation {
         str.append(this.numMidfielders);
         str.append("-");
         str.append(this.numAttackers);
-        str.append("-");
 
         return str.toString();
     }

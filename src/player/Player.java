@@ -133,14 +133,11 @@ public class Player implements IPlayer {
 
     @Override
     public String toString() {
-        return
-                "\n--------------\n"+
-                "name='" + name + "\n" +
-                        "birthDate=" + birthDate + "\n" +
-                        "nationality='" + nationality + "\n" +
-                        "position=" + position + "\n" +
-                        "number=" + number + "\n" +
-                        "\n\n" + attributes.toString();
+        StringBuilder sb = new StringBuilder();
+        sb.append(name).append("(").append(number).append(") | ").append(position).append(" | ").append(birthDate).append(" | ").append(nationality).append(" | ");
+        sb.append("\n     ").append(attributes.toString());
+
+        return sb.toString();
 
     }
 

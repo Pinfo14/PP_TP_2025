@@ -13,10 +13,24 @@ public class FormationManagement {
 
     public FormationManagement() {
         formations = new Formation[INITIAL_FORMATIONS];
-        this.formations[0] = new Formation( 4, 3, 2);
-        this.formations[1] = new Formation(4, 3, 3);
-        this.formations[2] = new Formation(4, 4, 2);
-        this.countFormations=3;
+        int idex = 0;
+        try {
+            this.formations[idex++] = new Formation(5, 3, 2);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+        try {
+            this.formations[idex++] = new Formation(4, 3, 3);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+        try {
+            this.formations[idex++] = new Formation(4, 4, 2);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
+        this.countFormations = idex;
+
     }
 
     public IFormation getFormation(int index) {
@@ -31,8 +45,12 @@ public class FormationManagement {
     }
 
     public void addFormation(int numDefenders, int numMidfielders, int numAttackers) {
-        formations[countFormations] = new Formation(numDefenders, numMidfielders, numAttackers);
-        countFormations++;
+        try {
+            formations[countFormations] = new Formation(numDefenders, numMidfielders, numAttackers);
+            countFormations++;
+        }catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void listFormations() {
