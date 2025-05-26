@@ -67,6 +67,8 @@ public class SeasonManagement {
             season = (Season) iSeason;
         }
 
+        FormationManagement formations = new FormationManagement();
+
         do {
             SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName(), season.getCurrentRound());
             option = reader.readInt(0, 7, "Selecione uma opção: ");
@@ -129,7 +131,7 @@ public class SeasonManagement {
                     if(season.getCoachingClubIndex() != -1 && season.getNumberOfCurrentTeams() > 0) {
                         RoundManagement roundManagement = new RoundManagement();
                         System.out.println(season.getCurrentRound());
-                        roundManagement.run(season);
+                        roundManagement.run(season, formations);
 
                     }else{
                         System.out.println("Selecione um clube para treinar.");
