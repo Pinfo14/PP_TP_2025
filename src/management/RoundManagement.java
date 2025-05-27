@@ -206,7 +206,9 @@ public class RoundManagement {
                 System.out.println(ev);
             }
         }
+        match.setPlayed();
 
+        System.out.println( match.getWinner().getClub().getName() + " ganhou o jogo.");
 
 
         System.out.println("Golos Casa: " + simulator.getHomeGoals());

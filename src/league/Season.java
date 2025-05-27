@@ -37,6 +37,7 @@ public class Season implements ISeason {
     private int pointsPerWin;
     private int pointsPerDraw;
     private int currentRound;
+    private MatchSimulator matchSimulator;
 
 
 
@@ -224,27 +225,33 @@ public class Season implements ISeason {
 
     @Override
     public boolean isSeasonComplete() {
-
-        //verifica se os jogos estao todos realizados
-
-
-        return false;
+        boolean isPLayed = false;
+        for(IMatch match : this.schedule.getAllMatches()) {
+            isPLayed = match.isPlayed();
+        }
+        return isPLayed;
     }
 
     @Override
     public void resetSeason() {
-
+        for (IMatch match : this.schedule.getAllMatches()) {
+            match.setPlayed();
+        }
     }
 
     @Override
     public String displayMatchResult(IMatch iMatch) {
-        return "";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Match Result: ");
+        sb.append(iMatch.getWinner().getClub().getName());
+        return sb.toString();
     }
 
     @Override
     public void setMatchSimulator(MatchSimulatorStrategy matchSimulatorStrategy) {
-
+        this.matchSimulator = matchSimulator;
     }
+
 
     @Override
     public IStanding[] getLeagueStandings() {

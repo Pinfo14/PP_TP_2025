@@ -80,42 +80,24 @@ public class Match implements IMatch {
            this.pleayed = false;
         }else {
             pleayed = true;
+            calculateGoalsFromEvents();
         }
     }
 
-    public void calculateGoalsFromEvents() {
+    private void calculateGoalsFromEvents() {
 
         IEvent[] allEvents = this.events.getEvents();
 
-        for (IEvent event : allEvents) {
-            if (event instanceof GoalEvent) {
-                GoalEvent goalEvent = (GoalEvent) event;
-
-                // Verifica se o jogador que marcou pertence à equipa da casa ou visitante
-                if (isPlayerFromTeam(goalEvent.getPlayer(), homeTeam)) {
-                    this.homeGoals++;
-                } else if (isPlayerFromTeam(goalEvent.getPlayer(), awayTeam)) {
-                    this.awayGoals++;
-                }
-            }
+        if (allEvents == null) {
+            this.homeGoals = 0;
+            this.awayGoals = 0;
+            return;
         }
+
+        this.homeGoals = getTotalByEvent(GoalEvent.class, homeClub);
+        this.awayGoals = getTotalByEvent(GoalEvent.class, awayClub);
     }
 
-    /**
-     * Verifica se um jogador pertence a uma equipa
-     */
-    private boolean isPlayerFromTeam(com.ppstudios.footballmanager.api.contracts.player.IPlayer player, ITeam team) {
-        if (team == null || player == null) {
-            return false;
-        }
-        IPlayer[] teamPlayers = team.getPlayers();
-        for (IPlayer teamPlayer : teamPlayers) {
-            if (teamPlayer != null && teamPlayer.equals(player)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     @Override
     public int getTotalByEvent(Class aClass, IClub iClub) {
