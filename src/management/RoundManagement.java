@@ -1,6 +1,7 @@
 package management;
 
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.IFormation;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
@@ -9,6 +10,7 @@ import match.Match;
 import menus.ListAllPlayers;
 import menus.RoundMenu;
 import menus.SeasonMenu;
+import player.Player;
 import reader.Reader;
 import team.Formation;
 import team.Team;
@@ -38,17 +40,22 @@ public class RoundManagement {
                     formationManagement.addFormation(defense, middle, attackers);
             }
         } while (indexFormation==0);
-        Formation formation = (Formation) formationManagement.getFormation(indexFormation);
-        setCoachFormation(season, formation);
+        //Formation formation = (Formation) formationManagement.getFormation(indexFormation);
+        //setCoachFormation(season, formation);
 
+        //CRIAR MENU PARA AVISAR QUE VAI ESCOLHER JOGADORES
         System.out.println("Selecione os jogadores: ");
         Utils.waitEnter();
 
+        IPlayer[] players = createTeamPlayers(season);
 
         //Seleciona jogadores
 
 
+
+
     }
+
     private void setCoachFormation(Season season, IFormation formation) {
         if (season == null || formation == null) {
             System.out.println("NULL - Season/formation");
@@ -124,6 +131,42 @@ public class RoundManagement {
         }
 
         return "desconhecido";
+    }
+
+    private IClub getClub(Season season) {
+        return season.getCurrentClubs()[season.getCoachingClubIndex()];
+    }
+
+    private IPlayer[] createTeamPlayers(Season season) {
+        int countPlayers = 0, index = -1;
+        Reader reader = new Reader();
+        boolean repeted;
+        IPlayer[] players = getClub(season).getPlayers();
+        IPlayer[] teamPlayers = new IPlayer[11];
+
+        ListAllPlayers.indexPlayer(players);
+        do{
+            repeted = false;
+            index = reader.readInt(1,players.length,"Jogador a adicionar: ");
+            if(index != -1) {
+                for(int i = 0; i < countPlayers; i++) {
+                    if (teamPlayers[i].equals(players[index])) {
+                        repeted = true;
+                        System.out.println("Jogador não encontrado.");
+                    }
+                }
+                if(!repeted) {
+                    teamPlayers[countPlayers] = players[index-1];
+                    countPlayers++;
+                    System.out.println("Jogador adicionado com sucesso.");
+                }else{
+                    System.out.println("Jogador ja esta na equipa.");
+                }
+            }
+
+        }while (countPlayers < 11);
+
+        return teamPlayers;
     }
 
 

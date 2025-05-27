@@ -131,15 +131,14 @@ public class PlayerAttributes implements Cloneable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Atributos do jogador: ");
-        sb.append("Defence:").append(this.defence).append(", ");
-        sb.append("Shooting:").append(this.shooting).append(", ");
-        sb.append("Passing:").append(this.passing).append(", ");
-        sb.append("Stamina:").append(this.stamina).append(", ");
-        sb.append("Speed:").append(this.speed).append(", ");
-        sb.append("Height:").append(this.height).append(", ");
-        sb.append("Weight:").append(this.weight).append(", ");
-        sb.append("Preferred Foot:").append(this.preferredFoot);
+        sb.append("Defesa:").append(this.defence).append(", ");
+        sb.append("Remate:").append(this.shooting).append(", ");
+        sb.append("Passe:").append(this.passing).append(", ");
+        sb.append("Resistencia:").append(this.stamina).append(", ");
+        sb.append("Velocidade:").append(this.speed).append(", ");
+        sb.append("Altura:").append(this.height).append(", ");
+        sb.append("Pesso:").append(this.weight).append(", ");
+        //sb.append("Preferred Foot:").append(this.preferredFoot);
         return sb.toString();
     }
 

@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 
 
 /**
@@ -128,19 +129,25 @@ public class Player implements IPlayer, Cloneable {
         return this.attributes.getDefence();
     }
 
+    private int calcAge(){
+        LocalDate hoje = LocalDate.now();
+        if (birthDate != null && !birthDate.isAfter(hoje)) {
+            return Period.between(birthDate, hoje).getYears();
+        } else {
+            return 0;
+        }
+    }
 
 
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(name).append("(").append(number).append(") | ").append(position).append(" | ").append(birthDate).append(" | ").append(nationality).append(" | ");
-        sb.append("\n     ").append(attributes.toString());
+        sb.append(attributes.toString());
 
         return sb.toString();
 
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -156,7 +163,6 @@ public class Player implements IPlayer, Cloneable {
                 && this.nationality.equals(player.nationality)
                 && this.position.equals(player.position);
     }
-
 
     @Override
     public void exportToJson() throws IOException {
@@ -187,9 +193,6 @@ public class Player implements IPlayer, Cloneable {
 
     }
 
-
-
-
     public JSONObject getJsonObject() {
         //cria um json object
         JSONObject player = new JSONObject();
@@ -201,7 +204,6 @@ public class Player implements IPlayer, Cloneable {
         player.put("attributes", this.attributes.getJsonObject());
         return player;
     }
-
 
     @Override
     public Player clone() throws CloneNotSupportedException {
