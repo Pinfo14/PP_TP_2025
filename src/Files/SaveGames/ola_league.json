@@ -13,23 +13,22 @@
         "matches": [
           {
             "awayClub": "VSC",
-            "homeClub": "FCP",
-            "homeTeam": {
-              "Club": "FCP",
+            "awayTeam": {
+              "Club": "VSC",
               "Goalkeeper": true,
               "Forward": 2,
               "Squad": [
-                "Diogo Costa",
-                "Zaidu Sanusi",
-                "Iván Marcano",
-                "Otávio",
-                "Tiago Djaló",
-                "Wendell",
-                "Stephen Eustáquio",
-                "Marko Grujić",
-                "Matheus Uribe",
-                "Mehdi Taremi",
-                "Evanilson"
+                "Rafael Nel",
+                "Conrad Harder",
+                "Daniel Bragança",
+                "Morten Hjulmand",
+                "Hidemasa Morita",
+                "Iván Fresneda",
+                "Ricardo Esgaio",
+                "Zeno Debast",
+                "Ousmane Diomandé",
+                "Eduardo Quaresma",
+                "Diego Callai"
               ],
               "PlayerCount": 11,
               "Formation": "5-3-2",
@@ -37,11 +36,89 @@
               "Midfield": 3,
               "Striker": 0
             },
+            "homeClub": "FCP",
+            "homeTeam": {
+              "Club": "FCP",
+              "Goalkeeper": true,
+              "Forward": 3,
+              "Squad": [
+                "Diogo Costa",
+                "Zaidu Sanusi",
+                "Iván Marcano",
+                "Otávio",
+                "Tiago Djaló",
+                "Stephen Eustáquio",
+                "Marko Grujić",
+                "Matheus Uribe",
+                "Mehdi Taremi",
+                "Evanilson",
+                "Luis Díaz"
+              ],
+              "PlayerCount": 11,
+              "Formation": "4-3-3",
+              "Defense": 4,
+              "Midfield": 3,
+              "Striker": 0
+            },
             "homeGoals": 0,
             "played": false,
             "events": {
-              "eventCount": 0,
-              "events": []
+              "eventCount": 12,
+              "events": [
+                {
+                  "description": "[Casa] Remate defendido por Diego Callai",
+                  "type": "GoalKick",
+                  "autor": "Diego Callai",
+                  "minute": 9
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 19
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 22
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Zaidu Sanusi para Hidemasa Morita",
+                  "type": "PassEvent",
+                  "autor": "Zaidu Sanusi",
+                  "minute": 39
+                },
+                {
+                  "description": "[Casa] Remate defendido por Diego Callai",
+                  "type": "GoalKick",
+                  "autor": "Diego Callai",
+                  "minute": 44
+                },
+                {
+                  "description": "Intervalo ",
+                  "type": "HalftimeEvent",
+                  "minute": 45
+                },
+                {
+                  "description": "[Casa] Remate defendido por Diego Callai",
+                  "type": "GoalKick",
+                  "autor": "Diego Callai",
+                  "minute": 69
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 76
+                },
+                {
+                  "description": "[Fora] Passe bem-sucedido de Zeno Debast para Zaidu Sanusi",
+                  "type": "PassEvent",
+                  "autor": "Zeno Debast",
+                  "minute": 90
+                }
+              ]
             },
             "awayGoals": 0
           },

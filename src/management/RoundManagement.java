@@ -56,13 +56,6 @@ public class RoundManagement {
 
         simulate(match);
 
-
-
-
-
-
-
-
     }
 
     private String getGamesString(Season season) {
