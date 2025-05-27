@@ -44,6 +44,7 @@ public class Team implements ITeam {
         this.midfield = midfield;
         this.forward = forward;
         this.playerCount = 11;
+        this.goalkeeper = true;
     }
 
     public Team(IClub club, IFormation formation){
@@ -228,6 +229,7 @@ public class Team implements ITeam {
 
     private void validatePositionForFormation(IPlayer iPlayer) {
         if (!isValidPositionForFormation(iPlayer.getPosition())) {
+            System.out.println(iPlayer.getPosition().getDescription());
             throw new IllegalStateException("Player: " + iPlayer.getName() + " Posicao " + iPlayer.getPosition().getDescription() + " invalida para a formation");
         }
     }

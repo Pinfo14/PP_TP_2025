@@ -33,12 +33,6 @@ public class ListMatches {
                 away = "-";
             }
 
-            if (round != lastRound && lastRound != -1) {
-                System.out.println("--------+--------------------------------+--------------------------------");
-            }
-
-            lastRound = round;
-
             System.out.println(String.format("%-7s | %-30s | %-30s", mt.getRound(), home, away));
         }
     }

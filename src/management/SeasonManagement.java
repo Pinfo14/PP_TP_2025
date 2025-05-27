@@ -14,7 +14,6 @@ import util.Utils;
 public class SeasonManagement {
 
     private IClub[] clubesLoaded ;
-
     private boolean defaultData;
 
 

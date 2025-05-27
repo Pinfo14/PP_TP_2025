@@ -39,52 +39,24 @@ public class RoundManagement {
                     int attackers = reader.readInt(1,10, "Numero de avançados: ");
                     formationManagement.addFormation(defense, middle, attackers);
             }
+
         } while (indexFormation==0);
-        //Formation formation = (Formation) formationManagement.getFormation(indexFormation);
-        //setCoachFormation(season, formation);
 
-        //CRIAR MENU PARA AVISAR QUE VAI ESCOLHER JOGADORES
-        System.out.println("Selecione os jogadores: ");
-        Utils.waitEnter();
-
-        IPlayer[] players = createTeamPlayers(season);
-
-        //Seleciona jogadores
+        Formation formation = (Formation) formationManagement.getFormation(indexFormation-1);
+        Team team = createTeam(season, formation);
 
 
 
 
-    }
 
-    private void setCoachFormation(Season season, IFormation formation) {
-        if (season == null || formation == null) {
-            System.out.println("NULL - Season/formation");
-            return;
-        }
 
-        int coachingIndex = season.getCoachingClubIndex();
-        IClub[] clubs = season.getCurrentClubs();
-        if (clubs == null || coachingIndex < 0 || coachingIndex >= clubs.length) {
-            System.out.println("Erro - Clube a treinar invalido.");
-            return;
-        }
+        IPlayer[] players = createTeamPlayers(season, formation.getNumDefenders(),formation.getNumMidfielders(),formation.getNumAttackers());
 
-        IClub coachClub = clubs[coachingIndex];
-        IMatch[] matches = season.getMatches(season.getCurrentRound());
-        if (matches == null) {
-            System.out.println("Erro - Nao foi possivel encontrar jogos.");
-            return;
-        }
+        IMatch match = findCoachingClubMatch(season);
+        match.setTeam(new Team(getClub(season), formation, players, formation.getNumDefenders(), formation.getNumMidfielders(), formation.getNumAttackers()));
 
-        for (IMatch match : matches) {
-            try {
-                if (coachClub.equals(match.getHomeClub()) || coachClub.equals(match.getAwayClub())) {
-                    //match.setTeam(new Team(coachClub, formation));
-                }
-            } catch (NullPointerException | IllegalStateException e) {
-                System.out.println("Erro ao definir formação: " + e.getMessage());
-            }
-        }
+        System.out.println(match);
+
     }
 
     private String getGamesString(Season season) {
@@ -105,68 +77,116 @@ public class RoundManagement {
     }
 
     private String getOpponentName(Season season) {
+        IMatch match = findCoachingClubMatch(season);
+        if (match == null) {
+            return "desconhecido";
+        }
+        IClub coachingClub = getCoachingClub(season);
+        if (coachingClub.equals(match.getHomeClub())) {
+            return match.getAwayClub().getName();
+        } else {
+            return match.getHomeClub().getName();
+        }
+    }
+
+    private IMatch findCoachingClubMatch(Season season) {
         if (season == null) {
-            return "desconhecido";
+            return null;
         }
-
         IMatch[] matches = season.getMatches(season.getCurrentRound());
-        if (matches == null || matches.length == 0) {
-            return "desconhecido";
+        IClub coachingClub = getCoachingClub(season);
+        if (matches == null || coachingClub == null) {
+            return null;
         }
+        for (IMatch m : matches) {
+            if (coachingClub.equals(m.getHomeClub()) || coachingClub.equals(m.getAwayClub())) {
+                return m;
+            }
+        }
+        return null;
+    }
 
+    private IClub getCoachingClub(Season season) {
+        if (season == null) {
+            return null;
+        }
         IClub[] clubs = season.getCurrentClubs();
         int coachingClubIndex = season.getCoachingClubIndex();
         if (clubs == null || coachingClubIndex < 0 || coachingClubIndex >= clubs.length) {
-            return "desconhecido";
+            return null;
         }
-        IClub club = clubs[coachingClubIndex];
-
-        for (IMatch match : matches) {
-            if (club.equals(match.getHomeClub())) {
-                return match.getAwayClub().getName();
-            }
-            if (club.equals(match.getAwayClub())) {
-                return match.getHomeClub().getName();
-            }
-        }
-
-        return "desconhecido";
+        return clubs[coachingClubIndex];
     }
 
     private IClub getClub(Season season) {
         return season.getCurrentClubs()[season.getCoachingClubIndex()];
     }
 
-    private IPlayer[] createTeamPlayers(Season season) {
-        int countPlayers = 0, index = -1;
+    private IPlayer[] createTeamPlayers(Season season, int defense, int middle, int attackers) {
         Reader reader = new Reader();
-        boolean repeted;
         IPlayer[] players = getClub(season).getPlayers();
         IPlayer[] teamPlayers = new IPlayer[11];
+        int countPlayers = 0;
+
+        ListAllPlayers.indexPlayer(players);
+
+        int index = reader.readInt(1, players.length, "Indique o GR: ");
+        teamPlayers[countPlayers++] = players[index - 1];
+
+        countPlayers = selectPlayers("defesa", defense,  players, teamPlayers, countPlayers);
+
+        countPlayers = selectPlayers("médio", middle, players, teamPlayers, countPlayers);
+
+        countPlayers = selectPlayers("avançado", attackers, players, teamPlayers, countPlayers);
+
+        return teamPlayers;
+    }
+
+    private int selectPlayers(String posicao, int quantidade, IPlayer[] players, IPlayer[] teamPlayers, int countPlayers) {
+        Reader reader = new Reader();
+        int count = 0;
+
+        while (count < quantidade) {
+
+            boolean repetido = false;
+            int index = reader.readInt(1, players.length, "Indique um " + posicao + ": ");
+            if (index != -1) {
+                for (int i = 0; i < countPlayers; i++) {
+                    if (teamPlayers[i].equals(players[index - 1])) {
+                        repetido = true;
+                        break;
+                    }
+                }
+                if (!repetido) {
+                    teamPlayers[countPlayers++] = players[index - 1];
+                    count++;
+                    System.out.println("Jogador adicionado com sucesso.");
+                } else {
+                    System.out.println("Jogador já está na equipa.");
+                }
+            } else {
+                System.out.println("Índice inválido.");
+            }
+        }
+        return countPlayers;
+    }
+
+    private Team createTeam(Season season, Formation formation) {
+        Team team = new Team(season.getCurrentClubs()[season.getCoachingClubIndex()], formation);
+
+        Reader reader = new Reader();
+        IPlayer[] players = getClub(season).getPlayers();
+        int index = 0, countPlayers = 0;
+
 
         ListAllPlayers.indexPlayer(players);
         do{
-            repeted = false;
-            index = reader.readInt(1,players.length,"Jogador a adicionar: ");
-            if(index != -1) {
-                for(int i = 0; i < countPlayers; i++) {
-                    if (teamPlayers[i].equals(players[index])) {
-                        repeted = true;
-                        System.out.println("Jogador não encontrado.");
-                    }
-                }
-                if(!repeted) {
-                    teamPlayers[countPlayers] = players[index-1];
-                    countPlayers++;
-                    System.out.println("Jogador adicionado com sucesso.");
-                }else{
-                    System.out.println("Jogador ja esta na equipa.");
-                }
-            }
-
+            index = reader.readInt(1, players.length, "Indique um jogador: ");
+            team.addPlayer(players[countPlayers++]);
         }while (countPlayers < 11);
 
-        return teamPlayers;
+
+        return team;
     }
 
 

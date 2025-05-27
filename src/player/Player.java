@@ -58,7 +58,12 @@ public class Player implements IPlayer, Cloneable {
 
     @Override
     public int getAge() {
-        return this.birthDate.getYear() - LocalDate.now().getYear();
+        LocalDate hoje = LocalDate.now();
+        if (birthDate != null && !birthDate.isAfter(hoje)) {
+            return Period.between(birthDate, hoje).getYears();
+        } else {
+            return 0;
+        }
     }
 
     @Override
@@ -127,15 +132,6 @@ public class Player implements IPlayer, Cloneable {
 
     public int getDefence(){
         return this.attributes.getDefence();
-    }
-
-    private int calcAge(){
-        LocalDate hoje = LocalDate.now();
-        if (birthDate != null && !birthDate.isAfter(hoje)) {
-            return Period.between(birthDate, hoje).getYears();
-        } else {
-            return 0;
-        }
     }
 
 
