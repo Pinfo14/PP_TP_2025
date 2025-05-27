@@ -20,13 +20,11 @@ public class SeasonManagement {
 
     public SeasonManagement() {
         this.defaultData = false;
-        loadDefaultClubs();
     }
+
     public SeasonManagement(boolean useDefaultData) {
        if(useDefaultData){
           loadDefaultClubs();
-       }else {
-           loadSavedClubs();
        }
     }
 
@@ -38,13 +36,7 @@ public class SeasonManagement {
 
     }
 
-    private void loadSavedClubs() {
-        System.out.println("A carregar jogo guardado...");
-        // Aqui implementarias o loading dos saves
 
-        // TODO: Implementar loading real dos saves
-
-    }
 
 
     private int countClubsLoded() {

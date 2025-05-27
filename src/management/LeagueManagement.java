@@ -6,14 +6,11 @@ import league.League;
 import league.Season;
 import reader.Reader;
 
-import java.io.IOException;
+
 
 public class LeagueManagement {
 
     private League league ;// Inicializado
-
-
-
 
 
     public void startNewGame( boolean useDefaultData) {
@@ -34,9 +31,10 @@ public class LeagueManagement {
         season = new Season(leagueName, year);
         league.createSeason(season);
 
-        SeasonManagement seasonManagement = new SeasonManagement(useDefaultData);
-        seasonManagement.run(league.getSeason(year));
-
+        if(useDefaultData) {
+            SeasonManagement seasonManagement = new SeasonManagement(true);
+            seasonManagement.run(league.getSeason(year));
+        }
     }
 
     public ILeague getLeague(){

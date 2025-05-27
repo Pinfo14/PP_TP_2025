@@ -1,0 +1,206 @@
+{
+  "numberOfSeasons": 1,
+  "seasons": [
+    {
+      "coachingClubIndex": 1,
+      "currentRound": 1,
+      "schedule": {
+        "numberOfClubs": 4,
+        "clubs": [
+          "SLB",
+          "SCP",
+          "VSC",
+          "FCF"
+        ],
+        "matches": [
+          {
+            "awayClub": "FCF",
+            "homeClub": "SLB",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "VSC",
+            "homeClub": "SCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "VSC",
+            "homeClub": "SLB",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SCP",
+            "homeClub": "FCF",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SCP",
+            "homeClub": "SLB",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCF",
+            "homeClub": "VSC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SLB",
+            "homeClub": "FCF",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SCP",
+            "homeClub": "VSC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SLB",
+            "homeClub": "VSC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCF",
+            "homeClub": "SCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SLB",
+            "homeClub": "SCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "VSC",
+            "homeClub": "FCF",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          }
+        ],
+        "numberOfRounds": 6
+      },
+      "pointsPerWin": 3,
+      "year": 2030,
+      "name": "glu",
+      "pointsPerLoss": 0,
+      "numberOfTeams": 4,
+      "pointsPerDraw": 1,
+      "standings": [
+        {
+          "TotalMatches": 0,
+          "Points": 0,
+          "Losses": 0,
+          "GoalDifference": 0,
+          "Club": "SLB",
+          "GoalsConceded": 0,
+          "GoalsScored": 0,
+          "Draws": 0,
+          "Wins": 0
+        },
+        {
+          "TotalMatches": 0,
+          "Points": 0,
+          "Losses": 0,
+          "GoalDifference": 0,
+          "Club": "SCP",
+          "GoalsConceded": 0,
+          "GoalsScored": 0,
+          "Draws": 0,
+          "Wins": 0
+        },
+        {
+          "TotalMatches": 0,
+          "Points": 0,
+          "Losses": 0,
+          "GoalDifference": 0,
+          "Club": "VSC",
+          "GoalsConceded": 0,
+          "GoalsScored": 0,
+          "Draws": 0,
+          "Wins": 0
+        },
+        {
+          "TotalMatches": 0,
+          "Points": 0,
+          "Losses": 0,
+          "GoalDifference": 0,
+          "Club": "FCF",
+          "GoalsConceded": 0,
+          "GoalsScored": 0,
+          "Draws": 0,
+          "Wins": 0
+        }
+      ]
+    }
+  ],
+  "name": "glu"
+}

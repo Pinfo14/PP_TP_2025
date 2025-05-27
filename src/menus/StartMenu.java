@@ -29,6 +29,8 @@ public class StartMenu {
                  case 1:
                      leagueManagement.startNewGame(true);
                      break;
+                 case 2:
+                     leagueManagement.startNewGame(false);
                  default:
                      //import os dados guardados.
              }
@@ -36,7 +38,7 @@ public class StartMenu {
              if (opcao == 0){
                  try {
                      this.saveGame.saveGame(leagueManagement.getLeague());
-                 } catch (IOException e) {
+                 } catch (Exception e) {
                     System.out.println("Erro ao salvar o jogo: " + e.getMessage());
                  }
              }
@@ -62,7 +64,7 @@ public class StartMenu {
         menu.append("║                                                                                        ║\n");
         menu.append("╚════════════════════════════════════════════════════════════════════════════════════════╝\n");
 
-        System.out.print(menu.toString());
+        System.out.print(menu);
 
     }
 

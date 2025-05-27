@@ -16,6 +16,7 @@ public class GenerateTeamDemo {
         for(IClub c : clubs){
           ITeam team = generateTeams.randomTeam(c);
           System.out.println(c.getName());
+          System.out.println(team);
 
         }
     }

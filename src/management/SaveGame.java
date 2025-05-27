@@ -10,7 +10,7 @@ import team.Club;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import java.time.LocalDate;
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -28,7 +28,7 @@ public class SaveGame {
     private static final String LEAGUE_FILE = "_league.json";
 
     public SaveGame() {
-        // Criar diretório de saves se não existir
+
         createSaveDirectory();
     }
 
@@ -138,43 +138,6 @@ public class SaveGame {
         }
     }
 
-    /**
-     * Lista todos os jogos guardados
-     */
-    public String[] listSavedGames() {
-        File directory = new File(SAVE_DIRECTORY);
 
-        if (!directory.exists() || !directory.isDirectory()) {
-            System.out.println("Diretório de saves não existe");
-            return new String[0];
-        }
-
-        String[] files = directory.list();
-
-        if (files == null || files.length == 0) {
-            System.out.println("Não existem jogos guardados");
-            return new String[0];
-        }
-
-        // Filtrar apenas ficheiros de liga
-        String[] leagueFiles = new String[files.length];
-        int count = 0;
-
-        for (String file : files) {
-            if (file.endsWith(LEAGUE_FILE)) {
-                // Remover a extensão para mostrar apenas o nome da liga
-                String leagueName = file.substring(0, file.length() - LEAGUE_FILE.length());
-                leagueFiles[count++] = leagueName;
-            }
-        }
-
-        // Criar array do tamanho correto
-        String[] result = new String[count];
-        for (int i = 0; i < count; i++) {
-            result[i] = leagueFiles[i];
-        }
-
-        return result;
-    }
 
 }
