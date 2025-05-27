@@ -2,18 +2,18 @@ package management;
 
 import com.ppstudios.footballmanager.api.contracts.league.ILeague;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+import imports.ImportSaveGame;
 import league.League;
 import league.Season;
 import reader.Reader;
 
 
-
 public class LeagueManagement {
 
-    private League league ;// Inicializado
+    private League league;// Inicializado
 
 
-    public void startNewGame( boolean useDefaultData) {
+    public void startNewGame(boolean useDefaultData) {
 
         Reader reader = new Reader();
         int year;
@@ -26,18 +26,88 @@ public class LeagueManagement {
         year = reader.readInt(2020, 2040, "Insira o ano que pretende iniciar (entre 2020 e 2040): ");
 
 
-
         league = new League(leagueName);
         season = new Season(leagueName, year);
         league.createSeason(season);
 
-        if(useDefaultData) {
+        if (useDefaultData) {
             SeasonManagement seasonManagement = new SeasonManagement(true);
             seasonManagement.run(league.getSeason(year));
         }
     }
 
-    public ILeague getLeague(){
+    public void loadGame() {
+        ImportSaveGame importSaveGame = new ImportSaveGame();
+        String[] availableLeagues = importSaveGame.listAvailableLeagues();
+
+        if (availableLeagues.length == 0) {
+            System.out.println("\n=== NENHUM JOGO SALVO ENCONTRADO ===");
+            System.out.println("Para carregar um jogo, coloque o ficheiro JSON na pasta:");
+            System.out.println("src/Files/SaveGames/[nome_da_liga]_league.json");
+            System.out.println("\nPor exemplo: src/Files/SaveGames/ola_league.json");
+            return;
+        }
+
+        // Mostrar saves disponíveis
+        System.out.println("\n=== JOGOS SALVOS DISPONÍVEIS ===");
+        for (int i = 0; i < availableLeagues.length; i++) {
+            System.out.println((i + 1) + " - " + availableLeagues[i]);
+        }
+
+        Reader reader = new Reader();
+        int choice = reader.readInt(1, availableLeagues.length, "Escolha o jogo a carregar: ");
+
+        String selectedLeague = availableLeagues[choice - 1];
+
+        try {
+            System.out.println("\nCarregando liga: " + selectedLeague + "...");
+
+            ILeague loadedLeague = importSaveGame.importLeague(selectedLeague);
+
+            if (loadedLeague == null) {
+                System.out.println("ERRO: Não foi possível carregar a liga!");
+                return;
+            }
+
+
+            this.league = (League) loadedLeague;
+
+
+            ISeason[] seasons = verifySeasons();
+
+            // Usar a última temporada (mais recente)
+            ISeason currentSeason = seasons[seasons.length - 1];
+
+            System.out.println("\n=== LIGA CARREGADA COM SUCESSO ===");
+            System.out.println("Liga: " + league.getName());
+            System.out.println("Temporadas encontradas: " + seasons.length);
+            System.out.println("Temporada atual: " + currentSeason.getName() + " (" + currentSeason.getYear() + ")");
+            System.out.println("Clubes na temporada: " + currentSeason.getNumberOfCurrentTeams());
+
+            // Iniciar gestão da temporada
+            SeasonManagement seasonManagement = new SeasonManagement(true);
+            seasonManagement.run(currentSeason);
+
+        } catch (IllegalStateException e) {
+            System.out.println(e.getMessage());
+
+        } catch (Exception e) {
+            System.out.println("ERRO ao carregar o jogo: " + e.getMessage());
+            System.out.println("Verifique se o ficheiro JSON está correto.");
+        }
+    }
+
+    private ISeason[] verifySeasons() {
+        // Obter temporadas da liga
+        ISeason[] seasons = this.league.getSeasons();
+        if (seasons.length == 0) {
+            throw new IllegalStateException("Nao existem seasons na liga");
+        }
+        return seasons;
+
+    }
+
+    public ILeague getLeague() {
         return this.league;
     }
 
@@ -51,12 +121,6 @@ public class LeagueManagement {
 
         System.out.println(sb);
     }
-/*
-    private void increaseLeagueArray() {
-        League[] newArray = new League[league.length * INCREMENT_FACTOR];
 
-        System.arraycopy(league, 0, newArray, 0, league.length);
-        league = newArray;
-    }*/
 
 }

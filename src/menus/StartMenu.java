@@ -30,7 +30,7 @@ public class StartMenu {
                      leagueManagement.startNewGame(true);
                      break;
                  case 2:
-                     leagueManagement.startNewGame(false);
+                     leagueManagement.loadGame();
                  default:
                      //import os dados guardados.
              }

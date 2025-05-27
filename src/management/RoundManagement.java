@@ -46,10 +46,6 @@ public class RoundManagement {
         Team team = createTeam(season, formation);
 
 
-
-
-
-
         IPlayer[] players = createTeamPlayers(season, formation.getNumDefenders(),formation.getNumMidfielders(),formation.getNumAttackers());
 
         IMatch match = findCoachingClubMatch(season);
@@ -178,14 +174,16 @@ public class RoundManagement {
         IPlayer[] players = getClub(season).getPlayers();
         int index = 0, countPlayers = 0;
 
-
         ListAllPlayers.indexPlayer(players);
         do{
             index = reader.readInt(1, players.length, "Indique um jogador: ");
-            team.addPlayer(players[countPlayers++]);
+            try {
+                team.addPlayer(players[index - 1]);
+                countPlayers++;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
         }while (countPlayers < 11);
-
-
         return team;
     }
 

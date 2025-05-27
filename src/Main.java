@@ -6,4 +6,5 @@ public class Main {
         StartMenu startMenu = new StartMenu();
         startMenu.menu();
     }
+
 }

@@ -10,7 +10,6 @@ import team.Club;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -28,9 +27,9 @@ public class SaveGame {
     private static final String LEAGUE_FILE = "_league.json";
 
     public SaveGame() {
-
         createSaveDirectory();
     }
+
 
     /**
      * Cria o diretório de saves se não existir
@@ -61,33 +60,6 @@ public class SaveGame {
         System.out.println("Jogo guardado com sucesso: " + league.getName());
     }
 
-
-
-    /**
-     * Método auxiliar para obter int do JSON com valor padrão
-     */
-    private int getIntFromJson(JSONObject json, String key, int defaultValue) {
-        if (json.containsKey(key)) {
-            return ((Long) json.get(key)).intValue();
-        }
-        return defaultValue;
-    }
-
-    /**
-     * Encontra um clube pelo código
-     */
-    private IClub findClubByCode(IClub[] clubs, String code) {
-        if (clubs == null || code == null) {
-            return null;
-        }
-
-        for (IClub club : clubs) {
-            if (club != null && club.getCode().equals(code)) {
-                return club;
-            }
-        }
-        return null;
-    }
 
 
     /**
@@ -125,7 +97,7 @@ public class SaveGame {
     private void saveLeague(ILeague league) throws IOException {
         JSONObject leagueJson = ((League) league).getLeagueJson();
 
-        String leaguePath = SAVE_DIRECTORY + league.getName()+ LEAGUE_FILE;
+        String leaguePath = SAVE_DIRECTORY +league.getName()+LEAGUE_FILE;
         FileWriter writer = new FileWriter(leaguePath);
         try {
             writer.write(leagueJson.toJSONString());

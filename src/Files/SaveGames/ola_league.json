@@ -14,6 +14,29 @@
           {
             "awayClub": "VSC",
             "homeClub": "FCP",
+            "homeTeam": {
+              "Club": "FCP",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Diogo Costa",
+                "Zaidu Sanusi",
+                "Iván Marcano",
+                "Otávio",
+                "Tiago Djaló",
+                "Wendell",
+                "Stephen Eustáquio",
+                "Marko Grujić",
+                "Matheus Uribe",
+                "Mehdi Taremi",
+                "Evanilson"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
             "homeGoals": 0,
             "played": false,
             "events": {

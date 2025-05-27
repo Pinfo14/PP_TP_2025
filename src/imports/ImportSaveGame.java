@@ -76,22 +76,17 @@ public class ImportSaveGame {
     public String[] listAvailableLeagues() {
         File saveDir = new File(SAVE_DIRECTORY);
 
-        if (!saveDir.exists() || !saveDir.isDirectory()) {
-            return new String[0];
+        if (!saveDir.exists()) {
+            throw new IllegalStateException("Directory nao existe");
         }
 
         String[] files = saveDir.list();
         if (files == null) {
-            return new String[0];
+            throw new IllegalStateException("Nao existe, Save Files ");
         }
 
-        // Contar ficheiros de liga
-        int leagueCount = 0;
-        for (String file : files) {
-            if (file.endsWith(LEAGUE_EXTENSION)) {
-                leagueCount++;
-            }
-        }
+        int leagueCount = countFiles(files);
+
 
         // Extrair nomes das ligas
         String[] leagueNames = new String[leagueCount];
@@ -106,6 +101,18 @@ public class ImportSaveGame {
         }
 
         return leagueNames;
+    }
+
+
+
+    private int countFiles(String[] files){
+        int leagueCount = 0;
+        for (String file : files) {
+            if (file.endsWith(LEAGUE_EXTENSION)) {
+                leagueCount++;
+            }
+        }
+        return leagueCount;
     }
 
     /**
@@ -205,7 +212,7 @@ public class ImportSaveGame {
         }
 
         // Fallback para dados default
-        System.out.println("Carregando clubes dos dados default...");
+        System.out.println("A carregar clubes dos saves default...");
         Imports defaultImports = new Imports();
         return defaultImports.importPlayersAndClub();
     }
@@ -339,13 +346,8 @@ public class ImportSaveGame {
         if (!json.containsKey(key)) {
             return defaultValue;
         }
-
-        Object value = json.get(key);
-        if (value instanceof Long) {
-            return ((Long) value).intValue();
-        }
-
-        return defaultValue;
+        long value = (long)json.get(key);
+        return ((Long) value).intValue();
     }
 
     /**
@@ -355,53 +357,14 @@ public class ImportSaveGame {
         if (!json.containsKey(key)) {
             return defaultValue;
         }
-
         Object value = json.get(key);
-        if (value instanceof Double) {
-            return ((Double) value).floatValue();
-        } else if (value instanceof Long) {
-            return ((Long) value).floatValue();
+        if (value == null) {
+            return defaultValue;
         }
 
-        return defaultValue;
+      float floatValue = ((Double) value).floatValue();
+
+        return floatValue;
     }
 
-    /**
-     * Lista todos os jogos guardados
-     */
-    public String[] listSavedGames() {
-        File directory = new File(SAVE_DIRECTORY);
-
-        if (!directory.exists() || !directory.isDirectory()) {
-            System.out.println("Diretório de saves não existe");
-            return new String[0];
-        }
-
-        String[] files = directory.list();
-
-        if (files == null || files.length == 0) {
-            System.out.println("Não existem jogos guardados");
-            return new String[0];
-        }
-
-        // Filtrar apenas ficheiros de liga
-        String[] leagueFiles = new String[files.length];
-        int count = 0;
-
-        for (String file : files) {
-            if (file.endsWith(LEAGUE_EXTENSION)) {
-                // Remover a extensão para mostrar apenas o nome da liga
-                String leagueName = file.substring(0, file.length() - LEAGUE_EXTENSION.length());
-                leagueFiles[count++] = leagueName;
-            }
-        }
-
-        // Criar array do tamanho correto
-        String[] result = new String[count];
-        for (int i = 0; i < count; i++) {
-            result[i] = leagueFiles[i];
-        }
-
-        return result;
-    }
 }
