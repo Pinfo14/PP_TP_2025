@@ -36,7 +36,6 @@ public class Club implements IClub {
     private String logo;
     private IPlayer[] players;
     private int playerCount;
-    private boolean isCoach;
     private int maxPlayers;
 
 
@@ -49,7 +48,6 @@ public class Club implements IClub {
         this.logo = logo;
         this.playerCount = 0;
         this.players = new Player[MINIMUM_PLAYERS];
-        this.isCoach = false;
         this.maxPlayers = MAX_PLAYERS;
     }
 
@@ -62,7 +60,6 @@ public class Club implements IClub {
         this.logo = logo;
         this.playerCount = 0;
         this.players = new Player[MINIMUM_PLAYERS];
-        this.isCoach = false;
         this.maxPlayers = maxPlayers;
     }
 

@@ -229,7 +229,6 @@ public class Team implements ITeam {
 
     private void validatePositionForFormation(IPlayer iPlayer) {
         if (!isValidPositionForFormation(iPlayer.getPosition())) {
-            System.out.println(iPlayer.getPosition().getDescription());
             throw new IllegalStateException("Player: " + iPlayer.getName() + " Posicao " + iPlayer.getPosition().getDescription() + " invalida para a formation");
         }
     }

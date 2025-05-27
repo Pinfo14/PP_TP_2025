@@ -52,8 +52,7 @@ public class OneMatchDemo {
 
         System.out.println("=== Eventos dos Jogos Simulados ===");
 
-        System.out.println("Jogo: " + matches[0].getHomeTeam().getClub().getName()+" vs "+ matches[0].getAwayTeam().getClub().getName()
-        );
+        System.out.println("Jogo: " + matches[0].getHomeTeam().getClub().getName()+" vs "+ matches[0].getAwayTeam().getClub().getName());
 
         simulador.simulate(matches[0]);
         if (matches[0].getEvents().length == 0) {
