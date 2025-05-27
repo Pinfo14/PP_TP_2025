@@ -1,17 +1,18 @@
 package management;
 
+import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
-import com.ppstudios.footballmanager.api.contracts.team.IFormation;
-import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import league.Season;
 import match.Match;
 import menus.ListAllPlayers;
+import menus.ListTeams;
 import menus.RoundMenu;
 import menus.SeasonMenu;
-import player.Player;
 import reader.Reader;
+import simulation.GenerateTeams;
+import simulation.MatchSimulator;
 import team.Formation;
 import team.Team;
 import util.Utils;
@@ -21,6 +22,7 @@ public class RoundManagement {
     public void run(Season season, FormationManagement formationManagement) {
 
         Reader reader = new Reader();
+
 
         //TODO - jogo contra FOLGA simula os outros.
         SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName(), season.getCurrentRound());
@@ -32,30 +34,35 @@ public class RoundManagement {
         do {
             formationManagement.listFormations();
             indexFormation = reader.readInt(0, formationManagement.getNumFormations(), "Seleicone a tatica que pretende (0 - para criar nova tatica): ");
-            switch (indexFormation) {
-                case 0:
-                    int defense = reader.readInt(1,10, "Numero de defesas: ");
-                    int middle = reader.readInt(1,10, "Numero de medios: ");
-                    int attackers = reader.readInt(1,10, "Numero de avançados: ");
-                    formationManagement.addFormation(defense, middle, attackers);
+            if(indexFormation == 0) {
+                int defense = reader.readInt(1,10, "Numero de defesas: ");
+                int middle = reader.readInt(1,10, "Numero de medios: ");
+                int attackers = reader.readInt(1,10, "Numero de avançados: ");
+                formationManagement.addFormation(defense, middle, attackers);
             }
 
-        } while (indexFormation==0);
+        } while (indexFormation == 0);
 
         Formation formation = (Formation) formationManagement.getFormation(indexFormation-1);
-        Team team = createTeam(season, formation);
+        Team teamCoach = createTeam(season, formation);
+        Team otherTeam = createTeamOpponent(season);
+        ListTeams.list(teamCoach, otherTeam);
+        Utils.waitEnter();
 
-
-
-
-
-
-        IPlayer[] players = createTeamPlayers(season, formation.getNumDefenders(),formation.getNumMidfielders(),formation.getNumAttackers());
+        //vale apena confirmar se a equipa e essa?
 
         IMatch match = findCoachingClubMatch(season);
-        match.setTeam(new Team(getClub(season), formation, players, formation.getNumDefenders(), formation.getNumMidfielders(), formation.getNumAttackers()));
+        match.setTeam(teamCoach);
+        match.setTeam(otherTeam);
 
-        System.out.println(match);
+        simulate(match);
+
+
+
+
+
+
+
 
     }
 
@@ -76,17 +83,22 @@ public class RoundManagement {
         return sb.toString();
     }
 
-    private String getOpponentName(Season season) {
+    private IClub getOpponent(Season season) {
         IMatch match = findCoachingClubMatch(season);
         if (match == null) {
-            return "desconhecido";
+            throw new NullPointerException("Season is NULL.");
         }
+
         IClub coachingClub = getCoachingClub(season);
         if (coachingClub.equals(match.getHomeClub())) {
-            return match.getAwayClub().getName();
+            return match.getAwayClub();
         } else {
-            return match.getHomeClub().getName();
+            return match.getHomeClub();
         }
+    }
+
+    private String getOpponentName(Season season) {
+        return getOpponent(season).getName();
     }
 
     private IMatch findCoachingClubMatch(Season season) {
@@ -122,74 +134,94 @@ public class RoundManagement {
         return season.getCurrentClubs()[season.getCoachingClubIndex()];
     }
 
-    private IPlayer[] createTeamPlayers(Season season, int defense, int middle, int attackers) {
-        Reader reader = new Reader();
-        IPlayer[] players = getClub(season).getPlayers();
-        IPlayer[] teamPlayers = new IPlayer[11];
-        int countPlayers = 0;
-
-        ListAllPlayers.indexPlayer(players);
-
-        int index = reader.readInt(1, players.length, "Indique o GR: ");
-        teamPlayers[countPlayers++] = players[index - 1];
-
-        countPlayers = selectPlayers("defesa", defense,  players, teamPlayers, countPlayers);
-
-        countPlayers = selectPlayers("médio", middle, players, teamPlayers, countPlayers);
-
-        countPlayers = selectPlayers("avançado", attackers, players, teamPlayers, countPlayers);
-
-        return teamPlayers;
-    }
-
-    private int selectPlayers(String posicao, int quantidade, IPlayer[] players, IPlayer[] teamPlayers, int countPlayers) {
-        Reader reader = new Reader();
-        int count = 0;
-
-        while (count < quantidade) {
-
-            boolean repetido = false;
-            int index = reader.readInt(1, players.length, "Indique um " + posicao + ": ");
-            if (index != -1) {
-                for (int i = 0; i < countPlayers; i++) {
-                    if (teamPlayers[i].equals(players[index - 1])) {
-                        repetido = true;
-                        break;
-                    }
-                }
-                if (!repetido) {
-                    teamPlayers[countPlayers++] = players[index - 1];
-                    count++;
-                    System.out.println("Jogador adicionado com sucesso.");
-                } else {
-                    System.out.println("Jogador já está na equipa.");
-                }
-            } else {
-                System.out.println("Índice inválido.");
-            }
-        }
-        return countPlayers;
-    }
-
     private Team createTeam(Season season, Formation formation) {
         Team team = new Team(season.getCurrentClubs()[season.getCoachingClubIndex()], formation);
-
+        int countPlayers = 0;
         Reader reader = new Reader();
         IPlayer[] players = getClub(season).getPlayers();
-        int index = 0, countPlayers = 0;
-
+        int index = 0;
+        int count = 0;
 
         ListAllPlayers.indexPlayer(players);
+        //gk
+        index = reader.readInt(1, players.length, "Indique o GR: ");
+        try{
+            team.addPlayer(players[index - 1]);
+            countPlayers++;
+        }catch(Exception e){
+            System.out.println("Erro ao adicionar jogador - " + e.getMessage());
+        }
+        //defenses
         do{
-            index = reader.readInt(1, players.length, "Indique um jogador: ");
-            team.addPlayer(players[countPlayers++]);
-        }while (countPlayers < 11);
-
+            index = reader.readInt(1, players.length, "Indique um defesa: ");
+            try{
+                team.addPlayer(players[index-1]);
+                countPlayers++;
+                count++;
+            }catch (Exception e){
+                System.out.println("Erro ao adicionar jogador - " + e.getMessage());
+            }
+        }while (count < formation.getNumDefenders());
+        //mid
+        count = 0;
+        do{
+            index = reader.readInt(1, players.length, "Indique um medio: ");
+            try{
+                team.addPlayer(players[index-1]);
+                countPlayers++;
+                count++;
+            }catch (Exception e){
+                System.out.println("Erro ao adicionar jogador - " + e.getMessage());
+            }
+        }while (count < formation.getNumMidfielders());
+        //
+        count = 0;
+        do{
+            index = reader.readInt(1, players.length, "Indique um avançado: ");
+            try{
+                team.addPlayer(players[index-1]);
+                countPlayers++;
+                count++;
+            }catch (Exception e){
+                System.out.println("Erro ao adicionar jogador - " + e.getMessage());
+            }
+        }while (count < formation.getNumAttackers());
 
         return team;
     }
 
+    private Team createTeamOpponent(Season season) {
 
+        GenerateTeams generateTeams = new GenerateTeams();
+
+        IClub clubOpponent = getOpponent(season);
+
+        return (Team) generateTeams.randomTeam(clubOpponent);
+
+
+
+    }
+
+    private void simulate(IMatch match) {
+        MatchSimulator simulator = new MatchSimulator();
+
+        simulator.simulate(match);
+
+        if (match.getEvents().length == 0) {
+            System.out.println("  (sem eventos)");
+        } else {
+            for (IEvent ev : match.getEvents()) {
+                System.out.println(ev);
+            }
+        }
+
+
+
+        System.out.println("Golos Casa: " + simulator.getHomeGoals());
+        System.out.println("Golos Fora: " + simulator.getAwayGoals());
+
+
+    }
 
 
 }
