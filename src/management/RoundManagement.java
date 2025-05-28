@@ -5,6 +5,7 @@ import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import league.Season;
 import league.Standing;
 import match.Match;
@@ -35,16 +36,16 @@ public class RoundManagement {
         do {
             formationManagement.listFormations();
             indexFormation = reader.readInt(0, formationManagement.getNumFormations(), "Seleicone a tatica que pretende (0 - para criar nova tatica): ");
-            if(indexFormation == 0) {
-                int defense = reader.readInt(1,10, "Numero de defesas: ");
-                int middle = reader.readInt(1,10, "Numero de medios: ");
-                int attackers = reader.readInt(1,10, "Numero de avançados: ");
+            if (indexFormation == 0) {
+                int defense = reader.readInt(1, 10, "Numero de defesas: ");
+                int middle = reader.readInt(1, 10, "Numero de medios: ");
+                int attackers = reader.readInt(1, 10, "Numero de avançados: ");
                 formationManagement.addFormation(defense, middle, attackers);
             }
 
         } while (indexFormation == 0);
 
-        Formation formation = (Formation) formationManagement.getFormation(indexFormation-1);
+        Formation formation = (Formation) formationManagement.getFormation(indexFormation - 1);
         Team teamCoach = createTeam(season, formation);
         Team otherTeam = createTeamOpponent(season);
         ListTeams.list(teamCoach, otherTeam);
@@ -63,14 +64,20 @@ public class RoundManagement {
 
     private String getGamesString(Season season) {
 
-        IMatch[] matches = season.getMatches(season.getCurrentRound());
+        IMatch[] matches = null;
+        try {
+            matches = season.getMatches(season.getCurrentRound());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
         if (matches == null || matches.length == 0) {
             return "Erro. Nao existem jogos.";
         }
 
         StringBuilder sb = new StringBuilder();
-        for(IMatch match : matches) {
-            if(match != null) {
+        for (IMatch match : matches) {
+            if (match != null) {
                 sb.append("- ").append(match.toString()).append("\n");
             }
         }
@@ -140,47 +147,47 @@ public class RoundManagement {
         ListAllPlayers.indexPlayer(players);
         //gk
         index = reader.readInt(1, players.length, "Indique o GR: ");
-        try{
+        try {
             team.addPlayer(players[index - 1]);
             countPlayers++;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Erro ao adicionar jogador - " + e.getMessage());
         }
         //defenses
-        do{
+        do {
             index = reader.readInt(1, players.length, "Indique um defesa: ");
-            try{
-                team.addPlayer(players[index-1]);
+            try {
+                team.addPlayer(players[index - 1]);
                 countPlayers++;
                 count++;
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Erro ao adicionar jogador - " + e.getMessage());
             }
-        }while (count < formation.getNumDefenders());
+        } while (count < formation.getNumDefenders());
         //mid
         count = 0;
-        do{
+        do {
             index = reader.readInt(1, players.length, "Indique um medio: ");
-            try{
-                team.addPlayer(players[index-1]);
+            try {
+                team.addPlayer(players[index - 1]);
                 countPlayers++;
                 count++;
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Erro ao adicionar jogador - " + e.getMessage());
             }
-        }while (count < formation.getNumMidfielders());
+        } while (count < formation.getNumMidfielders());
         //
         count = 0;
-        do{
+        do {
             index = reader.readInt(1, players.length, "Indique um avançado: ");
-            try{
-                team.addPlayer(players[index-1]);
+            try {
+                team.addPlayer(players[index - 1]);
                 countPlayers++;
                 count++;
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println("Erro ao adicionar jogador - " + e.getMessage());
             }
-        }while (count < formation.getNumAttackers());
+        } while (count < formation.getNumAttackers());
 
         return team;
     }
@@ -192,7 +199,6 @@ public class RoundManagement {
         IClub clubOpponent = getOpponent(season);
 
         return (Team) generateTeams.randomTeam(clubOpponent);
-
 
 
     }
@@ -212,7 +218,7 @@ public class RoundManagement {
         printEvents(match);
         match.setPlayed();
         System.out.println("- FIM DO JOGO -");
-        System.out.println("Resultado: " + match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - ("+ simulator.getAwayGoals() +") " + match.getAwayClub().getName());
+        System.out.println("Resultado: " + match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ") " + match.getAwayClub().getName());
 
         updateStandings(season, match, simulator);
     }
@@ -222,7 +228,7 @@ public class RoundManagement {
         IClub[] clubs = season.getCurrentClubs();
 
         for (int i = 0; i < clubs.length; i++) {
-            if(club.equals(clubs[i])) {
+            if (club.equals(clubs[i])) {
                 return i;
             }
         }

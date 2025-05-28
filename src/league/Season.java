@@ -6,6 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import match.Match;
 import menus.ListStanding;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -202,7 +203,7 @@ public class Season implements ISeason {
         try {
             scheduledMatches = schedule.getMatchesForRound(i);
         } catch (IllegalArgumentException | IllegalStateException e) {
-            throw e;
+           System.out.println(e.getMessage());
         }
 
         return scheduledMatches;
@@ -324,18 +325,33 @@ public class Season implements ISeason {
     @Override
     public void resetSeason() {
         for (IMatch match : this.schedule.getAllMatches()) {
-            match.setPlayed();
+            ((Match)match).resetMatch(true);
         }
     }
 
+    /**
+     * Exibe o resultado de uma partida, mostrando o nome do clube vencedor.
+     *
+     * @param iMatch partida da qual o resultado será gerado.
+     * @return uma string representando o nome do clube vencedor da partida.
+     */
     @Override
     public String displayMatchResult(IMatch iMatch) {
         StringBuilder sb = new StringBuilder();
         sb.append("Match Result: ");
-        sb.append(iMatch.getWinner().getClub().getName());
+        if (iMatch.getWinner()!=null) {
+            sb.append(iMatch.getWinner().getClub().getName());
+        }else {
+            sb.append("Empate");
+        }
         return sb.toString();
     }
 
+    /**
+     * Define a estratégia de simulação para a temporada.
+     *
+     * @param matchSimulatorStrategy a instância da estratégia de simulação de partidas a ser utilizada.
+     */
     @Override
     public void setMatchSimulator(MatchSimulatorStrategy matchSimulatorStrategy) {
         this.matchSimulator = matchSimulator;
@@ -383,12 +399,12 @@ public class Season implements ISeason {
 
     @Override
     public int getMaxRounds() {
-        return 0;
+        return this.schedule.getNumberOfRounds();
     }
 
     @Override
     public int getCurrentMatches() {
-        return 0;
+        return calculateNumberOfMatches();
     }
 
     @Override
@@ -480,6 +496,12 @@ public class Season implements ISeason {
 
         Season other = (Season) obj;
 
-        return true;// ou outra comparação relevante
+        return this.year == other.year &&
+                this.maxClubs == other.maxClubs &&
+                this.numClubs == other.numClubs &&
+                this.pointsPerWin == other.pointsPerWin &&
+                this.pointsPerDraw == other.pointsPerDraw &&
+                this.pointsPerLoss == other.pointsPerLoss &&
+                this.name.equals(other.name);
     }
 }

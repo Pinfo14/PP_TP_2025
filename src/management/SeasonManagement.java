@@ -1,6 +1,7 @@
 package management;
 
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
+import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import imports.Imports;
 import league.Season;
@@ -14,12 +15,9 @@ import util.Utils;
 public class SeasonManagement {
 
     private IClub[] clubesLoaded ;
-    private boolean defaultData;
 
 
-    public SeasonManagement() {
-        this.defaultData = false;
-    }
+
 
     public SeasonManagement(boolean useDefaultData) {
        if(useDefaultData){
@@ -103,7 +101,7 @@ public class SeasonManagement {
                 handleListMatches(season);
                 break;
             case 5:
-                handleListResults();
+                handleListResults(season);
                 break;
             case 6:
                 handleListStandings(season);
@@ -232,6 +230,10 @@ public class SeasonManagement {
             System.out.println("Selecione um clube para treinar antes de avançar para a próxima jornada.");
             return;
         }
+        if(season.isSeasonComplete()){
+            System.out.println("A season acabou!!");
+            return;
+        }
 
         RoundManagement roundManagement = new RoundManagement();
         roundManagement.run(season, formations);
@@ -259,11 +261,51 @@ public class SeasonManagement {
     /**
      * Lista os resultados dos jogos (a implementar)
      */
-    private void handleListResults() {
-        System.out.println("Funcionalidade ainda não implementada.");
-        Utils.waitEnter();
+    private void handleListResults(Season season) {
+        try {
+            IMatch[] allMatches = season.getMatches();
+            boolean hasResults = false;
+
+            System.out.println("\n=== RESULTADOS DOS JOGOS ===");
+
+            for (IMatch match : allMatches) {
+                if (match != null && match.isPlayed() && match.isValid()) {
+                    hasResults = true;
+                    displaySimpleResult(match);
+                }
+            }
+
+            if (!hasResults) {
+                System.out.println("Ainda não foram realizados jogos.");
+            }
+
+            Utils.waitEnter();
+
+        } catch (Exception e) {
+            System.out.println("Erro ao listar resultados: " + e.getMessage());
+            Utils.waitEnter();
+        }
     }
 
+
+    private void displaySimpleResult(IMatch match) {
+        String homeName = match.getHomeClub().getName();
+        String awayName = match.getAwayClub().getName();
+        String result = "JOGADO";
+
+
+        // Determinar vencedor
+        String winner = "";
+        if (match.getWinner() != null) {
+            winner = " (Vencedor: " + match.getWinner().getClub().getName() + ")";
+        } else {
+            winner = " (Empate)";
+        }
+
+        System.out.println("Jornada " + match.getRound() + ": " +
+                homeName + " " + result + " " + awayName + winner);
+
+    }
     /**
      * Lista a classificação da liga
      */
@@ -280,7 +322,10 @@ public class SeasonManagement {
      * Simula o restante da época (a implementar)
      */
     private void handleSimulateRestOfSeason(Season season) {
-
+        if(season.isSeasonComplete()){
+            System.out.println("A season acabou!!");
+            return;
+        }
         season.simulateSeason();
 
     }

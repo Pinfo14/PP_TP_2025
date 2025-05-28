@@ -35,16 +35,6 @@ public class Team implements ITeam {
     private int striker;
     private boolean goalkeeper;
 
-    public Team(IClub club, IFormation formation, IPlayer[] squad, int defense, int midfield, int forward){
-        this.club = club;
-        this.formation = formation;
-        this.squad = squad;
-        this.defense = defense;
-        this.midfield = midfield;
-        this.forward = forward;
-        this.playerCount = 11;
-        this.goalkeeper = true;
-    }
 
     public Team(IClub club, IFormation formation){
         this.club = club;
@@ -122,7 +112,22 @@ public class Team implements ITeam {
 
     @Override
     public int getTeamStrength() {
-        return 0;
+        if (this.playerCount == 0) {
+            return 0;
+        }
+
+        int totalStrength = 0;
+
+        for (int i = 0; i < this.playerCount; i++) {
+            if (this.squad[i] != null) {
+                // Média simples dos 4 atributos principais
+                int playerAverage = (this.squad[i].getShooting() + this.squad[i].getPassing() +
+                        this.squad[i].getSpeed() + this.squad[i].getStamina()) / 4;
+                totalStrength += playerAverage;
+            }
+        }
+
+        return totalStrength / this.playerCount;
     }
 
     @Override

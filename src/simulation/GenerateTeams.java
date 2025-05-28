@@ -63,7 +63,7 @@ public class GenerateTeams {
         int availableForwards = numPlayerByPos(club.getPlayers(), this.positionManage.getPositionByDescription("Forward"));
         int availableGoalkeepers = numPlayerByPos(club.getPlayers(), this.positionManage.getPositionByDescription("Goalkeeper"));
 
-        // TODOS os requisitos devem ser satisfeitos (AND, não OR)
+        // TODOS os requisitos devem ser satisfeitos
         return availableDefenders >= numDefenders &&
                 availableMidfielders >= numMidfielders &&
                 availableForwards >= numAttackers &&

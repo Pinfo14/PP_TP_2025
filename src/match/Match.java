@@ -76,11 +76,14 @@ public class Match implements IMatch {
 
     @Override
     public void setPlayed() {
-        if (this.pleayed){
-           this.pleayed = false;
-        }else {
             pleayed = true;
             calculateGoalsFromEvents();
+    }
+
+
+    public void resetMatch(boolean reset) {
+        if (reset){
+            this.pleayed = false;
         }
     }
 

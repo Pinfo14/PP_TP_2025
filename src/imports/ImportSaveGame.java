@@ -161,12 +161,20 @@ public class ImportSaveGame {
             // Adicionar clubes através dos standings
             addClubsToSeason(season, seasonJson, allClubs);
 
+            loadMatchesFromJson(season, seasonJson);
+
             return season;
 
         } catch (Exception e) {
             System.out.println("Erro ao criar temporada: " + e.getMessage());
             return null;
         }
+    }
+
+
+
+    private void loadMatchesFromJson(Season season,JSONObject seasonJson){
+
     }
 
     /**

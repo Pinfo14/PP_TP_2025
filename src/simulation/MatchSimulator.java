@@ -13,10 +13,10 @@ import player.PlayerPositionManage;
 
 public class MatchSimulator implements MatchSimulatorStrategy {
 
-    private static final double EVENT_PROB = 0.2;
+    private static final double EVENT_PROB = 0.3;
     private static final double HOME_OR_AWAY_PROB = 0.5;
-    private static final double PASS_EVENT_PROB = 0.5;
-    private static final double SHOT_EVENT_PROB = 0.8;
+    private static final double PASS_EVENT_PROB = 0.3;
+    private static final double SHOT_EVENT_PROB = 0.7;
 
     private int homeGoals;
     private int awayGoals;
@@ -81,7 +81,6 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                         } else {
                             this.awayGoals++;
                         }
-                        // adicionar golo a equipa
                     }
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);

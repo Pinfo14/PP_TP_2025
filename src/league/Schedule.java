@@ -13,7 +13,15 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * Nome: Emanuel Jose Teixeira Pinto
+ * Número: 8230371
+ * Turma: LEI1T1
+ *
+ * Nome: Roberto Cristiano Martins Faria
+ * Número: 8230067
+ * Turma: LEI1T2
+ */
 
 public class Schedule  implements ISchedule {
 

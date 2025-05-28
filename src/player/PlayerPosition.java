@@ -14,7 +14,6 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
  */
 public class PlayerPosition implements IPlayerPosition {
 
-    //fazer enum
 
     private final String description;
 
