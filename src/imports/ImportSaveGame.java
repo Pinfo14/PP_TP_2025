@@ -1,11 +1,16 @@
 package imports;
 
 import com.ppstudios.footballmanager.api.contracts.league.ILeague;
+import com.ppstudios.footballmanager.api.contracts.match.IMatch;
+import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import league.League;
+import league.Schedule;
 import league.Season;
+import match.Match;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -14,6 +19,8 @@ import player.Player;
 import player.PlayerAttributes;
 import player.PlayerPosition;
 import team.Club;
+import team.Formation;
+import team.Team;
 
 import java.io.File;
 import java.io.FileReader;
@@ -161,7 +168,7 @@ public class ImportSaveGame {
             // Adicionar clubes através dos standings
             addClubsToSeason(season, seasonJson, allClubs);
 
-            loadMatchesFromJson(season, seasonJson);
+            loadSchedule(season, seasonJson);
 
             return season;
 
@@ -171,11 +178,207 @@ public class ImportSaveGame {
         }
     }
 
+    private void loadSchedule(Season season, JSONObject seasonJson) {
+        if (!seasonJson.containsKey("schedule")) {
+            System.out.println("Nenhum schedule encontrado no save, a gerar calendário automático...");
+            season.generateSchedule();
+            return;
+        }
 
+        try {
+            JSONObject scheduleJson = (JSONObject) seasonJson.get("schedule");
+            System.out.println("A carregar schedule do save...");
 
-    private void loadMatchesFromJson(Season season,JSONObject seasonJson){
+            // Carregar matches
+            IMatch[] matches = loadMatches(season, scheduleJson);
 
+            if (matches != null && matches.length > 0) {
+                System.out.println("Schedule carregado com " + matches.length + " matches!");
+
+                IClub[] clubs = season.getCurrentClubs();
+                int numberOfClubs = season.getNumberOfCurrentTeams();
+                int numberOfRounds = getIntValue(scheduleJson, "numberOfRounds", (numberOfClubs - 1) * 2);
+
+                Schedule schedule = new Schedule(matches, clubs, numberOfClubs, numberOfRounds);
+                season.setSchedule(schedule);
+
+            } else {
+                System.out.println("Erro ao carregar matches, a gerar calendário automático...");
+                season.generateSchedule();
+            }
+
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar schedule: " + e.getMessage());
+            e.printStackTrace();
+            season.generateSchedule();
+        }
     }
+
+    /**
+     * Corrigir o método loadMatches - estava incompleto
+     */
+    private IMatch[] loadMatches(Season season, JSONObject scheduleJson) {
+        if (!scheduleJson.containsKey("matches")) {
+            System.out.println("Nenhuma partida encontrada no save");
+            return null;
+        }
+
+        try {
+            JSONArray matchesArray = (JSONArray) scheduleJson.get("matches");
+
+            if (matchesArray == null || matchesArray.isEmpty()) {
+                System.out.println("Array de matches vazio");
+                return null;
+            }
+
+            System.out.println("A carregar " + matchesArray.size() + " matches...");
+
+            IMatch[] matches = new Match[matchesArray.size()];
+            IClub[] clubs = season.getCurrentClubs(); // CORRIGIR: usar clubs da season
+
+            for (int i = 0; i < matchesArray.size(); i++) {
+                JSONObject matchJson = (JSONObject) matchesArray.get(i);
+                matches[i] = createMatch(matchJson, clubs, i + 1); // CORRIGIR: nome do método
+            }
+
+            return matches;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar matches: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Corrigir o nome do método createMatch
+     */
+    private IMatch createMatch(JSONObject matchJson, IClub[] clubs, int round) {
+        try {
+            String homeClubCode = (String) matchJson.get("homeClub");
+            String awayClubCode = (String) matchJson.get("awayClub");
+
+            IClub homeClub = findClubByCode(clubs, homeClubCode);
+            IClub awayClub = findClubByCode(clubs, awayClubCode);
+
+            if (homeClub == null || awayClub == null) {
+                System.out.println("Clube não encontrado: " + homeClubCode + " vs " + awayClubCode);
+                return null;
+            }
+
+            // Criar match
+            Match match = new Match(homeClub, awayClub, round);
+
+            loadTeams(match,matchJson);
+
+            boolean played = (boolean) matchJson.get("played");
+
+            if (played) {
+                match.setPlayed();
+
+                if (matchJson.containsKey("homeGoals") && matchJson.containsKey("awayGoals")) {
+                    int homeGoals = getIntValue(matchJson, "homeGoals", 0);
+                    int awayGoals = getIntValue(matchJson, "awayGoals", 0);
+
+                    match.setHomeGoals(homeGoals);
+                    match.setAwayGoals(awayGoals);
+
+                    System.out.println("Match criada: " + homeClubCode + " " + homeGoals + "-" + awayGoals + " " + awayClubCode);
+                }
+
+            } else {
+                System.out.println("Match criada: " + homeClubCode + " vs " + awayClubCode + " (não jogada)");
+            }
+
+
+
+            return match;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao criar match: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+    private void loadTeams(IMatch match, JSONObject matchJson) {
+        try {
+            // Verificar se existem equipas no JSON
+            if (matchJson.containsKey("homeTeam") && matchJson.containsKey("awayTeam")) {
+
+                JSONObject homeTeamJson = (JSONObject) matchJson.get("homeTeam");
+                JSONObject awayTeamJson = (JSONObject) matchJson.get("awayTeam");
+
+                // Criar equipas simples
+                ITeam homeTeam = createTeam(homeTeamJson, match.getHomeClub());
+                ITeam awayTeam = createTeam(awayTeamJson, match.getAwayClub());
+
+                // Definir as equipas na match
+                match.setTeam(homeTeam);
+                match.setTeam(awayTeam);
+
+                System.out.println("Equipas carregadas para a match");
+
+            } else {
+                System.out.println("AVISO: Match sem equipas definidas no JSON");
+            }
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar equipas: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Cria uma equipa básica a partir do JSON
+     */
+    private ITeam createTeam(JSONObject teamJson, IClub club) {
+        try {
+
+            Formation form = null;
+
+            if (teamJson.containsKey("Formation")) {
+                String formationName = (String) teamJson.get("Formation");
+                form = new Formation(formationName);
+            }
+
+            Team team = new Team(club,form);
+
+            if (teamJson.containsKey("Squad")) {
+                JSONArray squadArray = (JSONArray) teamJson.get("Squad");
+
+                System.out.println("A carregar " + squadArray.size() + " jogadores...");
+
+                for (Object playerNameObj : squadArray) {
+                    String playerName = (String) playerNameObj;
+
+                    // Encontrar o jogador no clube
+                    IPlayer player = findPlayerInClub(club, playerName);
+
+                    if (player != null) {
+                        try {
+                            team.addPlayer(player);
+                            System.out.println("  - Adicionado: " + playerName);
+                        } catch (Exception e) {
+                            System.out.println("  - ERRO ao adicionar " + playerName + ": " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("  - AVISO: Jogador não encontrado no clube: " + playerName);
+                    }
+                }
+            }
+
+
+            return team;
+
+        } catch (Exception e) {
+            System.out.println("Erro ao criar equipa: " + e.getMessage());
+            return null;
+        }
+    }
+
+
+
 
     /**
      * Adiciona clubes à temporada baseado nos standings
@@ -346,7 +549,17 @@ public class ImportSaveGame {
         }
         return null;
     }
+    private IPlayer findPlayerInClub(IClub club, String playerName) {
+        IPlayer[] players = club.getPlayers();
 
+        for (IPlayer player : players) {
+            if (player.getName().equals(playerName)) {
+                return player;
+            }
+        }
+
+        return null; // Não encontrado
+    }
     /**
      * Obtém um valor inteiro do JSON com fallback
      */

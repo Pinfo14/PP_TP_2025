@@ -3,7 +3,6 @@ package match;
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.event.IEventManager;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
-import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import event.*;
@@ -25,14 +24,14 @@ public class Match implements IMatch {
     private IClub awayClub;
     private ITeam homeTeam;
     private ITeam awayTeam;
-    private boolean pleayed;
+    private boolean played;
     private int round;
     private IEventManager events;
     private int homeGoals;
     private int awayGoals;
 
     public Match(IClub homeClub, IClub awayClub, int round) {
-        this.pleayed = false;
+        this.played = false;
         this.homeClub = homeClub;
         this.awayClub = awayClub;
         this.round = round;
@@ -40,6 +39,16 @@ public class Match implements IMatch {
         this.homeGoals = 0;
         this.awayGoals = 0;
     }
+
+
+    public void setHomeGoals(int goals) {
+        this.homeGoals = goals;
+    }
+
+    public void setAwayGoals(int goals) {
+        this.awayGoals = goals;
+    }
+
 
     private void setHomeTeam(ITeam homeTeam) {
         this.homeTeam = homeTeam;
@@ -61,7 +70,7 @@ public class Match implements IMatch {
 
     @Override
     public boolean isPlayed() {
-        return this.pleayed;
+        return this.played;
     }
 
     @Override
@@ -76,14 +85,14 @@ public class Match implements IMatch {
 
     @Override
     public void setPlayed() {
-            pleayed = true;
+            played = true;
             calculateGoalsFromEvents();
     }
 
 
     public void resetMatch(boolean reset) {
         if (reset){
-            this.pleayed = false;
+            this.played = false;
         }
     }
 
@@ -262,7 +271,7 @@ public class Match implements IMatch {
         object.put("awayClub",this.awayClub.getCode());
         object.put("homeGoals", this.homeGoals);
         object.put("awayGoals", this.awayGoals);
-        object.put("played", this.pleayed);
+        object.put("played", this.played);
         // Teams (se existirem)
         if(this.homeTeam != null) {
             object.put("homeTeam", ((Team)this.homeTeam).getJsonObj());
@@ -285,7 +294,7 @@ public class Match implements IMatch {
             return false;
         }
         Match match = (Match) o;
-        return this.pleayed == match.pleayed &&
+        return this.played == match.played &&
                 this.round == match.round &&
                 this.homeGoals == match.homeGoals &&
                 this.awayGoals == match.awayGoals &&

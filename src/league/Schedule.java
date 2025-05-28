@@ -17,18 +17,17 @@ import java.io.IOException;
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
  * Turma: LEI1T1
- *
+ * <p>
  * Nome: Roberto Cristiano Martins Faria
  * Número: 8230067
  * Turma: LEI1T2
  */
 
-public class Schedule  implements ISchedule {
+public class Schedule implements ISchedule {
 
     private IMatch[] games;
     private IClub[] clubs;
     private int numberOfClubs;
-    private ITeam[] teams;
     private int numberOfRounds;
 
     public Schedule(IClub[] clubs, int numberOfClubs) {
@@ -37,6 +36,14 @@ public class Schedule  implements ISchedule {
         this.numberOfRounds = calculateRounds();
 
         generateGames();
+    }
+
+    public Schedule(IMatch[] matches, IClub[] club, int numberOfClubs, int numberOfRounds) {
+        this.clubs = copyClubs(club, numberOfClubs);
+        this.games = new IMatch[matches.length];
+        System.arraycopy(matches, 0, this.games, 0, matches.length);
+        this.numberOfClubs = numberOfClubs;
+        this.numberOfRounds = numberOfRounds;
     }
 
     private int calculateRounds() {
@@ -62,13 +69,13 @@ public class Schedule  implements ISchedule {
 
         games = new IMatch[totalMatches];
 
-        IClub[] rot = copyClubs(this.clubs,n);
+        IClub[] rot = copyClubs(this.clubs, n);
 
         for (int r = 0; r < halfRounds; r++) {
             for (int j = 0; j < matchesPerRound; j++) {
                 IClub home = rot[j];
                 IClub away = rot[n - 1 - j];
-                int idx    = r * matchesPerRound + j;
+                int idx = r * matchesPerRound + j;
                 games[idx] = new Match(home, away, (r + 1));
             }
 
@@ -80,12 +87,12 @@ public class Schedule  implements ISchedule {
         for (int r = 0; r < halfRounds; r++) {
             for (int j = 0; j < matchesPerRound; j++) {
 
-                int firstIdx  = r * matchesPerRound + j;
-                IMatch m1      = games[firstIdx];
+                int firstIdx = r * matchesPerRound + j;
+                IMatch m1 = games[firstIdx];
 
                 int secondIdx = (r + halfRounds) * matchesPerRound + j;
 
-                games[secondIdx] = new Match(m1.getAwayClub(), m1.getHomeClub(),halfRounds + r + 1);
+                games[secondIdx] = new Match(m1.getAwayClub(), m1.getHomeClub(), halfRounds + r + 1);
             }
         }
     }
@@ -93,15 +100,15 @@ public class Schedule  implements ISchedule {
     @Override
     public IMatch[] getMatchesForRound(int i) {
 
-        if(i < 1 || i > numberOfRounds) {
+        if (i < 1 || i > numberOfRounds) {
             throw new IllegalArgumentException("Round not valid");
         }
 
-        IMatch[] matches = new IMatch[calculateMatchesPerRound()+1];
+        IMatch[] matches = new IMatch[calculateMatchesPerRound() + 1];
         int idx = 0;
 
-        for(IMatch match : games) {
-            if(match.getRound() == i){
+        for (IMatch match : games) {
+            if (match.getRound() == i) {
                 matches[idx++] = match;
             }
         }
@@ -111,15 +118,15 @@ public class Schedule  implements ISchedule {
 
     @Override
     public IMatch[] getMatchesForTeam(ITeam iTeam) {
-        if(iTeam == null) {
+        if (iTeam == null) {
             throw new IllegalArgumentException("Team not valid");
         }
 
         IMatch[] matches = new IMatch[calculateMatchesPerRound()];
 
         int idx = 0;
-        for(IMatch match : games) {
-            if(match.getRound() == idx){
+        for (IMatch match : games) {
+            if (match.getRound() == idx) {
                 matches[idx++] = match;
             }
         }
@@ -135,7 +142,7 @@ public class Schedule  implements ISchedule {
     @Override
     public IMatch[] getAllMatches() {
         IMatch[] matches = new IMatch[this.games.length];
-        for(int i = 0; i < this.games.length; i++) {
+        for (int i = 0; i < this.games.length; i++) {
             matches[i] = this.games[i];
         }
         return matches;
@@ -143,18 +150,18 @@ public class Schedule  implements ISchedule {
 
     @Override
     public void setTeam(ITeam iTeam, int i) {
-        if(iTeam == null) {
+        if (iTeam == null) {
             throw new IllegalArgumentException("Team not valid");
         }
-        if(i < 1 || i > numberOfRounds) {
+        if (i < 1 || i > numberOfRounds) {
             throw new IllegalArgumentException("Round not valid");
         }
-        if(!isInLeague(iTeam)) {
+        if (!isInLeague(iTeam)) {
             throw new IllegalStateException("Team is not in the league");
         }
 
         IMatch[] matches = getMatchesForRound(i);
-        for(IMatch match: matches) {
+        for (IMatch match : matches) {
             match.setTeam(iTeam);
         }
 
@@ -171,9 +178,9 @@ public class Schedule  implements ISchedule {
         try {
             fileWriter.write(getJsonSchedule().toJSONString());
             System.out.println("Schedule exportado com sucesso para: " + fileName);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Erro ao exportar o schedule para o arquivo: " + fileName);
-        }finally {
+        } finally {
             fileWriter.close();
         }
     }
@@ -190,18 +197,18 @@ public class Schedule  implements ISchedule {
     private JSONArray getJsonMatchs() {
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < this.games.length; i++) {
-            if(this.games[i] != null) {
-                jsonArray.add(((Match)this.games[i]).getMatchJson());
+            if (this.games[i] != null) {
+                jsonArray.add(((Match) this.games[i]).getMatchJson());
             }
         }
         return jsonArray;
     }
 
 
-    private JSONArray getClubsCodes(){
+    private JSONArray getClubsCodes() {
         JSONArray jsonArray = new JSONArray();
-        for(int i = 0; i < this.clubs.length; i++) {
-            if(this.clubs[i] != null) {
+        for (int i = 0; i < this.clubs.length; i++) {
+            if (this.clubs[i] != null) {
                 jsonArray.add(this.clubs[i].getCode());
             }
 
@@ -211,7 +218,7 @@ public class Schedule  implements ISchedule {
 
     private IClub[] copyClubs(IClub[] clubs, int numberOfClubs) {
         IClub[] clubsTemp = new IClub[clubs.length];
-        for(int i = 0; i < numberOfClubs; i++) {
+        for (int i = 0; i < numberOfClubs; i++) {
             clubsTemp[i] = clubs[i];
         }
         return clubsTemp;
@@ -225,8 +232,8 @@ public class Schedule  implements ISchedule {
 
     private boolean isInLeague(ITeam team) {
 
-        for(IClub clubTemp : clubs) {
-            if(clubTemp.equals(team.getClub())) {
+        for (IClub clubTemp : clubs) {
+            if (clubTemp.equals(team.getClub())) {
                 return true;
             }
         }
@@ -241,7 +248,7 @@ public class Schedule  implements ISchedule {
             sb.append("Jornada ").append(round).append(":\n");
 
             for (IMatch jogo : games) {
-                if(jogo.getRound() == round) {
+                if (jogo.getRound() == round) {
                     sb.append(String.format("\t%s\n", jogo.toString()));
                 }
             }

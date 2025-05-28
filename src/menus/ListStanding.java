@@ -50,10 +50,10 @@ public class ListStanding {
                 "POS", "EQUIPA", "PTS", "J", "V", "E", "D", "GM", "GS", "DIF"));
         System.out.println("---+----------------------------+-----+----+----+----+----+----+----+----");
 
-        for(int i = 0; i < standings.length; i++) {
-            if(standings[i] != null) {
+        for(int i = 0; i < standingsCopy.length; i++) {
+            if(standingsCopy[i] != null) {
 
-                Standing standing = (Standing) standings[i];
+                Standing standing = (Standing) standingsCopy[i];
 
                 int games = standings[i].getWins() + standings[i].getLosses() + standings[i].getDraws();
 
@@ -61,6 +61,7 @@ public class ListStanding {
                         i + 1, standing.getClub().getName(), standing.getPoints(), games, standing.getWins(), standing.getDraws(),
                         standing.getLosses(), standing.getGoalScored(), standing.getGoalsConceded(), standing.getGoalDifference()));
             }
+
 
         }
     }

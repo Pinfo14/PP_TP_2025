@@ -30,6 +30,18 @@ public class Formation implements IFormation {
         this.numAttackers = numAttackers;
     }
 
+    public Formation (String name){
+        this.name =name;
+        setParts(name);
+    }
+
+    private void setParts(String name){
+        String[] parts = name.split("-");
+        this.numDefenders = Integer.parseInt(parts[0]);
+        this.numMidfielders = Integer.parseInt(parts[1]);
+        this.numAttackers = Integer.parseInt(parts[2]);
+    }
+
     private boolean isValidFormation(int numDefenders, int numMidfielders, int numAttackers) {
         if(numAttackers+numDefenders+numMidfielders !=10 ){
             return false;
