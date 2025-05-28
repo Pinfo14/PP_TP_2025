@@ -189,8 +189,6 @@ public class Match implements IMatch {
         }
     }
 
-
-
     @Override
     public void addEvent(IEvent iEvent) {
         if (iEvent == null) {
@@ -202,7 +200,6 @@ public class Match implements IMatch {
         this.events.addEvent(iEvent);
 
     }
-
 
     private boolean isInEvent(IEvent event) {
         for (IEvent iEvent : this.events.getEvents()) {
@@ -236,7 +233,6 @@ public class Match implements IMatch {
         sb.append(awayClub.getName());
 
         return sb.toString();
-
     }
 
     @Override
@@ -279,7 +275,6 @@ public class Match implements IMatch {
 
         return object;
     }
-
 
     @Override
     public boolean equals(Object o) {

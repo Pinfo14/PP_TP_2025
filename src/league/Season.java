@@ -1,6 +1,4 @@
 package league;
-
-import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.league.ISchedule;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
@@ -8,7 +6,6 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
-import match.Match;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import simulation.GenerateTeams;
@@ -17,6 +14,7 @@ import team.Club;
 
 import java.io.File;
 import java.io.FileWriter;
+
 import java.io.IOException;
 /**
  * Nome: Emanuel Jose Teixeira Pinto
@@ -58,7 +56,7 @@ public class Season implements ISeason {
         this.coachingClubIndex = coachingClubIndex;
     }
 
-   public Season(String leagueName, int year) {
+    public Season(String leagueName, int year) {
         this.maxClubs = 18;
         this.name = leagueName;
         this.year = year;
@@ -99,11 +97,11 @@ public class Season implements ISeason {
             throw new IllegalArgumentException("Club cannot be null.");
         }
 
-        if(clubExist(iClub)) {
+        if (clubExist(iClub)) {
             throw new IllegalArgumentException("Club already exists.");
         }
 
-        if(numClubs == maxClubs) {
+        if (numClubs == maxClubs) {
             throw new IllegalStateException("League is full.");
         }
 
@@ -125,19 +123,19 @@ public class Season implements ISeason {
 
         int index = clubIndex(iClub);
 
-        if(index == -1) {
+        if (index == -1) {
             throw new IllegalStateException("Club does not exist in the league.");
         }
 
-        if(index == coachingClubIndex) {
+        if (index == coachingClubIndex) {
             coachingClubIndex = -1;
         }
 
-        for(int i = index; i < numClubs - 1; i++) {
+        for (int i = index; i < numClubs - 1; i++) {
             clubs[i] = clubs[i + 1];
         }
 
-        for(int i = index; i < numClubs - 1; i++) {
+        for (int i = index; i < numClubs - 1; i++) {
             standings[i] = standings[i + 1];
         }
 
@@ -158,7 +156,8 @@ public class Season implements ISeason {
     private int calculateNumberOfMatches() {
         int totalClubs = numClubs;
         if (totalClubs % 2 != 0) {
-            totalClubs++;        }
+            totalClubs++;
+        }
         return totalClubs * (totalClubs - 1);
     }
 
@@ -193,7 +192,7 @@ public class Season implements ISeason {
     @Override
     public IMatch[] getMatches(int i) {
 
-        if(i < 0 || i > schedule.getNumberOfRounds()) {
+        if (i < 0 || i > schedule.getNumberOfRounds()) {
             throw new IllegalArgumentException("Jornada Inexistente");
         }
 
@@ -212,36 +211,83 @@ public class Season implements ISeason {
     @Override
     public void simulateRound() {
 
-        Match[] scheduledMatches = (Match[]) getMatches(currentRound);
+        IMatch[] scheduledMatches = getMatches(currentRound);
         MatchSimulator simulator = new MatchSimulator();
         GenerateTeams generateTeams = new GenerateTeams();
 
+        if (scheduledMatches.length > 1) {
+            System.out.println("\nResultados da jornada:");
+        }
 
-        for(Match m : scheduledMatches) {
-            if(!m.isPlayed()){
-                ITeam homeLineup = generateTeams.randomTeam(m.getHomeClub());
-                ITeam awayLineup = generateTeams.randomTeam(m.getAwayClub());
+        for (IMatch match : scheduledMatches) {
+            if (match == null) {
+                continue;
+            }
+            if (match.getHomeClub().getName().equals("FOLGA") || match.getAwayClub().getName().equals("FOLGA")) {
+                System.out.println("FOLGA");
+                continue;
+            }
+            if (match.getHomeClub() == null || match.getAwayClub() == null) {
+                continue;
+            }
+            if (match.isPlayed()) {
+                continue;
+            }
+            ITeam homeLineup = generateTeams.randomTeam(match.getHomeClub());
+            ITeam awayLineup = generateTeams.randomTeam(match.getAwayClub());
 
-                m.setTeam(homeLineup);
-                m.setTeam(awayLineup);
+            match.setTeam(homeLineup);
+            match.setTeam(awayLineup);
 
-                simulator.simulate(m);
+            simulator.simulate(match);
+            match.setPlayed();
 
-                m.setPlayed();
+            System.out.println(match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - ("+ simulator.getAwayGoals() +") " + match.getAwayClub().getName());
 
+            int homeIndex = clubIndex(match.getHomeClub());
+            Standing standingHome = (Standing) standings[homeIndex];
+            int awayIndex = clubIndex(match.getAwayClub());
+            Standing standingAway = (Standing) standings[awayIndex];
 
-
-                int homeIndex = clubIndex(m.getHomeClub());
-                Standing standingHome = (Standing) standings[homeIndex];
-                if(m.getWinner().equals(homeLineup)) {
-                    //standingHome.addWinResult(m);
-
-
-                }
-
+            if (match.getWinner() != null && match.getWinner().equals(homeLineup)) {
+                standingHome.addWinResult(simulator.getHomeGoals(), simulator.getAwayGoals(), pointsPerWin);
+                standingAway.addLossResult(simulator.getAwayGoals(), simulator.getHomeGoals(), pointsPerLoss);
+            } else if (match.getWinner() != null && match.getWinner().equals(awayLineup)) {
+                standingAway.addWinResult(simulator.getAwayGoals(), simulator.getHomeGoals(), pointsPerWin);
+                standingHome.addLossResult(simulator.getHomeGoals(), simulator.getAwayGoals(), pointsPerLoss);
+            } else {
+                standingHome.addDrawResult(simulator.getHomeGoals(), simulator.getAwayGoals(), pointsPerDraw);
+                standingAway.addDrawResult(simulator.getAwayGoals(), simulator.getHomeGoals(), pointsPerDraw);
             }
         }
 
+        roundCompleted();
+
+    }
+
+    private void roundCompleted() {
+        IMatch[] matches = getMatches(getCurrentRound());
+
+        for (IMatch m : matches) {
+            if (m == null || m.getHomeClub() == null || m.getAwayClub() == null) {
+                continue;
+            }
+
+            String homeName = m.getHomeClub().getName();
+            String awayName = m.getAwayClub().getName();
+
+            if (homeName.equals("FOLGA") || awayName.equals("FOLGA")) {
+                continue;
+            }
+
+            if (!m.isPlayed()) {
+                return;
+            }
+        }
+
+        currentRound++;
+
+        //TODO verifica se e o fim da season
 
     }
 
@@ -258,7 +304,7 @@ public class Season implements ISeason {
     @Override
     public boolean isSeasonComplete() {
         boolean isPLayed = false;
-        for(IMatch match : this.schedule.getAllMatches()) {
+        for (IMatch match : this.schedule.getAllMatches()) {
             isPLayed = match.isPlayed();
         }
         return isPLayed;
@@ -326,7 +372,7 @@ public class Season implements ISeason {
 
     @Override
     public int getMaxRounds() {
-        return 0 ;
+        return 0;
     }
 
     @Override
@@ -359,19 +405,19 @@ public class Season implements ISeason {
         try {
             fileWriter.write(getSeasonJson().toJSONString());
             System.out.println("Season exportado com sucesso para: " + fileName);
-        }catch (IOException e){
+        } catch (IOException e) {
             System.out.println("Erro ao exportar o season para o arquivo: " + fileName);
-        }finally {
+        } finally {
             fileWriter.close();
         }
     }
 
-    private JSONArray getStandingsJson(){
+    private JSONArray getStandingsJson() {
         JSONArray jsonArray = new JSONArray();
 
-        for(int i = 0; i < this.standings.length; i++) {
-            if(this.standings[i] != null) {
-                jsonArray.add(((Standing)this.standings[i]).getJsonObj());
+        for (int i = 0; i < this.standings.length; i++) {
+            if (this.standings[i] != null) {
+                jsonArray.add(((Standing) this.standings[i]).getJsonObj());
             }
         }
         return jsonArray;
@@ -388,13 +434,13 @@ public class Season implements ISeason {
         seasonJson.put("pointsPerLoss", this.pointsPerLoss);
         seasonJson.put("currentRound", this.currentRound);
         seasonJson.put("standings", this.getStandingsJson());
-        seasonJson.put("schedule",( (Schedule) this.schedule).getJsonSchedule());
+        seasonJson.put("schedule", ((Schedule) this.schedule).getJsonSchedule());
         return seasonJson;
     }
 
     private boolean clubExist(IClub iclub) {
-        for(int i = 0; i < numClubs; i++) {
-            if(clubs[i].equals(iclub)) {
+        for (int i = 0; i < numClubs; i++) {
+            if (clubs[i].equals(iclub)) {
                 return true;
             }
         }
@@ -403,8 +449,8 @@ public class Season implements ISeason {
     }
 
     private int clubIndex(IClub iclub) {
-        for(int i = 0; i < numClubs; i++) {
-            if(clubs[i].equals(iclub)) {
+        for (int i = 0; i < numClubs; i++) {
+            if (clubs[i].equals(iclub)) {
                 return i;
             }
         }
@@ -423,6 +469,6 @@ public class Season implements ISeason {
 
         Season other = (Season) obj;
 
-        return true ;// ou outra comparação relevante
+        return true;// ou outra comparação relevante
     }
 }
