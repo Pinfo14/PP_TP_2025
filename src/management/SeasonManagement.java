@@ -109,7 +109,7 @@ public class SeasonManagement {
                 handleListStandings(season);
                 break;
             case 7:
-                handleSimulateRestOfSeason();
+                handleSimulateRestOfSeason(season);
                 break;
             case 0:
 
@@ -279,9 +279,10 @@ public class SeasonManagement {
     /**
      * Simula o restante da época (a implementar)
      */
-    private void handleSimulateRestOfSeason() {
-        System.out.println("Funcionalidade ainda não implementada.");
-        Utils.waitEnter();
+    private void handleSimulateRestOfSeason(Season season) {
+
+        season.simulateSeason();
+
     }
 
 

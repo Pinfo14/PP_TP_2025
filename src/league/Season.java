@@ -6,6 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import menus.ListStanding;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import simulation.GenerateTeams;
@@ -287,13 +288,23 @@ public class Season implements ISeason {
 
         currentRound++;
 
-        //TODO verifica se e o fim da season
-
+        getChampion();
     }
 
     @Override
     public void simulateSeason() {
+        int totRounds = schedule.getNumberOfRounds();
+        for (int i = 1; i <= totRounds; i++) {
+            System.out.println("\n - JORNADA " + i);
+            simulateRound();
+        }
 
+    }
+
+    private void getChampion() {
+        if(currentRound - 1  == schedule.getNumberOfRounds()) {
+            ListStanding.listFinalStanding(standings,getName());
+        }
     }
 
     @Override
