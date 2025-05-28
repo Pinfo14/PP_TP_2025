@@ -35,7 +35,6 @@ public class Team implements ITeam {
     private int striker;
     private boolean goalkeeper;
 
-
     public Team(IClub club, IFormation formation, IPlayer[] squad, int defense, int midfield, int forward){
         this.club = club;
         this.formation = formation;
@@ -53,7 +52,6 @@ public class Team implements ITeam {
         this.squad = new Player[MAX_PLAYERS];
         this.playerCount=0;
     }
-
 
     @Override
     public IClub getClub() {
@@ -80,7 +78,6 @@ public class Team implements ITeam {
 
     @Override
     public void addPlayer(IPlayer iPlayer) {
-
         validatePlayerNotNull(iPlayer);
         validateFormationDefined();
         validateTeamNotFull();
@@ -123,19 +120,15 @@ public class Team implements ITeam {
         return true;
     }
 
-
     @Override
     public int getTeamStrength() {
         return 0;
     }
 
-
     @Override
     public void setFormation(IFormation iFormation) {
         this.formation = iFormation;
     }
-
-
 
     public JSONObject getJsonObj() {
         JSONObject team = new JSONObject();
@@ -176,17 +169,6 @@ public class Team implements ITeam {
         }
     }
 
-    @Override
-    public String toString() {
-        String s = "";
-        for (IPlayer player : this.squad) {
-            if (player != null) {
-                s += player + "\n";
-            }
-        }
-        return s;
-    }
-
     private boolean isInTeam(IPlayer iPlayer) {
         validatePlayerNotNull(iPlayer);
         try {
@@ -200,7 +182,6 @@ public class Team implements ITeam {
         }
         return false;
     }
-
 
     private void incrementPosition(IPlayer iPlayer) {
         String position = iPlayer.getPosition().getDescription();
@@ -262,4 +243,42 @@ public class Team implements ITeam {
             throw new IllegalStateException("Player já está na team");
         }
     }
+
+    @Override
+    public String toString() {
+        String s = "";
+        for (IPlayer player : this.squad) {
+            if (player != null) {
+                s += player + "\n";
+            }
+        }
+        return s;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Team other = (Team) obj;
+
+        for(int i = 0; i < this.squad.length; i++) {
+            if(!this.squad[i].equals(other.squad[i])) {
+                return false;
+            }
+        }
+        return this.playerCount == other.playerCount
+                && this.defense == other.defense
+                && this.midfield == other.midfield
+                && this.forward == other.forward
+                && this.striker == other.striker
+                && this.goalkeeper == other.goalkeeper
+                && this.club.equals(other.club)
+                && this.formation.equals(other.formation);
+    }
+
+
 }

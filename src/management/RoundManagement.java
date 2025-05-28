@@ -195,24 +195,28 @@ public class RoundManagement {
     }
 
     private void simulate(IMatch match) {
-        MatchSimulator simulator = new MatchSimulator();
+        if(match == null)   {
+            throw new NullPointerException("Erro - match null");
+        }
 
+        MatchSimulator simulator = new MatchSimulator();
         simulator.simulate(match);
 
         if (match.getEvents().length == 0) {
-            System.out.println("  (sem eventos)");
+            System.out.println("(sem eventos)");
         } else {
             for (IEvent ev : match.getEvents()) {
                 System.out.println(ev);
             }
         }
+
         match.setPlayed();
 
-        System.out.println( match.getWinner().getClub().getName() + " ganhou o jogo.");
+
+        //simulate remain round.
 
 
-        System.out.println("Golos Casa: " + simulator.getHomeGoals());
-        System.out.println("Golos Fora: " + simulator.getAwayGoals());
+
 
 
     }

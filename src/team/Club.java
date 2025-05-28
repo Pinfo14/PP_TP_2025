@@ -169,7 +169,6 @@ public class Club implements IClub {
         this.playerCount--;
     }
 
-
     @Override
     public int getPlayerCount() {
         return this.playerCount;
@@ -236,9 +235,6 @@ public class Club implements IClub {
         obj.put("playerCount", this.playerCount);
         return obj;
     }
-
-
-
 
     private JSONArray getPlayersJson() {
         JSONArray playersArray = new JSONArray();

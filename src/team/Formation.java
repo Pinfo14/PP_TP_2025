@@ -72,6 +72,9 @@ public class Formation implements IFormation {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
         if (!(o instanceof Formation )){
             return false;
         }
@@ -82,9 +85,6 @@ public class Formation implements IFormation {
                 this.numMidfielders == form.numMidfielders &&
                 this.name.equals(form.name);
     }
-
-
-
 
     @Override
     public String toString() {

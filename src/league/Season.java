@@ -1,13 +1,17 @@
 package league;
 
+import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.league.ISchedule;
 import com.ppstudios.footballmanager.api.contracts.league.ISeason;
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.simulation.MatchSimulatorStrategy;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import match.Match;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import simulation.GenerateTeams;
 import simulation.MatchSimulator;
 import team.Club;
 
@@ -39,8 +43,6 @@ public class Season implements ISeason {
     private int currentRound;
     private MatchSimulator matchSimulator;
 
-
-
     public Season(String leagueName, int year, int coachingClubIndex, int currentRound,
                   int pointsPerWin, int pointsPerDraw, int pointsPerLoss) {
         this.maxClubs = 18;
@@ -56,8 +58,7 @@ public class Season implements ISeason {
         this.coachingClubIndex = coachingClubIndex;
     }
 
-
-    public Season(String leagueName, int year) {
+   public Season(String leagueName, int year) {
         this.maxClubs = 18;
         this.name = leagueName;
         this.year = year;
@@ -211,6 +212,37 @@ public class Season implements ISeason {
     @Override
     public void simulateRound() {
 
+        Match[] scheduledMatches = (Match[]) getMatches(currentRound);
+        MatchSimulator simulator = new MatchSimulator();
+        GenerateTeams generateTeams = new GenerateTeams();
+
+
+        for(Match m : scheduledMatches) {
+            if(!m.isPlayed()){
+                ITeam homeLineup = generateTeams.randomTeam(m.getHomeClub());
+                ITeam awayLineup = generateTeams.randomTeam(m.getAwayClub());
+
+                m.setTeam(homeLineup);
+                m.setTeam(awayLineup);
+
+                simulator.simulate(m);
+
+                m.setPlayed();
+
+
+
+                int homeIndex = clubIndex(m.getHomeClub());
+                Standing standingHome = (Standing) standings[homeIndex];
+                if(m.getWinner().equals(homeLineup)) {
+                    //standingHome.addWinResult(m);
+
+
+                }
+
+            }
+        }
+
+
     }
 
     @Override
@@ -251,7 +283,6 @@ public class Season implements ISeason {
     public void setMatchSimulator(MatchSimulatorStrategy matchSimulatorStrategy) {
         this.matchSimulator = matchSimulator;
     }
-
 
     @Override
     public IStanding[] getLeagueStandings() {
@@ -380,9 +411,6 @@ public class Season implements ISeason {
 
         return -1;
     }
-
-
-
 
     @Override
     public boolean equals(Object obj) {
