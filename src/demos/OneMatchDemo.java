@@ -8,6 +8,7 @@ import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import imports.Imports;
 import league.League;
 import league.Season;
+import management.HtmlExport;
 import simulation.GenerateTeams;
 import simulation.MatchSimulator;
 
@@ -67,7 +68,9 @@ public class OneMatchDemo {
         System.out.println("Vencedor: " + matches[0].getWinner());
         System.out.println("-----------------------------------");
 
+        matches[0].setPlayed();
 
+        HtmlExport.exportMatchHtml(matches[0]);
     }
 
 

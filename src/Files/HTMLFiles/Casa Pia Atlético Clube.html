@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casa Pia Atlético Clube - Club Report</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+        }
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 30px;
+            background: rgba(30, 60, 114, 0.97);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            margin-bottom: 35px;
+        }
+        .club-logo {
+            width: 90px;
+            height: 90px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #fff;
+        }
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.3em;
+            letter-spacing: 2px;
+            color: #00ff99;
+            margin-bottom: 8px;
+        }
+        .header p { color: #fff; font-size: 1.05em; }
+        .club-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 18px;
+            margin-bottom: 24px;
+        }
+        .players-section {
+            margin-top: 30px;
+        }
+        .players-section h2 {
+            color: #00ff99;
+            font-size: 1.5em;
+            margin-bottom: 18px;
+        }
+        .players-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+        .player-card {
+            background: rgba(0,0,0,0.18);
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+        }
+        .player-card h3 { color: #00ff99; margin-bottom: 8px; }
+        .player-stats { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .stat-item { background: #222; border-radius: 6px; padding: 4px 10px; color: #fff; font-size: 0.95em; }
+        .stat-label { color: #00ff99; margin-right: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="club-logo" src="https://media.api-sports.io/football/teams/221.png" alt="Club Logo">
+            <div>
+                <h1>Casa Pia Atlético Clube</h1>
+                <p>Portugal | Founded: 1920</p>
+                <p>Stadium: Estádio Municipal de Rio Maior</p>
+            </div>
+        </div>
+        <div class="club-info">
+            <div><strong>Club Code:</strong> CPAC</div>
+            <div><strong>Players:</strong> 30</div>
+        </div>
+        <div class="players-section">
+            <h2>Players</h2>
+            <div class="players-list">
+                <div class="player-card">
+                    <h3>Patrick Sequeira</h3>
+                    <p><strong>Nationality:</strong> Costa Rican</p>
+                    <p><strong>Birth Date:</strong> 1999-03-01</p>
+                </div>
+                <div class="player-card">
+                    <h3>Daniel Azevedo</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1998-02-12</p>
+                </div>
+                <div class="player-card">
+                    <h3>Ricardo Batista</h3>
+                    <p><strong>Nationality:</strong> Angolan</p>
+                    <p><strong>Birth Date:</strong> 1986-11-19</p>
+                </div>
+                <div class="player-card">
+                    <h3>Duplexe Tchamba</h3>
+                    <p><strong>Nationality:</strong> Cameroonian</p>
+                    <p><strong>Birth Date:</strong> 1998-07-10</p>
+                </div>
+                <div class="player-card">
+                    <h3>Ruben Kluivert</h3>
+                    <p><strong>Nationality:</strong> Dutch</p>
+                    <p><strong>Birth Date:</strong> 2001-05-21</p>
+                </div>
+                <div class="player-card">
+                    <h3>João Goulart</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2000-01-27</p>
+                </div>
+                <div class="player-card">
+                    <h3>Leonardo Lelo</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2000-03-30</p>
+                </div>
+                <div class="player-card">
+                    <h3>José Fonte</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1983-12-22</p>
+                </div>
+                <div class="player-card">
+                    <h3>Fahem Benaïssa-Yahia</h3>
+                    <p><strong>Nationality:</strong> French</p>
+                    <p><strong>Birth Date:</strong> 2000-04-29</p>
+                </div>
+                <div class="player-card">
+                    <h3>André Geraldes</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1991-05-02</p>
+                </div>
+                <div class="player-card">
+                    <h3>Nermin Zolotić</h3>
+                    <p><strong>Nationality:</strong> Bosnian</p>
+                    <p><strong>Birth Date:</strong> 1993-07-07</p>
+                </div>
+                <div class="player-card">
+                    <h3>Isaac Monteiro</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2004-03-04</p>
+                </div>
+                <div class="player-card">
+                    <h3>Gaizka Larrazabal</h3>
+                    <p><strong>Nationality:</strong> Spanish</p>
+                    <p><strong>Birth Date:</strong> 1997-12-17</p>
+                </div>
+                <div class="player-card">
+                    <h3>Tiago Dias</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1998-05-04</p>
+                </div>
+                <div class="player-card">
+                    <h3>Miguel Sousa</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1998-09-19</p>
+                </div>
+                <div class="player-card">
+                    <h3>Beni Mukendi</h3>
+                    <p><strong>Nationality:</strong> Angolan</p>
+                    <p><strong>Birth Date:</strong> 2002-05-21</p>
+                </div>
+                <div class="player-card">
+                    <h3>Rafael Brito</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2002-01-19</p>
+                </div>
+                <div class="player-card">
+                    <h3>Telasco Segovia</h3>
+                    <p><strong>Nationality:</strong> Venezuelan</p>
+                    <p><strong>Birth Date:</strong> 2003-04-02</p>
+                </div>
+                <div class="player-card">
+                    <h3>Pablo Roberto</h3>
+                    <p><strong>Nationality:</strong> Brazilian</p>
+                    <p><strong>Birth Date:</strong> 1999-11-14</p>
+                </div>
+                <div class="player-card">
+                    <h3>Andrian Kraev</h3>
+                    <p><strong>Nationality:</strong> Bulgarian</p>
+                    <p><strong>Birth Date:</strong> 1999-02-14</p>
+                </div>
+                <div class="player-card">
+                    <h3>Nuno Moreira</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1999-06-16</p>
+                </div>
+                <div class="player-card">
+                    <h3>Max Svensson</h3>
+                    <p><strong>Nationality:</strong> Spanish</p>
+                    <p><strong>Birth Date:</strong> 2001-11-08</p>
+                </div>
+                <div class="player-card">
+                    <h3>Raúl Blanco</h3>
+                    <p><strong>Nationality:</strong> Spanish</p>
+                    <p><strong>Birth Date:</strong> 2001-07-31</p>
+                </div>
+                <div class="player-card">
+                    <h3>Kiki Silva</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 1998-02-14</p>
+                </div>
+                <div class="player-card">
+                    <h3>Jérémy Livolant</h3>
+                    <p><strong>Nationality:</strong> French</p>
+                    <p><strong>Birth Date:</strong> 1998-01-09</p>
+                </div>
+                <div class="player-card">
+                    <h3>Samu</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2006-09-15</p>
+                </div>
+                <div class="player-card">
+                    <h3>Henrique Pereira</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2002-02-15</p>
+                </div>
+                <div class="player-card">
+                    <h3>Samuel Obeng</h3>
+                    <p><strong>Nationality:</strong> Ghanaian</p>
+                    <p><strong>Birth Date:</strong> 1997-05-15</p>
+                </div>
+                <div class="player-card">
+                    <h3>Cassiano</h3>
+                    <p><strong>Nationality:</strong> Brazilian</p>
+                    <p><strong>Birth Date:</strong> 1989-06-16</p>
+                </div>
+                <div class="player-card">
+                    <h3>Clau Mendes</h3>
+                    <p><strong>Nationality:</strong> Portuguese</p>
+                    <p><strong>Birth Date:</strong> 2000-12-08</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

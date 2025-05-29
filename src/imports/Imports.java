@@ -17,6 +17,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import static imports.ImportUtils.*;
+
 /**
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
@@ -220,33 +222,6 @@ public class Imports {
     }
 
 
-    /**
-     * Remove acentos de uma string substituindo cada caractere acentuado
-     * pelo correspondente sem acento.
-     */
-    public String removerAcentos(String texto) {
-        // String com todos os caracteres acentuados possíveis
-        String comAcento = "ÁÀÂÃÄáàâãäÉÈÊËéèêëÍÌÎÏíìîïÓÒÔÕÖóòôõöÚÙÛÜúùûüÇç";
-        // String com caracteres não acentuados correspondentes
-        String semAcento = "AAAAAaaaaaEEEEeeeeIIIIiiiiOOOOOoooooUUUUuuuuCc";
-        // Cria um StringBuilder com tamanho inicial igual ao texto para melhor performance
-        StringBuilder sb = new StringBuilder(texto.length());
 
-        // Percorre cada caractere do texto de entrada
-        for (char c : texto.toCharArray()) {
-            // Procura o índice do caractere atual na string de caracteres acentuados
-            int idx = comAcento.indexOf(c);
-            // Se encontrou o caractere acentuado (idx diferente de -1)
-            if (idx != -1) {
-                // Adiciona o caractere não acentuado correspondente
-                sb.append(semAcento.charAt(idx));
-            } else {
-                // Se não encontrou, mantém o caractere original
-                sb.append(c);
-            }
-        }
-        //  retorna o StringBuilder como String
-        return sb.toString();
-    }
 
 }

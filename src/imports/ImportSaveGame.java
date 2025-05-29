@@ -1,5 +1,6 @@
 package imports;
 
+import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.league.ILeague;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
@@ -7,9 +8,11 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayerPosition;
 import com.ppstudios.footballmanager.api.contracts.player.PreferredFoot;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import com.ppstudios.footballmanager.api.contracts.team.ITeam;
+import event.*;
 import league.League;
 import league.Schedule;
 import league.Season;
+import league.Standing;
 import match.Match;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -27,6 +30,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 
+import static imports.ImportUtils.*;
+
 /**
  * Nome: Emanuel Jose Teixeira Pinto
  * Número: 8230371
@@ -42,6 +47,13 @@ public class ImportSaveGame {
     private static final String CLUBS_FILE = "all_clubs.json";
     private static final String LEAGUE_EXTENSION = "_league.json";
 
+
+    private IClub[] allClubs;
+
+    public ImportSaveGame(){
+        this.allClubs = importAllClubs();
+    }
+
     /**
      * Importa uma liga completa a partir de um ficheiro JSON
      * @param leagueName Nome da liga a carregar
@@ -50,7 +62,10 @@ public class ImportSaveGame {
     public ILeague importLeague(String leagueName) {
         try {
             // Primeiro carregar todos os clubes disponíveis
-            IClub[] allClubs = importAllClubs();
+           if (allClubs == null) {
+               System.out.println("Array de clubes vazio");
+               return null;
+           }
 
             // Carregar o ficheiro da liga
             String leaguePath = SAVE_DIRECTORY + leagueName + LEAGUE_EXTENSION;
@@ -77,8 +92,18 @@ public class ImportSaveGame {
     }
 
     /**
-     * Lista todos os saves de ligas disponíveis
-     * @return Array com nomes das ligas salvas
+     * Lista os nomes das ligas disponíveis no diretório de save.
+     *
+     * Este método verifica os ficheiros no diretório
+     * e devolve os nomes das ligas disponíveis, baseando-se
+     * na extensão especificada pela constante LEAGUE_EXTENSION.
+     * Apenas os ficheiros com esta extensão serão considerados como ligas.
+     * Caso o diretório não exista ou não contenha nenhum ficheiro com a
+     * extensão esperada, será lançada uma exceção.
+     *
+     * @return Um array de strings contendo os nomes das ligas disponíveis.
+     * @throws IllegalStateException Se o diretório de save não existir ou
+     *                               se não houver nenhum ficheiro de saveGame válido.
      */
     public String[] listAvailableLeagues() {
         File saveDir = new File(SAVE_DIRECTORY);
@@ -92,10 +117,8 @@ public class ImportSaveGame {
             throw new IllegalStateException("Nao existe, Save Files ");
         }
 
-        int leagueCount = countFiles(files);
+        int leagueCount = ImportUtils.countFiles(files,LEAGUE_EXTENSION);
 
-
-        // Extrair nomes das ligas
         String[] leagueNames = new String[leagueCount];
         int index = 0;
 
@@ -112,18 +135,19 @@ public class ImportSaveGame {
 
 
 
-    private int countFiles(String[] files){
-        int leagueCount = 0;
-        for (String file : files) {
-            if (file.endsWith(LEAGUE_EXTENSION)) {
-                leagueCount++;
-            }
-        }
-        return leagueCount;
-    }
+
 
     /**
-     * Cria uma liga a partir do JSON
+     * Cria uma liga a partir de um objeto JSON.
+     *
+     * Este método constrói uma instância de League utilizando os dados
+     * fornecidos no objeto JSON, incluindo as temporadas. As temporadas associadas
+     * são criadas a partir do conteúdo JSON, e os clubes correspondentes são atribuídos
+     * conforme fornecido no array allClubs.
+     *
+     * @param leagueJson Objeto JSON contendo os dados da liga a ser criada.
+     * @param allClubs Array de clubes disponíveis para associar à liga.
+     * @return Uma instância de ILeague criada a partir do JSON fornecido.
      */
     private ILeague createLeagueFromJson(JSONObject leagueJson, IClub[] allClubs) {
         String name = (String) leagueJson.get("name");
@@ -169,6 +193,7 @@ public class ImportSaveGame {
             addClubsToSeason(season, seasonJson, allClubs);
 
             loadSchedule(season, seasonJson);
+            loadStandings(season, seasonJson);
 
             return season;
 
@@ -270,6 +295,7 @@ public class ImportSaveGame {
             Match match = new Match(homeClub, awayClub, round);
 
             loadTeams(match,matchJson);
+            loadEventsForMatch(match, matchJson);
 
             boolean played = (boolean) matchJson.get("played");
 
@@ -301,6 +327,74 @@ public class ImportSaveGame {
         }
     }
 
+    private void loadEventsForMatch(Match match, JSONObject matchJson) {
+        if (!matchJson.containsKey("events")) {
+            return;
+        }
+
+        JSONObject eventsJson = (JSONObject) matchJson.get("events");
+        JSONArray eventsArray = (JSONArray) eventsJson.get("events");
+
+        for (Object eventObj : eventsArray) {
+            JSONObject eventJson = (JSONObject) eventObj;
+
+            IEvent event = createEventFromJson(eventJson);
+            if (event != null) {
+                match.addEvent(event);
+            }
+        }
+    }
+
+    private IEvent createEventFromJson(JSONObject eventJson) {
+        String type = (String) eventJson.get("type");
+        int minute = ((Long) eventJson.get("minute")).intValue();
+        String description = (String) eventJson.get("description");
+
+        switch (type) {
+            case "Goal":
+                String autorName = (String) eventJson.get("autor");
+                IPlayer player = findPlayerByName(allClubs, autorName);
+                if (player != null) {
+                    return new GoalEvent(player, minute, description);
+                }
+                break;
+
+            case "Foul":
+                String autorFoul = (String) eventJson.get("autor");
+                String victimName = (String) eventJson.get("victim");
+                IPlayer autor = findPlayerByName(allClubs, autorFoul);
+                IPlayer victim = findPlayerByName(allClubs, victimName);
+                if (autor != null && victim != null) {
+                    return new FoulEvent(description, minute, autor, victim);
+                }
+                break;
+
+            case "PassEvent":
+                String autorPass = (String) eventJson.get("autor");
+                IPlayer autorPlayer = findPlayerByName(allClubs, autorPass);
+                if (autorPlayer != null) {
+                    return new PassEvent(description, minute, autorPlayer);
+                }
+                break;
+
+            case "GoalKick":
+                String autorKick = (String) eventJson.get("autor");
+                IPlayer kickPlayer = findPlayerByName(allClubs, autorKick);
+                if (kickPlayer != null) {
+                    return new GoalKickEvent(minute, description, kickPlayer);
+                }
+                break;
+
+            case "HalftimeEvent":
+                return new HalftimeEvent(minute);
+
+            default:
+                System.out.println("Tipo de evento desconhecido: " + type);
+                break;
+        }
+
+        return null;
+    }
 
 
     private void loadTeams(IMatch match, JSONObject matchJson) {
@@ -377,8 +471,59 @@ public class ImportSaveGame {
         }
     }
 
+    /**
+     * Carrega os standings (classificação) da temporada
+     */
+    private void loadStandings(Season season, JSONObject seasonJson) {
+        if (!seasonJson.containsKey("standings")) {
+            System.out.println("Nenhum standing encontrado no save");
+            return;
+        }
 
+        try {
+            JSONArray standingsArray = (JSONArray) seasonJson.get("standings");
+            IClub[] clubs = season.getCurrentClubs();
 
+            System.out.println("A carregar " + standingsArray.size() + " standings...");
+
+            // Criar array de standings
+            Standing[] standings = new Standing[standingsArray.size()];
+
+            for (int i = 0; i < standingsArray.size(); i++) {
+                JSONObject standingJson = (JSONObject) standingsArray.get(i);
+
+                String clubCode = (String) standingJson.get("Club");
+                IClub club = findClubByCode(clubs, clubCode);
+
+                if (club != null) {
+                    // Extrair dados do standing do JSON
+                    int points = getIntValue(standingJson, "Points", 0);
+                    int wins = getIntValue(standingJson, "Wins", 0);
+                    int losses = getIntValue(standingJson, "Losses", 0);
+                    int draws = getIntValue(standingJson, "Draws", 0);
+                    int goalsScored = getIntValue(standingJson, "GoalsScored", 0);
+                    int goalsConceded = getIntValue(standingJson, "GoalsConceded", 0);
+
+                    // Criar standing com o novo construtor
+                    standings[i] = new Standing(club, points, wins, losses, draws, goalsScored, goalsConceded);
+
+                    System.out.println("Standing carregado para " + clubCode + ": " + points + " pts");
+
+                } else {
+                    System.out.println("Clube não encontrado para standing: " + clubCode);
+                    standings[i] = null; // ou criar um standing vazio
+                }
+            }
+
+            // Definir todos os standings na temporada de uma vez
+            season.setStandings(standings);
+            System.out.println("Todos os standings definidos na temporada!");
+
+        } catch (Exception e) {
+            System.out.println("Erro ao carregar standings: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Adiciona clubes à temporada baseado nos standings
@@ -538,54 +683,6 @@ public class ImportSaveGame {
         return new PlayerAttributes(shooting, passing, stamina, speed, height, weight, defence, preferredFoot);
     }
 
-    /**
-     * Encontra um clube pelo código
-     */
-    private IClub findClubByCode(IClub[] clubs, String code) {
-        for (IClub club : clubs) {
-            if (club.getCode().equals(code)) {
-                return club;
-            }
-        }
-        return null;
-    }
-    private IPlayer findPlayerInClub(IClub club, String playerName) {
-        IPlayer[] players = club.getPlayers();
 
-        for (IPlayer player : players) {
-            if (player.getName().equals(playerName)) {
-                return player;
-            }
-        }
-
-        return null; // Não encontrado
-    }
-    /**
-     * Obtém um valor inteiro do JSON com fallback
-     */
-    private int getIntValue(JSONObject json, String key, int defaultValue) {
-        if (!json.containsKey(key)) {
-            return defaultValue;
-        }
-        long value = (long)json.get(key);
-        return ((Long) value).intValue();
-    }
-
-    /**
-     * Obtém um valor float do JSON com fallback
-     */
-    private float getFloatValue(JSONObject json, String key, float defaultValue) {
-        if (!json.containsKey(key)) {
-            return defaultValue;
-        }
-        Object value = json.get(key);
-        if (value == null) {
-            return defaultValue;
-        }
-
-      float floatValue = ((Double) value).floatValue();
-
-        return floatValue;
-    }
 
 }

@@ -35,6 +35,16 @@ public class Standing implements IStanding {
         this.points = 0;
     }
 
+    public Standing(IClub club,int points, int numberWins, int numberLosses, int numberDraws, int numberGoalsScored, int numberGoalsConceded) {
+        this.club = club;
+        this.numberDraws = numberDraws;
+        this.numberWins = numberWins;
+        this.numberLosses = numberLosses;
+        this.numberGoalsScored = numberGoalsScored;
+        this.numberGoalsConceded = numberGoalsConceded;
+        this.points = points;
+    }
+
     public IClub getClub() {
         return club;
     }

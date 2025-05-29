@@ -97,6 +97,10 @@ public class Season implements ISeason {
         this.schedule=schedule;
     }
 
+    public void setStandings(IStanding[] standings) {
+        System.arraycopy(standings, 0, this.standings, 0, standings.length);
+    }
+
     @Override
     public boolean addClub(IClub iClub) {
         //se a seasom ja tiver começado nao pode começar outra liga? e remover ?

@@ -23,7 +23,7 @@ public class StartMenu {
 
         do {
             displayMenu();
-            opcao = reader.readInt(0, 2, "Opçao: ");
+            opcao = reader.readInt(0, 3, "Opçao: ");
 
              switch (opcao) {
                  case 1:
@@ -31,19 +31,18 @@ public class StartMenu {
                      break;
                  case 2:
                      leagueManagement.loadGame();
+                     break;
+                     case 3:
+                         try {
+                             this.saveGame.saveGame(leagueManagement.getLeague());
+                         } catch (Exception e) {
+                             System.out.println("Erro ao salvar o jogo: " + e.getMessage());
+                         }
+                         break;
                  default:
                      //import os dados guardados.
              }
-
-             if (opcao == 0){
-                 try {
-                     this.saveGame.saveGame(leagueManagement.getLeague());
-                 } catch (Exception e) {
-                    System.out.println("Erro ao salvar o jogo: " + e.getMessage());
-                 }
-             }
-
-        } while (opcao != 0);
+        } while (opcao != 0 && opcao != 3);
 
     }
 
@@ -60,6 +59,7 @@ public class StartMenu {
         menu.append("║   1 - NOVO JOGO                                                                        ║\n");
         menu.append("║   2 - CARREGAR JOGO ANTERIOR                                                           ║\n");
         menu.append("║                                                                                        ║\n");
+        menu.append("║   3 - Guardar e sair                                                                   ║\n");
         menu.append("║   0 - SAIR                                                                             ║\n");
         menu.append("║                                                                                        ║\n");
         menu.append("╚════════════════════════════════════════════════════════════════════════════════════════╝\n");
