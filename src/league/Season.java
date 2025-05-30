@@ -374,7 +374,7 @@ public class Season implements ISeason {
 
     }
 
-    private void getChampion() {
+    public void getChampion() {
         if(currentRound - 1  == schedule.getNumberOfRounds()) {
             ListStanding.listFinalStanding(standings,getName());
         }

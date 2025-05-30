@@ -2,7 +2,9 @@ package menus;
 
 import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
+import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import league.Standing;
+import team.Team;
 
 public class ListStanding {
 
@@ -68,17 +70,17 @@ public class ListStanding {
     public static void listFinalStanding(IStanding[] standings, String name) {
         if (standings == null) {
             throw new NullPointerException("\nTabela classificativa é nula!");
-
         }
 
         if (standings.length == 0) {
-            System.out.println("\nErro.");
+            System.out.println("\nErro: tabela classificativa vazia.");
             return;
         }
 
+
         IStanding[] standingsCopy = standings.clone();
 
-        // Ordena a cópia
+
         for (int i = 0; i < standingsCopy.length - 1; i++) {
             for (int j = i + 1; j < standingsCopy.length; j++) {
                 if (standingsCopy[i] != null && standingsCopy[j] != null) {
@@ -104,28 +106,46 @@ public class ListStanding {
                 }
             }
         }
+        String championName = "";
 
-        System.out.println("-------------------------------------------------------------------------");
-        System.out.println("VENCEDOR DA " + name + " - ");
-        System.out.println("-------------------------------------------------------------------------");
         System.out.println("---+----------------------------+-----+----+----+----+----+----+----+----");
-        System.out.println(String.format("%-3s| %-27s| %-4s| %-3s| %-3s| %-3s| %-3s| %-3s| %-3s| %-4s",
-                "POS", "EQUIPA", "PTS", "J", "V", "E", "D", "GM", "GS", "DIF"));
+        System.out.printf("%-3s| %-27s| %-4s| %-3s| %-3s| %-3s| %-3s| %-3s| %-3s| %-4s\n",
+                "POS", "EQUIPA", "PTS", "J", "V", "E", "D", "GM", "GS", "DIF");
         System.out.println("---+----------------------------+-----+----+----+----+----+----+----+----");
 
-        for(int i = 0; i < standingsCopy.length; i++) {
-            if(standingsCopy[i] != null) {
 
+        for (int i = 0; i < standingsCopy.length; i++) {
+            if (standingsCopy[i] != null && standingsCopy[i] instanceof Standing) {
                 Standing standing = (Standing) standingsCopy[i];
+                if (standing.getClub() == null) {
+                    continue;
+                }
 
-                int games = standings[i].getWins() + standings[i].getLosses() + standings[i].getDraws();
+                int jogos = standing.getWins() + standing.getDraws() + standing.getLosses();
 
-                System.out.println(String.format("%-3d| %-27s| %-4d| %-3d| %-3d| %-3d| %-3d| %-3d| %-3d| %-4d",
-                        i + 1, standing.getClub().getName(), standing.getPoints(), games, standing.getWins(), standing.getDraws(),
-                        standing.getLosses(), standing.getGoalScored(), standing.getGoalsConceded(), standing.getGoalDifference()));
+                System.out.printf("%-3d| %-27s| %-4d| %-3d| %-3d| %-3d| %-3d| %-3d| %-3d| %-4d\n",
+                        i + 1,
+                        standing.getClub().getName(),
+                        standing.getPoints(),
+                        jogos,
+                        standing.getWins(),
+                        standing.getDraws(),
+                        standing.getLosses(),
+                        standing.getGoalScored(),
+                        standing.getGoalsConceded(),
+                        standing.getGoalDifference()
+                );
+
+                if(i == 0) {
+                    championName = standing.getClub().getName();
+                }
             }
-
         }
+
+        System.out.println("---+----------------------------+-----+----+----+----+----+----+----+----");
+        System.out.println("VENCEDOR DA " + name + " - " + championName);
+        System.out.println("-------------------------------------------------------------------------");
     }
+
 
 }
