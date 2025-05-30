@@ -63,7 +63,6 @@ public class OneMatchDemo {
                 System.out.println("Evento: " + ev);
             }
         }
-        System.out.println("RESULTADO: "+simulador.getHomeGoals() + " : " + simulador.getAwayGoals());
 
         System.out.println("Vencedor: " + matches[0].getWinner());
         System.out.println("-----------------------------------");

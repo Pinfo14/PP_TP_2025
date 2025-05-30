@@ -1,0 +1,88 @@
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: FCP 3-1 VSC
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: VSC 2-2 FCP
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: CDSC 2-2 FCP
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: CDN 0-5 SLB
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: CDSC vs SLB (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs CDN (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: CDSC vs CDN (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs CDSC (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs CDN (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs CDSC (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: CDN vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: CDN vs CDSC (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs SLB (não jogada)
+[30/05/2025] Clube não encontrado: SLB vs null
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: FCP 3-2 SCP
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: SLB 1-2 SCP
+[30/05/2025] Clube não encontrado: null vs FCP
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs FCP (não jogada)
+[30/05/2025] Clube não encontrado: SCP vs null
+[30/05/2025] Clube não encontrado: null vs SLB
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs SLB (não jogada)
+[30/05/2025] Clube não encontrado: FCP vs null
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs SLB (não jogada)
+[30/05/2025] Clube não encontrado: null vs SCP
+[30/05/2025] Clube não encontrado: SLB vs null
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: FCP 3-2 SCP
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: SLB 1-2 SCP
+[30/05/2025] Clube não encontrado: null vs FCP
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs FCP (não jogada)
+[30/05/2025] Clube não encontrado: SCP vs null
+[30/05/2025] Clube não encontrado: null vs SLB
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs SLB (não jogada)
+[30/05/2025] Clube não encontrado: FCP vs null
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs SLB (não jogada)
+[30/05/2025] Clube não encontrado: null vs SCP
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs null (não jogada)
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: FCP 3-2 SCP
+[30/05/2025] Equipas carregadas para a match
+[30/05/2025] Match criada: SLB 1-2 SCP
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: null vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SLB vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs null (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: null vs SLB (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs FCP (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: SCP vs SLB (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs null (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: FCP vs SLB (não jogada)
+[30/05/2025] AVISO: Match sem equipas definidas no JSON
+[30/05/2025] Match criada: null vs SCP (não jogada)

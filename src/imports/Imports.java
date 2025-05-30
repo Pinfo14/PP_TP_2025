@@ -35,9 +35,8 @@ public class Imports {
     private PlayerAttributes attributes = new PlayerAttributes();
 
     /**
-     * Lê informações dos clubes de um arquivo JSON e constrói um array de objetos Club.
-     * O método analisa a estrutura JSON para extrair detalhes incluindo nome do clube, código, país,
-     * ano de fundação, nome do estádio e logo. Cada entrada extraída é usada para criar uma instância de Club.
+     * Lê informações dos clubes de um arquivo JSON e constrói um array de  Club.
+     * O método le o ficheiro JSON para extrair detalhes do club para criar uma instância de Club.
      * <p>
      * Em caso de erro na leitura ou análise do arquivo, um array vazio de Club é retornado.
      *
@@ -52,7 +51,7 @@ public class Imports {
         try  {
             FileReader reader = new FileReader(file);
             JSONArray clubsArray = (JSONArray) parser.parse(reader);
-            // Cria o array de Club com o tamanho do jsonarray
+
             Club[] clubs = new Club[clubsArray.size()];
 
             int i = 0;
@@ -87,6 +86,17 @@ public class Imports {
         }
     }
 
+    /**
+     * Importa jogadores a partir de um ficheiro JSON especificado.
+     * O método lê os dados do ficheiro JSON para extrair objetos de jogador
+     * e cria instâncias de jogadores com base nos atributos fornecidos.
+     * Retorna um array de jogadores ou um array vazio em caso de erro.
+     *
+     * @param fileName O nome do ficheiro que contém os dados dos jogadores a serem importados.
+     *                 O ficheiro deve estar na localização "src/Files/players/".
+     * @return Um array de objetos  IPlayer representando os jogadores importados.
+     *         Retorna um array vazio caso ocorra algum erro durante a leitura  do ficheiro.
+     */
     public IPlayer[] importPlayers(String fileName) {
         JSONParser parser = new JSONParser();
         File file = new File("src/Files/players/" + fileName);
@@ -121,14 +131,11 @@ public class Imports {
                     number = ((Long) numberObj).intValue();
                 }
 
-
                 String playerPos = (String) playerJson.get("basePosition");
 
                 IPlayerPosition position = new PlayerPosition(playerPos);
 
-
                 PlayerAttributes playerAttributes = attributes.generateAttributes(playerPos);
-
 
                 Player playerObj = new Player(
                         name,
@@ -153,17 +160,23 @@ public class Imports {
 
 
 
+    /**
+     * Importa informações de clubes e jogadores associando-os corretamente.
+     *
+     * Em caso de erro ao importar jogadores, o programa tenta continuar com os próximos clubes
+     * e exibe mensagens de erro relevantes.
+     *
+     * @return Um array de objetos IClub representando os clubes com seus jogadores associados.
+     *         Se ocorrerem erros ao importar clubes ou jogadores, os clubes serão retornados
+     *         com os jogadores que puderem ser associados.
+     */
     public IClub[] importPlayersAndClub() {
 
         IClub[] club = this.importClubs();
 
         String directoryPath = "src/Files/players";
-
         File directory = new File(directoryPath);
-
         File[] files = directory.listFiles();
-
-        //Alterar digo para abrir o ficheiro x se lançar exeção se a lançar ele tenta abrir outro.
 
         for (IClub c : club) {
             try {
@@ -180,48 +193,6 @@ public class Imports {
             }
 
         }
-
         return club;
     }
-
-
-    private String checkNameFileClub(File[] files, String clubName) {
-
-        // Divide o nome do clube em tokens (tudo maiúsculo) [SPORT,LISBOA,E,BENFICA]
-        String[] tokens = removerAcentos(clubName).toUpperCase().split("\\s+");
-        String lastToken = tokens[tokens.length - 1];
-        String firstMatch = null;
-
-        for (File f : files) {
-            String fname = f.getName();
-            int dot = fname.lastIndexOf('.');//index do . exemplo sporting.json
-            String base;
-            if (dot > 0) {
-                base = fname.substring(0, dot).toUpperCase();//sporting.json -> SPORTING
-            } else {
-                base = fname.toUpperCase();
-            }
-
-            // Para cada token, verifica se o nome-base do ficheiro contém o token
-            for (String token : tokens) {
-                if (base.contains(token)) {
-                    // Se o token for o último, prioridade máxima
-                    if (token.equals(lastToken)) {
-                        return fname;
-                    }
-                    // Guarda o primeiro match caso ainda não exista
-                    if (firstMatch == null) {
-                        firstMatch = fname;
-                    }
-                }
-            }
-        }
-
-        // Se não encontrou match no último token, retorna o primeiro match (ou null)
-        return firstMatch;
-    }
-
-
-
-
 }

@@ -50,7 +50,7 @@ public class RoundManagement {
 
             ListTeams.list((Team) match.getHomeTeam(), (Team) match.getAwayTeam());
 
-            simulateMatch(season, match);
+            simulateMatch(season, (Match) match);
         } else {
             System.out.println("\nJogo da jornada: FOLGA - o seu clube não joga nesta ronda.");
         }
@@ -219,7 +219,7 @@ public class RoundManagement {
 
     }
 
-    private void simulateMatch(Season season, IMatch match) {
+    private void simulateMatch(Season season, Match match) {
         if (match == null) {
             throw new NullPointerException("Erro - match null");
         }
@@ -228,13 +228,15 @@ public class RoundManagement {
             return;
         }
 
+
+
         System.out.println("\n= INICIO DO JOGO =");
         MatchSimulator simulator = new MatchSimulator();
         simulator.simulate(match);
         printEvents(match);
         match.setPlayed();
         System.out.println("= FIM DO JOGO =");
-        System.out.println("Resultado: " + match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ") " + match.getAwayClub().getName());
+        System.out.println("Resultado: " + match.getHomeClub().getName() + " (" + match.getHomeGoals() + ") - (" + match.getAwayGoals() + ") " + match.getAwayClub().getName());
 
         updateStandings(season, match, simulator);
     }
@@ -262,20 +264,20 @@ public class RoundManagement {
         }
     }
 
-    private void updateStandings(Season season, IMatch match, MatchSimulator simulator) {
+    private void updateStandings(Season season, Match match, MatchSimulator simulator) {
         Standing[] standings = (Standing[]) season.getLeagueStandings();
         int homeIndex = getIndexClub(season, match.getHomeClub());
         int awayIndex = getIndexClub(season, match.getAwayClub());
 
         if (match.getWinner() != null && match.getWinner().equals(match.getHomeTeam())) {
-            standings[homeIndex].addWinResult(simulator.getHomeGoals(), simulator.getAwayGoals(), season.getPointsPerWin());
-            standings[awayIndex].addLossResult(simulator.getAwayGoals(), simulator.getHomeGoals(), season.getPointsPerLoss());
+            standings[homeIndex].addWinResult(match.getHomeGoals(), match.getAwayGoals(), season.getPointsPerWin());
+            standings[awayIndex].addLossResult(match.getAwayGoals(), match.getHomeGoals(), season.getPointsPerLoss());
         } else if (match.getWinner() != null && match.getWinner().equals(match.getAwayTeam())) {
-            standings[awayIndex].addWinResult(simulator.getAwayGoals(), simulator.getHomeGoals(), season.getPointsPerWin());
-            standings[homeIndex].addLossResult(simulator.getHomeGoals(), simulator.getAwayGoals(), season.getPointsPerLoss());
+            standings[awayIndex].addWinResult(match.getAwayGoals(), match.getHomeGoals(), season.getPointsPerWin());
+            standings[homeIndex].addLossResult(match.getHomeGoals(), match.getAwayGoals(), season.getPointsPerLoss());
         } else {
-            standings[homeIndex].addDrawResult(simulator.getHomeGoals(), simulator.getAwayGoals(), season.getPointsPerDraw());
-            standings[awayIndex].addDrawResult(simulator.getAwayGoals(), simulator.getHomeGoals(), season.getPointsPerDraw());
+            standings[homeIndex].addDrawResult(match.getHomeGoals(), match.getAwayGoals(), season.getPointsPerDraw());
+            standings[awayIndex].addDrawResult(match.getAwayGoals(), match.getHomeGoals(), season.getPointsPerDraw());
         }
     }
 

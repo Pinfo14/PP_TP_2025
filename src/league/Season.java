@@ -74,6 +74,11 @@ public class Season implements ISeason {
         this.coachingClubIndex = -1;
     }
 
+
+    public void setStandings(IStanding[] standings) {
+        System.arraycopy(standings, 0, this.standings, 0, standings.length);
+    }
+
     @Override
     public int getYear() {
         return year;
@@ -252,7 +257,7 @@ public class Season implements ISeason {
                 continue;
             }
 
-            simulateMatch(match, simulator, generateTeams);
+            simulateMatch((Match) match, simulator, generateTeams);
         }
 
         roundCompleted();
@@ -276,7 +281,9 @@ public class Season implements ISeason {
         return true;
     }
 
-    private void simulateMatch(IMatch match, MatchSimulator simulator, GenerateTeams generator) {
+    private void simulateMatch(Match match, MatchSimulator simulator, GenerateTeams generator) {
+
+
         ITeam homeLineup = generator.randomTeam(match.getHomeClub());
         ITeam awayLineup = generator.randomTeam(match.getAwayClub());
 
@@ -286,20 +293,20 @@ public class Season implements ISeason {
         simulator.simulate(match);
         match.setPlayed();
 
-        System.out.println(match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ") " + match.getAwayClub().getName());
+        System.out.println(match.getHomeClub().getName() + " (" + match.getHomeGoals() + ") - (" + match.getAwayGoals()+ ") " + match.getAwayClub().getName());
 
         updateStandings(match, homeLineup, awayLineup, simulator);
     }
 
-    private void updateStandings(IMatch match, ITeam homeLineup, ITeam awayLineup, MatchSimulator simulator) {
+    private void updateStandings(Match match, ITeam homeLineup, ITeam awayLineup, MatchSimulator simulator) {
         int homeIndex = clubIndex(match.getHomeClub());
         int awayIndex = clubIndex(match.getAwayClub());
 
         Standing standingHome = (Standing) standings[homeIndex];
         Standing standingAway = (Standing) standings[awayIndex];
 
-        int homeGoals = simulator.getHomeGoals();
-        int awayGoals = simulator.getAwayGoals();
+        int homeGoals =  match.getHomeGoals();
+        int awayGoals = match.getAwayGoals();
         ITeam winner = match.getWinner();
 
         if (winner != null) {

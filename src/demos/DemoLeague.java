@@ -6,6 +6,7 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import league.League;
 import league.Season;
+import management.HtmlExport;
 import management.SaveGame;
 import menus.ListStanding;
 import team.Club;
@@ -48,9 +49,8 @@ public class DemoLeague {
 
         IMatch[] ma = season.getMatches(5);
     for(IMatch m : ma) {
-        System.out.println(m.toString());
-    }
 
+    }
 
         ListStanding.list(season.getLeagueStandings());
 

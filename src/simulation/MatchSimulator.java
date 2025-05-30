@@ -18,8 +18,6 @@ public class MatchSimulator implements MatchSimulatorStrategy {
     private static final double PASS_EVENT_PROB = 0.3;
     private static final double SHOT_EVENT_PROB = 0.7;
 
-    private int homeGoals;
-    private int awayGoals;
 
 
     private EventFactory factory;
@@ -31,8 +29,6 @@ public class MatchSimulator implements MatchSimulatorStrategy {
         this.factory = new EventFactory();
         this.positionManager = new PlayerPositionManage();
         this.probFormationHomeTeam = 0;
-        this.homeGoals = 0;
-        this.awayGoals = 0;
     }
 
     @Override
@@ -75,18 +71,10 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                     ev = factory.generatePassEvent(autor, alvo, minuto, isHome);
                 } else if (tipo > PASS_EVENT_PROB + this.probFormationHomeTeam && tipo < SHOT_EVENT_PROB + this.probFormationHomeTeam) {
                     ev = factory.generateShotEvent(autor, gk, minuto, isHome);
-                    if (ev instanceof GoalEvent) {
-                        if (isHome) {
-                            this.homeGoals++;
-                        } else {
-                            this.awayGoals++;
-                        }
-                    }
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);
                 }
 
-                // Só regista se o evento for não-nulo (bem-sucedido)
                 if (ev != null) {
                     iMatch.addEvent(ev);
                 }
@@ -95,13 +83,6 @@ public class MatchSimulator implements MatchSimulatorStrategy {
     }
 
 
-    public int getHomeGoals() {
-        return homeGoals;
-    }
-
-    public int getAwayGoals() {
-        return awayGoals;
-    }
 
     /**
      * Escolhe um jogador aleatoriamente do array devolvido por getPlayers() de uma posicao especifica.
@@ -121,9 +102,9 @@ public class MatchSimulator implements MatchSimulatorStrategy {
      * Escolhe um jogador aleatoriamente do array devolvido por getPlayers().
      */
     private IPlayer getPlayer(ITeam team) {
-        IPlayer[] v = team.getPlayers();
-        int idx = (int) (Math.random() * v.length);
-        return v[idx];
+        IPlayer[] players = team.getPlayers();
+        int idx = (int) (Math.random() * players.length);
+        return players[idx];
     }
 
 }

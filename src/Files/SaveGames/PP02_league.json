@@ -1,0 +1,479 @@
+{
+  "numberOfSeasons": 1,
+  "seasons": [
+    {
+      "coachingClubIndex": 0,
+      "currentRound": 3,
+      "schedule": {
+        "numberOfClubs": 3,
+        "clubs": [
+          "SLB",
+          "FCP",
+          "SCP",
+          null
+        ],
+        "matches": [
+          {
+            "awayClub": null,
+            "homeClub": "SLB",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SCP",
+            "awayTeam": {
+              "Club": "SCP",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Marcus Edwards",
+                "Afonso Moreira",
+                "João Simões",
+                "Daniel Bragança",
+                "Hidemasa Morita",
+                "Ousmane Diomandé",
+                "Eduardo Quaresma",
+                "Matheus Reis",
+                "Zeno Debast",
+                "Iván Fresneda",
+                "Franco Israel"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeClub": "FCP",
+            "homeTeam": {
+              "Club": "FCP",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Luis Díaz",
+                "Evanilson",
+                "Fábio Vieira",
+                "Marko Grujić",
+                "Stephen Eustáquio",
+                "Martim Cunha",
+                "Iván Marcano",
+                "Francisco Moura",
+                "Zé Pedro",
+                "Gabriel Brás",
+                "Diogo Costa"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeGoals": 3,
+            "played": true,
+            "events": {
+              "eventCount": 21,
+              "events": [
+                {
+                  "description": "[Casa] Remate defendido por Franco Israel",
+                  "type": "GoalKick",
+                  "autor": "Franco Israel",
+                  "minute": 3
+                },
+                {
+                  "description": "[Casa] Remate defendido por Franco Israel",
+                  "type": "GoalKick",
+                  "autor": "Franco Israel",
+                  "minute": 4
+                },
+                {
+                  "description": "[Casa] Remate defendido por Franco Israel",
+                  "type": "GoalKick",
+                  "autor": "Franco Israel",
+                  "minute": 16
+                },
+                {
+                  "description": "[Casa] Remate defendido por Franco Israel",
+                  "type": "GoalKick",
+                  "autor": "Franco Israel",
+                  "minute": 23
+                },
+                {
+                  "description": "[Fora] Falta de Zeno Debast sobre Martim Cunha (assinalada)",
+                  "victim": "Martim Cunha",
+                  "type": "Foul",
+                  "autor": "Zeno Debast",
+                  "minute": 25
+                },
+                {
+                  "description": "[Casa] Remate defendido por Franco Israel",
+                  "type": "GoalKick",
+                  "autor": "Franco Israel",
+                  "minute": 30
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 36
+                },
+                {
+                  "description": "[Fora] Falta de Franco Israel sobre Marko Grujić (assinalada)",
+                  "victim": "Marko Grujić",
+                  "type": "Foul",
+                  "autor": "Franco Israel",
+                  "minute": 37
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 38
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 39
+                },
+                {
+                  "description": "Intervalo ",
+                  "type": "HalftimeEvent",
+                  "minute": 45
+                },
+                {
+                  "description": "[Fora] Remate defendido por Diogo Costa",
+                  "type": "GoalKick",
+                  "autor": "Diogo Costa",
+                  "minute": 65
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Francisco Moura para Ousmane Diomandé",
+                  "type": "PassEvent",
+                  "autor": "Francisco Moura",
+                  "minute": 69
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Gabriel Brás para Afonso Moreira",
+                  "type": "PassEvent",
+                  "autor": "Gabriel Brás",
+                  "minute": 70
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Zé Pedro para Franco Israel",
+                  "type": "PassEvent",
+                  "autor": "Zé Pedro",
+                  "minute": 75
+                },
+                {
+                  "description": "[Casa] Falta de Iván Marcano sobre Eduardo Quaresma (assinalada)",
+                  "victim": "Eduardo Quaresma",
+                  "type": "Foul",
+                  "autor": "Iván Marcano",
+                  "minute": 78
+                }
+              ]
+            },
+            "awayGoals": 2
+          },
+          {
+            "awayClub": "SCP",
+            "awayTeam": {
+              "Club": "SCP",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Viktor Gyökeres",
+                "Maxi Araújo",
+                "Pedro Gonçalves",
+                "Morten Hjulmand",
+                "Daniel Bragança",
+                "Iván Fresneda",
+                "Zeno Debast",
+                "Eduardo Quaresma",
+                "Matheus Reis",
+                "Ricardo Esgaio",
+                "Diogo Pinto"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeClub": "SLB",
+            "homeTeam": {
+              "Club": "SLB",
+              "Goalkeeper": true,
+              "Forward": 3,
+              "Squad": [
+                "André Gomes",
+                "Álvaro Carreras",
+                "António Silva",
+                "Nicolás Otamendi",
+                "Alexander Bah",
+                "Florentino Luís",
+                "Fredrik Aursnes",
+                "Orkun Kökçü",
+                "João Rêgo",
+                "Luka Jovic",
+                "David Neres"
+              ],
+              "PlayerCount": 11,
+              "Formation": "4-3-3",
+              "Defense": 4,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeGoals": 1,
+            "played": true,
+            "events": {
+              "eventCount": 18,
+              "events": [
+                {
+                  "description": "[Fora] Falta de Viktor Gyökeres sobre Florentino Luís (assinalada)",
+                  "victim": "Florentino Luís",
+                  "type": "Foul",
+                  "autor": "Viktor Gyökeres",
+                  "minute": 1
+                },
+                {
+                  "description": "[Casa] Remate defendido por Diogo Pinto",
+                  "type": "GoalKick",
+                  "autor": "Diogo Pinto",
+                  "minute": 2
+                },
+                {
+                  "description": "[Fora] Passe bem-sucedido de Ricardo Esgaio para Luka Jovic",
+                  "type": "PassEvent",
+                  "autor": "Ricardo Esgaio",
+                  "minute": 6
+                },
+                {
+                  "description": "[Casa] Remate defendido por Diogo Pinto",
+                  "type": "GoalKick",
+                  "autor": "Diogo Pinto",
+                  "minute": 16
+                },
+                {
+                  "description": "[Fora] Remate defendido por André Gomes",
+                  "type": "GoalKick",
+                  "autor": "André Gomes",
+                  "minute": 22
+                },
+                {
+                  "description": "[Fora] Passe bem-sucedido de Daniel Bragança para João Rêgo",
+                  "type": "PassEvent",
+                  "autor": "Daniel Bragança",
+                  "minute": 27
+                },
+                {
+                  "description": "[Fora] Remate defendido por André Gomes",
+                  "type": "GoalKick",
+                  "autor": "André Gomes",
+                  "minute": 35
+                },
+                {
+                  "description": "[Casa] Remate defendido por Diogo Pinto",
+                  "type": "GoalKick",
+                  "autor": "Diogo Pinto",
+                  "minute": 38
+                },
+                {
+                  "description": "Intervalo ",
+                  "type": "HalftimeEvent",
+                  "minute": 45
+                },
+                {
+                  "description": "[Fora] Passe bem-sucedido de Matheus Reis para Fredrik Aursnes",
+                  "type": "PassEvent",
+                  "autor": "Matheus Reis",
+                  "minute": 55
+                },
+                {
+                  "description": "[Fora] Remate defendido por André Gomes",
+                  "type": "GoalKick",
+                  "autor": "André Gomes",
+                  "minute": 60
+                },
+                {
+                  "description": "[Casa] Falta de João Rêgo sobre Diogo Pinto (assinalada)",
+                  "victim": "Diogo Pinto",
+                  "type": "Foul",
+                  "autor": "João Rêgo",
+                  "minute": 62
+                },
+                {
+                  "description": "[Casa] Falta de Orkun Kökçü sobre Eduardo Quaresma (assinalada)",
+                  "victim": "Eduardo Quaresma",
+                  "type": "Foul",
+                  "autor": "Orkun Kökçü",
+                  "minute": 69
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Álvaro Carreras para Pedro Gonçalves",
+                  "type": "PassEvent",
+                  "autor": "Álvaro Carreras",
+                  "minute": 77
+                },
+                {
+                  "description": "[Fora] Passe bem-sucedido de Maxi Araújo para David Neres",
+                  "type": "PassEvent",
+                  "autor": "Maxi Araújo",
+                  "minute": 89
+                }
+              ]
+            },
+            "awayGoals": 2
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": null,
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": "SLB",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": null,
+            "homeClub": "SCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SLB",
+            "homeClub": null,
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": "SCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SLB",
+            "homeClub": "SCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": null,
+            "homeClub": "FCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SLB",
+            "homeClub": "FCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "SCP",
+            "homeClub": null,
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          }
+        ],
+        "numberOfRounds": 6
+      },
+      "pointsPerWin": 3,
+      "year": 2021,
+      "name": "PP02",
+      "pointsPerLoss": 0,
+      "numberOfTeams": 3,
+      "pointsPerDraw": 1,
+      "standings": [
+        {
+          "TotalMatches": 1,
+          "Points": 0,
+          "Losses": 1,
+          "GoalDifference": -1,
+          "Club": "SLB",
+          "GoalsConceded": 2,
+          "GoalsScored": 1,
+          "Draws": 0,
+          "Wins": 0
+        },
+        {
+          "TotalMatches": 1,
+          "Points": 3,
+          "Losses": 0,
+          "GoalDifference": 1,
+          "Club": "FCP",
+          "GoalsConceded": 2,
+          "GoalsScored": 3,
+          "Draws": 0,
+          "Wins": 1
+        },
+        {
+          "TotalMatches": 2,
+          "Points": 3,
+          "Losses": 1,
+          "GoalDifference": 0,
+          "Club": "SCP",
+          "GoalsConceded": 4,
+          "GoalsScored": 4,
+          "Draws": 0,
+          "Wins": 1
+        }
+      ]
+    }
+  ],
+  "name": "PP02"
+}

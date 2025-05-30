@@ -5,8 +5,6 @@ import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.event.IEventManager;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import player.Player;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

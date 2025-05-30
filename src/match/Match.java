@@ -115,14 +115,14 @@ public class Match implements IMatch {
         this.awayGoals = getTotalByEvent(GoalEvent.class, awayClub);
     }
 
+
+
     @Override
     public int getTotalByEvent(Class aClass, IClub iClub) {
         int count = 0;
-        IEvent[] allEvents = this.events.getEvents();
 
-        for (IEvent event : allEvents) {
+        for (IEvent event : this.events.getEvents()) {
             if (aClass.isInstance(event)) {
-                // Para eventos de golo, verifica se o jogador pertence ao clube
                 if (event instanceof GoalEvent) {
                     GoalEvent goalEvent = (GoalEvent) event;
                     if (isPlayerFromClub(goalEvent.getPlayer(), iClub)) {
@@ -131,7 +131,6 @@ public class Match implements IMatch {
                 }
             }
         }
-
         return count;
     }
 
