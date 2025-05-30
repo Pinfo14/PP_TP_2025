@@ -7,7 +7,6 @@ public class SeasonMenu {
         HeaderMenu.print(year,round, club, name);
 
         System.out.println("╔═════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                                                                         ║");
         System.out.println("║   1 - Gerir equipas                                                     ║");
         System.out.println("║   2 - Selecionar equipa para treinar                                    ║");
         System.out.println("║-------------------------------------------------------------------------║");
@@ -16,6 +15,7 @@ public class SeasonMenu {
         System.out.println("║   5 - Listar Resultados                                                 ║");
         System.out.println("║   6 - Classificacao                                                     ║");
         System.out.println("║   7 - Simular o restante epoca                                          ║");
+        System.out.println("║   8 - Reset Season                                                      ║");
         System.out.println("║                                                                         ║");
         System.out.println("║   0 - Sair                                                              ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════════════╝");
@@ -27,7 +27,6 @@ public class SeasonMenu {
         HeaderMenu.print(year, round, club, name); // Mostra o cabeçalho no formato caixa
 
         System.out.println("╔═════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                                                                         ║");
         System.out.println("║   1 - Adicionar Equipas à Liga                                          ║");
         System.out.println("║   2 - Apagar Equipa da Liga                                             ║");
         System.out.println("║   3 - Listar Equipas na Liga                                            ║");

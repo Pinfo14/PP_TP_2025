@@ -29,6 +29,8 @@ import java.io.IOException;
  */
 public class Season implements ISeason {
 
+    private static final String FOLGA = "FOLGA";
+
     private int maxClubs;
     private String name;
     private int year;
@@ -92,28 +94,43 @@ public class Season implements ISeason {
         return clubs[coachingClubIndex].getName();
     }
 
-
     public void setSchedule( Schedule schedule){
         this.schedule=schedule;
     }
 
-    public void setStandings(IStanding[] standings) {
-        System.arraycopy(standings, 0, this.standings, 0, standings.length);
+    private boolean verifyMactchPlayed(){
+        if (schedule == null) {
+            return false; // Nenhuma partida foi jogada se o calendário nem existe
+        }
+
+        IMatch[] matches = schedule.getAllMatches();
+
+        for(IMatch match : matches){
+            if (match != null && match.isPlayed()){
+                    return true;
+                }
+
+        }
+
+        return false;
     }
 
     @Override
     public boolean addClub(IClub iClub) {
-        //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
+        if(verifyMactchPlayed()) {
+            throw new IllegalArgumentException("Não pode adicionar um clube após a primeira jornada");
+        }
+
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
 
         if (clubExist(iClub)) {
-            throw new IllegalArgumentException("Club already exists.");
+            throw new IllegalArgumentException("Clube já existe");
         }
 
         if (numClubs == maxClubs) {
-            throw new IllegalStateException("League is full.");
+            throw new IllegalStateException("Liga está cheia.");
         }
 
         standings[numClubs] = new Standing(iClub);
@@ -127,7 +144,10 @@ public class Season implements ISeason {
 
     @Override
     public boolean removeClub(IClub iClub) {
-        //todo verifica se algum jogo ja foi jogado
+        if(verifyMactchPlayed()) {
+            throw new IllegalArgumentException("Não pode remover um clube após a primeira jornada");
+        }
+
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
@@ -135,7 +155,7 @@ public class Season implements ISeason {
         int index = clubIndex(iClub);
 
         if (index == -1) {
-            throw new IllegalStateException("Club does not exist in the league.");
+            throw new IllegalStateException("Clube não existe na liga.");
         }
 
         if (index == coachingClubIndex) {
@@ -144,15 +164,13 @@ public class Season implements ISeason {
 
         for (int i = index; i < numClubs - 1; i++) {
             clubs[i] = clubs[i + 1];
-        }
-
-        for (int i = index; i < numClubs - 1; i++) {
             standings[i] = standings[i + 1];
         }
 
         clubs[--numClubs] = null;
-        currentRound = 1;
+        standings[numClubs] = null;
         generateSchedule();
+        currentRound = 1;
 
         return true;
     }
@@ -221,7 +239,6 @@ public class Season implements ISeason {
 
     @Override
     public void simulateRound() {
-
         IMatch[] scheduledMatches = getMatches(currentRound);
         MatchSimulator simulator = new MatchSimulator();
         GenerateTeams generateTeams = new GenerateTeams();
@@ -231,50 +248,77 @@ public class Season implements ISeason {
         }
 
         for (IMatch match : scheduledMatches) {
-            if (match == null) {
+            if (!shouldSimulate(match)) {
                 continue;
             }
-            if (match.getHomeClub().getName().equals("FOLGA") || match.getAwayClub().getName().equals("FOLGA")) {
-                System.out.println("FOLGA");
-                continue;
-            }
-            if (match.getHomeClub() == null || match.getAwayClub() == null) {
-                continue;
-            }
-            if (match.isPlayed()) {
-                continue;
-            }
-            ITeam homeLineup = generateTeams.randomTeam(match.getHomeClub());
-            ITeam awayLineup = generateTeams.randomTeam(match.getAwayClub());
 
-            match.setTeam(homeLineup);
-            match.setTeam(awayLineup);
-
-            simulator.simulate(match);
-            match.setPlayed();
-
-            System.out.println(match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - ("+ simulator.getAwayGoals() +") " + match.getAwayClub().getName());
-
-            int homeIndex = clubIndex(match.getHomeClub());
-            Standing standingHome = (Standing) standings[homeIndex];
-            int awayIndex = clubIndex(match.getAwayClub());
-            Standing standingAway = (Standing) standings[awayIndex];
-
-            if (match.getWinner() != null && match.getWinner().equals(homeLineup)) {
-                standingHome.addWinResult(simulator.getHomeGoals(), simulator.getAwayGoals(), pointsPerWin);
-                standingAway.addLossResult(simulator.getAwayGoals(), simulator.getHomeGoals(), pointsPerLoss);
-            } else if (match.getWinner() != null && match.getWinner().equals(awayLineup)) {
-                standingAway.addWinResult(simulator.getAwayGoals(), simulator.getHomeGoals(), pointsPerWin);
-                standingHome.addLossResult(simulator.getHomeGoals(), simulator.getAwayGoals(), pointsPerLoss);
-            } else {
-                standingHome.addDrawResult(simulator.getHomeGoals(), simulator.getAwayGoals(), pointsPerDraw);
-                standingAway.addDrawResult(simulator.getAwayGoals(), simulator.getHomeGoals(), pointsPerDraw);
-            }
+            simulateMatch(match, simulator, generateTeams);
         }
 
         roundCompleted();
-
     }
+
+    private boolean shouldSimulate(IMatch match) {
+
+        if (match == null || match.isPlayed()) {
+            return false;
+        }
+
+        if (match.getHomeClub() == null || match.getAwayClub() == null) {
+            return false;
+        }
+
+        if (match.getHomeClub().getName().equals(FOLGA) || match.getAwayClub().getName().equals(FOLGA)) {
+            System.out.println(FOLGA);
+            return false;
+        }
+
+        return true;
+    }
+
+    private void simulateMatch(IMatch match, MatchSimulator simulator, GenerateTeams generator) {
+        ITeam homeLineup = generator.randomTeam(match.getHomeClub());
+        ITeam awayLineup = generator.randomTeam(match.getAwayClub());
+
+        match.setTeam(homeLineup);
+        match.setTeam(awayLineup);
+
+        simulator.simulate(match);
+        match.setPlayed();
+
+        System.out.println(match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ") " + match.getAwayClub().getName());
+
+        updateStandings(match, homeLineup, awayLineup, simulator);
+    }
+
+    private void updateStandings(IMatch match, ITeam homeLineup, ITeam awayLineup, MatchSimulator simulator) {
+        int homeIndex = clubIndex(match.getHomeClub());
+        int awayIndex = clubIndex(match.getAwayClub());
+
+        Standing standingHome = (Standing) standings[homeIndex];
+        Standing standingAway = (Standing) standings[awayIndex];
+
+        int homeGoals = simulator.getHomeGoals();
+        int awayGoals = simulator.getAwayGoals();
+        ITeam winner = match.getWinner();
+
+        if (winner != null) {
+            if (winner.equals(homeLineup)) {
+                //System.out.println("Vencedor: " + standingHome.getClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ")");
+                standingHome.addWinResult(homeGoals, awayGoals, pointsPerWin);
+                standingAway.addLossResult(awayGoals, homeGoals, pointsPerLoss);
+            } else if (winner.equals(awayLineup)) {
+                //System.out.println("Vencedor: " + standingHome.getClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ")");
+                standingAway.addWinResult(awayGoals, homeGoals, pointsPerWin);
+                standingHome.addLossResult(homeGoals, awayGoals, pointsPerLoss);
+            }
+        } else {
+            standingHome.addDrawResult(homeGoals, awayGoals, pointsPerDraw);
+            standingAway.addDrawResult(awayGoals, homeGoals, pointsPerDraw);
+        }
+    }
+
+
 
     private void roundCompleted() {
         IMatch[] matches = getMatches(getCurrentRound());
@@ -287,7 +331,7 @@ public class Season implements ISeason {
             String homeName = m.getHomeClub().getName();
             String awayName = m.getAwayClub().getName();
 
-            if (homeName.equals("FOLGA") || awayName.equals("FOLGA")) {
+            if (homeName.equals(FOLGA) || awayName.equals(FOLGA)) {
                 continue;
             }
 
@@ -304,7 +348,7 @@ public class Season implements ISeason {
     @Override
     public void simulateSeason() {
         int totRounds = schedule.getNumberOfRounds();
-        for (int i = 1; i <= totRounds; i++) {
+        for (int i = currentRound; i <= totRounds; i++) {
             System.out.println("\n - JORNADA " + i);
             simulateRound();
         }
@@ -333,8 +377,21 @@ public class Season implements ISeason {
 
     @Override
     public void resetSeason() {
-        for (IMatch match : this.schedule.getAllMatches()) {
-            ((Match)match).resetMatch(true);
+
+        generateSchedule();
+        currentRound = 1;
+        cleanstanding();
+
+    }
+
+    private void cleanstanding() {
+        Standing standingTemp;
+        for(IStanding standing : standings) {
+            if(standing != null) {
+                standingTemp = (Standing) standing;
+                standingTemp.reset();
+            }
+
         }
     }
 

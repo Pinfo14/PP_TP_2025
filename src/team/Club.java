@@ -75,15 +75,15 @@ public class Club implements IClub {
 
     @Override
     public IPlayer[] getPlayers() {
-        IPlayer[] players = new Player[this.playerCount];
+        IPlayer[] players1 = new Player[this.playerCount];
         for (int i = 0; i < this.playerCount; i++) {
             try {
-                players[i] = ((Player) this.players[i]).clone();
+                players1[i] = ((Player) this.players[i]).clone();
             } catch (CloneNotSupportedException e) {
                 System.out.println("Erro ao clonar o player: " + this.players[i].getName());
             }
         }
-        return players;
+        return players1;
     }
 
     @Override
