@@ -13,15 +13,11 @@ public class SeasonManagement {
 
     private IClub[] clubesLoaded ;
 
-
-
-
     public SeasonManagement(boolean useDefaultData) {
        if(useDefaultData){
           loadDefaultClubs();
        }
     }
-
 
     private void loadDefaultClubs() {
         System.out.println("A carregar dados default...");
@@ -29,9 +25,6 @@ public class SeasonManagement {
        this.clubesLoaded = imports.importPlayersAndClub();
 
     }
-
-
-
 
     private int countClubsLoded() {
         int count = 0;
@@ -51,7 +44,7 @@ public class SeasonManagement {
         int option;
         do {
             displayMainMenu(season);
-            option = reader.readInt(0, 7, "Selecione uma opção: ");
+            option = reader.readInt(0, 8, "Selecione uma opção: ");
             processMainMenuOption(option, season, formations, reader);
 
 
@@ -289,6 +282,8 @@ public class SeasonManagement {
     }
 
     private void handleResetSeason(Season season) {
+        season.resetSeason();
+        System.out.println("Reset realizado com sucesso.");
 
     }
 

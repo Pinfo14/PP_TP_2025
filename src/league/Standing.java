@@ -104,8 +104,6 @@ public class Standing implements IStanding {
         this.numberGoalsConceded += goals;
     }
 
-
-
     /**
      * Método  para atualizar depois de uma vitória
      */

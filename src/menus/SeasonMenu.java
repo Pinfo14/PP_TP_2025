@@ -15,6 +15,7 @@ public class SeasonMenu {
         System.out.println("║   5 - Listar Resultados                                                 ║");
         System.out.println("║   6 - Classificacao                                                     ║");
         System.out.println("║   7 - Simular o restante epoca                                          ║");
+        System.out.println("║   8 - Reset Season                                                      ║");
         System.out.println("║                                                                         ║");
         System.out.println("║   0 - Sair                                                              ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════════════╝");

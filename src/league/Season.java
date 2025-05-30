@@ -92,13 +92,13 @@ public class Season implements ISeason {
         return clubs[coachingClubIndex].getName();
     }
 
-
     public void setSchedule( Schedule schedule){
         this.schedule=schedule;
     }
 
     @Override
     public boolean addClub(IClub iClub) {
+        //todo verifica se algum jogo ja foi jogado
         //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
@@ -329,8 +329,21 @@ public class Season implements ISeason {
 
     @Override
     public void resetSeason() {
-        for (IMatch match : this.schedule.getAllMatches()) {
-            ((Match)match).resetMatch(true);
+
+        generateSchedule();
+        currentRound = 1;
+        cleanstanding();
+
+    }
+
+    private void cleanstanding() {
+        Standing standingTemp;
+        for(IStanding standing : standings) {
+            if(standing != null) {
+                standingTemp = (Standing) standing;
+                standingTemp.reset();
+            }
+
         }
     }
 
