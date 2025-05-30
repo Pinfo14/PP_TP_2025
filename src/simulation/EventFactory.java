@@ -77,5 +77,12 @@ public class EventFactory {
         return new FoulEvent(desc, min, maker, victim);
     }
 
+    public IEvent generateShotTry(IPlayer autor, int minute, boolean isHome) {
+            String desc;
+            desc = (isHome ? "[Casa] " : "[Fora] ")
+                    + "Tentativa de remate de " + autor.getName();
+            return new ShotEvent(desc,minute,autor);
+    }
+
 
 }

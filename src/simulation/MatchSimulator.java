@@ -53,11 +53,11 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                 if (isHome) {
                     atacantes = homeTeam;
                     defensores = awayTeam;
-                    this.probFormationHomeTeam = atacantes.getFormation().getTacticalAdvantage(defensores.getFormation()) / 10;
+                    this.probFormationHomeTeam = atacantes.getFormation().getTacticalAdvantage(defensores.getFormation()) / 100;
                 } else {
                     atacantes = awayTeam;
                     defensores = homeTeam;
-                    this.probFormationHomeTeam = defensores.getFormation().getTacticalAdvantage(atacantes.getFormation()) / 10;
+                    this.probFormationHomeTeam = defensores.getFormation().getTacticalAdvantage(atacantes.getFormation()) / 100;
                 }
 
 
@@ -71,6 +71,8 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                     ev = factory.generatePassEvent(autor, alvo, minuto, isHome);
                 } else if (tipo > PASS_EVENT_PROB + this.probFormationHomeTeam && tipo < SHOT_EVENT_PROB + this.probFormationHomeTeam) {
                     ev = factory.generateShotEvent(autor, gk, minuto, isHome);
+                } else if (tipo >SHOT_EVENT_PROB) {
+                    ev=factory.generateShotTry(autor,minuto,isHome);
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);
                 }

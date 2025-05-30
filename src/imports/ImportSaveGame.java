@@ -49,6 +49,7 @@ public class ImportSaveGame {
     private static final String FORMATION_KEY = "Formation";
     private static final String SQUAD_KEY = "Squad";
 
+    private static final Club folga = new Club("FOLGA");
 
 
     private IClub[] allClubs;
