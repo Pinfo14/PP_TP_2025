@@ -4,9 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.event.IEvent;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
-import com.ppstudios.footballmanager.api.contracts.team.ITeam;
 import league.Season;
-import league.Standing;
 import match.Match;
 import menus.ListAllPlayers;
 import menus.ListTeams;
@@ -34,7 +32,7 @@ public class RoundManagement {
         IClub opponent = getOpponent(season);
 
         boolean folga;
-        if(opponent == null || opponent.getName().equalsIgnoreCase("FOLGA")){
+        if(opponent == null || opponent.getName().equals("FOLGA")){
             folga = true;
         } else {
             folga = false;
@@ -120,9 +118,6 @@ public class RoundManagement {
         }
     }
 
-    private String getOpponentName(Season season) {
-        return getOpponent(season).getName();
-    }
 
     private IMatch findCoachingClubMatch(Season season) {
         if (season == null) {
@@ -134,6 +129,7 @@ public class RoundManagement {
             return null;
         }
         for (IMatch m : matches) {
+            System.out.println(m);
             if (coachingClub.equals(m.getHomeClub()) || coachingClub.equals(m.getAwayClub())) {
                 return m;
             }
@@ -228,10 +224,13 @@ public class RoundManagement {
         if (match == null) {
             throw new NullPointerException("Erro - match null");
         }
-        if (match.isPlayed()) {
-            System.out.println("Partida já foi jogada!");
-            return;
+
+            if (match.isPlayed()) {
+                System.out.println("Partida já foi jogada!");
+                return;
+
         }
+
 
         System.out.println("\n= INICIO DO JOGO =");
         MatchSimulator simulator = new MatchSimulator();

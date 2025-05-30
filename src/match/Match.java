@@ -265,6 +265,8 @@ public class Match implements IMatch {
             fileWriter.close();
         }
     }
+
+
     public JSONObject getMatchJson() {
         JSONObject object = new JSONObject();
         object.put("homeClub", this.homeClub.getCode());

@@ -219,6 +219,7 @@ public class SeasonManagement {
      * Gere a próxima jornada
      */
     private void handleNextRound(Season season, FormationManagement formations) {
+
         if (!validateCoachingSetup(season)) {
             System.out.println("Selecione um clube para treinar antes de avançar para a próxima jornada.");
             return;

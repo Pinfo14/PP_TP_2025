@@ -104,16 +104,32 @@ public class Schedule implements ISchedule {
             throw new IllegalArgumentException("Round not valid");
         }
 
+
         IMatch[] matches = new IMatch[calculateMatchesPerRound() + 1];
         int idx = 0;
 
         for (IMatch match : games) {
+            if (match == null) {
+                continue;
+            }
+
+
+
             if (match.getRound() == i) {
                 matches[idx++] = match;
+
             }
         }
 
-        return matches;
+
+
+        // Retornar array correto
+        IMatch[] result = new IMatch[idx];
+        for (int j = 0; j < idx; j++) {
+            result[j] = matches[j];
+        }
+
+        return result;
     }
 
     @Override
@@ -197,11 +213,35 @@ public class Schedule implements ISchedule {
     private JSONArray getJsonMatchs() {
         JSONArray jsonArray = new JSONArray();
         for (int i = 0; i < this.games.length; i++) {
-            if (this.games[i] != null) {
+            if (this.games[i] != null ) {
                 jsonArray.add(((Match) this.games[i]).getMatchJson());
             }
         }
         return jsonArray;
+    }
+    private boolean isValidTeamsInMatch(IMatch match) {
+        if (match == null) {
+            return false;
+        }
+        IClub homeClub = match.getHomeClub();
+        IClub awayClub = match.getAwayClub();
+
+        return isValidClub(homeClub) && isValidClub(awayClub);
+    }
+
+    private boolean isValidClub(IClub club) {
+        if (club == null) {
+            return false;
+        }
+
+        String clubCode = club.getCode();
+        String clubName = club.getName();
+
+        return clubCode != null
+                && !clubCode.isEmpty()
+                && !clubCode.equals("null")
+                && clubName != null
+                && !clubName.equals("FOLGA");
     }
 
 
@@ -211,7 +251,6 @@ public class Schedule implements ISchedule {
             if (this.clubs[i] != null) {
                 jsonArray.add(this.clubs[i].getCode());
             }
-
         }
         return jsonArray;
     }
@@ -249,7 +288,7 @@ public class Schedule implements ISchedule {
 
             for (IMatch jogo : games) {
                 if (jogo.getRound() == round) {
-                    sb.append(String.format("\t%s\n", jogo.toString()));
+                    sb.append(String.format("\t%s\n", jogo));
                 }
             }
         }

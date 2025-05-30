@@ -8,6 +8,9 @@ import league.Season;
 import reader.Reader;
 
 
+import static imports.ImportUtils.listAvailableLeagues;
+
+
 public class LeagueManagement {
 
     private League league;// Inicializado
@@ -37,8 +40,8 @@ public class LeagueManagement {
     }
 
     public void loadGame() {
-        ImportSaveGame importSaveGame = new ImportSaveGame();
-        String[] availableLeagues = importSaveGame.listAvailableLeagues();
+
+        String[] availableLeagues = listAvailableLeagues();
 
         if (availableLeagues.length == 0) {
             System.out.println("\n=== NENHUM JOGO SALVO ENCONTRADO ===");
@@ -62,6 +65,7 @@ public class LeagueManagement {
         try {
             System.out.println("\nCarregando liga: " + selectedLeague + "...");
 
+            ImportSaveGame importSaveGame = new ImportSaveGame();
             ILeague loadedLeague = importSaveGame.importLeague(selectedLeague);
 
             if (loadedLeague == null) {
@@ -87,9 +91,6 @@ public class LeagueManagement {
             // Iniciar gestão da temporada
             SeasonManagement seasonManagement = new SeasonManagement(true);
             seasonManagement.run(currentSeason);
-
-        } catch (IllegalStateException e) {
-            System.out.println(e.getMessage());
 
         } catch (Exception e) {
             System.out.println("ERRO ao carregar o jogo: " + e.getMessage());

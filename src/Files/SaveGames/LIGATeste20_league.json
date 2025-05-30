@@ -1,0 +1,403 @@
+{
+  "numberOfSeasons": 1,
+  "seasons": [
+    {
+      "coachingClubIndex": 1,
+      "currentRound": 3,
+      "schedule": {
+        "numberOfClubs": 3,
+        "clubs": [
+          "FCP",
+          "GVFC",
+          "RAFC"
+        ],
+        "matches": [
+          {
+            "awayClub": null,
+            "homeClub": "FCP",
+            "homeGoals": 0,
+            "played": true,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "RAFC",
+            "awayTeam": {
+              "Club": "RAFC",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Ahmed Hassan",
+                "Chukwudi Igbokwe",
+                "João Novais",
+                "Vítor Gomes",
+                "Demir Ege Tıknaz",
+                "Nelson Abbey",
+                "Francisco Petrasso",
+                "João Pedro",
+                "Andreas Ntoi",
+                "Jonathan Panzo",
+                "Cezary Miszta"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeClub": "GVFC",
+            "homeTeam": {
+              "Club": "GVFC",
+              "Goalkeeper": true,
+              "Forward": 3,
+              "Squad": [
+                "Andrew da Silva Ventura",
+                "Josué Sá",
+                "Rúben Fernandes",
+                "Jonathan Buatu",
+                "Jonathan Mutombo",
+                "Facundo Cáseres",
+                "Jesús Castillo",
+                "Kanya Fujimoto",
+                "Tidjany Touré",
+                "Jorge Aguirre",
+                "Diego Collado"
+              ],
+              "PlayerCount": 11,
+              "Formation": "4-3-3",
+              "Defense": 4,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeGoals": 1,
+            "played": true,
+            "events": {
+              "eventCount": 1,
+              "events": [
+                {
+                  "description": "Intervalo ",
+                  "type": "HalftimeEvent",
+                  "minute": 45
+                }
+              ]
+            },
+            "awayGoals": 2
+          },
+          {
+            "awayClub": "RAFC",
+            "awayTeam": {
+              "Club": "RAFC",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Clayton",
+                "Fábio Ronaldo",
+                "João Novais",
+                "Brandon Aguilera",
+                "João Graça",
+                "João Tomé",
+                "Francisco Petrasso",
+                "Andreas Ntoi",
+                "Jonathan Panzo",
+                "Nelson Abbey",
+                "Antzelo Sina"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeClub": "FCP",
+            "homeTeam": {
+              "Club": "FCP",
+              "Goalkeeper": true,
+              "Forward": 2,
+              "Squad": [
+                "Evanilson",
+                "Mehdi Taremi",
+                "Matheus Uribe",
+                "Marko Grujić",
+                "Fábio Vieira",
+                "Wendell",
+                "Martim Fernandes",
+                "Martim Cunha",
+                "Pepe",
+                "Zaidu Sanusi",
+                "Samuel Portugal"
+              ],
+              "PlayerCount": 11,
+              "Formation": "5-3-2",
+              "Defense": 5,
+              "Midfield": 3,
+              "Striker": 0
+            },
+            "homeGoals": 1,
+            "played": true,
+            "events": {
+              "eventCount": 19,
+              "events": [
+                {
+                  "description": "[Casa] Falta de Marko Grujić sobre João Tomé (assinalada)",
+                  "victim": "João Tomé",
+                  "type": "Foul",
+                  "autor": "Marko Grujić",
+                  "minute": 1
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Matheus Uribe para Francisco Petrasso",
+                  "type": "PassEvent",
+                  "autor": "Matheus Uribe",
+                  "minute": 3
+                },
+                {
+                  "description": "[Casa] Tentativa de remate de Martim Fernandes",
+                  "type": "ShotEvent",
+                  "autor": "Martim Fernandes",
+                  "minute": 4
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Fábio Vieira para Andreas Ntoi",
+                  "type": "PassEvent",
+                  "autor": "Fábio Vieira",
+                  "minute": 9
+                },
+                {
+                  "description": "[Fora] Tentativa de remate de João Tomé",
+                  "type": "ShotEvent",
+                  "autor": "João Tomé",
+                  "minute": 14
+                },
+                {
+                  "description": "[Fora] Tentativa de remate de João Tomé",
+                  "type": "ShotEvent",
+                  "autor": "João Tomé",
+                  "minute": 18
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Martim Cunha para João Novais",
+                  "type": "PassEvent",
+                  "autor": "Martim Cunha",
+                  "minute": 19
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Pepe para Andreas Ntoi",
+                  "type": "PassEvent",
+                  "autor": "Pepe",
+                  "minute": 21
+                },
+                {
+                  "description": "[Casa] Remate defendido por Antzelo Sina",
+                  "type": "GoalKick",
+                  "autor": "Antzelo Sina",
+                  "minute": 35
+                },
+                {
+                  "description": "[Fora] Remate defendido por Samuel Portugal",
+                  "type": "GoalKick",
+                  "autor": "Samuel Portugal",
+                  "minute": 38
+                },
+                {
+                  "description": "Intervalo ",
+                  "type": "HalftimeEvent",
+                  "minute": 45
+                },
+                {
+                  "description": "[Casa] Passe bem-sucedido de Martim Fernandes para Clayton",
+                  "type": "PassEvent",
+                  "autor": "Martim Fernandes",
+                  "minute": 50
+                },
+                {
+                  "description": "[Fora] Tentativa de remate de João Graça",
+                  "type": "ShotEvent",
+                  "autor": "João Graça",
+                  "minute": 55
+                },
+                {
+                  "description": "[Fora] Tentativa de remate de Fábio Ronaldo",
+                  "type": "ShotEvent",
+                  "autor": "Fábio Ronaldo",
+                  "minute": 66
+                },
+                {
+                  "description": "[Fora] Passe bem-sucedido de Nelson Abbey para Pepe",
+                  "type": "PassEvent",
+                  "autor": "Nelson Abbey",
+                  "minute": 76
+                },
+                {
+                  "description": "[Fora] Remate defendido por Samuel Portugal",
+                  "type": "GoalKick",
+                  "autor": "Samuel Portugal",
+                  "minute": 81
+                },
+                {
+                  "description": "[Fora] Falta de Francisco Petrasso sobre Marko Grujić (assinalada)",
+                  "victim": "Marko Grujić",
+                  "type": "Foul",
+                  "autor": "Francisco Petrasso",
+                  "minute": 85
+                },
+                {
+                  "description": "[Fora] Falta de Nelson Abbey sobre Samuel Portugal (assinalada)",
+                  "victim": "Samuel Portugal",
+                  "type": "Foul",
+                  "autor": "Nelson Abbey",
+                  "minute": 87
+                }
+              ]
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "GVFC",
+            "homeClub": null,
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "GVFC",
+            "homeClub": "FCP",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": null,
+            "homeClub": "RAFC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": null,
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "GVFC",
+            "homeClub": "RAFC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": "RAFC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": null,
+            "homeClub": "GVFC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "FCP",
+            "homeClub": "GVFC",
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          },
+          {
+            "awayClub": "RAFC",
+            "homeClub": null,
+            "homeGoals": 0,
+            "played": false,
+            "events": {
+              "eventCount": 0,
+              "events": []
+            },
+            "awayGoals": 0
+          }
+        ],
+        "numberOfRounds": 6
+      },
+      "pointsPerWin": 3,
+      "year": 2025,
+      "name": "LIGATeste20",
+      "pointsPerLoss": 0,
+      "numberOfTeams": 3,
+      "pointsPerDraw": 1,
+      "standings": [
+        {
+          "TotalMatches": 1,
+          "Points": 3,
+          "Losses": 0,
+          "GoalDifference": 1,
+          "Club": "FCP",
+          "GoalsConceded": 0,
+          "GoalsScored": 1,
+          "Draws": 0,
+          "Wins": 1
+        },
+        {
+          "TotalMatches": 1,
+          "Points": 0,
+          "Losses": 1,
+          "GoalDifference": -1,
+          "Club": "GVFC",
+          "GoalsConceded": 2,
+          "GoalsScored": 1,
+          "Draws": 0,
+          "Wins": 0
+        },
+        {
+          "TotalMatches": 2,
+          "Points": 3,
+          "Losses": 1,
+          "GoalDifference": 0,
+          "Club": "RAFC",
+          "GoalsConceded": 2,
+          "GoalsScored": 2,
+          "Draws": 0,
+          "Wins": 1
+        }
+      ]
+    }
+  ],
+  "name": "LIGATeste20"
+}

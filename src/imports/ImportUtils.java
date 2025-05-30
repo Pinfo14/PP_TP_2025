@@ -4,6 +4,7 @@ import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import org.json.simple.JSONObject;
 import team.Club;
+import util.Logs;
 
 import java.io.File;
 
@@ -17,6 +18,16 @@ import java.io.File;
  * Turma: LEI1T2
  */
 public class ImportUtils {
+
+    public static final String SAVE_DIRECTORY = "src/Files/SaveGames/";
+    public static final String CLUBS_FILE = "all_clubs.json";
+    public static final String LEAGUE_EXTENSION = "_league.json";
+    public static final String FORMATION_KEY = "Formation";
+    public static final String SQUAD_KEY = "Squad";
+    public static final Logs logger = new Logs();
+
+
+
     /**
      * Localiza e retorna um clube no array fornecido que corresponda ao código especificado.
      * Se nenhum clube correspondente for encontrado, retorna null.
@@ -31,7 +42,7 @@ public class ImportUtils {
                 return club;
             }
         }
-        return new Club("FOLGA");
+        return  null;
     }
 
     /**
@@ -195,5 +206,38 @@ public class ImportUtils {
 
         // Se não encontrou match no último token, retorna o primeiro match (ou null)
         return firstMatch;
+    }
+
+    /**
+     * Lista os nomes das ligas disponíveis no diretório de save.
+     *
+     * @return Um array de strings contendo os nomes das ligas disponíveis.
+     * @throws IllegalStateException Se o diretório de save não existir ou
+     *                               se não houver nenhum ficheiro de saveGame válido.
+     */
+    public static String[] listAvailableLeagues() {
+        File saveDir = new File(SAVE_DIRECTORY);
+
+        if (!saveDir.exists()) {
+            throw new IllegalStateException("Directory nao existe");
+        }
+
+        String[] files = saveDir.list();
+        if (files == null) {
+            throw new IllegalStateException("Nao existe, Save Files ");
+        }
+
+        int leagueCount = ImportUtils.countFiles(files,LEAGUE_EXTENSION);
+
+        String[] leagueNames = new String[leagueCount];
+        int index = 0;
+
+        for (String file : files) {
+            if (file.endsWith(LEAGUE_EXTENSION)) {
+                String leagueName = file.substring(0, file.length() - LEAGUE_EXTENSION.length());
+                leagueNames[index++] = leagueName;
+            }
+        }
+        return leagueNames;
     }
 }

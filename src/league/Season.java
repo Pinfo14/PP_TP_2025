@@ -141,7 +141,6 @@ public class Season implements ISeason {
         standings[numClubs] = new Standing(iClub);
         clubs[numClubs] = iClub;
         numClubs++;
-        currentRound = 1;
         generateSchedule();
 
         return true;
@@ -235,7 +234,7 @@ public class Season implements ISeason {
         try {
             scheduledMatches = schedule.getMatchesForRound(i);
         } catch (IllegalArgumentException | IllegalStateException e) {
-           System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
         return scheduledMatches;

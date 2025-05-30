@@ -16,9 +16,12 @@ public class MatchSimulator implements MatchSimulatorStrategy {
     private static final double EVENT_PROB = 0.3;
     private static final double HOME_OR_AWAY_PROB = 0.5;
     private static final double PASS_EVENT_PROB = 0.3;
-    private static final double SHOT_EVENT_PROB = 0.7;
+    private static final double SHOT_EVENT_PROB = 0.6 ;
+    private static final double TRY_SHOT_EVENT_PROB = 0.8;
 
 
+    private int homeGoals;
+    private int awayGoals;
 
     private EventFactory factory;
     private PlayerPositionManage positionManager;
@@ -29,6 +32,8 @@ public class MatchSimulator implements MatchSimulatorStrategy {
         this.factory = new EventFactory();
         this.positionManager = new PlayerPositionManage();
         this.probFormationHomeTeam = 0;
+        this.homeGoals = 0;
+        this.awayGoals = 0;
     }
 
     @Override
@@ -71,12 +76,12 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                     ev = factory.generatePassEvent(autor, alvo, minuto, isHome);
                 } else if (tipo > PASS_EVENT_PROB + this.probFormationHomeTeam && tipo < SHOT_EVENT_PROB + this.probFormationHomeTeam) {
                     ev = factory.generateShotEvent(autor, gk, minuto, isHome);
-                } else if (tipo >SHOT_EVENT_PROB) {
+                } else if (tipo > PASS_EVENT_PROB + this.probFormationHomeTeam && tipo < TRY_SHOT_EVENT_PROB + this.probFormationHomeTeam) {
                     ev=factory.generateShotTry(autor,minuto,isHome);
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);
                 }
-                // Só regista se o evento for não-nulo (bem-sucedido)
+
                 if (ev != null) {
                     iMatch.addEvent(ev);
                 }
