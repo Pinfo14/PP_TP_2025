@@ -96,20 +96,40 @@ public class Season implements ISeason {
         this.schedule=schedule;
     }
 
+    private boolean verifyMactchPlayed(){
+        if (schedule == null) {
+            return false; // Nenhuma partida foi jogada se o calendário nem existe
+        }
+
+        IMatch[] matches = schedule.getAllMatches();
+
+        for(IMatch match : matches){
+            if (match != null) {
+                if (match.isPlayed()){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public boolean addClub(IClub iClub) {
-        //todo verifica se algum jogo ja foi jogado
-        //se a seasom ja tiver começado nao pode começar outra liga? e remover ?
+        if(verifyMactchPlayed()) {
+            throw new IllegalArgumentException("Não pode adicionar um clube após a primeira jornada");
+        }
+
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
 
         if (clubExist(iClub)) {
-            throw new IllegalArgumentException("Club already exists.");
+            throw new IllegalArgumentException("Clube já existe");
         }
 
         if (numClubs == maxClubs) {
-            throw new IllegalStateException("League is full.");
+            throw new IllegalStateException("Liga está cheia.");
         }
 
         standings[numClubs] = new Standing(iClub);
@@ -123,7 +143,10 @@ public class Season implements ISeason {
 
     @Override
     public boolean removeClub(IClub iClub) {
-        //todo verifica se algum jogo ja foi jogado
+        if(verifyMactchPlayed()) {
+            throw new IllegalArgumentException("Não pode remover um clube após a primeira jornada");
+        }
+
         if (iClub == null) {
             throw new IllegalArgumentException("Club cannot be null.");
         }
@@ -131,7 +154,7 @@ public class Season implements ISeason {
         int index = clubIndex(iClub);
 
         if (index == -1) {
-            throw new IllegalStateException("Club does not exist in the league.");
+            throw new IllegalStateException("Clube não existe na liga.");
         }
 
         if (index == coachingClubIndex) {
@@ -140,15 +163,13 @@ public class Season implements ISeason {
 
         for (int i = index; i < numClubs - 1; i++) {
             clubs[i] = clubs[i + 1];
-        }
-
-        for (int i = index; i < numClubs - 1; i++) {
             standings[i] = standings[i + 1];
         }
 
         clubs[--numClubs] = null;
-        currentRound = 1;
+        standings[numClubs] = null;
         generateSchedule();
+        currentRound = 1;
 
         return true;
     }
