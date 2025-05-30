@@ -12,12 +12,12 @@ public class ListMatchesDetail {
 
     public static void list(Season season) {
         Reader reader = new Reader();
-        int countID = 1;
+        IMatch[] matches;
+        int[] realIndexes = new int[100]; // tamanho máximo assumido, ou matches.length
 
-        IMatch[] matches = null;
         try {
             matches = season.getMatches();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Erro ao obter os partidas");
             Utils.waitEnter();
             return;
@@ -27,25 +27,27 @@ public class ListMatchesDetail {
         System.out.printf("%-3s | %s\n", "ID", "JOGOS");
         System.out.println("----+---------------------------------------------------------------------");
 
-        for (IMatch match : matches) {
+        int countID = 1;
+        for (int i = 0; i < matches.length; i++) {
+            IMatch match = matches[i];
+
             if (match != null && match.isPlayed()) {
-                System.out.printf("%-3d | %s", countID++, formatMatc(match));
+                System.out.printf("%-3d | %s", countID, formatMatc(match));
+                realIndexes[countID - 1] = i;  // salva o índice real do match
+                countID++;
             }
         }
 
-
-        if(countID == 1) {
-            System.out.printf("Não existem jogos.");
+        if (countID == 1) {
+            System.out.println("Não existem jogos.");
         } else {
             int option = reader.readInt(0, countID - 1, "\nSelecione um jogo ou 0 para voltar ao menu anterior: ");
-            int index = option - 1;
 
-            if (option > 0 && index < matches.length && matches[index] != null && matches[index].isPlayed()) {
-                showMatchDetail(matches[index]);
+            if (option > 0) {
+                int realIndex = realIndexes[option - 1];
+                showMatchDetail(matches[realIndex]);
             }
         }
-
-
 
         Utils.waitEnter();
     }
@@ -65,6 +67,7 @@ public class ListMatchesDetail {
 
     private static void showMatchDetail(IMatch match) {
         System.out.println("\nResumo do jogo:");
+        System.out.println(match);
         ListTeams.list((Team) match.getHomeTeam(), (Team) match.getAwayTeam());
         showEvents(match);
         System.out.println("\n" + formatMatc(match));

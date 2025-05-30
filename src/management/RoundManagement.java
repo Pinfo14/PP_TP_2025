@@ -23,42 +23,60 @@ import util.Utils;
 public class RoundManagement {
 
     public void run(Season season, FormationManagement formationManagement) {
-
         Reader reader = new Reader();
 
-        //TODO - jogo contra FOLGA simula os outros.
-        SeasonMenu.mainSeasonMenu(season.getYear(), season.getNameCoachingClub(), season.getName(), season.getCurrentRound());
-        RoundMenu.topMenu(season.getCurrentRound(), getOpponentName(season), getGamesString(season));
+        SeasonMenu.mainSeasonMenu(
+                season.getYear(),
+                season.getNameCoachingClub(),
+                season.getName(),
+                season.getCurrentRound()
+        );
 
+        IClub opponent = getOpponent(season);
+        boolean isBye = opponent == null || opponent.getName().equalsIgnoreCase("FOLGA");
 
-        //Selects the tactic formation
+        if (!isBye) {
+            RoundMenu.topMenu(season.getCurrentRound(), opponent.getName(), getGamesString(season));
+            Formation formation = handleFormationSelection(reader, formationManagement);
+
+            Team teamCoach = createTeam(season, formation);
+            Team otherTeam = createTeamOpponent(season);
+
+            Utils.waitEnter();
+
+            IMatch match = findCoachingClubMatch(season);
+            match.setTeam(teamCoach);
+            match.setTeam(otherTeam);
+
+            ListTeams.list((Team) match.getHomeTeam(), (Team) match.getAwayTeam());
+
+            simulateMatch(season, match);
+        } else {
+            System.out.println("\nJogo da jornada: FOLGA - o seu clube não joga nesta ronda.");
+        }
+
+        season.simulateRound();
+    }
+
+    private Formation handleFormationSelection(Reader reader, FormationManagement formationManagement) {
         int indexFormation;
         do {
             formationManagement.listFormations();
-            indexFormation = reader.readInt(0, formationManagement.getNumFormations(), "Seleicone a tatica que pretende (0 - para criar nova tatica): ");
+            indexFormation = reader.readInt(
+                    0, formationManagement.getNumFormations(),
+                    "Selecione a tática que pretende (0 - para criar nova tática): "
+            );
             if (indexFormation == 0) {
-                int defense = reader.readInt(1, 10, "Numero de defesas: ");
-                int middle = reader.readInt(1, 10, "Numero de medios: ");
-                int attackers = reader.readInt(1, 10, "Numero de avançados: ");
+                int defense = reader.readInt(1, 10, "Número de defesas: ");
+                int middle = reader.readInt(1, 10, "Número de médios: ");
+                int attackers = reader.readInt(1, 10, "Número de avançados: ");
                 formationManagement.addFormation(defense, middle, attackers);
             }
-
         } while (indexFormation == 0);
 
-        Formation formation = (Formation) formationManagement.getFormation(indexFormation - 1);
-        Team teamCoach = createTeam(season, formation);
-        Team otherTeam = createTeamOpponent(season);
-
-        Utils.waitEnter();
-
-        IMatch match = findCoachingClubMatch(season);
-        match.setTeam(teamCoach);
-        match.setTeam(otherTeam);
-        ListTeams.list((Team) match.getHomeTeam(), (Team) match.getAwayTeam());
-        simulateMatch(season, match);
-        season.simulateRound();
-
+        return (Formation) formationManagement.getFormation(indexFormation - 1);
     }
+
 
     private String getGamesString(Season season) {
 
