@@ -1,7 +1,6 @@
 package management;
 
 import com.ppstudios.footballmanager.api.contracts.event.IEvent;
-import com.ppstudios.footballmanager.api.contracts.league.IStanding;
 import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.player.IPlayer;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
@@ -33,9 +32,15 @@ public class RoundManagement {
         );
 
         IClub opponent = getOpponent(season);
-        boolean isBye = opponent == null || opponent.getName().equalsIgnoreCase("FOLGA");
 
-        if (!isBye) {
+        boolean folga;
+        if(opponent == null || opponent.getName().equalsIgnoreCase("FOLGA")){
+            folga = true;
+        } else {
+            folga = false;
+        }
+
+        if (!folga) {
             RoundMenu.topMenu(season.getCurrentRound(), opponent.getName(), getGamesString(season));
             Formation formation = handleFormationSelection(reader, formationManagement);
 
@@ -76,7 +81,6 @@ public class RoundManagement {
 
         return (Formation) formationManagement.getFormation(indexFormation - 1);
     }
-
 
     private String getGamesString(Season season) {
 
@@ -234,21 +238,17 @@ public class RoundManagement {
         printEvents(match);
         match.setPlayed();
         System.out.println("= FIM DO JOGO =");
-        System.out.println("Resultado: " + match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ") " + match.getAwayClub().getName());
 
-        updateStandings(season, match, simulator);
+        printResults(match);
+        season.updateStandings(match);
     }
 
-    private int getIndexClub(Season season, IClub club) {
-
-        IClub[] clubs = season.getCurrentClubs();
-
-        for (int i = 0; i < clubs.length; i++) {
-            if (club.equals(clubs[i])) {
-                return i;
-            }
+    private void printResults(IMatch iMatch) {
+        Match match = null;
+        if(iMatch instanceof Match){
+            match = (Match) iMatch;
         }
-        throw new IllegalArgumentException("Erro - club nao encontrado");
+        System.out.println(match.getHomeClub().getName() + " (" + match.getHomeGoals() +") vs (" + match.getAwayGoals() + ") " + match.getAwayClub().getName());
     }
 
     private void printEvents(IMatch match) {
@@ -262,21 +262,6 @@ public class RoundManagement {
         }
     }
 
-    private void updateStandings(Season season, IMatch match, MatchSimulator simulator) {
-        Standing[] standings = (Standing[]) season.getLeagueStandings();
-        int homeIndex = getIndexClub(season, match.getHomeClub());
-        int awayIndex = getIndexClub(season, match.getAwayClub());
 
-        if (match.getWinner() != null && match.getWinner().equals(match.getHomeTeam())) {
-            standings[homeIndex].addWinResult(simulator.getHomeGoals(), simulator.getAwayGoals(), season.getPointsPerWin());
-            standings[awayIndex].addLossResult(simulator.getAwayGoals(), simulator.getHomeGoals(), season.getPointsPerLoss());
-        } else if (match.getWinner() != null && match.getWinner().equals(match.getAwayTeam())) {
-            standings[awayIndex].addWinResult(simulator.getAwayGoals(), simulator.getHomeGoals(), season.getPointsPerWin());
-            standings[homeIndex].addLossResult(simulator.getHomeGoals(), simulator.getAwayGoals(), season.getPointsPerLoss());
-        } else {
-            standings[homeIndex].addDrawResult(simulator.getHomeGoals(), simulator.getAwayGoals(), season.getPointsPerDraw());
-            standings[awayIndex].addDrawResult(simulator.getAwayGoals(), simulator.getHomeGoals(), season.getPointsPerDraw());
-        }
-    }
 
 }

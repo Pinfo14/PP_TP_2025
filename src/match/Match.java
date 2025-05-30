@@ -95,11 +95,6 @@ public class Match implements IMatch {
             calculateGoalsFromEvents();
     }
 
-    public void resetMatch(boolean reset) {
-        if (reset){
-            this.played = false;
-        }
-    }
 
     private void calculateGoalsFromEvents() {
 
@@ -131,7 +126,6 @@ public class Match implements IMatch {
                 }
             }
         }
-
         return count;
     }
 
@@ -175,10 +169,8 @@ public class Match implements IMatch {
     @Override
     public ITeam getWinner() {
         if (homeGoals > awayGoals) {
-            System.out.println("Winner: " + homeClub.getName() + "golos c: " + homeGoals +" - f"+ awayGoals);
             return homeTeam;
         } else if (awayGoals > homeGoals) {
-            System.out.println("Winner: " + awayClub.getName() + "golos: " + homeGoals +" - "+ awayGoals);
             return awayTeam;
         } else {
             return null;

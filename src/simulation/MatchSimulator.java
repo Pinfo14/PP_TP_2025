@@ -85,7 +85,6 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);
                 }
-
                 // Só regista se o evento for não-nulo (bem-sucedido)
                 if (ev != null) {
                     iMatch.addEvent(ev);
