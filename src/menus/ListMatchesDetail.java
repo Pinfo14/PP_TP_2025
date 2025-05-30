@@ -32,8 +32,8 @@ public class ListMatchesDetail {
             IMatch match = matches[i];
 
             if (match != null && match.isPlayed()) {
-                System.out.printf("%-3d | %s", countID, formatMatc(match));
-                realIndexes[countID - 1] = i;  // salva o índice real do match
+                System.out.printf("%-3d | %s", countID, formatMatch(match));
+                realIndexes[countID - 1] = i;
                 countID++;
             }
         }
@@ -52,10 +52,12 @@ public class ListMatchesDetail {
         Utils.waitEnter();
     }
 
-    private static String formatMatc(IMatch match) {
-        if (!(match instanceof Match m)) {
+    private static String formatMatch(IMatch match) {
+        if (!(match instanceof Match)) {
             return "(partida inválida)\n";
         }
+
+        Match m = (Match) match;
 
         StringBuilder sb = new StringBuilder();
         sb.append("Jornada ").append(m.getRound()).append(" - ");
@@ -65,12 +67,12 @@ public class ListMatchesDetail {
         return sb.toString();
     }
 
+
     private static void showMatchDetail(IMatch match) {
         System.out.println("\nResumo do jogo:");
-        System.out.println(match);
         ListTeams.list((Team) match.getHomeTeam(), (Team) match.getAwayTeam());
         showEvents(match);
-        System.out.println("\n" + formatMatc(match));
+        System.out.println("\n" + formatMatch(match));
     }
 
     private static void showEvents(IMatch match) {

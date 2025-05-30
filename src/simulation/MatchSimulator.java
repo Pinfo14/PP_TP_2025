@@ -76,7 +76,7 @@ public class MatchSimulator implements MatchSimulatorStrategy {
                 } else {
                     ev = factory.generateFoulEvent(autor, alvo, minuto, isHome);
                 }
-
+                // Só regista se o evento for não-nulo (bem-sucedido)
                 if (ev != null) {
                     iMatch.addEvent(ev);
                 }
@@ -85,6 +85,13 @@ public class MatchSimulator implements MatchSimulatorStrategy {
     }
 
 
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    public int getAwayGoals() {
+        return awayGoals;
+    }
 
     /**
      * Escolhe um jogador aleatoriamente do array devolvido por getPlayers() de uma posicao especifica.

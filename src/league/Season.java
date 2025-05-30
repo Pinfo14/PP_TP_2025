@@ -257,7 +257,7 @@ public class Season implements ISeason {
                 continue;
             }
 
-            simulateMatch((Match) match, simulator, generateTeams);
+            simulateMatch(match, simulator, generateTeams);
         }
 
         roundCompleted();
@@ -281,9 +281,7 @@ public class Season implements ISeason {
         return true;
     }
 
-    private void simulateMatch(Match match, MatchSimulator simulator, GenerateTeams generator) {
-
-
+    private void simulateMatch(IMatch match, MatchSimulator simulator, GenerateTeams generator) {
         ITeam homeLineup = generator.randomTeam(match.getHomeClub());
         ITeam awayLineup = generator.randomTeam(match.getAwayClub());
 
@@ -293,29 +291,50 @@ public class Season implements ISeason {
         simulator.simulate(match);
         match.setPlayed();
 
-        System.out.println(match.getHomeClub().getName() + " (" + match.getHomeGoals() + ") - (" + match.getAwayGoals()+ ") " + match.getAwayClub().getName());
+        printResults(match);
 
-        updateStandings(match, homeLineup, awayLineup, simulator);
+        updateStandings(match);
     }
 
-    private void updateStandings(Match match, ITeam homeLineup, ITeam awayLineup, MatchSimulator simulator) {
-        int homeIndex = clubIndex(match.getHomeClub());
-        int awayIndex = clubIndex(match.getAwayClub());
+    private void printResults(IMatch match) {
+        if (!(match instanceof Match)) {
+            System.out.println("Resultados da jornada:");
+        }
+
+        Match m = (Match) match;
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Jornada ").append(m.getRound()).append(" - ");
+        sb.append(m.getHomeClub().getName()).append(" (").append(m.getHomeGoals()).append(") vs ");
+        sb.append("(").append(m.getAwayGoals()).append(") ").append(m.getAwayClub().getName());
+
+        System.out.println(sb.toString());
+
+
+    }
+
+    public void updateStandings(IMatch iMatch) {
+        int homeIndex = clubIndex(iMatch.getHomeClub());
+        int awayIndex = clubIndex(iMatch.getAwayClub());
+
+        if (!(iMatch instanceof Match)) {
+            System.out.println("\nResultados da jornada:");
+        }
+
+        Match m = (Match) iMatch;
 
         Standing standingHome = (Standing) standings[homeIndex];
         Standing standingAway = (Standing) standings[awayIndex];
 
-        int homeGoals =  match.getHomeGoals();
-        int awayGoals = match.getAwayGoals();
-        ITeam winner = match.getWinner();
+        int homeGoals = m.getHomeGoals();
+        int awayGoals = m.getAwayGoals();
+        ITeam winner = m.getWinner();
 
         if (winner != null) {
-            if (winner.equals(homeLineup)) {
-                //System.out.println("Vencedor: " + standingHome.getClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ")");
+            if (winner.equals(m.getHomeTeam())) {
                 standingHome.addWinResult(homeGoals, awayGoals, pointsPerWin);
                 standingAway.addLossResult(awayGoals, homeGoals, pointsPerLoss);
-            } else if (winner.equals(awayLineup)) {
-                //System.out.println("Vencedor: " + standingHome.getClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ")");
+            } else if (winner.equals(m.getAwayTeam())) {
                 standingAway.addWinResult(awayGoals, homeGoals, pointsPerWin);
                 standingHome.addLossResult(homeGoals, awayGoals, pointsPerLoss);
             }
@@ -324,8 +343,6 @@ public class Season implements ISeason {
             standingAway.addDrawResult(awayGoals, homeGoals, pointsPerDraw);
         }
     }
-
-
 
     private void roundCompleted() {
         IMatch[] matches = getMatches(getCurrentRound());
