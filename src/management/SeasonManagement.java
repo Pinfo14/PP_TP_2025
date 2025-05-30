@@ -5,10 +5,7 @@ import com.ppstudios.footballmanager.api.contracts.match.IMatch;
 import com.ppstudios.footballmanager.api.contracts.team.IClub;
 import imports.Imports;
 import league.Season;
-import menus.ListClub;
-import menus.ListMatches;
-import menus.ListStanding;
-import menus.SeasonMenu;
+import menus.*;
 import reader.Reader;
 import util.Utils;
 
@@ -108,6 +105,9 @@ public class SeasonManagement {
                 break;
             case 7:
                 handleSimulateRestOfSeason(season);
+                break;
+            case 8:
+                handleResetSeason(season);
                 break;
             case 0:
 
@@ -259,52 +259,10 @@ public class SeasonManagement {
     }
 
     /**
-     * Lista os resultados dos jogos (a implementar)
+     * Lista os resultados e ve
      */
     private void handleListResults(Season season) {
-        try {
-            IMatch[] allMatches = season.getMatches();
-            boolean hasResults = false;
-
-            System.out.println("\n=== RESULTADOS DOS JOGOS ===");
-
-            for (IMatch match : allMatches) {
-                if (match != null && match.isPlayed() && match.isValid()) {
-                    hasResults = true;
-                    displaySimpleResult(match);
-                }
-            }
-
-            if (!hasResults) {
-                System.out.println("Ainda não foram realizados jogos.");
-            }
-
-            Utils.waitEnter();
-
-        } catch (Exception e) {
-            System.out.println("Erro ao listar resultados: " + e.getMessage());
-            Utils.waitEnter();
-        }
-    }
-
-
-    private void displaySimpleResult(IMatch match) {
-        String homeName = match.getHomeClub().getName();
-        String awayName = match.getAwayClub().getName();
-        String result = "JOGADO";
-
-
-        // Determinar vencedor
-        String winner = "";
-        if (match.getWinner() != null) {
-            winner = " (Vencedor: " + match.getWinner().getClub().getName() + ")";
-        } else {
-            winner = " (Empate)";
-        }
-
-        System.out.println("Jornada " + match.getRound() + ": " +
-                homeName + " " + result + " " + awayName + winner);
-
+        ListMatchesDetail.list(season);
     }
     /**
      * Lista a classificação da liga
@@ -327,6 +285,10 @@ public class SeasonManagement {
             return;
         }
         season.simulateSeason();
+
+    }
+
+    private void handleResetSeason(Season season) {
 
     }
 

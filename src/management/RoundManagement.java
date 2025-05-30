@@ -48,15 +48,13 @@ public class RoundManagement {
         Formation formation = (Formation) formationManagement.getFormation(indexFormation - 1);
         Team teamCoach = createTeam(season, formation);
         Team otherTeam = createTeamOpponent(season);
-        ListTeams.list(teamCoach, otherTeam);
-        Utils.waitEnter();
 
-        //vale apena confirmar se a equipa e essa?
+        Utils.waitEnter();
 
         IMatch match = findCoachingClubMatch(season);
         match.setTeam(teamCoach);
         match.setTeam(otherTeam);
-
+        ListTeams.list((Team) match.getHomeTeam(), (Team) match.getAwayTeam());
         simulateMatch(season, match);
         season.simulateRound();
 
@@ -212,12 +210,12 @@ public class RoundManagement {
             return;
         }
 
-        System.out.println("\n- INICIO DO JOGO -");
+        System.out.println("\n= INICIO DO JOGO =");
         MatchSimulator simulator = new MatchSimulator();
         simulator.simulate(match);
         printEvents(match);
         match.setPlayed();
-        System.out.println("- FIM DO JOGO -");
+        System.out.println("= FIM DO JOGO =");
         System.out.println("Resultado: " + match.getHomeClub().getName() + " (" + simulator.getHomeGoals() + ") - (" + simulator.getAwayGoals() + ") " + match.getAwayClub().getName());
 
         updateStandings(season, match, simulator);

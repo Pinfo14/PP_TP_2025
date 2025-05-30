@@ -40,15 +40,21 @@ public class Match implements IMatch {
         this.awayGoals = 0;
     }
 
-
     public void setHomeGoals(int goals) {
         this.homeGoals = goals;
+    }
+
+    public int getHomeGoals() {
+        return homeGoals;
+    }
+
+    public int getAwayGoals() {
+        return awayGoals;
     }
 
     public void setAwayGoals(int goals) {
         this.awayGoals = goals;
     }
-
 
     private void setHomeTeam(ITeam homeTeam) {
         this.homeTeam = homeTeam;
@@ -89,7 +95,6 @@ public class Match implements IMatch {
             calculateGoalsFromEvents();
     }
 
-
     public void resetMatch(boolean reset) {
         if (reset){
             this.played = false;
@@ -110,7 +115,6 @@ public class Match implements IMatch {
         this.awayGoals = getTotalByEvent(GoalEvent.class, awayClub);
     }
 
-
     @Override
     public int getTotalByEvent(Class aClass, IClub iClub) {
         int count = 0;
@@ -130,6 +134,7 @@ public class Match implements IMatch {
 
         return count;
     }
+
     /**
      * Verifica se um jogador pertence a um clube
      */
@@ -140,6 +145,7 @@ public class Match implements IMatch {
 
         return club.isPlayer(player);
     }
+
     /**
      * Verifica se as equipas e as teams são nulas e se existe uma equipa com o nome FOLGA
      * Verifica se a cada equipa corresponde a cada club.
